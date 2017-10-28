@@ -2,7 +2,7 @@
 The following steps describes on how to properly build [La2Eden](http://la2eden.com).
 
 **Project dependencies:**
-  - [JDK 8](http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
+  - [Java 8 (JDK)](http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
   - [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
   - A svn client. [SlikSVN](https://sliksvn.com/download/) is recommended though.
 
@@ -18,11 +18,9 @@ The following steps describes on how to properly build [La2Eden](http://la2eden.
   - Type at Variable value: `<path_to_your_jdk8_folder>` *(e.g. `C:\Program Files\Java\jdk1.8.0_91`)*
 3. Download and extract [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
 4. Checkout the source files
-  - Click the "Check out from Version Control" dropdown and select `Subversion`
-  - Click "+" symbol.
-  - Type at the Repository URL window: `http://subversion.assembla.com/svn/la2eden/stable`
-  - Click "Ok".
-  - Click "Checkout...".
+  - From the `VCS` menu, click the "Check out from Version Control" dropdown and select `Git`
+  - Type at the `Git Repository URL` field: `https://gitlab.com/queued/la2eden`
+  - Click "Clone".
 5. Compile the project
   - From the "Ant Build" side-window, hit the green-forward arrow *">"* button.
   - Wait for the "Ant build completed successfully" console message.

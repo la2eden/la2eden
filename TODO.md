@@ -14,11 +14,10 @@
 13. Add [Custom PvP Rewards](http://www.l2jserver.com/forum/viewtopic.php?f=13&t=27096) system
 14. Add [Toggle Potions](http://www.l2jbrasil.com/index.php?/topic/109725-code-potion-automatico/) support (with config)
 15. Add [Custom starting title](http://www.l2jbrasil.com/index.php?/topic/67261-custom-char-tittle-text/) mod
-16. Add [Announce Clan Leader Login](http://www.l2jbrasil.com/index.php?/topic/94073-mod-announce-clan-leader-login/) mod
-17. Add [Welcome PM](http://www.l2jbrasil.com/index.php?/topic/57797-show-welcome-pm/) mod
-18. Create a `"Raid Manager"` mod, that spawns a random RB from a list specified in config in a random world **area** also specified in a list
-19. Fix the configuration files (mostly existing mods). Every custom mod needs it's own file!
-20. Rework the CommunityBoard visual
+16. Add [Welcome PM](http://www.l2jbrasil.com/index.php?/topic/57797-show-welcome-pm/) mod
+17. Create a `"Raid Manager"` mod, that spawns a random RB from a list specified in config in a random world **area** also specified in a list
+18. Fix the configuration files (mostly existing mods). Every custom mod needs it's own file!
+19. Rework the CommunityBoard visual to look like L2Mythras.
 
 ---
 
