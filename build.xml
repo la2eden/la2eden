@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="La2Eden" default="finish" basedir=".">
+	<description>
+		This script will build the La2Eden High Five project.
+	</description>
+
+	<property name="build" location="./build" />
+	<property name="build.bin" location="${build}/bin" />
+	<property name="build.dist" location="${build}/dist" />
+	<property name="build.dist.gameserver" location="${build.dist}/gameserver" />
+	<property name="build.dist.loginserver" location="${build.dist}/loginserver" />
+	<property name="build.dist.installer" location="${build.dist}/db_installer" />
+	<property name="datapack" location="dist" />
+	<property name="libs" location="${datapack}/libs" />
+	<property name="src" location="java" />
+
+	<path id="classpath">
+		<fileset dir="${libs}">
+			<include name="*.jar" />
+		</fileset>
+	</path>
+
+	<pathconvert property="manifest.libs" pathsep=" ">
+		<path refid="classpath" />
+		<mapper>
+			<chainedmapper>
+				<flattenmapper />
+				<globmapper from="*.jar" to="../libs/*.jar" />
+			</chainedmapper>
+		</mapper>
+	</pathconvert>
+
+	<target name="checkRequirements" description="Check Requirements.">
+		<fail message="Ant 1.8.2 is required. But your version is ${ant.version} and if you are using Eclipse probably is outdated.">
+			<condition>
+				<not>
+					<antversion atleast="1.8.2" />
+				</not>
+			</condition>
+		</fail>
+		<available classname="java.util.stream.Stream" property="JDK8.present" />
+		<fail unless="JDK8.present" message="Java 1.8 is required. But your version is Java ${ant.java.version} and probably JDK is not installed." />
+	</target>
+
+    <target name="getDateAndVersion" description="Get Date and Version.">
+        <tstamp>
+            <format property="timestamp" pattern="dd/MM/yyyy HH:mm"/>
+        </tstamp>
+        <exec dir="${basedir}" executable="svnversion" outputproperty="version">
+            <arg value="-c"/>
+            <redirector>
+                <outputfilterchain>
+                    <tokenfilter>
+                        <replaceregex pattern="[0-9]+\:" replace=""/>
+                    </tokenfilter>
+                </outputfilterchain>
+            </redirector>
+        </exec>
+
+        <echo message="Current version: ${version}${line.separator}Build date: ${timestamp}" />
+    </target>
+
+	<target name="init" depends="checkRequirements,getDateAndVersion" description="Create the output directories.">
+		<delete dir="${build}" quiet="true" />
+
+        <mkdir dir="${build}" />
+		<mkdir dir="${build.bin}" />
+	</target>
+
+    <target name="dist" depends="init" description="Export the files to the output directory.">
+        <sync todir="${build.dist}" includeemptydirs="true">
+            <fileset dir="dist"/>
+        </sync>
+        <!-- Leave it this way!!! -->
+        <concat destfile="${build.dist.gameserver}/config/core/Version.ini">ProjectVersion=${version}${line.separator}ProjectDate=${timestamp}</concat>
+    </target>
+
+	<target name="compile" depends="dist" description="Compile the source.">
+		<javac srcdir="${src}" classpathref="classpath" destdir="${build.bin}" compiler="modern" debug="true" debuglevel="lines,vars,source" includeantruntime="false" source="1.8" target="1.8" encoding="UTF-8" />
+	</target>
+
+	<target name="jar" depends="compile" description="Create the jar files.">
+		<tstamp>
+			<format property="time.stamp" pattern="yyyy-MM-dd HH:mm:ss" />
+		</tstamp>
+
+		<jar destfile="${build.dist.loginserver}/LoginServer.jar" level="9">
+			<fileset dir="${build.bin}">
+				<exclude name="**/dbinstaller/**" />
+				<exclude name="**/gameserver/**" />
+				<exclude name="**/commons/geodriver/**" />
+				<exclude name="**/commons/javaengine/**" />
+			</fileset>
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Built-Date" value="${time.stamp}" />
+				<attribute name="Implementation-URL" value="http://la2eden.com/" />
+				<attribute name="Class-Path" value="${manifest.libs}" />
+				<attribute name="Main-Class" value="com.la2eden.loginserver.L2LoginServer" />
+			</manifest>
+		</jar>
+		<jar destfile="${build.dist.gameserver}/GameServer.jar" level="9">
+			<fileset dir="${build.bin}">
+				<exclude name="**/dbinstaller/**" />
+				<exclude name="**/loginserver/**" />
+				<exclude name="**/accountmanager/**" />
+				<exclude name="**/gsregistering/**" />
+			</fileset>
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Built-Date" value="${time.stamp}" />
+				<attribute name="Implementation-URL" value="http://la2eden.com/" />
+				<attribute name="Class-Path" value="${manifest.libs}" />
+				<attribute name="Main-Class" value="com.la2eden.gameserver.GameServer" />
+			</manifest>
+		</jar>
+		<jar destfile="${build.dist.installer}/Database_Installer_GS.jar" level="9">
+			<fileset dir="${build.bin}">
+				<include name="**/dbinstaller/**" />
+				<include name="**/images/**" />
+				<include name="**/util/**" />
+				<include name="**/SQLFilter**" />
+				<exclude name="**/LauncherLS*" />
+			</fileset>
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Built-Date" value="${time.stamp}" />
+				<attribute name="Class-Path" value="${manifest.libs}" />
+				<attribute name="Implementation-URL" value="http://la2eden.com/" />
+				<attribute name="Main-Class" value="com.la2eden.tools.dbinstaller.LauncherGS" />
+			</manifest>
+		</jar>
+		<jar destfile="${build.dist.installer}/Database_Installer_LS.jar" level="9">
+			<fileset dir="${build.bin}">
+				<include name="**/dbinstaller/**" />
+				<include name="**/images/**" />
+				<include name="**/util/**" />
+				<include name="**/SQLFilter**" />
+				<exclude name="**/LauncherGS*" />
+			</fileset>
+			<manifest>
+				<attribute name="Built-By" value="${user.name}" />
+				<attribute name="Built-Date" value="${time.stamp}" />
+				<attribute name="Class-Path" value="${manifest.libs}" />
+				<attribute name="Implementation-URL" value="http://la2eden.com/" />
+				<attribute name="Main-Class" value="com.la2eden.tools.dbinstaller.LauncherLS" />
+			</manifest>
+		</jar>
+	</target>
+
+	<target name="adding-core" depends="jar" description="Adding the compiled jars to the Zip file.">
+		<zip destfile="${build}/La2Eden.zip" basedir="${build.dist}" level="9" />
+	</target>
+
+	<target name="adding-datapack" depends="adding-core" description="Updating the Zip file with datapack content.">
+		<zip destfile="${build}/La2Eden.zip" basedir="${datapack}" update="true" level="9" />
+	</target>
+
+	<target name="finish" depends="adding-datapack" description="Cleaning the build folder.">
+        <delete dir="${build.dist}" />
+        <delete dir="${build.bin}" />
+	</target>
+</project>

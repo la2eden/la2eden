@@ -1,0 +1,111 @@
+/*
+ * This file is part of the L2J Mobius project.
+ * 
+ * This program is free software: you can redistribute it and/or modify
+ * it under the terms of the GNU General Public License as published by
+ * the Free Software Foundation, either version 3 of the License, or
+ * (at your option) any later version.
+ * 
+ * This program is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
+ * General Public License for more details.
+ * 
+ * You should have received a copy of the GNU General Public License
+ * along with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+package com.la2eden.gameserver.network;
+
+import java.util.Map.Entry;
+
+import com.la2eden.gameserver.datatables.ItemTable;
+import com.la2eden.gameserver.model.Elementals;
+import com.la2eden.gameserver.model.StatsSet;
+import com.la2eden.gameserver.model.actor.L2Character;
+import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
+import com.la2eden.gameserver.model.items.instance.L2ItemInstance;
+import com.la2eden.gameserver.model.skills.Skill;
+import com.la2eden.gameserver.network.serverpackets.NpcHtmlMessage;
+import com.la2eden.gameserver.network.serverpackets.TutorialShowHtml;
+
+/**
+ * @author UnAfraid
+ */
+public class Debug
+{
+	public static void sendSkillDebug(L2Character attacker, L2Character target, Skill skill, StatsSet set)
+	{
+		if (!attacker.isPlayer())
+		{
+			return;
+		}
+		
+		final StringBuilder sb = new StringBuilder();
+		for (Entry<String, Object> entry : set.getSet().entrySet())
+		{
+			sb.append("<tr><td>" + entry.getKey() + "</td><td><font color=\"LEVEL\">" + entry.getValue() + "</font></td></tr>");
+		}
+		
+		final NpcHtmlMessage msg = new NpcHtmlMessage();
+		msg.setFile(attacker.getActingPlayer().getHtmlPrefix(), "./datapack/html/admin/skilldebug.htm");
+		msg.replace("%patk%", target.getPAtk(target));
+		msg.replace("%matk%", target.getMAtk(target, skill));
+		msg.replace("%pdef%", target.getPDef(target));
+		msg.replace("%mdef%", target.getMDef(target, skill));
+		msg.replace("%acc%", target.getAccuracy());
+		msg.replace("%evas%", target.getEvasionRate(target));
+		msg.replace("%crit%", target.getCriticalHit(target, skill));
+		msg.replace("%speed%", target.getRunSpeed());
+		msg.replace("%pAtkSpd%", target.getPAtkSpd());
+		msg.replace("%mAtkSpd%", target.getMAtkSpd());
+		msg.replace("%str%", target.getSTR());
+		msg.replace("%dex%", target.getDEX());
+		msg.replace("%con%", target.getCON());
+		msg.replace("%int%", target.getINT());
+		msg.replace("%wit%", target.getWIT());
+		msg.replace("%men%", target.getMEN());
+		msg.replace("%atkElemType%", Elementals.getElementName(target.getAttackElement()));
+		msg.replace("%atkElemVal%", target.getAttackElementValue(target.getAttackElement()));
+		msg.replace("%fireDef%", target.getDefenseElementValue((byte) 0));
+		msg.replace("%waterDef%", target.getDefenseElementValue((byte) 1));
+		msg.replace("%windDef%", target.getDefenseElementValue((byte) 2));
+		msg.replace("%earthDef%", target.getDefenseElementValue((byte) 3));
+		msg.replace("%holyDef%", target.getDefenseElementValue((byte) 4));
+		msg.replace("%darkDef%", target.getDefenseElementValue((byte) 5));
+		msg.replace("%skill%", skill.toString());
+		msg.replace("%details%", sb.toString());
+		attacker.sendPacket(new TutorialShowHtml(msg.getHtml()));
+	}
+	
+	public static void sendItemDebug(L2PcInstance player, L2ItemInstance item, StatsSet set)
+	{
+		final StringBuilder sb = new StringBuilder();
+		for (Entry<String, Object> entry : set.getSet().entrySet())
+		{
+			sb.append("<tr><td>" + entry.getKey() + "</td><td><font color=\"LEVEL\">" + entry.getValue() + "</font></td></tr>");
+		}
+		
+		final NpcHtmlMessage msg = new NpcHtmlMessage();
+		msg.setFile(player.getHtmlPrefix(), "./datapack/html/admin/itemdebug.htm");
+		msg.replace("%itemName%", item.getName());
+		msg.replace("%itemSlot%", getBodyPart(item.getItem().getBodyPart()));
+		msg.replace("%itemType%", item.isArmor() ? "Armor" : item.isWeapon() ? "Weapon" : "Etc");
+		msg.replace("%enchantLevel%", item.getEnchantLevel());
+		msg.replace("%isMagicWeapon%", item.getItem().isMagicWeapon());
+		msg.replace("%item%", item.toString());
+		msg.replace("%details%", sb.toString());
+		player.sendPacket(new TutorialShowHtml(msg.getHtml()));
+	}
+	
+	private static String getBodyPart(int bodyPart)
+	{
+		for (Entry<String, Integer> entry : ItemTable.SLOTS.entrySet())
+		{
+			if ((entry.getValue() & bodyPart) == bodyPart)
+			{
+				return entry.getKey();
+			}
+		}
+		return "Unknown";
+	}
+}
