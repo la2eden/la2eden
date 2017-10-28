@@ -2,9 +2,10 @@
 The following steps describes on how to properly build [La2Eden](http://la2eden.com).
 
 **Project dependencies:**
+
   - [Java 8 (JDK)](http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)
   - [IntelliJ IDEA](https://www.jetbrains.com/idea/download/)
-  - A svn client. [SlikSVN](https://sliksvn.com/download/) is recommended though.
+  - [Git](https://git-scm.com/downloads)
 
 **Steps:**
 1. Download and install [JDK 8](http://www.oracle.com/technetwork/pt/java/javase/downloads/jdk8-downloads-2133151.html)

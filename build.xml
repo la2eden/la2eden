@@ -31,6 +31,7 @@
 	</pathconvert>
 
 	<target name="checkRequirements" description="Check Requirements.">
+		<!-- Ant -->
 		<fail message="Ant 1.8.2 is required. But your version is ${ant.version} and if you are using Eclipse probably is outdated.">
 			<condition>
 				<not>
@@ -38,29 +39,31 @@
 				</not>
 			</condition>
 		</fail>
+
+		<!-- Java -->
 		<available classname="java.util.stream.Stream" property="JDK8.present" />
 		<fail unless="JDK8.present" message="Java 1.8 is required. But your version is Java ${ant.java.version} and probably JDK is not installed." />
+
+		<!-- Git -->
+		<available file=".git" type="dir" property="git.present"/>
+		<fail unless="git.present" message="You need the '.git' repository in order to build La2Eden. No git repo found!" />
 	</target>
 
-    <target name="getDateAndVersion" description="Get Date and Version.">
+    <target name="getDateAndVersion" depends="checkRequirements" description="Get Date and Version.">
         <tstamp>
             <format property="timestamp" pattern="dd/MM/yyyy HH:mm"/>
         </tstamp>
-        <exec dir="${basedir}" executable="svnversion" outputproperty="version">
-            <arg value="-c"/>
-            <redirector>
-                <outputfilterchain>
-                    <tokenfilter>
-                        <replaceregex pattern="[0-9]+\:" replace=""/>
-                    </tokenfilter>
-                </outputfilterchain>
-            </redirector>
-        </exec>
+		<exec executable="git" outputproperty="version" failifexecutionfails="false" errorproperty="">
+			<arg value="describe"/>
+			<arg value="--tags"/>
+			<arg value="--always"/>
+			<arg value="HEAD"/>
+		</exec>
 
         <echo message="Current version: ${version}${line.separator}Build date: ${timestamp}" />
     </target>
 
-	<target name="init" depends="checkRequirements,getDateAndVersion" description="Create the output directories.">
+	<target name="init" depends="getDateAndVersion" description="Create the output directories.">
 		<delete dir="${build}" quiet="true" />
 
         <mkdir dir="${build}" />
