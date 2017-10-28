@@ -54,10 +54,10 @@
             <format property="timestamp" pattern="dd/MM/yyyy HH:mm"/>
         </tstamp>
 		<exec executable="git" outputproperty="version" failifexecutionfails="false" errorproperty="">
-			<arg value="describe"/>
-			<arg value="--tags"/>
-			<arg value="--always"/>
-			<arg value="HEAD"/>
+			<arg value="log"/>
+			<arg value="--pretty=format:%h"/>
+			<arg value="-n"/>
+			<arg value="1"/>
 		</exec>
 
         <echo message="Current version: ${version}${line.separator}Build date: ${timestamp}" />
