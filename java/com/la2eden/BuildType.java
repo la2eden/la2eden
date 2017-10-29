@@ -5,14 +5,14 @@ package com.la2eden;
  *
  * @author All Unser Miranda
  */
-public enum ProjectType
+public enum BuildType
 {
     FREE(0),
     VIP(1);
 
     private int _type;
 
-    ProjectType(int type) {
+    BuildType(int type) {
         _type = type;
     }
 }

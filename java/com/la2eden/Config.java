@@ -58,7 +58,7 @@ public final class Config
     // --------------------------------------------------
     // Project-related constants
     // --------------------------------------------------
-	public static final ProjectType PROJECT_TYPE = ProjectType.VIP;
+	public static final BuildType BUILD_TYPE = BuildType.FREE;
 	public static final Integer MAX_FREE_USERS = 300;
     public static final Integer MAX_VIP_USERS = 5000;
 	
@@ -106,7 +106,7 @@ public final class Config
     public static final String WEDDING_FILE = "./config/mods/Wedding.ini";
 
     // Version files
-    public static final String SERVER_VERSION_FILE = "./config/core/Version.ini";
+    public static final String VERSION_FILE = "./config/core/Version.ini";
 
 	// --------------------------------------------------
 	// L2J Variable Definitions
@@ -992,8 +992,10 @@ public final class Config
 	public static boolean SERVER_RESTART_SCHEDULE_MESSAGE;
 	public static int SERVER_RESTART_SCHEDULE_COUNTDOWN;
 	public static String[] SERVER_RESTART_SCHEDULE;
-    public static String SERVER_VERSION;
+    public static String BUILD_NUMBER;
     public static String BUILD_DATE;
+    public static String SHORT_COMMIT;
+    public static String LONG_COMMIT;
 	
 	// --------------------------------------------------
 	// MMO Settings
@@ -1221,7 +1223,7 @@ public final class Config
 			
 			MAX_CHARACTERS_NUMBER_PER_ACCOUNT = serverSettings.getInt("CharMaxNumber", 7);
 
-			switch (PROJECT_TYPE) {
+			switch (BUILD_TYPE) {
                 case FREE:
                     MAXIMUM_ONLINE_USERS = MAX_FREE_USERS;
                     break;
@@ -1783,9 +1785,11 @@ public final class Config
 			BAD_ID_CHECKING = IdFactory.getBoolean("BadIdChecking", true);
 
             // Load Version files
-            final PropertiesParser CoreVersion = new PropertiesParser(SERVER_VERSION_FILE);
-            SERVER_VERSION = CoreVersion.getString("ProjectVersion", "Unknown project version");
-            BUILD_DATE = CoreVersion.getString("ProjectDate", "Unknown project date");
+            final PropertiesParser CoreVersion = new PropertiesParser(VERSION_FILE);
+            BUILD_NUMBER = CoreVersion.getString("BuildNumber", "Unknown build version");
+            BUILD_DATE = CoreVersion.getString("BuildDate", "Unknown build date");
+			SHORT_COMMIT = CoreVersion.getString("ShortCommit", "Unknown build hash");
+			LONG_COMMIT = CoreVersion.getString("LongCommit", "Unknown build hash");
 			
 			// Load General L2Properties file (if exists)
 			final PropertiesParser General = new PropertiesParser(GENERAL_CONFIG_FILE);

@@ -7,7 +7,7 @@
 5. Add [Town War](http://www.mediafire.com/download/hqan7h5m8to04r8/%7BHigh+Five+%7D+Town+War.rar) event inside the Event Engine
 6. Add [.online](https://gist.github.com/St3eT/35344de7389ae1068767) command
 7. Add [.xpon / .xpoff](http://www.l2jbrasil.com/index.php?/topic/109404-code-comandos-xpon-xpoff/) commands
-8. Add [.grandboss](http://www.l2jbrasil.com/index.php?/topic/106674-grand-boss-info/) command
+8. Add [.boss](http://www.l2jbrasil.com/index.php?/topic/106674-grand-boss-info/) command
 10. Add [.pmon / .pmoff](http://www.l2jbrasil.com/index.php?/topic/23020-l2jfree-comando-pmoff-pmon/) commands
 11. Add [.away / .back](http://www.l2jbrasil.com/index.php?/topic/23017-l2jserver-away-system/) command
 12. Add [Change Email](http://www.l2jserver.com/forum/viewtopic.php?f=69&t=31408) system

@@ -305,7 +305,6 @@ public final class GameServer
 		final long totalMem = Runtime.getRuntime().maxMemory() / 1048576;
 		_log.info(getClass().getSimpleName() + ": Started, using " + getUsedMemoryMB() + " of " + totalMem + " MB total memory.");
 		_log.info(getClass().getSimpleName() + ": Geodata use " + geodataMemory + " MB of memory.");
-		_log.info(getClass().getSimpleName() + ": Maximum number of connected players is " + Config.MAXIMUM_ONLINE_USERS + ".");
 		_log.info(getClass().getSimpleName() + ": Server loaded in " + ((System.currentTimeMillis() - serverLoadStart) / 1000) + " seconds.");
 		
 		final SelectorConfig sc = new SelectorConfig();
@@ -371,7 +370,7 @@ public final class GameServer
 		Config.load();
 
         // Show project information
-        printSection("Information");
+        printSection("Project Info");
         projectInfo();
 
 		printSection("Database");
@@ -416,21 +415,23 @@ public final class GameServer
 
     public static void projectInfo()
     {
-        _log.info("====================[ La2Eden ]====================");
+        _log.info("=====================[ La2Eden ]======================");
+        _log.info("    -> Get access to source files at our website. <-    ");
+        _log.info("                -> http://la2eden.com <-                ");
+        _log.info("");
 
-        switch (Config.PROJECT_TYPE) {
-            case FREE:
-                _log.info("Project: ............... Eden FREE");
-                break;
-            case VIP:
-                _log.info("Project: ............... Eden VIP");
-        }
-
-
-        _log.info("Developer: ............. Enkel");
-        _log.info("Website: ............... http://la2eden.com");
-        _log.info("Version: ............... " + Config.SERVER_VERSION);
-        _log.info("Chronicle: ............. High Five");
-        _log.info("===================================================");
+		switch (Config.BUILD_TYPE) {
+			case FREE:
+                _log.info("Max Online Players: .......... " + Config.MAX_FREE_USERS);
+				_log.info("Build Type: .................. Eden FREE");
+				break;
+			case VIP:
+                _log.info("Max online players: .......... " + Config.MAX_VIP_USERS);
+				_log.info("Build Type: .................. Eden VIP");
+		}
+        _log.info("Build Number: ................ " + Config.BUILD_NUMBER);
+		_log.info("Build Commit: ................ " + Config.SHORT_COMMIT);
+		_log.info("Build Date: .................. " + Config.BUILD_DATE);
+        _log.info("======================================================");
     }
 }
