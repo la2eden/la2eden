@@ -1,5 +1,5 @@
 /*
- * This file is part of the L2J Mobius project.
+ * This file is part of the La2Eden project.
  * 
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -2922,7 +2922,7 @@ public final class Config
 			LOGIN_SERVER_SCHEDULE_RESTART_TIME = ServerSettings.getLong("LoginRestartTime", 24);
 			
 			DATABASE_DRIVER = ServerSettings.getString("Driver", "com.mysql.jdbc.Driver");
-			DATABASE_URL = ServerSettings.getString("URL", "jdbc:mysql://localhost/l2jmobiush5?useUnicode=true&characterEncoding=utf-8");
+			DATABASE_URL = ServerSettings.getString("URL", "jdbc:mysql://localhost/la2eden?useUnicode=true&characterEncoding=utf-8");
 			DATABASE_LOGIN = ServerSettings.getString("Login", "root");
 			DATABASE_PASSWORD = ServerSettings.getString("Password", "");
 			DATABASE_MAX_CONNECTIONS = ServerSettings.getInt("MaximumDbConnections", 10);

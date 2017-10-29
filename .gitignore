@@ -2,5 +2,6 @@
 bin/*
 build/*
 
-# IntelliJ IDEA workspace file
+# IDEA-related files
 .idea/workspace.xml
+.idea/uiDesigner.xml
