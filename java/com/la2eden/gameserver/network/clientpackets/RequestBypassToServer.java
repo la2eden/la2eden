@@ -16,19 +16,12 @@
  */
 package com.la2eden.gameserver.network.clientpackets;
 
-import java.util.StringTokenizer;
-import java.util.logging.Level;
-
 import com.la2eden.Config;
 import com.la2eden.gameserver.ai.CtrlIntention;
 import com.la2eden.gameserver.data.xml.impl.AdminData;
 import com.la2eden.gameserver.enums.InstanceType;
 import com.la2eden.gameserver.enums.PlayerAction;
-import com.la2eden.gameserver.handler.AdminCommandHandler;
-import com.la2eden.gameserver.handler.BypassHandler;
-import com.la2eden.gameserver.handler.CommunityBoardHandler;
-import com.la2eden.gameserver.handler.IAdminCommandHandler;
-import com.la2eden.gameserver.handler.IBypassHandler;
+import com.la2eden.gameserver.handler.*;
 import com.la2eden.gameserver.model.L2Object;
 import com.la2eden.gameserver.model.L2World;
 import com.la2eden.gameserver.model.actor.L2Character;
@@ -45,6 +38,9 @@ import com.la2eden.gameserver.network.serverpackets.ConfirmDlg;
 import com.la2eden.gameserver.network.serverpackets.NpcHtmlMessage;
 import com.la2eden.gameserver.util.GMAudit;
 import com.la2eden.gameserver.util.Util;
+
+import java.util.StringTokenizer;
+import java.util.logging.Level;
 
 /**
  * RequestBypassToServer client packet implementation.
@@ -170,6 +166,17 @@ public final class RequestBypassToServer extends L2GameClientPacket
 			{
 				CommunityBoardHandler.getInstance().handleParseCommand(_command, activeChar);
 			}
+			else if (_command.startsWith(".")) {
+                String command = _command.substring(1).split(" ")[0];
+                String params = _command.substring(1).split(" ").length > 1 ? _command.substring(1).split(" ")[1] : "";
+                IVoicedCommandHandler vch = VoicedCommandHandler.getInstance().getHandler(command);
+                if (vch == null)
+                {
+                    _log.warning(activeChar + " requested not registered admin command '" + command + "'");
+                    return;
+                }
+                vch.useVoicedCommand(command, activeChar, params);
+            }
 			else if (_command.equals("come_here") && activeChar.isGM())
 			{
 				comeHere(activeChar);

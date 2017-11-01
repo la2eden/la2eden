@@ -436,16 +436,6 @@ public class EnterWorld extends L2GameClientPacket
 		{
 			sendServerVersion(activeChar);
 		}
-
-		// Send welcome pm's
-		if (Config.WELCOME_PM_ENABLED)
-		{
-			for (String msg : Config.WELCOME_PM_TEXT)
-			{
-				CreatureSay packet = new CreatureSay(0, ChatType.WHISPER, Config.WELCOME_PM_SENDER, msg);
-				activeChar.sendPacket(packet);
-			}
-		}
 		
 		SevenSigns.getInstance().sendCurrentPeriodMsg(activeChar);
 		AnnouncementsTable.getInstance().showAnnouncements(activeChar);
@@ -568,6 +558,16 @@ public class EnterWorld extends L2GameClientPacket
 		{
 			activeChar.sendPacket(new ExShowScreenMessage(Config.WELCOME_MESSAGE_TEXT, Config.WELCOME_MESSAGE_TIME));
 		}
+
+        // Send welcome pm's
+        if (Config.WELCOME_PM_ENABLED)
+        {
+            for (String msg : Config.WELCOME_PM_TEXT)
+            {
+                CreatureSay packet = new CreatureSay(0, ChatType.WHISPER, Config.WELCOME_PM_SENDER, msg);
+                activeChar.sendPacket(packet);
+            }
+        }
 		
 		L2ClassMasterInstance.showQuestionMark(activeChar);
 		
@@ -637,7 +637,7 @@ public class EnterWorld extends L2GameClientPacket
 	{
 		chr.sendMessage("========< Version >========");
 		chr.sendMessage("Build number: .. " + Config.BUILD_NUMBER);
-		chr.sendMessage("Build date: .... " + Config.BUILD_DATE);
+		chr.sendMessage("Build date: ...... " + Config.BUILD_DATE);
 		chr.sendMessage("Build commit: .. " + Config.SHORT_COMMIT);
 		chr.sendMessage("==========================");
 	}

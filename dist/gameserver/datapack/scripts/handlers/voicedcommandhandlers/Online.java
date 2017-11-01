@@ -78,7 +78,7 @@ public class Online implements IVoicedCommandHandler
 
         if (Config.ENABLE_ONLINE_STATUS_HTML)
         {
-            String file = Config.ENABLE_ONLINE_STATUS_SHOW_OFFLINE ? "html/mods/Online/OnlineStatus-off.htm" : "html/mods/Online/OnlineStatus.htm";
+            String file = Config.ENABLE_ONLINE_STATUS_SHOW_OFFLINE ? "datapack/html/mods/Online/OnlineStatus-off.htm" : "datapack/html/mods/Online/OnlineStatus.htm";
             String content = HtmCache.getInstance().getHtm(player.getHtmlPrefix(), file);
             NpcHtmlMessage html = new NpcHtmlMessage(content);
 
