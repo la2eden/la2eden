@@ -2639,8 +2639,6 @@ public final class Config
 
             L2JMOD_OLD_DROP_BEHAVIOR = CustomSettings.getBoolean("OldDropBehavior", false);
 
-            L2JMOD_DISPLAY_SERVER_TIME = CustomSettings.getBoolean("DisplayServerTime", false);
-
             WELCOME_MESSAGE_ENABLED = CustomSettings.getBoolean("ScreenWelcomeMessageEnable", false);
             WELCOME_MESSAGE_TEXT = CustomSettings.getString("ScreenWelcomeMessageText", "Welcome to L2J server!");
             WELCOME_MESSAGE_TIME = CustomSettings.getInt("ScreenWelcomeMessageTime", 10) * 1000;
