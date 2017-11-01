@@ -16,10 +16,6 @@
  */
 package com.la2eden.gameserver.network.clientpackets;
 
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
-
 import com.la2eden.Config;
 import com.la2eden.gameserver.SevenSignsFestival;
 import com.la2eden.gameserver.enums.PrivateStoreType;
@@ -32,6 +28,10 @@ import com.la2eden.gameserver.network.SystemMessageId;
 import com.la2eden.gameserver.network.serverpackets.CharSelectionInfo;
 import com.la2eden.gameserver.network.serverpackets.RestartResponse;
 import com.la2eden.gameserver.taskmanager.AttackStanceTaskManager;
+
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 /**
  * This class ...
@@ -75,6 +75,13 @@ public final class RequestRestart extends L2GameClientPacket
 		{
 			player.sendMessage("Cannot restart while trading");
 			sendPacket(RestartResponse.valueOf(false));
+			return;
+		}
+
+		if (player.isAway())
+		{
+			player.sendMessage("You can't restart in away mode.");
+
 			return;
 		}
 		

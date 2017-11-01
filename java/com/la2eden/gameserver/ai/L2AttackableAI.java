@@ -215,6 +215,11 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 			{
 				return false;
 			}
+
+			// check player is in away mode
+			if (player.isAway() && !Config.AWAY_PLAYER_TAKE_AGGRO) {
+				return false;
+			}
 			
 			if (player.isInParty() && player.getParty().isInDimensionalRift())
 			{

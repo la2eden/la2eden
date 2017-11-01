@@ -16,44 +16,9 @@
  */
 package com.la2eden.gameserver.model.actor.instance;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Calendar;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.TreeMap;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentSkipListMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicInteger;
-import java.util.concurrent.locks.ReentrantLock;
-import java.util.logging.Level;
-
 import com.la2eden.Config;
 import com.la2eden.commons.database.DatabaseFactory;
-import com.la2eden.gameserver.GameTimeController;
-import com.la2eden.gameserver.GeoData;
-import com.la2eden.gameserver.ItemsAutoDestroy;
-import com.la2eden.gameserver.LoginServerThread;
-import com.la2eden.gameserver.RecipeController;
-import com.la2eden.gameserver.SevenSigns;
-import com.la2eden.gameserver.SevenSignsFestival;
-import com.la2eden.gameserver.ThreadPoolManager;
+import com.la2eden.gameserver.*;
 import com.la2eden.gameserver.ai.CtrlIntention;
 import com.la2eden.gameserver.ai.L2CharacterAI;
 import com.la2eden.gameserver.ai.L2PlayerAI;
@@ -64,118 +29,22 @@ import com.la2eden.gameserver.communitybbs.Manager.ForumsBBSManager;
 import com.la2eden.gameserver.data.sql.impl.CharNameTable;
 import com.la2eden.gameserver.data.sql.impl.CharSummonTable;
 import com.la2eden.gameserver.data.sql.impl.ClanTable;
-import com.la2eden.gameserver.data.xml.impl.AdminData;
-import com.la2eden.gameserver.data.xml.impl.ClassListData;
-import com.la2eden.gameserver.data.xml.impl.EnchantSkillGroupsData;
-import com.la2eden.gameserver.data.xml.impl.ExperienceData;
-import com.la2eden.gameserver.data.xml.impl.FishData;
-import com.la2eden.gameserver.data.xml.impl.HennaData;
-import com.la2eden.gameserver.data.xml.impl.NpcData;
-import com.la2eden.gameserver.data.xml.impl.PetDataTable;
-import com.la2eden.gameserver.data.xml.impl.PlayerTemplateData;
-import com.la2eden.gameserver.data.xml.impl.PlayerXpPercentLostData;
-import com.la2eden.gameserver.data.xml.impl.RecipeData;
-import com.la2eden.gameserver.data.xml.impl.SkillTreesData;
+import com.la2eden.gameserver.data.xml.impl.*;
 import com.la2eden.gameserver.datatables.ItemTable;
 import com.la2eden.gameserver.datatables.SkillData;
-import com.la2eden.gameserver.enums.ChatType;
-import com.la2eden.gameserver.enums.HtmlActionScope;
-import com.la2eden.gameserver.enums.IllegalActionPunishmentType;
-import com.la2eden.gameserver.enums.InstanceType;
-import com.la2eden.gameserver.enums.MountType;
-import com.la2eden.gameserver.enums.PartyDistributionType;
-import com.la2eden.gameserver.enums.PlayerAction;
-import com.la2eden.gameserver.enums.PrivateStoreType;
-import com.la2eden.gameserver.enums.Race;
-import com.la2eden.gameserver.enums.Sex;
-import com.la2eden.gameserver.enums.ShortcutType;
-import com.la2eden.gameserver.enums.ShotType;
-import com.la2eden.gameserver.enums.Team;
+import com.la2eden.gameserver.enums.*;
 import com.la2eden.gameserver.handler.IItemHandler;
 import com.la2eden.gameserver.handler.ItemHandler;
 import com.la2eden.gameserver.idfactory.IdFactory;
-import com.la2eden.gameserver.instancemanager.AntiFeedManager;
-import com.la2eden.gameserver.instancemanager.CastleManager;
-import com.la2eden.gameserver.instancemanager.CoupleManager;
-import com.la2eden.gameserver.instancemanager.CursedWeaponsManager;
-import com.la2eden.gameserver.instancemanager.DimensionalRiftManager;
-import com.la2eden.gameserver.instancemanager.DuelManager;
-import com.la2eden.gameserver.instancemanager.FortManager;
-import com.la2eden.gameserver.instancemanager.FortSiegeManager;
-import com.la2eden.gameserver.instancemanager.GrandBossManager;
-import com.la2eden.gameserver.instancemanager.HandysBlockCheckerManager;
-import com.la2eden.gameserver.instancemanager.InstanceManager;
-import com.la2eden.gameserver.instancemanager.ItemsOnGroundManager;
-import com.la2eden.gameserver.instancemanager.PremiumManager;
-import com.la2eden.gameserver.instancemanager.PunishmentManager;
-import com.la2eden.gameserver.instancemanager.QuestManager;
-import com.la2eden.gameserver.instancemanager.SiegeManager;
-import com.la2eden.gameserver.instancemanager.TerritoryWarManager;
-import com.la2eden.gameserver.instancemanager.ZoneManager;
-import com.la2eden.gameserver.model.ArenaParticipantsHolder;
-import com.la2eden.gameserver.model.BlockList;
-import com.la2eden.gameserver.model.ClanPrivilege;
-import com.la2eden.gameserver.model.L2AccessLevel;
-import com.la2eden.gameserver.model.L2Clan;
-import com.la2eden.gameserver.model.L2ClanMember;
-import com.la2eden.gameserver.model.L2ContactList;
-import com.la2eden.gameserver.model.L2EnchantSkillLearn;
-import com.la2eden.gameserver.model.L2ManufactureItem;
-import com.la2eden.gameserver.model.L2Object;
-import com.la2eden.gameserver.model.L2Party;
+import com.la2eden.gameserver.instancemanager.*;
+import com.la2eden.gameserver.model.*;
 import com.la2eden.gameserver.model.L2Party.messageType;
-import com.la2eden.gameserver.model.L2PetLevelData;
-import com.la2eden.gameserver.model.L2PremiumItem;
-import com.la2eden.gameserver.model.L2Radar;
-import com.la2eden.gameserver.model.L2RecipeList;
-import com.la2eden.gameserver.model.L2Request;
-import com.la2eden.gameserver.model.L2SkillLearn;
-import com.la2eden.gameserver.model.L2World;
-import com.la2eden.gameserver.model.L2WorldRegion;
-import com.la2eden.gameserver.model.Location;
-import com.la2eden.gameserver.model.Macro;
-import com.la2eden.gameserver.model.MacroList;
-import com.la2eden.gameserver.model.PartyMatchRoom;
-import com.la2eden.gameserver.model.PartyMatchRoomList;
-import com.la2eden.gameserver.model.PartyMatchWaitingList;
-import com.la2eden.gameserver.model.PcCondOverride;
-import com.la2eden.gameserver.model.ShortCuts;
-import com.la2eden.gameserver.model.Shortcut;
-import com.la2eden.gameserver.model.TeleportBookmark;
-import com.la2eden.gameserver.model.TeleportWhereType;
-import com.la2eden.gameserver.model.TerritoryWard;
-import com.la2eden.gameserver.model.TimeStamp;
-import com.la2eden.gameserver.model.TradeList;
-import com.la2eden.gameserver.model.UIKeysSettings;
-import com.la2eden.gameserver.model.actor.L2Attackable;
-import com.la2eden.gameserver.model.actor.L2Character;
-import com.la2eden.gameserver.model.actor.L2Decoy;
-import com.la2eden.gameserver.model.actor.L2Npc;
-import com.la2eden.gameserver.model.actor.L2Playable;
-import com.la2eden.gameserver.model.actor.L2Summon;
-import com.la2eden.gameserver.model.actor.L2Vehicle;
+import com.la2eden.gameserver.model.actor.*;
 import com.la2eden.gameserver.model.actor.appearance.PcAppearance;
 import com.la2eden.gameserver.model.actor.knownlist.PcKnownList;
 import com.la2eden.gameserver.model.actor.stat.PcStat;
 import com.la2eden.gameserver.model.actor.status.PcStatus;
-import com.la2eden.gameserver.model.actor.tasks.player.DismountTask;
-import com.la2eden.gameserver.model.actor.tasks.player.FameTask;
-import com.la2eden.gameserver.model.actor.tasks.player.GameGuardCheckTask;
-import com.la2eden.gameserver.model.actor.tasks.player.InventoryEnableTask;
-import com.la2eden.gameserver.model.actor.tasks.player.LookingForFishTask;
-import com.la2eden.gameserver.model.actor.tasks.player.PetFeedTask;
-import com.la2eden.gameserver.model.actor.tasks.player.PvPFlagTask;
-import com.la2eden.gameserver.model.actor.tasks.player.RecoBonusTaskEnd;
-import com.la2eden.gameserver.model.actor.tasks.player.RecoGiveTask;
-import com.la2eden.gameserver.model.actor.tasks.player.RentPetTask;
-import com.la2eden.gameserver.model.actor.tasks.player.ResetChargesTask;
-import com.la2eden.gameserver.model.actor.tasks.player.ResetSoulsTask;
-import com.la2eden.gameserver.model.actor.tasks.player.SitDownTask;
-import com.la2eden.gameserver.model.actor.tasks.player.StandUpTask;
-import com.la2eden.gameserver.model.actor.tasks.player.TeleportWatchdogTask;
-import com.la2eden.gameserver.model.actor.tasks.player.VitalityTask;
-import com.la2eden.gameserver.model.actor.tasks.player.WarnUserTakeBreakTask;
-import com.la2eden.gameserver.model.actor.tasks.player.WaterTask;
+import com.la2eden.gameserver.model.actor.tasks.player.*;
 import com.la2eden.gameserver.model.actor.templates.L2PcTemplate;
 import com.la2eden.gameserver.model.actor.transform.Transform;
 import com.la2eden.gameserver.model.base.ClassId;
@@ -184,48 +53,16 @@ import com.la2eden.gameserver.model.base.PlayerClass;
 import com.la2eden.gameserver.model.base.SubClass;
 import com.la2eden.gameserver.model.effects.EffectFlag;
 import com.la2eden.gameserver.model.effects.L2EffectType;
-import com.la2eden.gameserver.model.entity.Castle;
-import com.la2eden.gameserver.model.entity.Duel;
-import com.la2eden.gameserver.model.entity.Fort;
-import com.la2eden.gameserver.model.entity.Hero;
-import com.la2eden.gameserver.model.entity.Instance;
-import com.la2eden.gameserver.model.entity.L2Event;
-import com.la2eden.gameserver.model.entity.NevitSystem;
-import com.la2eden.gameserver.model.entity.Siege;
-import com.la2eden.gameserver.model.entity.TvTEvent;
+import com.la2eden.gameserver.model.entity.*;
 import com.la2eden.gameserver.model.events.EventDispatcher;
-import com.la2eden.gameserver.model.events.impl.character.player.OnPlayerEquipItem;
-import com.la2eden.gameserver.model.events.impl.character.player.OnPlayerFameChanged;
-import com.la2eden.gameserver.model.events.impl.character.player.OnPlayerHennaRemove;
-import com.la2eden.gameserver.model.events.impl.character.player.OnPlayerKarmaChanged;
-import com.la2eden.gameserver.model.events.impl.character.player.OnPlayerLogin;
-import com.la2eden.gameserver.model.events.impl.character.player.OnPlayerLogout;
-import com.la2eden.gameserver.model.events.impl.character.player.OnPlayerPKChanged;
-import com.la2eden.gameserver.model.events.impl.character.player.OnPlayerProfessionChange;
-import com.la2eden.gameserver.model.events.impl.character.player.OnPlayerPvPChanged;
-import com.la2eden.gameserver.model.events.impl.character.player.OnPlayerPvPKill;
-import com.la2eden.gameserver.model.events.impl.character.player.OnPlayerTransform;
+import com.la2eden.gameserver.model.events.impl.character.player.*;
 import com.la2eden.gameserver.model.fishing.L2Fish;
 import com.la2eden.gameserver.model.fishing.L2Fishing;
-import com.la2eden.gameserver.model.holders.AdditionalSkillHolder;
-import com.la2eden.gameserver.model.holders.ItemHolder;
-import com.la2eden.gameserver.model.holders.PlayerEventHolder;
-import com.la2eden.gameserver.model.holders.SkillHolder;
-import com.la2eden.gameserver.model.holders.SkillUseHolder;
+import com.la2eden.gameserver.model.holders.*;
 import com.la2eden.gameserver.model.interfaces.IEventListener;
 import com.la2eden.gameserver.model.interfaces.ILocational;
-import com.la2eden.gameserver.model.itemcontainer.Inventory;
-import com.la2eden.gameserver.model.itemcontainer.ItemContainer;
-import com.la2eden.gameserver.model.itemcontainer.PcFreight;
-import com.la2eden.gameserver.model.itemcontainer.PcInventory;
-import com.la2eden.gameserver.model.itemcontainer.PcRefund;
-import com.la2eden.gameserver.model.itemcontainer.PcWarehouse;
-import com.la2eden.gameserver.model.itemcontainer.PetInventory;
-import com.la2eden.gameserver.model.items.L2Armor;
-import com.la2eden.gameserver.model.items.L2EtcItem;
-import com.la2eden.gameserver.model.items.L2Henna;
-import com.la2eden.gameserver.model.items.L2Item;
-import com.la2eden.gameserver.model.items.L2Weapon;
+import com.la2eden.gameserver.model.itemcontainer.*;
+import com.la2eden.gameserver.model.items.*;
 import com.la2eden.gameserver.model.items.instance.L2ItemInstance;
 import com.la2eden.gameserver.model.items.type.ActionType;
 import com.la2eden.gameserver.model.items.type.ArmorType;
@@ -253,79 +90,22 @@ import com.la2eden.gameserver.model.zone.ZoneId;
 import com.la2eden.gameserver.model.zone.type.L2BossZone;
 import com.la2eden.gameserver.network.L2GameClient;
 import com.la2eden.gameserver.network.SystemMessageId;
-import com.la2eden.gameserver.network.serverpackets.AbstractHtmlPacket;
-import com.la2eden.gameserver.network.serverpackets.ActionFailed;
-import com.la2eden.gameserver.network.serverpackets.ChangeWaitType;
-import com.la2eden.gameserver.network.serverpackets.CharInfo;
-import com.la2eden.gameserver.network.serverpackets.ConfirmDlg;
-import com.la2eden.gameserver.network.serverpackets.EtcStatusUpdate;
-import com.la2eden.gameserver.network.serverpackets.ExAutoSoulShot;
-import com.la2eden.gameserver.network.serverpackets.ExBrExtraUserInfo;
-import com.la2eden.gameserver.network.serverpackets.ExDominionWarStart;
-import com.la2eden.gameserver.network.serverpackets.ExDuelUpdateUserInfo;
-import com.la2eden.gameserver.network.serverpackets.ExFishingEnd;
-import com.la2eden.gameserver.network.serverpackets.ExFishingStart;
-import com.la2eden.gameserver.network.serverpackets.ExGetBookMarkInfoPacket;
-import com.la2eden.gameserver.network.serverpackets.ExGetOnAirShip;
-import com.la2eden.gameserver.network.serverpackets.ExOlympiadMode;
-import com.la2eden.gameserver.network.serverpackets.ExPrivateStoreSetWholeMsg;
-import com.la2eden.gameserver.network.serverpackets.ExSetCompassZoneCode;
-import com.la2eden.gameserver.network.serverpackets.ExStartScenePlayer;
-import com.la2eden.gameserver.network.serverpackets.ExStorageMaxCount;
-import com.la2eden.gameserver.network.serverpackets.ExUseSharedGroupItem;
-import com.la2eden.gameserver.network.serverpackets.ExVoteSystemInfo;
+import com.la2eden.gameserver.network.serverpackets.*;
 import com.la2eden.gameserver.network.serverpackets.FlyToLocation.FlyType;
-import com.la2eden.gameserver.network.serverpackets.FriendStatusPacket;
-import com.la2eden.gameserver.network.serverpackets.GameGuardQuery;
-import com.la2eden.gameserver.network.serverpackets.GetOnVehicle;
-import com.la2eden.gameserver.network.serverpackets.HennaInfo;
-import com.la2eden.gameserver.network.serverpackets.InventoryUpdate;
-import com.la2eden.gameserver.network.serverpackets.ItemList;
-import com.la2eden.gameserver.network.serverpackets.L2GameServerPacket;
-import com.la2eden.gameserver.network.serverpackets.LeaveWorld;
-import com.la2eden.gameserver.network.serverpackets.MagicSkillUse;
-import com.la2eden.gameserver.network.serverpackets.MyTargetSelected;
-import com.la2eden.gameserver.network.serverpackets.NicknameChanged;
-import com.la2eden.gameserver.network.serverpackets.ObservationMode;
-import com.la2eden.gameserver.network.serverpackets.ObservationReturn;
-import com.la2eden.gameserver.network.serverpackets.PartySmallWindowUpdate;
-import com.la2eden.gameserver.network.serverpackets.PetInventoryUpdate;
-import com.la2eden.gameserver.network.serverpackets.PlaySound;
-import com.la2eden.gameserver.network.serverpackets.PledgeShowMemberListDelete;
-import com.la2eden.gameserver.network.serverpackets.PledgeShowMemberListUpdate;
-import com.la2eden.gameserver.network.serverpackets.PrivateStoreListBuy;
-import com.la2eden.gameserver.network.serverpackets.PrivateStoreListSell;
-import com.la2eden.gameserver.network.serverpackets.PrivateStoreManageListBuy;
-import com.la2eden.gameserver.network.serverpackets.PrivateStoreManageListSell;
-import com.la2eden.gameserver.network.serverpackets.PrivateStoreMsgBuy;
-import com.la2eden.gameserver.network.serverpackets.PrivateStoreMsgSell;
-import com.la2eden.gameserver.network.serverpackets.RecipeShopMsg;
-import com.la2eden.gameserver.network.serverpackets.RecipeShopSellList;
-import com.la2eden.gameserver.network.serverpackets.RelationChanged;
-import com.la2eden.gameserver.network.serverpackets.Ride;
-import com.la2eden.gameserver.network.serverpackets.ServerClose;
-import com.la2eden.gameserver.network.serverpackets.SetupGauge;
-import com.la2eden.gameserver.network.serverpackets.ShortCutInit;
-import com.la2eden.gameserver.network.serverpackets.SkillCoolTime;
-import com.la2eden.gameserver.network.serverpackets.SkillList;
-import com.la2eden.gameserver.network.serverpackets.Snoop;
-import com.la2eden.gameserver.network.serverpackets.SocialAction;
-import com.la2eden.gameserver.network.serverpackets.StatusUpdate;
-import com.la2eden.gameserver.network.serverpackets.StopMove;
-import com.la2eden.gameserver.network.serverpackets.SystemMessage;
-import com.la2eden.gameserver.network.serverpackets.TargetSelected;
-import com.la2eden.gameserver.network.serverpackets.TargetUnselected;
-import com.la2eden.gameserver.network.serverpackets.TradeDone;
-import com.la2eden.gameserver.network.serverpackets.TradeOtherDone;
-import com.la2eden.gameserver.network.serverpackets.TradeStart;
-import com.la2eden.gameserver.network.serverpackets.UserInfo;
-import com.la2eden.gameserver.network.serverpackets.ValidateLocation;
 import com.la2eden.gameserver.taskmanager.AttackStanceTaskManager;
 import com.la2eden.gameserver.util.Broadcast;
 import com.la2eden.gameserver.util.FloodProtectors;
 import com.la2eden.gameserver.util.Util;
 import com.la2eden.util.EnumIntBitmask;
 import com.la2eden.util.Rnd;
+
+import java.sql.*;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.locks.ReentrantLock;
+import java.util.logging.Level;
 
 /**
  * This class represents all player characters in the world.<br>
@@ -748,6 +528,11 @@ public final class L2PcInstance extends L2Playable
 	// public static int _loto_nums[] = {0,1,2,3,4,5,6,7,8,9,};
 	/** new race ticket **/
 	private final int _race[] = new int[2];
+
+    // Character Away Mode
+    private boolean _isAway = false;
+    public int _originalTitleColorAway;
+    public String _originalTitleAway;
 	
 	private final BlockList _blockList = new BlockList(this);
 	
@@ -2855,6 +2640,10 @@ public final class L2PcInstance extends L2Playable
 		{
 			sendMessage("A dark force beyond your mortal understanding makes your knees to shake when you try to stand up...");
 		}
+		else if (isAway())
+        {
+            sendMessage("You cannot stand up if you are in away mode");
+        }
 		else if (_waitTypeSitting && !isInStoreMode() && !isAlikeDead())
 		{
 			if (getEffectList().isAffected(EffectFlag.RELAXING))
@@ -4772,6 +4561,14 @@ public final class L2PcInstance extends L2Playable
 			{
 				newTarget = null;
 			}
+
+            if (isAway() && !Config.AWAY_ALLOW_INTERFERENCE)
+            {
+                sendMessage("You cannot target players in away mode.");
+                sendPacket(ActionFailed.STATIC_PACKET);
+
+                return;
+            }
 			
 			// vehicles cant be targeted
 			if (!isGM() && (newTarget instanceof L2Vehicle))
@@ -12653,6 +12450,16 @@ public final class L2PcInstance extends L2Playable
 	{
 		return isTransformed() && getTransformation().isFlying();
 	}
+
+    public boolean isAway()
+    {
+        return _isAway;
+    }
+
+    public void setIsAway(boolean state)
+    {
+        _isAway = state;
+    }
 	
 	/**
 	 * Returns the Number of Charges this L2PcInstance got.

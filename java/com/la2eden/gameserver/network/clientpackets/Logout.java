@@ -16,10 +16,6 @@
  */
 package com.la2eden.gameserver.network.clientpackets;
 
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
-
 import com.la2eden.Config;
 import com.la2eden.gameserver.SevenSignsFestival;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
@@ -28,6 +24,10 @@ import com.la2eden.gameserver.network.SystemMessageId;
 import com.la2eden.gameserver.network.serverpackets.ActionFailed;
 import com.la2eden.gameserver.network.serverpackets.SystemMessage;
 import com.la2eden.gameserver.taskmanager.AttackStanceTaskManager;
+
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 /**
  * This class ...
@@ -93,6 +93,12 @@ public final class Logout extends L2GameClientPacket
 			player.sendMessage("A superior power doesn't allow you to leave the event.");
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
+		}
+
+		if (player.isAway())
+		{
+            player.sendMessage("You can't leave in Away mode.");
+            return;
 		}
 		
 		// Prevent player from logging out if they are a festival participant

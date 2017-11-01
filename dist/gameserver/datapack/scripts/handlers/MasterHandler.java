@@ -299,7 +299,8 @@ public class MasterHandler
 			Config.L2JMOD_DEBUG_VOICE_COMMAND ? Debug.class : null,
 			Config.L2JMOD_ALLOW_CHANGE_PASSWORD ? ChangePassword.class : null,
 			Config.PREMIUM_SYSTEM_ENABLED ? Premium.class : null,
-            Config.ENABLE_VOICED_ONLINE ? Online.class : null
+            Config.ENABLE_VOICED_ONLINE ? Online.class : null,
+            Config.ALLOW_AWAY_STATUS ? Away.class : null
 		},
 		{
 			// Target Handlers

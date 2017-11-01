@@ -262,6 +262,7 @@ public final class GameServer
 		{
 			CoupleManager.getInstance();
 		}
+
 		
 		if (Config.ALT_FISH_CHAMPIONSHIP_ENABLED)
 		{
@@ -285,6 +286,11 @@ public final class GameServer
 		
 		TvTManager.getInstance();
 		KnownListUpdateTaskManager.getInstance();
+
+		if (Config.ALLOW_AWAY_STATUS) {
+			// printSection("Away System");
+			AwayManager.getInstance();
+		}
 		
 		if ((Config.OFFLINE_TRADE_ENABLE || Config.OFFLINE_CRAFT_ENABLE) && Config.RESTORE_OFFLINERS)
 		{

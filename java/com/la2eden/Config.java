@@ -824,6 +824,7 @@ public final class Config
 	public static float PREMIUM_RATE_SPOIL_AMOUNT;
 	public static Map<Integer, Float> PREMIUM_RATE_DROP_CHANCE_BY_ID;
 	public static Map<Integer, Float> PREMIUM_RATE_DROP_AMOUNT_BY_ID;
+
 	// --------------------------------------------------
 	// NPC Settings
 	// --------------------------------------------------
@@ -1179,6 +1180,13 @@ public final class Config
     public static boolean WELCOME_PM_ENABLED;
     public static String WELCOME_PM_SENDER;
     public static List<String> WELCOME_PM_TEXT;
+    public static boolean ALLOW_AWAY_STATUS;
+    public static int AWAY_TIMER;
+    public static int BACK_TIMER;
+    public static int AWAY_TITLE_COLOR;
+    public static boolean AWAY_ALLOW_INTERFERENCE;
+    public static boolean AWAY_PLAYER_TAKE_AGGRO;
+    public static boolean AWAY_PEACE_ZONE;
 	
 	/**
 	 * This class initializes all global variables for configuration.<br>
@@ -2523,6 +2531,14 @@ public final class Config
 
             // Load Chat settings file (if exists)
             final PropertiesParser ChatModSettings = new PropertiesParser(CHAT_FILE);
+
+            ALLOW_AWAY_STATUS = ChatModSettings.getBoolean("AllowAwayStatus", false);
+            AWAY_ALLOW_INTERFERENCE = ChatModSettings.getBoolean("AwayAllowInterference", false);
+            AWAY_PLAYER_TAKE_AGGRO = ChatModSettings.getBoolean("AwayPlayerTakeAggro", false);
+            AWAY_TITLE_COLOR = Integer.decode("0x" + ChatModSettings.getString("AwayTitleColor", "0000FF"));
+            AWAY_TIMER = ChatModSettings.getInt("AwayTimer", 3);
+            BACK_TIMER = ChatModSettings.getInt("BackTimer", 3);
+            AWAY_PEACE_ZONE = ChatModSettings.getBoolean("AwayOnlyInPeaceZone", false);
 
             ENABLE_VOICED_ONLINE = ChatModSettings.getBoolean("EnableOnlineStatus", false);
             ENABLE_ONLINE_STATUS_HTML = ChatModSettings.getBoolean("EnableAdvancedStatus", false);
