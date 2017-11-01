@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <list enabled="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/zones.xsd">
-	<!-- Boss Zones -->
+	<!-- GrandBoss Zones -->
 	<zone name="Anakim and Lilith Boss" id="12003" type="BossZone" shape="NPoly" minZ="-5504" maxZ="-5104">
 		<stat name="default_enabled" val="false" />
 		<stat name="InvadeTime" val="1800000" />

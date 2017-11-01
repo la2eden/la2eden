@@ -263,7 +263,7 @@ public class Wedding implements IVoicedCommandHandler
 		
 		if (GrandBossManager.getInstance().getZone(activeChar) != null)
 		{
-			activeChar.sendMessage("You are inside a Boss Zone.");
+			activeChar.sendMessage("You are inside a GrandBoss Zone.");
 			return false;
 		}
 		
@@ -281,7 +281,7 @@ public class Wedding implements IVoicedCommandHandler
 		
 		if (GrandBossManager.getInstance().getZone(activeChar) != null)
 		{
-			activeChar.sendMessage("You are inside a Boss Zone.");
+			activeChar.sendMessage("You are inside a GrandBoss Zone.");
 			return false;
 		}
 		
@@ -373,7 +373,7 @@ public class Wedding implements IVoicedCommandHandler
 		
 		if (GrandBossManager.getInstance().getZone(partner) != null)
 		{
-			activeChar.sendMessage("Your partner is inside a Boss Zone.");
+			activeChar.sendMessage("Your partner is inside a GrandBoss Zone.");
 			return false;
 		}
 		

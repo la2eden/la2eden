@@ -66,10 +66,10 @@ public class VarkaKetra extends AbstractNpcAI
 		21347, // Ketra Prophet
 		21348, // Prophet's Guard
 		21349, // Prophet's Aide
-		25299, // Ketra's Hero Hekaton (Raid Boss)
-		25302, // Ketra's Commander Tayr (Raid Boss)
-		25305, // Ketra's Chief Brakki (Raid Boss)
-		25306, // Soul of Fire Nastron (Raid Boss)
+		25299, // Ketra's Hero Hekaton (Raid GrandBoss)
+		25302, // Ketra's Commander Tayr (Raid GrandBoss)
+		25305, // Ketra's Chief Brakki (Raid GrandBoss)
+		25306, // Soul of Fire Nastron (Raid GrandBoss)
 	};
 	private static final int[] VARKA =
 	{
@@ -94,10 +94,10 @@ public class VarkaKetra extends AbstractNpcAI
 		21373, // Varka's Prophet
 		21374, // Prophet's Guard
 		21375, // Disciple of Prophet
-		25309, // Varka's Hero Shadith (Raid Boss)
-		25312, // Varka's Commander Mos (Raid Boss)
-		25315, // Varka's Chief Horus (Raid Boss)
-		25316, // Soul of Water Ashutar (Raid Boss)
+		25309, // Varka's Hero Shadith (Raid GrandBoss)
+		25312, // Varka's Commander Mos (Raid GrandBoss)
+		25315, // Varka's Chief Horus (Raid GrandBoss)
+		25316, // Soul of Water Ashutar (Raid GrandBoss)
 	};
 	// Items
 	private static final int[] KETRA_MARKS =

@@ -123,7 +123,7 @@ public final class RequestRestart extends L2GameClientPacket
 			return;
 		}
 		
-		// Remove player from Boss Zone
+		// Remove player from GrandBoss Zone
 		player.removeFromBossZone();
 		
 		final L2GameClient client = getClient();

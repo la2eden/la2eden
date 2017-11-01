@@ -45,7 +45,7 @@ import com.la2eden.gameserver.model.interfaces.IStorable;
 import com.la2eden.gameserver.model.zone.type.L2BossZone;
 
 /**
- * Grand Boss manager.
+ * Grand GrandBoss manager.
  * @author DaRkRaGe Revised by Emperorc
  */
 public final class GrandBossManager implements IStorable
@@ -131,7 +131,7 @@ public final class GrandBossManager implements IStorable
 			{
 				zones.get(rs.getInt("zone")).add(rs.getInt("player_id"));
 			}
-			_log.info(getClass().getSimpleName() + ": Initialized " + _zones.size() + " Grand Boss Zones");
+			_log.info(getClass().getSimpleName() + ": Initialized " + _zones.size() + " Grand GrandBoss Zones");
 		}
 		catch (SQLException e)
 		{
@@ -347,7 +347,7 @@ public final class GrandBossManager implements IStorable
 	}
 	
 	/**
-	 * Saves all Grand Boss info and then clears all info from memory, including all schedules.
+	 * Saves all Grand GrandBoss info and then clears all info from memory, including all schedules.
 	 */
 	public void cleanUp()
 	{

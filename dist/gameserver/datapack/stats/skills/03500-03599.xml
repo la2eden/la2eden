@@ -738,7 +738,7 @@
 	</skill>
 	<skill id="3557" levels="1" name="Necklace of Valakas">
 		<!-- Confirmed CT2.5 -->
-		<!-- Boss Jewel Skill -->
+		<!-- GrandBoss Jewel Skill -->
 		<set name="icon" val="icon.accessory_necklace_of_valakas_i00" />
 		<set name="magicLvl" val="75" />
 		<set name="operateType" val="P" />
@@ -764,7 +764,7 @@
 	</skill>
 	<skill id="3558" levels="1" name="Earring of Antharas">
 		<!-- Confirmed CT2.5 -->
-		<!-- Boss Jewel Skill -->
+		<!-- GrandBoss Jewel Skill -->
 		<set name="icon" val="icon.accessory_earring_of_antaras_i00" />
 		<set name="magicLvl" val="75" />
 		<set name="operateType" val="P" />
@@ -791,7 +791,7 @@
 	</skill>
 	<skill id="3559" levels="2" name="Earring of Zaken">
 		<!-- Confirmed CT2.5 and Updated to H5 -->
-		<!-- Boss Jewel Skill -->
+		<!-- GrandBoss Jewel Skill -->
 		<table name="#darkRes"> 0 15 </table>
 		<table name="#healEffect"> 1.1 1.15 </table>
 		<table name="#magicLvl"> 75 80 </table>
@@ -820,7 +820,7 @@
 	</skill>
 	<skill id="3560" levels="1" name="Earring of Orfen">
 		<!-- Confirmed CT2.5 -->
-		<!-- Boss Jewel Skill -->
+		<!-- GrandBoss Jewel Skill -->
 		<set name="icon" val="icon.accessory_earring_of_orfen_i00" />
 		<set name="magicLvl" val="75" />
 		<set name="operateType" val="P" />
@@ -839,7 +839,7 @@
 	</skill>
 	<skill id="3561" levels="1" name="Ring of Baium">
 		<!-- Confirmed CT2.5 -->
-		<!-- Boss Jewel Skill -->
+		<!-- GrandBoss Jewel Skill -->
 		<set name="icon" val="icon.accessory_ring_of_baium_i00" />
 		<set name="magicLvl" val="75" />
 		<set name="operateType" val="P" />
@@ -863,7 +863,7 @@
 	</skill>
 	<skill id="3562" levels="1" name="Ring of Ant Queen">
 		<!-- Confirmed CT2.5 -->
-		<!-- Boss Jewel Skill -->
+		<!-- GrandBoss Jewel Skill -->
 		<set name="icon" val="icon.accessory_ring_of_queen_ant_i00" />
 		<set name="magicLvl" val="75" />
 		<set name="operateType" val="P" />
@@ -885,7 +885,7 @@
 	</skill>
 	<skill id="3563" levels="1" name="Ring of Core">
 		<!-- Confirmed CT2.5 -->
-		<!-- Boss Jewel Skill -->
+		<!-- GrandBoss Jewel Skill -->
 		<set name="icon" val="icon.accessory_ring_of_core_i00" />
 		<set name="magicLvl" val="75" />
 		<set name="operateType" val="P" />

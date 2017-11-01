@@ -76,9 +76,9 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4722" level="3" /> <!--BOSS Strike -->
-			<skill id="5025" level="1" /> <!--Raid Boss - Level 30 -->
+			<skill id="5025" level="1" /> <!--Raid GrandBoss - Level 30 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" />
@@ -229,8 +229,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="1" /> <!--Undead -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="5026" level="1" /> <!--Raid Boss - Level 39 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="5026" level="1" /> <!--Raid GrandBoss - Level 39 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" />
@@ -358,8 +358,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="5027" level="1" /> <!--Raid Boss - Level 37 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="5027" level="1" /> <!--Raid GrandBoss - Level 37 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" />
@@ -515,8 +515,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="5028" level="1" /> <!--Raid Boss - Level 53 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="5028" level="1" /> <!--Raid GrandBoss - Level 53 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" />
@@ -677,9 +677,9 @@
 			<skill id="4415" level="4" /> <!--One-handed Sword -->
 			<skill id="4416" level="2" /> <!--Magic Creatures -->
 			<skill id="4437" level="5" /> <!--Greater Resist Bleeding -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4726" level="5" /> <!--Stun -->
-			<skill id="5029" level="1" /> <!--Raid Boss - Level 52 -->
+			<skill id="5029" level="1" /> <!--Raid GrandBoss - Level 52 -->
 		</skillList>
 		<corpseTime>8</corpseTime>
 		<exCrtEffect>true</exCrtEffect>
@@ -762,8 +762,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="5031" level="1" /> <!--Raid Boss - Level 80 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="5031" level="1" /> <!--Raid GrandBoss - Level 80 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" isAggressive="false" />
@@ -918,9 +918,9 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="2" /> <!--Magic Creatures -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4730" level="7" /> <!--BOSS Mortal Blow -->
-			<skill id="5034" level="1" /> <!--Raid Boss - Level 73 -->
+			<skill id="5034" level="1" /> <!--Raid GrandBoss - Level 73 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" />
@@ -993,8 +993,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="2" /> <!--Magic Creatures -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="5035" level="1" /> <!--Raid Boss - Level 76 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="5035" level="1" /> <!--Raid GrandBoss - Level 76 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" isAggressive="false" />
@@ -1145,9 +1145,9 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4721" level="10" /> <!--BOSS Strike -->
-			<skill id="5179" level="1" /> <!--Raid Boss - Level 80 -->
+			<skill id="5179" level="1" /> <!--Raid GrandBoss - Level 80 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" isAggressive="false" />
@@ -1227,10 +1227,10 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="25" /> <!--Kamael -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="5265" level="2" /> <!--NPC - Soul Emission -->
-			<skill id="5469" level="1" /> <!--Raid Boss - Level 22 -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5469" level="1" /> <!--Raid GrandBoss - Level 22 -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" isAggressive="false">
@@ -1407,10 +1407,10 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="9" /> <!--Demons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="5467" level="1" /> <!--Dark Attacks -->
-			<skill id="5470" level="1" /> <!--Raid Boss - Level 81 -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5470" level="1" /> <!--Raid GrandBoss - Level 81 -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" isAggressive="false" />
@@ -1478,11 +1478,11 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="9" /> <!--Demons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="5418" level="1" /> <!--Invincible -->
 			<skill id="5462" level="1" /> <!--Fire Attacks -->
-			<skill id="5471" level="1" /> <!--Raid Boss - Level 82 -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5471" level="1" /> <!--Raid GrandBoss - Level 82 -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" isAggressive="false">
@@ -1573,7 +1573,7 @@
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="9" /> <!--Demons -->
 			<skill id="5462" level="1" /> <!--Fire Attacks -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai aggroRange="300" clanHelpRange="300">
@@ -1625,12 +1625,12 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="7" /> <!--Spirits -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="5238" level="1" /> <!--Freezing -->
 			<skill id="5420" level="1" /> <!--Invincible -->
 			<skill id="5463" level="1" /> <!--Water Attacks -->
-			<skill id="5472" level="1" /> <!--Raid Boss - Level 83 -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5472" level="1" /> <!--Raid GrandBoss - Level 83 -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" isAggressive="false" />
@@ -1683,7 +1683,7 @@
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="7" /> <!--Spirits -->
 			<skill id="5463" level="1" /> <!--Water Attacks -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai aggroRange="300" clanHelpRange="300" />
@@ -1732,9 +1732,9 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="9" /> <!--Demons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="5467" level="1" /> <!--Dark Attacks -->
-			<skill id="5473" level="1" /> <!--Raid Boss - Level 81 -->
+			<skill id="5473" level="1" /> <!--Raid GrandBoss - Level 81 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" isAggressive="false" />
@@ -1891,11 +1891,11 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="7" /> <!--Spirits -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="5380" level="4" /> <!--NPC(party) -Magic Single Long Range DD - Wind -->
 			<skill id="5382" level="4" /> <!--NPC(party) -Magic Range Close Range DD - Wind -->
 			<skill id="5464" level="1" /> <!--Wind Attacks -->
-			<skill id="5474" level="1" /> <!--Raid Boss - Level 81 -->
+			<skill id="5474" level="1" /> <!--Raid GrandBoss - Level 81 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" isAggressive="false" />
@@ -1944,7 +1944,7 @@
 			<param name="Threshold_Level_Min" value="11" />
 			<param name="Threshold_Level_Max" value="11" />
 			<param name="FieldCycle_Quantity" value="300" />
-			<skill name="Skill01_ID" id="5249" level="9" /> <!-- Boss Dark Circle -->
+			<skill name="Skill01_ID" id="5249" level="9" /> <!-- GrandBoss Dark Circle -->
 			<skill name="Skill02_ID" id="5247" level="9" /> <!-- Seed of Darkness -->
 			<skill name="Skill03_ID" id="5044" level="2" /> <!-- NPC Ultimate Defense -->
 		</parameters>
@@ -1977,13 +1977,13 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="9" /> <!--Demons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="5044" level="2" /> <!--NPC Ultimate Defense -->
 			<skill id="5247" level="9" /> <!--Seed of Darkness -->
-			<skill id="5249" level="9" /> <!--Boss Dark Circle -->
+			<skill id="5249" level="9" /> <!--GrandBoss Dark Circle -->
 			<skill id="5467" level="1" /> <!--Dark Attacks -->
-			<skill id="5475" level="1" /> <!--Raid Boss - Level 83 -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5475" level="1" /> <!--Raid GrandBoss - Level 83 -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" isAggressive="false" />
@@ -2044,7 +2044,7 @@
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="1" /> <!--Undead -->
 			<skill id="5467" level="1" /> <!--Dark Attacks -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" isAggressive="false" />
@@ -2066,7 +2066,7 @@
 			<param name="Threshold_Level_Min" value="11" />
 			<param name="Threshold_Level_Max" value="11" />
 			<param name="FieldCycle_Quantity" value="300" />
-			<skill name="Skill01_ID" id="5246" level="9" /> <!-- Boss Dark Explosion -->
+			<skill name="Skill01_ID" id="5246" level="9" /> <!-- GrandBoss Dark Explosion -->
 			<skill name="Skill02_ID" id="5250" level="1" /> <!-- Stun -->
 		</parameters>
 		<race>DEMONIC</race>
@@ -2098,12 +2098,12 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="9" /> <!--Demons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="5246" level="9" /> <!--Boss Dark Explosion -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="5246" level="9" /> <!--GrandBoss Dark Explosion -->
 			<skill id="5250" level="1" /> <!--Stun -->
 			<skill id="5467" level="1" /> <!--Dark Attacks -->
-			<skill id="5476" level="1" /> <!--Raid Boss - Level 83 -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5476" level="1" /> <!--Raid GrandBoss - Level 83 -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="2000" isAggressive="false">
@@ -2229,10 +2229,10 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="5467" level="1" /> <!--Dark Attacks -->
-			<skill id="5477" level="1" /> <!--Raid Boss - Level 83 -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5477" level="1" /> <!--Raid GrandBoss - Level 83 -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" isAggressive="false" />
@@ -2296,7 +2296,7 @@
 			<skill id="5233" level="1" /> <!--Weight Spin Attack - Weak -->
 			<skill id="5234" level="1" /> <!--Weight Spin Attack - Mid -->
 			<skill id="5235" level="1" /> <!--Weight Spin Attack - Strong -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" isAggressive="false" />

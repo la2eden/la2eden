@@ -125,8 +125,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4987" level="1" /> <!--Raid Boss - Level 74 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4987" level="1" /> <!--Raid GrandBoss - Level 74 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" isAggressive="false" />
@@ -288,8 +288,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="8" /> <!--Angels -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4988" level="1" /> <!--Raid Boss - Level 76 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4988" level="1" /> <!--Raid GrandBoss - Level 76 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" isAggressive="false" />
@@ -439,8 +439,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="3" /> <!--Beasts -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4864" level="1" /> <!--Raid Boss - Level 40 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4864" level="1" /> <!--Raid GrandBoss - Level 40 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" isAggressive="false" />
@@ -595,9 +595,9 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4741" level="3" /> <!--BOSS Strike -->
-			<skill id="4865" level="1" /> <!--Raid Boss - Level 36 -->
+			<skill id="4865" level="1" /> <!--Raid GrandBoss - Level 36 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" isAggressive="false" />
@@ -745,8 +745,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="11" /> <!--Spears -->
 			<skill id="4416" level="11" /> <!--Giants -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4866" level="1" /> <!--Raid Boss - Level 40 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4866" level="1" /> <!--Raid GrandBoss - Level 40 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" isAggressive="false" />
@@ -900,9 +900,9 @@
 			<skill id="4414" level="3" /> <!--Light Armor Type -->
 			<skill id="4415" level="7" /> <!--Daggers -->
 			<skill id="4416" level="3" /> <!--Beasts -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4752" level="5" /> <!--BOSS Mortal Blow -->
-			<skill id="4867" level="1" /> <!--Raid Boss - Level 50 -->
+			<skill id="4867" level="1" /> <!--Raid GrandBoss - Level 50 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" isAggressive="false" />
@@ -1056,8 +1056,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="1" /> <!--Undead -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4868" level="1" /> <!--Raid Boss - Level 73 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4868" level="1" /> <!--Raid GrandBoss - Level 73 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" isAggressive="false" />
@@ -1217,8 +1217,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="9" /> <!--Demons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4869" level="1" /> <!--Raid Boss - Level 35 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4869" level="1" /> <!--Raid GrandBoss - Level 35 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -1377,8 +1377,8 @@
 			<skill id="4414" level="3" /> <!--Light Armor Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4870" level="1" /> <!--Raid Boss - Level 62 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4870" level="1" /> <!--Raid GrandBoss - Level 62 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -1537,8 +1537,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="10" /> <!--Dragons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4871" level="1" /> <!--Raid Boss - Level 75 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4871" level="1" /> <!--Raid GrandBoss - Level 75 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -1613,8 +1613,8 @@
 			<skill id="4414" level="3" /> <!--Light Armor Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4872" level="1" /> <!--Raid Boss - Level 57 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4872" level="1" /> <!--Raid GrandBoss - Level 57 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -1767,10 +1767,10 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="1" /> <!--Undead -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4721" level="6" /> <!--BOSS Strike -->
 			<skill id="4736" level="6" /> <!--BOSS Spinning Slash -->
-			<skill id="4873" level="1" /> <!--Raid Boss - Level 69 -->
+			<skill id="4873" level="1" /> <!--Raid GrandBoss - Level 69 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -1843,9 +1843,9 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="10" /> <!--Dragons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4731" level="6" /> <!--BOSS Mortal Blow -->
-			<skill id="4874" level="1" /> <!--Raid Boss - Level 60 -->
+			<skill id="4874" level="1" /> <!--Raid GrandBoss - Level 60 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -1919,8 +1919,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4875" level="1" /> <!--Raid Boss - Level 72 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4875" level="1" /> <!--Raid GrandBoss - Level 72 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -2076,8 +2076,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="10" /> <!--Dragons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4876" level="1" /> <!--Raid Boss - Level 59 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4876" level="1" /> <!--Raid GrandBoss - Level 59 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -2228,9 +2228,9 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4745" level="5" /> <!--Stun -->
-			<skill id="4877" level="1" /> <!--Raid Boss - Level 55 -->
+			<skill id="4877" level="1" /> <!--Raid GrandBoss - Level 55 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -2393,10 +2393,10 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="11" /> <!--Giants -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4724" level="8" /> <!--Stun -->
 			<skill id="4734" level="8" /> <!--BOSS Spinning Slash -->
-			<skill id="4878" level="1" /> <!--Raid Boss - Level 75 -->
+			<skill id="4878" level="1" /> <!--Raid GrandBoss - Level 75 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -2466,8 +2466,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="11" /> <!--Giants -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4879" level="1" /> <!--Raid Boss - Level 78 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4879" level="1" /> <!--Raid GrandBoss - Level 78 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -2615,10 +2615,10 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="9" /> <!--Demons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4720" level="7" /> <!--BOSS Strike -->
 			<skill id="4735" level="7" /> <!--BOSS Spinning Slash -->
-			<skill id="4880" level="1" /> <!--Raid Boss - Level 72 -->
+			<skill id="4880" level="1" /> <!--Raid GrandBoss - Level 72 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -2691,8 +2691,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="5" /> <!--Plants -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4881" level="1" /> <!--Raid Boss - Level 75 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4881" level="1" /> <!--Raid GrandBoss - Level 75 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -2847,8 +2847,8 @@
 			<skill id="4414" level="3" /> <!--Light Armor Type -->
 			<skill id="4415" level="7" /> <!--Daggers -->
 			<skill id="4416" level="3" /> <!--Beasts -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4882" level="1" /> <!--Raid Boss - Level 70 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4882" level="1" /> <!--Raid GrandBoss - Level 70 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -3008,9 +3008,9 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="2" /> <!--Magic Creatures -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4730" level="6" /> <!--BOSS Mortal Blow -->
-			<skill id="4883" level="1" /> <!--Raid Boss - Level 65 -->
+			<skill id="4883" level="1" /> <!--Raid GrandBoss - Level 65 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -3080,9 +3080,9 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4741" level="6" /> <!--BOSS Strike -->
-			<skill id="4884" level="1" /> <!--Raid Boss - Level 60 -->
+			<skill id="4884" level="1" /> <!--Raid GrandBoss - Level 60 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -3236,10 +3236,10 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="6" /> <!--Blunt Weapons -->
 			<skill id="4416" level="11" /> <!--Giants -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4725" level="5" /> <!--Stun -->
 			<skill id="4735" level="5" /> <!--BOSS Spinning Slash -->
-			<skill id="4885" level="1" /> <!--Raid Boss - Level 55 -->
+			<skill id="4885" level="1" /> <!--Raid GrandBoss - Level 55 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -3312,9 +3312,9 @@
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="2" /> <!--Magic Creatures -->
 			<skill id="4444" level="2" /> <!--Higher Resist Bow/Crossbow Weapons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4745" level="4" /> <!--Stun -->
-			<skill id="4886" level="1" /> <!--Raid Boss - Level 45 -->
+			<skill id="4886" level="1" /> <!--Raid GrandBoss - Level 45 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -3477,8 +3477,8 @@
 			<skill id="4414" level="3" /> <!--Light Armor Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="3" /> <!--Beasts -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4887" level="1" /> <!--Raid Boss - Level 67 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4887" level="1" /> <!--Raid GrandBoss - Level 67 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -3646,8 +3646,8 @@
 			<skill id="4414" level="3" /> <!--Light Armor Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="9" /> <!--Demons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4888" level="1" /> <!--Raid Boss - Level 75 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4888" level="1" /> <!--Raid GrandBoss - Level 75 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -3796,9 +3796,9 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="11" /> <!--Giants -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4744" level="7" /> <!--Stun -->
-			<skill id="4889" level="1" /> <!--Raid Boss - Level 70 -->
+			<skill id="4889" level="1" /> <!--Raid GrandBoss - Level 70 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -3950,9 +3950,9 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4721" level="2" /> <!--BOSS Strike -->
-			<skill id="4890" level="1" /> <!--Raid Boss - Level 28 -->
+			<skill id="4890" level="1" /> <!--Raid GrandBoss - Level 28 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -4022,8 +4022,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="2" /> <!--Magic Creatures -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4891" level="1" /> <!--Raid Boss - Level 50 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4891" level="1" /> <!--Raid GrandBoss - Level 50 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -4186,8 +4186,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="1" /> <!--Undead -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4892" level="1" /> <!--Raid Boss - Level 75 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4892" level="1" /> <!--Raid GrandBoss - Level 75 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -4259,8 +4259,8 @@
 			<skill id="4414" level="3" /> <!--Light Armor Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="9" /> <!--Demons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4893" level="1" /> <!--Raid Boss - Level 50 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4893" level="1" /> <!--Raid GrandBoss - Level 50 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -4420,10 +4420,10 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="8" /> <!--Angels -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4719" level="5" /> <!--BOSS Strike -->
 			<skill id="4734" level="5" /> <!--BOSS Spinning Slash -->
-			<skill id="4894" level="1" /> <!--Raid Boss - Level 55 -->
+			<skill id="4894" level="1" /> <!--Raid GrandBoss - Level 55 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -4497,10 +4497,10 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="9" /> <!--Demons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4724" level="7" /> <!--Stun -->
 			<skill id="4734" level="7" /> <!--BOSS Spinning Slash -->
-			<skill id="4895" level="1" /> <!--Raid Boss - Level 70 -->
+			<skill id="4895" level="1" /> <!--Raid GrandBoss - Level 70 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -4581,8 +4581,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="1" /> <!--Undead -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4896" level="1" /> <!--Raid Boss - Level 75 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4896" level="1" /> <!--Raid GrandBoss - Level 75 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -4665,8 +4665,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="9" /> <!--Demons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4897" level="1" /> <!--Raid Boss - Level 80 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4897" level="1" /> <!--Raid GrandBoss - Level 80 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -4822,8 +4822,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="8" /> <!--Angels -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4898" level="1" /> <!--Raid Boss - Level 80 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4898" level="1" /> <!--Raid GrandBoss - Level 80 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" isAggressive="false" />
@@ -5019,8 +5019,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="2" /> <!--Magic Creatures -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4900" level="1" /> <!--Raid Boss - Level 78 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4900" level="1" /> <!--Raid GrandBoss - Level 78 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" isAggressive="false" />
@@ -5177,8 +5177,8 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="5" /> <!--Blunt Weapons -->
 			<skill id="4416" level="13" /> <!--Fairies -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4901" level="1" /> <!--Raid Boss - Level 78 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4901" level="1" /> <!--Raid GrandBoss - Level 78 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" isAggressive="false" />
@@ -5323,8 +5323,8 @@
 			<skill id="4414" level="3" /> <!--Light Armor Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="11" /> <!--Giants -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4902" level="1" /> <!--Raid Boss - Level 74 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4902" level="1" /> <!--Raid GrandBoss - Level 74 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" isAggressive="false" />
@@ -5487,9 +5487,9 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="6" /> <!--Blunt Weapons -->
 			<skill id="4416" level="6" /> <!--Humanoids -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
 			<skill id="4746" level="9" /> <!--Stun -->
-			<skill id="4903" level="1" /> <!--Raid Boss - Level 80 -->
+			<skill id="4903" level="1" /> <!--Raid GrandBoss - Level 80 -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<ai type="BALANCED" clanHelpRange="300" isAggressive="false" />

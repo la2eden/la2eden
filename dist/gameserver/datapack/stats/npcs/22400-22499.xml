@@ -7855,7 +7855,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="7" /> <!--Daggers -->
 			<skill id="4416" level="9" /> <!--Demons -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 			<skill id="5719" level="1" /> <!--Kamabion Susceptibility -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>

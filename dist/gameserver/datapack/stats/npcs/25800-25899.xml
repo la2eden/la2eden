@@ -39,8 +39,8 @@
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="9" /> <!--Demons -->
 			<skill id="4444" level="2" /> <!--Higher Resist Bow/Crossbow Weapons -->
-			<skill id="4494" level="1" /> <!--Raid Boss -->
-			<skill id="4983" level="1" /> <!--Raid Boss - Level 25 -->
+			<skill id="4494" level="1" /> <!--Raid GrandBoss -->
+			<skill id="4983" level="1" /> <!--Raid GrandBoss - Level 25 -->
 		</skillList>
 		<ai type="BALANCED" clanHelpRange="300" />
 		<dropLists>

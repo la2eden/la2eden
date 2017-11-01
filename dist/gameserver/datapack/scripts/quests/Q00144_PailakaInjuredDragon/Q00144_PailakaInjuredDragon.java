@@ -100,7 +100,7 @@ public class Q00144_PailakaInjuredDragon extends Quest
 	private static final int ANTYLOPE_2 = 18643;
 	private static final int ANTYLOPE_3 = 18651;
 	private static final int FLAVA = 18647;
-	// Boss
+	// GrandBoss
 	private static final int LATANA = 18660;
 	// Items
 	private static final int SPEAR = 13052;

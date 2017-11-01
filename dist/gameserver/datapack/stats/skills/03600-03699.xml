@@ -106,7 +106,7 @@
 	</skill>
 	<skill id="3604" levels="1" name="Frintezza's Necklace">
 		<!-- Confirmed CT2.5 -->
-		<!-- Boss Jewel Skill -->
+		<!-- GrandBoss Jewel Skill -->
 		<set name="icon" val="icon.accessory_necklace_of_frintessa_i00" />
 		<set name="magicLvl" val="75" />
 		<set name="operateType" val="P" />
@@ -964,7 +964,7 @@
 	</skill>
 	<skill id="3649" levels="1" name="Beleth's Ring">
 		<!-- Confirmed CT2.5 -->
-		<!-- Boss Jewel Skill -->
+		<!-- GrandBoss Jewel Skill -->
 		<set name="icon" val="icon.accessary_dynasty_ring_i00" />
 		<set name="magicLvl" val="75" />
 		<set name="operateType" val="P" />

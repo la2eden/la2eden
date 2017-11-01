@@ -1175,8 +1175,8 @@ public final class Config
     public static boolean ENABLE_VOICED_ONLINE;
     public static boolean ENABLE_ONLINE_STATUS_HTML;
     public static boolean ENABLE_ONLINE_STATUS_SHOW_OFFLINE;
-    public static boolean ENABLE_VOICED_BOSS_COMMAND;
-    public static List<Integer> BOSS_LIST;
+    public static boolean ENABLE_VOICED_GRANDBOSS;
+    public static List<Integer> GRANDBOSS_LIST;
     public static boolean WELCOME_PM_ENABLED;
     public static String WELCOME_PM_SENDER;
     public static List<String> WELCOME_PM_TEXT;
@@ -2543,13 +2543,13 @@ public final class Config
             ENABLE_VOICED_ONLINE = ChatModSettings.getBoolean("EnableOnlineStatus", false);
             ENABLE_ONLINE_STATUS_HTML = ChatModSettings.getBoolean("EnableAdvancedStatus", false);
             ENABLE_ONLINE_STATUS_SHOW_OFFLINE = ChatModSettings.getBoolean("EnableOfflineTraders", false);
-            ENABLE_VOICED_BOSS_COMMAND = ChatModSettings.getBoolean("EnableBossCommand", false);
+            ENABLE_VOICED_GRANDBOSS = ChatModSettings.getBoolean("EnableGrandBossCommand", false);
 
-            final String[] boss = ChatModSettings.getString("BossList", "").split(",");
-            BOSS_LIST = new ArrayList<>(boss.length);
+            final String[] boss = ChatModSettings.getString("GrandBossList", "").split(",");
+            GRANDBOSS_LIST = new ArrayList<>(boss.length);
             for (String id : boss)
             {
-                BOSS_LIST.add(Integer.parseInt(id.trim()));
+                GRANDBOSS_LIST.add(Integer.parseInt(id.trim()));
             }
 
             L2JMOD_DISPLAY_SERVER_TIME = ChatModSettings.getBoolean("DisplayServerTime", false);

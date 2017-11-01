@@ -131,7 +131,7 @@ public class L2BossZone extends L2ZoneType
 	}
 	
 	/**
-	 * Boss zones have special behaviors for player characters.<br>
+	 * GrandBoss zones have special behaviors for player characters.<br>
 	 * Players are automatically teleported out when the attempt to enter these zones, except if the time at which they enter the zone is prior to the entry expiration time set for that player.<br>
 	 * Entry expiration times are set by any one of the following:<br>
 	 * 1) A player logs out while in a zone (Expiration gets set to logoutTime + _timeInvade)<br>

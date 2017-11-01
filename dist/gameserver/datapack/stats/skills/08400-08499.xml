@@ -1036,7 +1036,7 @@
 	</skill>
 	<skill id="8459" levels="1" name="Necklace of Freya">
 		<!-- Confirmed CT2.5 -->
-		<!-- Boss Jewel Skill -->
+		<!-- GrandBoss Jewel Skill -->
 		<set name="icon" val="icon.accessary_queen_of_ice_necklace_i00" />
 		<set name="magicLvl" val="1" />
 		<set name="operateType" val="P" />
@@ -1058,7 +1058,7 @@
 	</skill>
 	<skill id="8460" levels="1" name="Blessed Necklace of Freya">
 		<!-- Confirmed CT2.5 -->
-		<!-- Boss Jewel Skill -->
+		<!-- GrandBoss Jewel Skill -->
 		<set name="icon" val="icon.accessary_queen_of_ice_necklace_i00" />
 		<set name="magicLvl" val="1" />
 		<set name="operateType" val="P" />

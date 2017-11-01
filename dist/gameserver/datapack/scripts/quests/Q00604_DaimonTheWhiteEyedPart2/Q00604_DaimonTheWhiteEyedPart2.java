@@ -37,7 +37,7 @@ public final class Q00604_DaimonTheWhiteEyedPart2 extends Quest
 	// NPCs
 	private static final int DAIMONS_ALTAR = 31541;
 	private static final int EYE_OF_ARGOS = 31683;
-	// Raid Boss
+	// Raid GrandBoss
 	private static final int DAIMON_THE_WHITE_EYED = 25290;
 	// Items
 	private static final int UNFINISHED_SUMMON_CRYSTAL = 7192;

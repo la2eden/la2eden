@@ -46,7 +46,7 @@ public final class Q00340_SubjugationOfLizardmen extends Quest
 	private static final int LANGK_LIZARDMAN_WARRIOR = 20024;
 	private static final int LANGK_LIZARDMAN_SCOUT = 20027;
 	private static final int LANGK_LIZARDMAN = 20030;
-	// Raid Boss
+	// Raid GrandBoss
 	private static final int SERPENT_DEMON_BIFRONS = 25146;
 	// Misc
 	private static final int MIN_LEVEL = 17;

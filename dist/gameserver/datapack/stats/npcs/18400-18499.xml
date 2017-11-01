@@ -1683,7 +1683,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -1720,7 +1720,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -1757,7 +1757,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -1794,7 +1794,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -1831,7 +1831,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -1868,7 +1868,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -1905,7 +1905,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -1942,7 +1942,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -1979,7 +1979,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -2016,7 +2016,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -2053,7 +2053,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -2090,7 +2090,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -2127,7 +2127,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -2164,7 +2164,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -2201,7 +2201,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -2238,7 +2238,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />
@@ -2275,7 +2275,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="3" /> <!--One-handed Sword -->
 			<skill id="4416" level="19" /> <!--Others -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>false</exCrtEffect>
 		<ai type="BALANCED" aggroRange="300" clanHelpRange="300" />

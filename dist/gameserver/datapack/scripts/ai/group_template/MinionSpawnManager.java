@@ -302,7 +302,7 @@ public final class MinionSpawnManager extends AbstractNpcAI
 		NPC.add(25493); // Eva's Spirit Niniel
 		NPC.add(25496); // Fafurion's Envoy Pingolpin
 		NPC.add(25498); // Fafurion's Henchman Istary
-		NPC.add(25501); // Boss Akata
+		NPC.add(25501); // GrandBoss Akata
 		NPC.add(25504); // Nellis' Vengeful Spirit
 		NPC.add(25506); // Rayito the Looter
 		NPC.add(25509); // Dark Shaman Varangka

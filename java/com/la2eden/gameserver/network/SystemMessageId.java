@@ -4169,13 +4169,13 @@ public final class SystemMessageId
 	@ClientString(id = 1372, message = "Your punishment will continue for $s1 minutes.")
 	public static SystemMessageId YOUR_PUNISHMENT_WILL_CONTINUE_FOR_S1_MINUTES;
 	
-	@ClientString(id = 1373, message = "$c1 has picked up $s2 that was dropped by the Raid Boss.")
+	@ClientString(id = 1373, message = "$c1 has picked up $s2 that was dropped by the Raid GrandBoss.")
 	public static SystemMessageId C1_HAS_PICKED_UP_S2_THAT_WAS_DROPPED_BY_THE_RAID_BOSS;
 	
-	@ClientString(id = 1374, message = "$c1 has picked up $s3 $s2(s) that were dropped by the Raid Boss.")
+	@ClientString(id = 1374, message = "$c1 has picked up $s3 $s2(s) that were dropped by the Raid GrandBoss.")
 	public static SystemMessageId C1_HAS_PICKED_UP_S3_S2_S_THAT_WERE_DROPPED_BY_THE_RAID_BOSS;
 	
-	@ClientString(id = 1375, message = "$c1 has picked up $s2 Adena that was dropped by the Raid Boss.")
+	@ClientString(id = 1375, message = "$c1 has picked up $s2 Adena that was dropped by the Raid GrandBoss.")
 	public static SystemMessageId C1_HAS_PICKED_UP_S2_ADENA_THAT_WAS_DROPPED_BY_THE_RAID_BOSS;
 	
 	@ClientString(id = 1376, message = "$c1 has picked up $s2 that was dropped by another character.")

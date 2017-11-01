@@ -38,7 +38,7 @@ import com.la2eden.gameserver.model.actor.instance.L2RaidBossInstance;
 import com.la2eden.util.Rnd;
 
 /**
- * Raid Boss spawn manager.
+ * Raid GrandBoss spawn manager.
  * @author godson
  */
 public class RaidBossSpawnManager
@@ -145,7 +145,7 @@ public class RaidBossSpawnManager
 				
 				_storedInfo.put(bossId, info);
 				
-				_log.info(getClass().getSimpleName() + ": Spawning Raid Boss " + raidboss.getName());
+				_log.info(getClass().getSimpleName() + ": Spawning Raid GrandBoss " + raidboss.getName());
 				
 				_bosses.put(bossId, raidboss);
 			}
@@ -465,7 +465,7 @@ public class RaidBossSpawnManager
 		
 		_storedInfo.put(raidboss.getId(), info);
 		
-		_log.info(getClass().getSimpleName() + ": Spawning Night Raid Boss " + raidboss.getName());
+		_log.info(getClass().getSimpleName() + ": Spawning Night Raid GrandBoss " + raidboss.getName());
 		
 		_bosses.put(raidboss.getId(), raidboss);
 	}

@@ -3232,7 +3232,7 @@
 		<parameters>
 			<param name="Skill01_Probablity" value="5" />
 			<param name="Skill02_Probablity" value="20" />
-			<skill name="Skill01" id="5249" level="4" /> <!-- Boss Dark Circle -->
+			<skill name="Skill01" id="5249" level="4" /> <!-- GrandBoss Dark Circle -->
 			<skill name="Skill02" id="4137" level="4" /> <!-- Hydro Screw -->
 			<skill name="soul_skill" id="5625" level="1" /> <!-- Soul Confinement -->
 		</parameters>
@@ -3264,7 +3264,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="10" /> <!--Dragons -->
-			<skill id="5249" level="4" /> <!--Boss Dark Circle -->
+			<skill id="5249" level="4" /> <!--GrandBoss Dark Circle -->
 			<skill id="5597" level="1" /> <!--Invalid Skill cancel -->
 			<skill id="5620" level="4" /> <!--Short-Range Physical Attack Weakness -->
 			<skill id="5625" level="1" /> <!--Soul Confinement -->
@@ -4013,7 +4013,7 @@
 			<skill id="4414" level="2" /> <!--Standard Type -->
 			<skill id="4415" level="1" /> <!--Bare Hands -->
 			<skill id="4416" level="1" /> <!--Undead -->
-			<skill id="5479" level="1" /> <!--Boss Petrification Resistance -->
+			<skill id="5479" level="1" /> <!--GrandBoss Petrification Resistance -->
 		</skillList>
 		<exCrtEffect>true</exCrtEffect>
 		<sNpcPropHpRate>4</sNpcPropHpRate>

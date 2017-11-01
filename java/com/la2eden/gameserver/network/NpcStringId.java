@@ -12672,7 +12672,7 @@ public final class NpcStringId
 	@ClientString(id = 1120178, message = "Fafurion's Henchman Istary (lv45)")
 	public static NpcStringId FAFURION_S_HENCHMAN_ISTARY_LV45;
 	
-	@ClientString(id = 1120179, message = "Grave Robber Boss Akata (lv30)")
+	@ClientString(id = 1120179, message = "Grave Robber GrandBoss Akata (lv30)")
 	public static NpcStringId GRAVE_ROBBER_BOSS_AKATA_LV30;
 	
 	@ClientString(id = 1120180, message = "Nellis' Vengeful Spirit (lv39)")

@@ -119,7 +119,7 @@ public final class Logout extends L2GameClientPacket
 			}
 		}
 		
-		// Remove player from Boss Zone
+		// Remove player from GrandBoss Zone
 		player.removeFromBossZone();
 		
 		final LogRecord record = new LogRecord(Level.INFO, "Disconnected");
