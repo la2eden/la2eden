@@ -430,6 +430,22 @@ public class EnterWorld extends L2GameClientPacket
 		}
 		
 		activeChar.sendPacket(SystemMessageId.WELCOME_TO_THE_WORLD_OF_LINEAGE_II);
+
+		// Display version info?
+		if (Config.DISPLAY_SERVER_VERSION)
+		{
+			sendServerVersion(activeChar);
+		}
+
+		// Send welcome pm's
+		if (Config.WELCOME_PM_ENABLED)
+		{
+			for (String msg : Config.WELCOME_PM_TEXT)
+			{
+				CreatureSay packet = new CreatureSay(0, ChatType.WHISPER, Config.WELCOME_PM_SENDER, msg);
+				activeChar.sendPacket(packet);
+			}
+		}
 		
 		SevenSigns.getInstance().sendCurrentPeriodMsg(activeChar);
 		AnnouncementsTable.getInstance().showAnnouncements(activeChar);
@@ -610,6 +626,20 @@ public class EnterWorld extends L2GameClientPacket
 				}
 			}
 		}
+	}
+
+	/**
+	 * Displays the current server version
+	 * @author mirand0x
+	 * @param chr L2PcInstance to be sent
+	 */
+	private void sendServerVersion(L2PcInstance chr)
+	{
+		chr.sendMessage("========< Version >========");
+		chr.sendMessage("Build number: .. " + Config.BUILD_NUMBER);
+		chr.sendMessage("Build date: .... " + Config.BUILD_DATE);
+		chr.sendMessage("Build commit: .. " + Config.SHORT_COMMIT);
+		chr.sendMessage("==========================");
 	}
 	
 	/**

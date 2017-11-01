@@ -428,6 +428,7 @@ public final class Config
 	// General Settings
 	// --------------------------------------------------
 	public static boolean EVERYBODY_HAS_ADMIN_RIGHTS;
+    public static boolean DISPLAY_SERVER_VERSION;
 	public static boolean SERVER_LIST_BRACKET;
 	public static int SERVER_LIST_TYPE;
 	public static int SERVER_LIST_AGE;
@@ -1170,8 +1171,8 @@ public final class Config
     public static boolean ENABLE_VOICED_ONLINE;
     public static boolean ENABLE_ONLINE_STATUS_HTML;
     public static boolean ENABLE_ONLINE_STATUS_SHOW_OFFLINE;
-    public static boolean ENABLE_VOICED_GRANDBOSS;
-    public static List<Integer> GRANDBOSS_LIST;
+    public static boolean ENABLE_VOICED_BOSS_COMMAND;
+    public static List<Integer> BOSS_LIST;
     public static boolean WELCOME_PM_ENABLED;
     public static String WELCOME_PM_SENDER;
     public static List<String> WELCOME_PM_TEXT;
@@ -1806,6 +1807,7 @@ public final class Config
 			// Load General L2Properties file (if exists)
 			final PropertiesParser General = new PropertiesParser(GENERAL_CONFIG_FILE);
 			EVERYBODY_HAS_ADMIN_RIGHTS = General.getBoolean("EverybodyHasAdminRights", false);
+            DISPLAY_SERVER_VERSION = General.getBoolean("DisplayServerVersion", true);
 			SERVER_LIST_BRACKET = General.getBoolean("ServerListBrackets", false);
 			SERVER_LIST_TYPE = getServerTypeId(General.getString("ServerListType", "Normal").split(","));
 			SERVER_LIST_AGE = General.getInt("ServerListAge", 0);
@@ -2243,7 +2245,7 @@ public final class Config
             }
 
             // Load Champion settings file (if exists)
-            final PropertiesParser ChampionSettings = new PropertiesParser(WEDDING_FILE);
+            final PropertiesParser ChampionSettings = new PropertiesParser(CHAMPION_FILE);
 			
 			L2JMOD_CHAMPION_ENABLE = ChampionSettings.getBoolean("ChampionEnable", false);
 			L2JMOD_CHAMPION_PASSIVE = ChampionSettings.getBoolean("ChampionPassive", false);
@@ -2519,13 +2521,13 @@ public final class Config
             ENABLE_VOICED_ONLINE = ChatModSettings.getBoolean("EnableOnlineStatus", false);
             ENABLE_ONLINE_STATUS_HTML = ChatModSettings.getBoolean("EnableAdvancedStatus", false);
             ENABLE_ONLINE_STATUS_SHOW_OFFLINE = ChatModSettings.getBoolean("EnableOfflineTraders", false);
-            ENABLE_VOICED_GRANDBOSS = ChatModSettings.getBoolean("EnableGrandbossCommand", false);
+            ENABLE_VOICED_BOSS_COMMAND = ChatModSettings.getBoolean("EnableBossCommand", false);
 
-            final String[] grandboss = ChatModSettings.getString("GrandbossList", "").split(",");
-            GRANDBOSS_LIST = new ArrayList<>(grandboss.length);
-            for (String id : grandboss)
+            final String[] boss = ChatModSettings.getString("BossList", "").split(",");
+            BOSS_LIST = new ArrayList<>(boss.length);
+            for (String id : boss)
             {
-                GRANDBOSS_LIST.add(Integer.parseInt(id.trim()));
+                BOSS_LIST.add(Integer.parseInt(id.trim()));
             }
 
             L2JMOD_DISPLAY_SERVER_TIME = ChatModSettings.getBoolean("DisplayServerTime", false);
