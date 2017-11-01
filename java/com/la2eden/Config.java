@@ -227,6 +227,9 @@ public final class Config
 	public static long STARTING_ADENA;
 	public static byte STARTING_LEVEL;
 	public static int STARTING_SP;
+    public static boolean CUSTOM_CHAR_TITLE;
+    public static String CUSTOM_CHAR_TITLE_TEXT;
+    public static int CUSTOM_TITLE_COLOR;
 	public static long MAX_ADENA;
 	public static boolean AUTO_LOOT;
 	public static boolean AUTO_LOOT_RAIDS;
@@ -1703,6 +1706,9 @@ public final class Config
 			STARTING_ADENA = character.getLong("StartingAdena", 0);
 			STARTING_LEVEL = character.getByte("StartingLevel", (byte) 1);
 			STARTING_SP = character.getInt("StartingSP", 0);
+            CUSTOM_CHAR_TITLE = character.getBoolean("EnableCustomStartingTitle", false);
+            CUSTOM_CHAR_TITLE_TEXT = character.getString("CustomStartingTitle", "La2Eden");
+            CUSTOM_TITLE_COLOR = Integer.decode("0x" + character.getString("CustomStartingTitleColor", "E57E34"));
 			MAX_ADENA = character.getLong("MaxAdena", 99900000000L);
 			if (MAX_ADENA < 0)
 			{

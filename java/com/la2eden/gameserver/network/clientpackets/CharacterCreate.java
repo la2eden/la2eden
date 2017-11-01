@@ -16,14 +16,6 @@
  */
 package com.la2eden.gameserver.network.clientpackets;
 
-import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-import java.util.regex.PatternSyntaxException;
-
 import com.la2eden.Config;
 import com.la2eden.gameserver.data.sql.impl.CharNameTable;
 import com.la2eden.gameserver.data.xml.impl.InitialEquipmentData;
@@ -53,6 +45,14 @@ import com.la2eden.gameserver.network.serverpackets.CharCreateFail;
 import com.la2eden.gameserver.network.serverpackets.CharCreateOk;
 import com.la2eden.gameserver.network.serverpackets.CharSelectionInfo;
 import com.la2eden.gameserver.util.Util;
+
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.regex.PatternSyntaxException;
 
 @SuppressWarnings("unused")
 public final class CharacterCreate extends L2GameClientPacket
@@ -267,8 +267,13 @@ public final class CharacterCreate extends L2GameClientPacket
 			final Location createLoc = template.getCreationPoint();
 			newChar.setXYZInvisible(createLoc.getX(), createLoc.getY(), createLoc.getZ());
 		}
-		
-		newChar.setTitle("");
+
+		if (Config.CUSTOM_CHAR_TITLE) {
+			newChar.setTitle(Config.CUSTOM_CHAR_TITLE_TEXT);
+			newChar.getAppearance().setTitleColor(Config.CUSTOM_TITLE_COLOR);
+		} else {
+			newChar.setTitle("");
+		}
 		
 		if (Config.ENABLE_VITALITY)
 		{
