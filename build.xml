@@ -114,7 +114,7 @@
 			<manifest>
 				<attribute name="Built-By" value="${user.name}" />
 				<attribute name="Built-Date" value="${time.stamp}" />
-				<attribute name="Implementation-URL" value="http://la2eden.com/" />
+				<attribute name="Implementation-URL" value="https://la2eden.com/" />
 				<attribute name="Class-Path" value="${manifest.libs}" />
 				<attribute name="Main-Class" value="com.la2eden.loginserver.L2LoginServer" />
 			</manifest>
@@ -129,7 +129,7 @@
 			<manifest>
 				<attribute name="Built-By" value="${user.name}" />
 				<attribute name="Built-Date" value="${time.stamp}" />
-				<attribute name="Implementation-URL" value="http://la2eden.com/" />
+				<attribute name="Implementation-URL" value="https://la2eden.com/" />
 				<attribute name="Class-Path" value="${manifest.libs}" />
 				<attribute name="Main-Class" value="com.la2eden.gameserver.GameServer" />
 			</manifest>
@@ -146,7 +146,7 @@
 				<attribute name="Built-By" value="${user.name}" />
 				<attribute name="Built-Date" value="${time.stamp}" />
 				<attribute name="Class-Path" value="${manifest.libs}" />
-				<attribute name="Implementation-URL" value="http://la2eden.com/" />
+				<attribute name="Implementation-URL" value="https://la2eden.com/" />
 				<attribute name="Main-Class" value="com.la2eden.tools.dbinstaller.LauncherGS" />
 			</manifest>
 		</jar>
@@ -162,7 +162,7 @@
 				<attribute name="Built-By" value="${user.name}" />
 				<attribute name="Built-Date" value="${time.stamp}" />
 				<attribute name="Class-Path" value="${manifest.libs}" />
-				<attribute name="Implementation-URL" value="http://la2eden.com/" />
+				<attribute name="Implementation-URL" value="https://la2eden.com/" />
 				<attribute name="Main-Class" value="com.la2eden.tools.dbinstaller.LauncherLS" />
 			</manifest>
 		</jar>

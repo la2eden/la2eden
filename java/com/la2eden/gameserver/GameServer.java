@@ -417,7 +417,7 @@ public final class GameServer
     {
         _log.info("=====================[ La2Eden ]======================");
         _log.info("    -> Get access to source files at our website. <-    ");
-        _log.info("                -> http://la2eden.com <-                ");
+        _log.info("               -> https://la2eden.com <-                ");
         _log.info("");
 
 		switch (Config.BUILD_TYPE) {
