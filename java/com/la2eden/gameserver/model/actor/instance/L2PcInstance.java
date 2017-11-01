@@ -113,6 +113,23 @@ import java.util.logging.Level;
  */
 public final class L2PcInstance extends L2Playable
 {
+    private Map<Integer, Future<?>> _autoPotTasks = new HashMap<>();
+
+    public boolean isAutoPot(int id)
+	{
+    	return _autoPotTasks.keySet().contains(id);
+    }
+
+    public void setAutoPot(int id, Future<?> task, boolean add)
+	{
+        if (add) {
+            _autoPotTasks.put(id, task);
+        } else {
+            _autoPotTasks.get(id).cancel(true);
+            _autoPotTasks.remove(id);
+        }
+    }
+
 	// Character Skill SQL String Definitions:
 	private static final String RESTORE_SKILLS_FOR_CHAR = "SELECT skill_id,skill_level FROM character_skills WHERE charId=? AND class_index=?";
 	private static final String UPDATE_CHARACTER_SKILL_LEVEL = "UPDATE character_skills SET skill_level=? WHERE skill_id=? AND charId=? AND class_index=?";
