@@ -288,9 +288,10 @@ public class MasterHandler
 		{
 			// Voiced Command Handlers
 			StatsVCmd.class,
-			// TODO: Add configuration options for this voiced commands:
+			// TODO: Add configuration options for these voiced commands:
 			// CastleVCmd.class,
 			// SetVCmd.class,
+
 			Config.L2JMOD_ALLOW_WEDDING ? Wedding.class : null,
 			Config.BANKING_SYSTEM_ENABLED ? Banking.class : null,
 			Config.L2JMOD_CHAT_ADMIN ? ChatAdmin.class : null,
@@ -298,6 +299,7 @@ public class MasterHandler
 			Config.L2JMOD_DEBUG_VOICE_COMMAND ? Debug.class : null,
 			Config.L2JMOD_ALLOW_CHANGE_PASSWORD ? ChangePassword.class : null,
 			Config.PREMIUM_SYSTEM_ENABLED ? Premium.class : null,
+            Config.ENABLE_VOICED_ONLINE ? Online.class : null
 		},
 		{
 			// Target Handlers
