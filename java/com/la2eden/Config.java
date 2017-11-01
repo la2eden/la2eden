@@ -1163,6 +1163,18 @@ public final class Config
 	public static Path GEODATA_PATH;
 	public static boolean TRY_LOAD_UNSPECIFIED_REGIONS;
 	public static Map<String, Boolean> GEODATA_REGIONS;
+
+    // --------------------------------------------------
+    // Chat Settings
+    // --------------------------------------------------
+    public static boolean ENABLE_VOICED_ONLINE;
+    public static boolean ENABLE_ONLINE_STATUS_HTML;
+    public static boolean ENABLE_ONLINE_STATUS_SHOW_OFFLINE;
+    public static boolean ENABLE_VOICED_GRANDBOSS;
+    public static List<Integer> GRANDBOSS_LIST;
+    public static boolean WELCOME_PM_ENABLED;
+    public static String WELCOME_PM_SENDER;
+    public static List<String> WELCOME_PM_TEXT;
 	
 	/**
 	 * This class initializes all global variables for configuration.<br>
@@ -2213,81 +2225,73 @@ public final class Config
 			
 			final String[] dropChanceMultiplier = RatesSettings.getString("DropChanceMultiplierByItemId", "").split(";");
 			RATE_DROP_CHANCE_BY_ID = new HashMap<>(dropChanceMultiplier.length);
-			if (!dropChanceMultiplier[0].isEmpty())
-			{
-				for (String item : dropChanceMultiplier)
-				{
-					final String[] itemSplit = item.split(",");
-					if (itemSplit.length != 2)
-					{
-						_log.warning("Config.load(): invalid config property -> RateDropItemsById \"" + item + "\"");
-					}
-					else
-					{
-						try
-						{
-							RATE_DROP_CHANCE_BY_ID.put(Integer.valueOf(itemSplit[0]), Float.valueOf(itemSplit[1]));
-						}
-						catch (NumberFormatException nfe)
-						{
-							if (!item.isEmpty())
-							{
-								_log.warning("Config.load(): invalid config property -> RateDropItemsById \"" + item + "\"");
-							}
-						}
-					}
-				}
-			}
+			if (!dropChanceMultiplier[0].isEmpty()) {
+                for (String item : dropChanceMultiplier) {
+                    final String[] itemSplit = item.split(",");
+                    if (itemSplit.length != 2) {
+                        _log.warning("Config.load(): invalid config property -> RateDropItemsById \"" + item + "\"");
+                    } else {
+                        try {
+                            RATE_DROP_CHANCE_BY_ID.put(Integer.valueOf(itemSplit[0]), Float.valueOf(itemSplit[1]));
+                        } catch (NumberFormatException nfe) {
+                            if (!item.isEmpty()) {
+                                _log.warning("Config.load(): invalid config property -> RateDropItemsById \"" + item + "\"");
+                            }
+                        }
+                    }
+                }
+            }
+
+            // Load Champion settings file (if exists)
+            final PropertiesParser ChampionSettings = new PropertiesParser(WEDDING_FILE);
 			
-			// Load Custom L2Properties file (if exists)
-			final PropertiesParser CustomSettings = new PropertiesParser(CUSTOM_CONFIG_FILE);
+			L2JMOD_CHAMPION_ENABLE = ChampionSettings.getBoolean("ChampionEnable", false);
+			L2JMOD_CHAMPION_PASSIVE = ChampionSettings.getBoolean("ChampionPassive", false);
+			L2JMOD_CHAMPION_FREQUENCY = ChampionSettings.getInt("ChampionFrequency", 0);
+			L2JMOD_CHAMP_TITLE = ChampionSettings.getString("ChampionTitle", "Champion");
+			L2JMOD_SHOW_CHAMPION_AURA = ChampionSettings.getBoolean("ChampionAura", true);
+			L2JMOD_CHAMP_MIN_LVL = ChampionSettings.getInt("ChampionMinLevel", 20);
+			L2JMOD_CHAMP_MAX_LVL = ChampionSettings.getInt("ChampionMaxLevel", 60);
+			L2JMOD_CHAMPION_HP = ChampionSettings.getInt("ChampionHp", 7);
+			L2JMOD_CHAMPION_HP_REGEN = ChampionSettings.getFloat("ChampionHpRegen", 1);
+			L2JMOD_CHAMPION_REWARDS_EXP_SP = ChampionSettings.getFloat("ChampionRewardsExpSp", 8);
+			L2JMOD_CHAMPION_REWARDS_CHANCE = ChampionSettings.getFloat("ChampionRewardsChance", 8);
+			L2JMOD_CHAMPION_REWARDS_AMOUNT = ChampionSettings.getFloat("ChampionRewardsAmount", 1);
+			L2JMOD_CHAMPION_ADENAS_REWARDS_CHANCE = ChampionSettings.getFloat("ChampionAdenasRewardsChance", 1);
+			L2JMOD_CHAMPION_ADENAS_REWARDS_AMOUNT = ChampionSettings.getFloat("ChampionAdenasRewardsAmount", 1);
+			L2JMOD_CHAMPION_ATK = ChampionSettings.getFloat("ChampionAtk", 1);
+			L2JMOD_CHAMPION_SPD_ATK = ChampionSettings.getFloat("ChampionSpdAtk", 1);
+			L2JMOD_CHAMPION_REWARD_LOWER_LVL_ITEM_CHANCE = ChampionSettings.getInt("ChampionRewardLowerLvlItemChance", 0);
+			L2JMOD_CHAMPION_REWARD_HIGHER_LVL_ITEM_CHANCE = ChampionSettings.getInt("ChampionRewardHigherLvlItemChance", 0);
+			L2JMOD_CHAMPION_REWARD_ID = ChampionSettings.getInt("ChampionRewardItemID", 6393);
+			L2JMOD_CHAMPION_REWARD_QTY = ChampionSettings.getInt("ChampionRewardItemQty", 1);
+			L2JMOD_CHAMPION_ENABLE_VITALITY = ChampionSettings.getBoolean("ChampionEnableVitality", false);
+			L2JMOD_CHAMPION_ENABLE_IN_INSTANCES = ChampionSettings.getBoolean("ChampionEnableInInstances", false);
+
+            // Load Wedding settings file (if exists)
+            final PropertiesParser WeddingSettings = new PropertiesParser(WEDDING_FILE);
 			
-			L2JMOD_CHAMPION_ENABLE = CustomSettings.getBoolean("ChampionEnable", false);
-			L2JMOD_CHAMPION_PASSIVE = CustomSettings.getBoolean("ChampionPassive", false);
-			L2JMOD_CHAMPION_FREQUENCY = CustomSettings.getInt("ChampionFrequency", 0);
-			L2JMOD_CHAMP_TITLE = CustomSettings.getString("ChampionTitle", "Champion");
-			L2JMOD_SHOW_CHAMPION_AURA = CustomSettings.getBoolean("ChampionAura", true);
-			L2JMOD_CHAMP_MIN_LVL = CustomSettings.getInt("ChampionMinLevel", 20);
-			L2JMOD_CHAMP_MAX_LVL = CustomSettings.getInt("ChampionMaxLevel", 60);
-			L2JMOD_CHAMPION_HP = CustomSettings.getInt("ChampionHp", 7);
-			L2JMOD_CHAMPION_HP_REGEN = CustomSettings.getFloat("ChampionHpRegen", 1);
-			L2JMOD_CHAMPION_REWARDS_EXP_SP = CustomSettings.getFloat("ChampionRewardsExpSp", 8);
-			L2JMOD_CHAMPION_REWARDS_CHANCE = CustomSettings.getFloat("ChampionRewardsChance", 8);
-			L2JMOD_CHAMPION_REWARDS_AMOUNT = CustomSettings.getFloat("ChampionRewardsAmount", 1);
-			L2JMOD_CHAMPION_ADENAS_REWARDS_CHANCE = CustomSettings.getFloat("ChampionAdenasRewardsChance", 1);
-			L2JMOD_CHAMPION_ADENAS_REWARDS_AMOUNT = CustomSettings.getFloat("ChampionAdenasRewardsAmount", 1);
-			L2JMOD_CHAMPION_ATK = CustomSettings.getFloat("ChampionAtk", 1);
-			L2JMOD_CHAMPION_SPD_ATK = CustomSettings.getFloat("ChampionSpdAtk", 1);
-			L2JMOD_CHAMPION_REWARD_LOWER_LVL_ITEM_CHANCE = CustomSettings.getInt("ChampionRewardLowerLvlItemChance", 0);
-			L2JMOD_CHAMPION_REWARD_HIGHER_LVL_ITEM_CHANCE = CustomSettings.getInt("ChampionRewardHigherLvlItemChance", 0);
-			L2JMOD_CHAMPION_REWARD_ID = CustomSettings.getInt("ChampionRewardItemID", 6393);
-			L2JMOD_CHAMPION_REWARD_QTY = CustomSettings.getInt("ChampionRewardItemQty", 1);
-			L2JMOD_CHAMPION_ENABLE_VITALITY = CustomSettings.getBoolean("ChampionEnableVitality", false);
-			L2JMOD_CHAMPION_ENABLE_IN_INSTANCES = CustomSettings.getBoolean("ChampionEnableInInstances", false);
-			
-			TVT_EVENT_ENABLED = CustomSettings.getBoolean("TvTEventEnabled", false);
-			TVT_EVENT_IN_INSTANCE = CustomSettings.getBoolean("TvTEventInInstance", false);
-			TVT_EVENT_INSTANCE_FILE = CustomSettings.getString("TvTEventInstanceFile", "coliseum.xml");
-			TVT_EVENT_INTERVAL = CustomSettings.getString("TvTEventInterval", "20:00").split(",");
-			TVT_EVENT_PARTICIPATION_TIME = CustomSettings.getInt("TvTEventParticipationTime", 3600);
-			TVT_EVENT_RUNNING_TIME = CustomSettings.getInt("TvTEventRunningTime", 1800);
-			TVT_EVENT_PARTICIPATION_NPC_ID = CustomSettings.getInt("TvTEventParticipationNpcId", 0);
-			
-			L2JMOD_ALLOW_WEDDING = CustomSettings.getBoolean("AllowWedding", false);
-			L2JMOD_WEDDING_PRICE = CustomSettings.getInt("WeddingPrice", 250000000);
-			L2JMOD_WEDDING_PUNISH_INFIDELITY = CustomSettings.getBoolean("WeddingPunishInfidelity", true);
-			L2JMOD_WEDDING_TELEPORT = CustomSettings.getBoolean("WeddingTeleport", true);
-			L2JMOD_WEDDING_TELEPORT_PRICE = CustomSettings.getInt("WeddingTeleportPrice", 50000);
-			L2JMOD_WEDDING_TELEPORT_DURATION = CustomSettings.getInt("WeddingTeleportDuration", 60);
-			L2JMOD_WEDDING_SAMESEX = CustomSettings.getBoolean("WeddingAllowSameSex", false);
-			L2JMOD_WEDDING_FORMALWEAR = CustomSettings.getBoolean("WeddingFormalWear", true);
-			L2JMOD_WEDDING_DIVORCE_COSTS = CustomSettings.getInt("WeddingDivorceCosts", 20);
-			
-			L2JMOD_ENABLE_WAREHOUSESORTING_CLAN = CustomSettings.getBoolean("EnableWarehouseSortingClan", false);
-			L2JMOD_ENABLE_WAREHOUSESORTING_PRIVATE = CustomSettings.getBoolean("EnableWarehouseSortingPrivate", false);
-			
-			L2JMOD_OLD_DROP_BEHAVIOR = CustomSettings.getBoolean("OldDropBehavior", false);
-			
+			L2JMOD_ALLOW_WEDDING = WeddingSettings.getBoolean("AllowWedding", false);
+			L2JMOD_WEDDING_PRICE = WeddingSettings.getInt("WeddingPrice", 250000000);
+			L2JMOD_WEDDING_PUNISH_INFIDELITY = WeddingSettings.getBoolean("WeddingPunishInfidelity", true);
+			L2JMOD_WEDDING_TELEPORT = WeddingSettings.getBoolean("WeddingTeleport", true);
+			L2JMOD_WEDDING_TELEPORT_PRICE = WeddingSettings.getInt("WeddingTeleportPrice", 50000);
+			L2JMOD_WEDDING_TELEPORT_DURATION = WeddingSettings.getInt("WeddingTeleportDuration", 60);
+			L2JMOD_WEDDING_SAMESEX = WeddingSettings.getBoolean("WeddingAllowSameSex", false);
+			L2JMOD_WEDDING_FORMALWEAR = WeddingSettings.getBoolean("WeddingFormalWear", true);
+			L2JMOD_WEDDING_DIVORCE_COSTS = WeddingSettings.getInt("WeddingDivorceCosts", 20);
+
+            // Load Tvt Event settings file (if exists)
+            final PropertiesParser TvTSettings = new PropertiesParser(TVT_EVENT_FILE);
+
+            TVT_EVENT_ENABLED = TvTSettings.getBoolean("TvTEventEnabled", false);
+            TVT_EVENT_IN_INSTANCE = TvTSettings.getBoolean("TvTEventInInstance", false);
+            TVT_EVENT_INSTANCE_FILE = TvTSettings.getString("TvTEventInstanceFile", "coliseum.xml");
+            TVT_EVENT_INTERVAL = TvTSettings.getString("TvTEventInterval", "20:00").split(",");
+            TVT_EVENT_PARTICIPATION_TIME = TvTSettings.getInt("TvTEventParticipationTime", 3600);
+            TVT_EVENT_RUNNING_TIME = TvTSettings.getInt("TvTEventRunningTime", 1800);
+            TVT_EVENT_PARTICIPATION_NPC_ID = TvTSettings.getInt("TvTEventParticipationNpcId", 0);
+
 			if (TVT_EVENT_PARTICIPATION_NPC_ID == 0)
 			{
 				TVT_EVENT_ENABLED = false;
@@ -2295,7 +2299,7 @@ public final class Config
 			}
 			else
 			{
-				String[] tvtNpcCoords = CustomSettings.getString("TvTEventParticipationNpcCoordinates", "0,0,0").split(",");
+				String[] tvtNpcCoords = TvTSettings.getString("TvTEventParticipationNpcCoordinates", "0,0,0").split(",");
 				if (tvtNpcCoords.length < 3)
 				{
 					TVT_EVENT_ENABLED = false;
@@ -2316,17 +2320,17 @@ public final class Config
 					{
 						TVT_EVENT_PARTICIPATION_NPC_COORDINATES[3] = Integer.parseInt(tvtNpcCoords[3]);
 					}
-					TVT_EVENT_MIN_PLAYERS_IN_TEAMS = CustomSettings.getInt("TvTEventMinPlayersInTeams", 1);
-					TVT_EVENT_MAX_PLAYERS_IN_TEAMS = CustomSettings.getInt("TvTEventMaxPlayersInTeams", 20);
-					TVT_EVENT_MIN_LVL = CustomSettings.getByte("TvTEventMinPlayerLevel", (byte) 1);
-					TVT_EVENT_MAX_LVL = CustomSettings.getByte("TvTEventMaxPlayerLevel", (byte) 80);
-					TVT_EVENT_RESPAWN_TELEPORT_DELAY = CustomSettings.getInt("TvTEventRespawnTeleportDelay", 20);
-					TVT_EVENT_START_LEAVE_TELEPORT_DELAY = CustomSettings.getInt("TvTEventStartLeaveTeleportDelay", 20);
-					TVT_EVENT_EFFECTS_REMOVAL = CustomSettings.getInt("TvTEventEffectsRemoval", 0);
-					TVT_EVENT_MAX_PARTICIPANTS_PER_IP = CustomSettings.getInt("TvTEventMaxParticipantsPerIP", 0);
-					TVT_ALLOW_VOICED_COMMAND = CustomSettings.getBoolean("TvTAllowVoicedInfoCommand", false);
-					TVT_EVENT_TEAM_1_NAME = CustomSettings.getString("TvTEventTeam1Name", "Team1");
-					tvtNpcCoords = CustomSettings.getString("TvTEventTeam1Coordinates", "0,0,0").split(",");
+					TVT_EVENT_MIN_PLAYERS_IN_TEAMS = TvTSettings.getInt("TvTEventMinPlayersInTeams", 1);
+					TVT_EVENT_MAX_PLAYERS_IN_TEAMS = TvTSettings.getInt("TvTEventMaxPlayersInTeams", 20);
+					TVT_EVENT_MIN_LVL = TvTSettings.getByte("TvTEventMinPlayerLevel", (byte) 1);
+					TVT_EVENT_MAX_LVL = TvTSettings.getByte("TvTEventMaxPlayerLevel", (byte) 80);
+					TVT_EVENT_RESPAWN_TELEPORT_DELAY = TvTSettings.getInt("TvTEventRespawnTeleportDelay", 20);
+					TVT_EVENT_START_LEAVE_TELEPORT_DELAY = TvTSettings.getInt("TvTEventStartLeaveTeleportDelay", 20);
+					TVT_EVENT_EFFECTS_REMOVAL = TvTSettings.getInt("TvTEventEffectsRemoval", 0);
+					TVT_EVENT_MAX_PARTICIPANTS_PER_IP = TvTSettings.getInt("TvTEventMaxParticipantsPerIP", 0);
+					TVT_ALLOW_VOICED_COMMAND = TvTSettings.getBoolean("TvTAllowVoicedInfoCommand", false);
+					TVT_EVENT_TEAM_1_NAME = TvTSettings.getString("TvTEventTeam1Name", "Team1");
+					tvtNpcCoords = TvTSettings.getString("TvTEventTeam1Coordinates", "0,0,0").split(",");
 					if (tvtNpcCoords.length < 3)
 					{
 						TVT_EVENT_ENABLED = false;
@@ -2337,8 +2341,8 @@ public final class Config
 						TVT_EVENT_TEAM_1_COORDINATES[0] = Integer.parseInt(tvtNpcCoords[0]);
 						TVT_EVENT_TEAM_1_COORDINATES[1] = Integer.parseInt(tvtNpcCoords[1]);
 						TVT_EVENT_TEAM_1_COORDINATES[2] = Integer.parseInt(tvtNpcCoords[2]);
-						TVT_EVENT_TEAM_2_NAME = CustomSettings.getString("TvTEventTeam2Name", "Team2");
-						tvtNpcCoords = CustomSettings.getString("TvTEventTeam2Coordinates", "0,0,0").split(",");
+						TVT_EVENT_TEAM_2_NAME = TvTSettings.getString("TvTEventTeam2Name", "Team2");
+						tvtNpcCoords = TvTSettings.getString("TvTEventTeam2Coordinates", "0,0,0").split(",");
 						if (tvtNpcCoords.length < 3)
 						{
 							TVT_EVENT_ENABLED = false;
@@ -2349,7 +2353,7 @@ public final class Config
 							TVT_EVENT_TEAM_2_COORDINATES[0] = Integer.parseInt(tvtNpcCoords[0]);
 							TVT_EVENT_TEAM_2_COORDINATES[1] = Integer.parseInt(tvtNpcCoords[1]);
 							TVT_EVENT_TEAM_2_COORDINATES[2] = Integer.parseInt(tvtNpcCoords[2]);
-							tvtNpcCoords = CustomSettings.getString("TvTEventParticipationFee", "0,0").split(",");
+							tvtNpcCoords = TvTSettings.getString("TvTEventParticipationFee", "0,0").split(",");
 							try
 							{
 								TVT_EVENT_PARTICIPATION_FEE[0] = Integer.parseInt(tvtNpcCoords[0]);
@@ -2362,7 +2366,7 @@ public final class Config
 									_log.warning("TvTEventEngine[Config.load()]: invalid config property -> TvTEventParticipationFee");
 								}
 							}
-							tvtNpcCoords = CustomSettings.getString("TvTEventReward", "57,100000").split(";");
+							tvtNpcCoords = TvTSettings.getString("TvTEventReward", "57,100000").split(";");
 							for (String reward : tvtNpcCoords)
 							{
 								final String[] rewardSplit = reward.split(",");
@@ -2390,12 +2394,12 @@ public final class Config
 								}
 							}
 							
-							TVT_EVENT_TARGET_TEAM_MEMBERS_ALLOWED = CustomSettings.getBoolean("TvTEventTargetTeamMembersAllowed", true);
-							TVT_EVENT_SCROLL_ALLOWED = CustomSettings.getBoolean("TvTEventScrollsAllowed", false);
-							TVT_EVENT_POTIONS_ALLOWED = CustomSettings.getBoolean("TvTEventPotionsAllowed", false);
-							TVT_EVENT_SUMMON_BY_ITEM_ALLOWED = CustomSettings.getBoolean("TvTEventSummonByItemAllowed", false);
-							TVT_REWARD_TEAM_TIE = CustomSettings.getBoolean("TvTRewardTeamTie", false);
-							tvtNpcCoords = CustomSettings.getString("TvTDoorsToOpen", "").split(";");
+							TVT_EVENT_TARGET_TEAM_MEMBERS_ALLOWED = TvTSettings.getBoolean("TvTEventTargetTeamMembersAllowed", true);
+							TVT_EVENT_SCROLL_ALLOWED = TvTSettings.getBoolean("TvTEventScrollsAllowed", false);
+							TVT_EVENT_POTIONS_ALLOWED = TvTSettings.getBoolean("TvTEventPotionsAllowed", false);
+							TVT_EVENT_SUMMON_BY_ITEM_ALLOWED = TvTSettings.getBoolean("TvTEventSummonByItemAllowed", false);
+							TVT_REWARD_TEAM_TIE = TvTSettings.getBoolean("TvTRewardTeamTie", false);
+							tvtNpcCoords = TvTSettings.getString("TvTDoorsToOpen", "").split(";");
 							for (String door : tvtNpcCoords)
 							{
 								try
@@ -2411,7 +2415,7 @@ public final class Config
 								}
 							}
 							
-							tvtNpcCoords = CustomSettings.getString("TvTDoorsToClose", "").split(";");
+							tvtNpcCoords = TvTSettings.getString("TvTDoorsToClose", "").split(";");
 							for (String door : tvtNpcCoords)
 							{
 								try
@@ -2427,7 +2431,7 @@ public final class Config
 								}
 							}
 							
-							tvtNpcCoords = CustomSettings.getString("TvTEventFighterBuffs", "").split(";");
+							tvtNpcCoords = TvTSettings.getString("TvTEventFighterBuffs", "").split(";");
 							if (!tvtNpcCoords[0].isEmpty())
 							{
 								TVT_EVENT_FIGHTER_BUFFS = new HashMap<>(tvtNpcCoords.length);
@@ -2455,7 +2459,7 @@ public final class Config
 								}
 							}
 							
-							tvtNpcCoords = CustomSettings.getString("TvTEventMageBuffs", "").split(";");
+							tvtNpcCoords = TvTSettings.getString("TvTEventMageBuffs", "").split(";");
 							if (!tvtNpcCoords[0].isEmpty())
 							{
 								TVT_EVENT_MAGE_BUFFS = new HashMap<>(tvtNpcCoords.length);
@@ -2486,43 +2490,108 @@ public final class Config
 					}
 				}
 			}
+
+            // Load Offline Traders settings file (if exists)
+            final PropertiesParser BankingSettings = new PropertiesParser(BANKING_FILE);
 			
-			BANKING_SYSTEM_ENABLED = CustomSettings.getBoolean("BankingEnabled", false);
-			BANKING_SYSTEM_GOLDBARS = CustomSettings.getInt("BankingGoldbarCount", 1);
-			BANKING_SYSTEM_ADENA = CustomSettings.getInt("BankingAdenaCount", 500000000);
+			BANKING_SYSTEM_ENABLED = BankingSettings.getBoolean("BankingEnabled", false);
+			BANKING_SYSTEM_GOLDBARS = BankingSettings.getInt("BankingGoldbarCount", 1);
+			BANKING_SYSTEM_ADENA = BankingSettings.getInt("BankingAdenaCount", 500000000);
+
+            // Load Offline Traders settings file (if exists)
+            final PropertiesParser OfflineSettings = new PropertiesParser(OFFLINE_TRADE_FILE);
+
+			OFFLINE_TRADE_ENABLE = OfflineSettings.getBoolean("OfflineTradeEnable", false);
+			OFFLINE_CRAFT_ENABLE = OfflineSettings.getBoolean("OfflineCraftEnable", false);
+			OFFLINE_MODE_IN_PEACE_ZONE = OfflineSettings.getBoolean("OfflineModeInPeaceZone", false);
+			OFFLINE_MODE_NO_DAMAGE = OfflineSettings.getBoolean("OfflineModeNoDamage", false);
+			OFFLINE_SET_NAME_COLOR = OfflineSettings.getBoolean("OfflineSetNameColor", false);
+			OFFLINE_NAME_COLOR = Integer.decode("0x" + OfflineSettings.getString("OfflineNameColor", "808080"));
+			OFFLINE_FAME = OfflineSettings.getBoolean("OfflineFame", true);
+			RESTORE_OFFLINERS = OfflineSettings.getBoolean("RestoreOffliners", false);
+			OFFLINE_MAX_DAYS = OfflineSettings.getInt("OfflineMaxDays", 10);
+			STORE_OFFLINE_TRADE_IN_REALTIME = OfflineSettings.getBoolean("StoreOfflineTradeInRealtime", true);
+			OFFLINE_DISCONNECT_FINISHED = OfflineSettings.getBoolean("OfflineDisconnectFinished", true);
+
+            // Load Chat settings file (if exists)
+            final PropertiesParser ChatModSettings = new PropertiesParser(CHAT_FILE);
+
+            ENABLE_VOICED_ONLINE = ChatModSettings.getBoolean("EnableOnlineStatus", false);
+            ENABLE_ONLINE_STATUS_HTML = ChatModSettings.getBoolean("EnableAdvancedStatus", false);
+            ENABLE_ONLINE_STATUS_SHOW_OFFLINE = ChatModSettings.getBoolean("EnableOfflineTraders", false);
+            ENABLE_VOICED_GRANDBOSS = ChatModSettings.getBoolean("EnableGrandbossCommand", false);
+
+            final String[] grandboss = ChatModSettings.getString("GrandbossList", "").split(",");
+            GRANDBOSS_LIST = new ArrayList<>(grandboss.length);
+            for (String id : grandboss)
+            {
+                GRANDBOSS_LIST.add(Integer.parseInt(id.trim()));
+            }
+
+            L2JMOD_DISPLAY_SERVER_TIME = ChatModSettings.getBoolean("DisplayServerTime", false);
+
+            WELCOME_PM_ENABLED = ChatModSettings.getBoolean("EnableWelcomePM", false);
+            WELCOME_PM_SENDER = ChatModSettings.getString("WelcomePMFrom", "Server");
+            String[] text = ChatModSettings.getString("WelcomePMText", "Welcome to La2Eden!#Report any bugs you may find in our forums.").split("#");
+            WELCOME_PM_TEXT = new ArrayList<>(text.length);
+            for (String msg : text)
+            {
+                WELCOME_PM_TEXT.add(msg); // Add new messages to the list
+            }
+
+            ANNOUNCE_PK_PVP = ChatModSettings.getBoolean("AnnouncePkPvP", false);
+            ANNOUNCE_PK_PVP_NORMAL_MESSAGE = ChatModSettings.getBoolean("AnnouncePkPvPNormalMessage", true);
+            ANNOUNCE_PK_MSG = ChatModSettings.getString("AnnouncePkMsg", "$killer has slaughtered $target");
+            ANNOUNCE_PVP_MSG = ChatModSettings.getString("AnnouncePvpMsg", "$killer has defeated $target");
+
+            L2JMOD_CHAT_ADMIN = ChatModSettings.getBoolean("ChatAdmin", false);
+
+            L2JMOD_MULTILANG_DEFAULT = ChatModSettings.getString("MultiLangDefault", "en");
+            L2JMOD_MULTILANG_ENABLE = ChatModSettings.getBoolean("MultiLangEnable", false);
+            String[] allowed = ChatModSettings.getString("MultiLangAllowed", L2JMOD_MULTILANG_DEFAULT).split(";");
+            L2JMOD_MULTILANG_ALLOWED = new ArrayList<>(allowed.length);
+            for (String lang : allowed)
+            {
+                L2JMOD_MULTILANG_ALLOWED.add(lang);
+            }
+
+            if (!L2JMOD_MULTILANG_ALLOWED.contains(L2JMOD_MULTILANG_DEFAULT))
+            {
+                _log.warning("MultiLang[Config.load()]: default language: " + L2JMOD_MULTILANG_DEFAULT + " is not in allowed list !");
+            }
+
+            L2JMOD_MULTILANG_VOICED_ALLOW = ChatModSettings.getBoolean("MultiLangVoiceCommand", true);
+            L2JMOD_MULTILANG_SM_ENABLE = ChatModSettings.getBoolean("MultiLangSystemMessageEnable", false);
+            allowed = ChatModSettings.getString("MultiLangSystemMessageAllowed", "").split(";");
+            L2JMOD_MULTILANG_SM_ALLOWED = new ArrayList<>(allowed.length);
+            for (String lang : allowed)
+            {
+                if (!lang.isEmpty())
+                {
+                    L2JMOD_MULTILANG_SM_ALLOWED.add(lang);
+                }
+            }
+            L2JMOD_MULTILANG_NS_ENABLE = ChatModSettings.getBoolean("MultiLangNpcStringEnable", false);
+            allowed = ChatModSettings.getString("MultiLangNpcStringAllowed", "").split(";");
+            L2JMOD_MULTILANG_NS_ALLOWED = new ArrayList<>(allowed.length);
+            for (String lang : allowed)
+            {
+                if (!lang.isEmpty())
+                {
+                    L2JMOD_MULTILANG_NS_ALLOWED.add(lang);
+                }
+            }
+
+			ANNOUNCE_PK_PVP = ChatModSettings.getBoolean("AnnouncePkPvP", false);
+			ANNOUNCE_PK_PVP_NORMAL_MESSAGE = ChatModSettings.getBoolean("AnnouncePkPvPNormalMessage", true);
+			ANNOUNCE_PK_MSG = ChatModSettings.getString("AnnouncePkMsg", "$killer has slaughtered $target");
+			ANNOUNCE_PVP_MSG = ChatModSettings.getString("AnnouncePvpMsg", "$killer has defeated $target");
 			
-			OFFLINE_TRADE_ENABLE = CustomSettings.getBoolean("OfflineTradeEnable", false);
-			OFFLINE_CRAFT_ENABLE = CustomSettings.getBoolean("OfflineCraftEnable", false);
-			OFFLINE_MODE_IN_PEACE_ZONE = CustomSettings.getBoolean("OfflineModeInPeaceZone", false);
-			OFFLINE_MODE_NO_DAMAGE = CustomSettings.getBoolean("OfflineModeNoDamage", false);
-			OFFLINE_SET_NAME_COLOR = CustomSettings.getBoolean("OfflineSetNameColor", false);
-			OFFLINE_NAME_COLOR = Integer.decode("0x" + CustomSettings.getString("OfflineNameColor", "808080"));
-			OFFLINE_FAME = CustomSettings.getBoolean("OfflineFame", true);
-			RESTORE_OFFLINERS = CustomSettings.getBoolean("RestoreOffliners", false);
-			OFFLINE_MAX_DAYS = CustomSettings.getInt("OfflineMaxDays", 10);
-			STORE_OFFLINE_TRADE_IN_REALTIME = CustomSettings.getBoolean("StoreOfflineTradeInRealtime", true);
-			OFFLINE_DISCONNECT_FINISHED = CustomSettings.getBoolean("OfflineDisconnectFinished", true);
+			L2JMOD_CHAT_ADMIN = ChatModSettings.getBoolean("ChatAdmin", false);
 			
-			L2JMOD_DISPLAY_SERVER_TIME = CustomSettings.getBoolean("DisplayServerTime", false);
-			
-			WELCOME_MESSAGE_ENABLED = CustomSettings.getBoolean("ScreenWelcomeMessageEnable", false);
-			WELCOME_MESSAGE_TEXT = CustomSettings.getString("ScreenWelcomeMessageText", "Welcome to L2J server!");
-			WELCOME_MESSAGE_TIME = CustomSettings.getInt("ScreenWelcomeMessageTime", 10) * 1000;
-			
-			L2JMOD_ANTIFEED_ENABLE = CustomSettings.getBoolean("AntiFeedEnable", false);
-			L2JMOD_ANTIFEED_DUALBOX = CustomSettings.getBoolean("AntiFeedDualbox", true);
-			L2JMOD_ANTIFEED_DISCONNECTED_AS_DUALBOX = CustomSettings.getBoolean("AntiFeedDisconnectedAsDualbox", true);
-			L2JMOD_ANTIFEED_INTERVAL = CustomSettings.getInt("AntiFeedInterval", 120) * 1000;
-			ANNOUNCE_PK_PVP = CustomSettings.getBoolean("AnnouncePkPvP", false);
-			ANNOUNCE_PK_PVP_NORMAL_MESSAGE = CustomSettings.getBoolean("AnnouncePkPvPNormalMessage", true);
-			ANNOUNCE_PK_MSG = CustomSettings.getString("AnnouncePkMsg", "$killer has slaughtered $target");
-			ANNOUNCE_PVP_MSG = CustomSettings.getString("AnnouncePvpMsg", "$killer has defeated $target");
-			
-			L2JMOD_CHAT_ADMIN = CustomSettings.getBoolean("ChatAdmin", false);
-			
-			L2JMOD_MULTILANG_DEFAULT = CustomSettings.getString("MultiLangDefault", "en");
-			L2JMOD_MULTILANG_ENABLE = CustomSettings.getBoolean("MultiLangEnable", false);
-			String[] allowed = CustomSettings.getString("MultiLangAllowed", L2JMOD_MULTILANG_DEFAULT).split(";");
+			L2JMOD_MULTILANG_DEFAULT = ChatModSettings.getString("MultiLangDefault", "en");
+			L2JMOD_MULTILANG_ENABLE = ChatModSettings.getBoolean("MultiLangEnable", false);
+			allowed = ChatModSettings.getString("MultiLangAllowed", L2JMOD_MULTILANG_DEFAULT).split(";");
 			L2JMOD_MULTILANG_ALLOWED = new ArrayList<>(allowed.length);
 			for (String lang : allowed)
 			{
@@ -2534,10 +2603,10 @@ public final class Config
 				_log.warning("MultiLang[Config.load()]: default language: " + L2JMOD_MULTILANG_DEFAULT + " is not in allowed list !");
 			}
 			
-			L2JMOD_HELLBOUND_STATUS = CustomSettings.getBoolean("HellboundStatus", false);
-			L2JMOD_MULTILANG_VOICED_ALLOW = CustomSettings.getBoolean("MultiLangVoiceCommand", true);
-			L2JMOD_MULTILANG_SM_ENABLE = CustomSettings.getBoolean("MultiLangSystemMessageEnable", false);
-			allowed = CustomSettings.getString("MultiLangSystemMessageAllowed", "").split(";");
+			L2JMOD_HELLBOUND_STATUS = ChatModSettings.getBoolean("HellboundStatus", false);
+			L2JMOD_MULTILANG_VOICED_ALLOW = ChatModSettings.getBoolean("MultiLangVoiceCommand", true);
+			L2JMOD_MULTILANG_SM_ENABLE = ChatModSettings.getBoolean("MultiLangSystemMessageEnable", false);
+			allowed = ChatModSettings.getString("MultiLangSystemMessageAllowed", "").split(";");
 			L2JMOD_MULTILANG_SM_ALLOWED = new ArrayList<>(allowed.length);
 			for (String lang : allowed)
 			{
@@ -2546,8 +2615,8 @@ public final class Config
 					L2JMOD_MULTILANG_SM_ALLOWED.add(lang);
 				}
 			}
-			L2JMOD_MULTILANG_NS_ENABLE = CustomSettings.getBoolean("MultiLangNpcStringEnable", false);
-			allowed = CustomSettings.getString("MultiLangNpcStringAllowed", "").split(";");
+			L2JMOD_MULTILANG_NS_ENABLE = ChatModSettings.getBoolean("MultiLangNpcStringEnable", false);
+			allowed = ChatModSettings.getString("MultiLangNpcStringAllowed", "").split(";");
 			L2JMOD_MULTILANG_NS_ALLOWED = new ArrayList<>(allowed.length);
 			for (String lang : allowed)
 			{
@@ -2556,9 +2625,30 @@ public final class Config
 					L2JMOD_MULTILANG_NS_ALLOWED.add(lang);
 				}
 			}
+
+            L2JMOD_DEBUG_VOICE_COMMAND = ChatModSettings.getBoolean("DebugVoiceCommand", false);
+            L2JMOD_ALLOW_CHANGE_PASSWORD = ChatModSettings.getBoolean("AllowChangePassword", false);
+
+            // Load Custom L2Properties file (if exists)
+            final PropertiesParser CustomSettings = new PropertiesParser(CUSTOM_CONFIG_FILE);
+
+            L2JMOD_ENABLE_WAREHOUSESORTING_CLAN = CustomSettings.getBoolean("EnableWarehouseSortingClan", false);
+            L2JMOD_ENABLE_WAREHOUSESORTING_PRIVATE = CustomSettings.getBoolean("EnableWarehouseSortingPrivate", false);
+
+            L2JMOD_OLD_DROP_BEHAVIOR = CustomSettings.getBoolean("OldDropBehavior", false);
+
+            L2JMOD_DISPLAY_SERVER_TIME = CustomSettings.getBoolean("DisplayServerTime", false);
+
+            WELCOME_MESSAGE_ENABLED = CustomSettings.getBoolean("ScreenWelcomeMessageEnable", false);
+            WELCOME_MESSAGE_TEXT = CustomSettings.getString("ScreenWelcomeMessageText", "Welcome to L2J server!");
+            WELCOME_MESSAGE_TIME = CustomSettings.getInt("ScreenWelcomeMessageTime", 10) * 1000;
+
+            L2JMOD_ANTIFEED_ENABLE = CustomSettings.getBoolean("AntiFeedEnable", false);
+            L2JMOD_ANTIFEED_DUALBOX = CustomSettings.getBoolean("AntiFeedDualbox", true);
+            L2JMOD_ANTIFEED_DISCONNECTED_AS_DUALBOX = CustomSettings.getBoolean("AntiFeedDisconnectedAsDualbox", true);
+            L2JMOD_ANTIFEED_INTERVAL = CustomSettings.getInt("AntiFeedInterval", 120) * 1000;
 			
 			L2WALKER_PROTECTION = CustomSettings.getBoolean("L2WalkerProtection", false);
-			L2JMOD_DEBUG_VOICE_COMMAND = CustomSettings.getBoolean("DebugVoiceCommand", false);
 			
 			L2JMOD_DUALBOX_CHECK_MAX_PLAYERS_PER_IP = CustomSettings.getInt("DualboxCheckMaxPlayersPerIP", 0);
 			L2JMOD_DUALBOX_CHECK_MAX_OLYMPIAD_PARTICIPANTS_PER_IP = CustomSettings.getInt("DualboxCheckMaxOlympiadParticipantsPerIP", 0);
@@ -2590,7 +2680,6 @@ public final class Config
 					}
 				}
 			}
-			L2JMOD_ALLOW_CHANGE_PASSWORD = CustomSettings.getBoolean("AllowChangePassword", false);
 			
 			CUSTOM_STARTING_LOC = CustomSettings.getBoolean("CustomStartingLocation", false);
 			CUSTOM_STARTING_LOC_X = CustomSettings.getInt("CustomStartingLocX", 83020);
@@ -2612,25 +2701,31 @@ public final class Config
 					MOBS_LIST_NOT_RANDOM.add(Integer.valueOf(id));
 				}
 			}
+
+            // Load Community Board L2Properties file (if exists)
+            final PropertiesParser CommunityBoardSettings = new PropertiesParser(COMMUNITY_FILE);
+
+			CUSTOM_CB_ENABLED = CommunityBoardSettings.getBoolean("CustomCommunityBoard", false);
+			COMMUNITYBOARD_CURRENCY = CommunityBoardSettings.getInt("CommunityCurrencyId", 57);
+			COMMUNITYBOARD_ENABLE_MULTISELLS = CommunityBoardSettings.getBoolean("CommunityEnableMultisells", true);
+			COMMUNITYBOARD_ENABLE_TELEPORTS = CommunityBoardSettings.getBoolean("CommunityEnableTeleports", true);
+			COMMUNITYBOARD_ENABLE_BUFFS = CommunityBoardSettings.getBoolean("CommunityEnableBuffs", true);
+			COMMUNITYBOARD_TELEPORT_PRICE = CommunityBoardSettings.getInt("CommunityTeleportPrice", 0);
+			COMMUNITYBOARD_BUFF_PRICE = CommunityBoardSettings.getInt("CommunityBuffPrice", 0);
+			COMMUNITYBOARD_COMBAT_DISABLED = CommunityBoardSettings.getBoolean("CommunityCombatDisabled", true);
+			COMMUNITYBOARD_KARMA_DISABLED = CommunityBoardSettings.getBoolean("CommunityKarmaDisabled", true);
+
+			// Load Premium L2Properties file (if exists)
+            final PropertiesParser PremiumSettings = new PropertiesParser(PREMIUM_FILE);
 			
-			CUSTOM_CB_ENABLED = CustomSettings.getBoolean("CustomCommunityBoard", false);
-			COMMUNITYBOARD_CURRENCY = CustomSettings.getInt("CommunityCurrencyId", 57);
-			COMMUNITYBOARD_ENABLE_MULTISELLS = CustomSettings.getBoolean("CommunityEnableMultisells", true);
-			COMMUNITYBOARD_ENABLE_TELEPORTS = CustomSettings.getBoolean("CommunityEnableTeleports", true);
-			COMMUNITYBOARD_ENABLE_BUFFS = CustomSettings.getBoolean("CommunityEnableBuffs", true);
-			COMMUNITYBOARD_TELEPORT_PRICE = CustomSettings.getInt("CommunityTeleportPrice", 0);
-			COMMUNITYBOARD_BUFF_PRICE = CustomSettings.getInt("CommunityBuffPrice", 0);
-			COMMUNITYBOARD_COMBAT_DISABLED = CustomSettings.getBoolean("CommunityCombatDisabled", true);
-			COMMUNITYBOARD_KARMA_DISABLED = CustomSettings.getBoolean("CommunityKarmaDisabled", true);
-			
-			PREMIUM_SYSTEM_ENABLED = CustomSettings.getBoolean("EnablePremiumSystem", false);
-			PREMIUM_RATE_XP = CustomSettings.getFloat("PremiumRateXp", 2);
-			PREMIUM_RATE_SP = CustomSettings.getFloat("PremiumRateSp", 2);
-			PREMIUM_RATE_DROP_CHANCE = CustomSettings.getFloat("PremiumRateDropChance", 2);
-			PREMIUM_RATE_DROP_AMOUNT = CustomSettings.getFloat("PremiumRateDropAmount", 1);
-			PREMIUM_RATE_SPOIL_CHANCE = CustomSettings.getFloat("PremiumRateSpoilChance", 2);
-			PREMIUM_RATE_SPOIL_AMOUNT = CustomSettings.getFloat("PremiumRateSpoilAmount", 1);
-			final String[] premiumDropChanceMultiplier = CustomSettings.getString("PremiumRateDropChanceByItemId", "").split(";");
+			PREMIUM_SYSTEM_ENABLED = PremiumSettings.getBoolean("EnablePremiumSystem", false);
+			PREMIUM_RATE_XP = PremiumSettings.getFloat("PremiumRateXp", 2);
+			PREMIUM_RATE_SP = PremiumSettings.getFloat("PremiumRateSp", 2);
+			PREMIUM_RATE_DROP_CHANCE = PremiumSettings.getFloat("PremiumRateDropChance", 2);
+			PREMIUM_RATE_DROP_AMOUNT = PremiumSettings.getFloat("PremiumRateDropAmount", 1);
+			PREMIUM_RATE_SPOIL_CHANCE = PremiumSettings.getFloat("PremiumRateSpoilChance", 2);
+			PREMIUM_RATE_SPOIL_AMOUNT = PremiumSettings.getFloat("PremiumRateSpoilAmount", 1);
+			final String[] premiumDropChanceMultiplier = PremiumSettings.getString("PremiumRateDropChanceByItemId", "").split(";");
 			PREMIUM_RATE_DROP_CHANCE_BY_ID = new HashMap<>(premiumDropChanceMultiplier.length);
 			if (!premiumDropChanceMultiplier[0].isEmpty())
 			{
@@ -2657,7 +2752,7 @@ public final class Config
 					}
 				}
 			}
-			final String[] premiumDropAmountMultiplier = CustomSettings.getString("PremiumRateDropAmountByItemId", "").split(";");
+			final String[] premiumDropAmountMultiplier = PremiumSettings.getString("PremiumRateDropAmountByItemId", "").split(";");
 			PREMIUM_RATE_DROP_AMOUNT_BY_ID = new HashMap<>(premiumDropAmountMultiplier.length);
 			if (!premiumDropAmountMultiplier[0].isEmpty())
 			{
