@@ -93,7 +93,6 @@ public final class Config
     public static final String CHAT_FILE = "./config/mods/Chat.ini";
     public static final String COMMUNITY_FILE = "./config/mods/CommunityBoard.ini";
     public static final String CUSTOM_CONFIG_FILE = "./config/mods/Custom.ini";
-    public static final String HITMAN_FILE = "./config/mods/Hitman.ini";
     public static final String OFFLINE_TRADE_FILE = "./config/mods/OfflineShop.ini";
     public static final String PREMIUM_FILE = "./config/mods/Premium.ini";
     public static final String WEDDING_FILE = "./config/mods/Wedding.ini";
