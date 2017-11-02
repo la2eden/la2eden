@@ -437,6 +437,7 @@ public final class Config
 	public static int SERVER_LIST_AGE;
 	public static boolean SERVER_GMONLY;
 	public static boolean GM_HERO_AURA;
+    public static boolean GM_STARTUP_SUPER_HASTE;
 	public static boolean GM_STARTUP_INVULNERABLE;
 	public static boolean GM_STARTUP_INVISIBLE;
 	public static boolean GM_STARTUP_SILENCE;
@@ -1831,6 +1832,7 @@ public final class Config
 			SERVER_LIST_AGE = General.getInt("ServerListAge", 0);
 			SERVER_GMONLY = General.getBoolean("ServerGMOnly", false);
 			GM_HERO_AURA = General.getBoolean("GMHeroAura", false);
+            GM_STARTUP_SUPER_HASTE  = General.getBoolean("GMStartupSuperHaste", false);
 			GM_STARTUP_INVULNERABLE = General.getBoolean("GMStartupInvulnerable", false);
 			GM_STARTUP_INVISIBLE = General.getBoolean("GMStartupInvisible", false);
 			GM_STARTUP_SILENCE = General.getBoolean("GMStartupSilence", false);

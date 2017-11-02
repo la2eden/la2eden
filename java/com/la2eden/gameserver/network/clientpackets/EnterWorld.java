@@ -54,6 +54,7 @@ import com.la2eden.gameserver.model.entity.Siege;
 import com.la2eden.gameserver.model.entity.TvTEvent;
 import com.la2eden.gameserver.model.entity.clanhall.AuctionableHall;
 import com.la2eden.gameserver.model.entity.clanhall.SiegableHall;
+import com.la2eden.gameserver.model.holders.SkillHolder;
 import com.la2eden.gameserver.model.items.instance.L2ItemInstance;
 import com.la2eden.gameserver.model.quest.Quest;
 import com.la2eden.gameserver.model.quest.QuestState;
@@ -170,6 +171,10 @@ public class EnterWorld extends L2GameClientPacket
 			{
 				activeChar.setIsInvul(true);
 			}
+
+			if (Config.GM_STARTUP_SUPER_HASTE && AdminData.getInstance().hasAccess("admin_gmspeed", activeChar.getAccessLevel())) {
+                activeChar.doCast(new SkillHolder(7029, 4).getSkill());
+            }
 			
 			if (Config.GM_STARTUP_INVISIBLE && AdminData.getInstance().hasAccess("admin_invisible", activeChar.getAccessLevel()))
 			{
