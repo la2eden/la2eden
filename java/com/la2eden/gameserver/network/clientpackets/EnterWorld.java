@@ -25,33 +25,11 @@ import com.la2eden.gameserver.data.sql.impl.OfflineTradersTable;
 import com.la2eden.gameserver.data.xml.impl.AdminData;
 import com.la2eden.gameserver.data.xml.impl.SkillTreesData;
 import com.la2eden.gameserver.enums.ChatType;
-import com.la2eden.gameserver.instancemanager.CHSiegeManager;
-import com.la2eden.gameserver.instancemanager.CastleManager;
-import com.la2eden.gameserver.instancemanager.ClanHallManager;
-import com.la2eden.gameserver.instancemanager.CoupleManager;
-import com.la2eden.gameserver.instancemanager.CursedWeaponsManager;
-import com.la2eden.gameserver.instancemanager.DimensionalRiftManager;
-import com.la2eden.gameserver.instancemanager.FortManager;
-import com.la2eden.gameserver.instancemanager.FortSiegeManager;
-import com.la2eden.gameserver.instancemanager.InstanceManager;
-import com.la2eden.gameserver.instancemanager.MailManager;
-import com.la2eden.gameserver.instancemanager.PetitionManager;
-import com.la2eden.gameserver.instancemanager.ServerRestartManager;
-import com.la2eden.gameserver.instancemanager.SiegeManager;
-import com.la2eden.gameserver.instancemanager.TerritoryWarManager;
-import com.la2eden.gameserver.model.L2Clan;
-import com.la2eden.gameserver.model.L2Object;
-import com.la2eden.gameserver.model.L2World;
-import com.la2eden.gameserver.model.PcCondOverride;
-import com.la2eden.gameserver.model.TeleportWhereType;
+import com.la2eden.gameserver.instancemanager.*;
+import com.la2eden.gameserver.model.*;
 import com.la2eden.gameserver.model.actor.instance.L2ClassMasterInstance;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
-import com.la2eden.gameserver.model.entity.Couple;
-import com.la2eden.gameserver.model.entity.Fort;
-import com.la2eden.gameserver.model.entity.FortSiege;
-import com.la2eden.gameserver.model.entity.L2Event;
-import com.la2eden.gameserver.model.entity.Siege;
-import com.la2eden.gameserver.model.entity.TvTEvent;
+import com.la2eden.gameserver.model.entity.*;
 import com.la2eden.gameserver.model.entity.clanhall.AuctionableHall;
 import com.la2eden.gameserver.model.entity.clanhall.SiegableHall;
 import com.la2eden.gameserver.model.holders.SkillHolder;
@@ -59,33 +37,10 @@ import com.la2eden.gameserver.model.items.instance.L2ItemInstance;
 import com.la2eden.gameserver.model.quest.Quest;
 import com.la2eden.gameserver.model.quest.QuestState;
 import com.la2eden.gameserver.model.skills.CommonSkill;
+import com.la2eden.gameserver.model.skills.Skill;
 import com.la2eden.gameserver.model.zone.ZoneId;
 import com.la2eden.gameserver.network.SystemMessageId;
-import com.la2eden.gameserver.network.serverpackets.ActionFailed;
-import com.la2eden.gameserver.network.serverpackets.CreatureSay;
-import com.la2eden.gameserver.network.serverpackets.Die;
-import com.la2eden.gameserver.network.serverpackets.EtcStatusUpdate;
-import com.la2eden.gameserver.network.serverpackets.ExBasicActionList;
-import com.la2eden.gameserver.network.serverpackets.ExGetBookMarkInfoPacket;
-import com.la2eden.gameserver.network.serverpackets.ExNoticePostArrived;
-import com.la2eden.gameserver.network.serverpackets.ExNotifyPremiumItem;
-import com.la2eden.gameserver.network.serverpackets.ExShowContactList;
-import com.la2eden.gameserver.network.serverpackets.ExShowScreenMessage;
-import com.la2eden.gameserver.network.serverpackets.ExStorageMaxCount;
-import com.la2eden.gameserver.network.serverpackets.ExVoteSystemInfo;
-import com.la2eden.gameserver.network.serverpackets.FriendList;
-import com.la2eden.gameserver.network.serverpackets.HennaInfo;
-import com.la2eden.gameserver.network.serverpackets.ItemList;
-import com.la2eden.gameserver.network.serverpackets.NpcHtmlMessage;
-import com.la2eden.gameserver.network.serverpackets.PledgeShowMemberListAll;
-import com.la2eden.gameserver.network.serverpackets.PledgeShowMemberListUpdate;
-import com.la2eden.gameserver.network.serverpackets.PledgeSkillList;
-import com.la2eden.gameserver.network.serverpackets.PledgeStatusChanged;
-import com.la2eden.gameserver.network.serverpackets.QuestList;
-import com.la2eden.gameserver.network.serverpackets.ShortCutInit;
-import com.la2eden.gameserver.network.serverpackets.SkillCoolTime;
-import com.la2eden.gameserver.network.serverpackets.SystemMessage;
-import com.la2eden.gameserver.network.serverpackets.ValidateLocation;
+import com.la2eden.gameserver.network.serverpackets.*;
 
 /**
  * Enter World Packet Handler
@@ -173,7 +128,10 @@ public class EnterWorld extends L2GameClientPacket
 			}
 
 			if (Config.GM_STARTUP_SUPER_HASTE && AdminData.getInstance().hasAccess("admin_gmspeed", activeChar.getAccessLevel())) {
-                activeChar.doCast(new SkillHolder(7029, 4).getSkill());
+                Skill skill = new SkillHolder(7029, 4).getSkill();
+                if (skill != null) {
+                    activeChar.broadcastPacket(new MagicSkillUse(activeChar, activeChar, skill.getId(), skill.getLevel(), skill.getHitTime(), skill.getReuseDelay()));
+                }
             }
 			
 			if (Config.GM_STARTUP_INVISIBLE && AdminData.getInstance().hasAccess("admin_invisible", activeChar.getAccessLevel()))

@@ -16,10 +16,6 @@
  */
 package com.la2eden.gameserver.network.clientpackets;
 
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
-
 import com.la2eden.Config;
 import com.la2eden.gameserver.data.xml.impl.EnchantItemData;
 import com.la2eden.gameserver.model.L2World;
@@ -32,13 +28,12 @@ import com.la2eden.gameserver.model.items.instance.L2ItemInstance;
 import com.la2eden.gameserver.model.skills.CommonSkill;
 import com.la2eden.gameserver.model.skills.Skill;
 import com.la2eden.gameserver.network.SystemMessageId;
-import com.la2eden.gameserver.network.serverpackets.EnchantResult;
-import com.la2eden.gameserver.network.serverpackets.InventoryUpdate;
-import com.la2eden.gameserver.network.serverpackets.ItemList;
-import com.la2eden.gameserver.network.serverpackets.MagicSkillUse;
-import com.la2eden.gameserver.network.serverpackets.StatusUpdate;
-import com.la2eden.gameserver.network.serverpackets.SystemMessage;
+import com.la2eden.gameserver.network.serverpackets.*;
 import com.la2eden.gameserver.util.Util;
+
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 public final class RequestEnchantItem extends L2GameClientPacket
 {
@@ -211,7 +206,7 @@ public final class RequestEnchantItem extends L2GameClientPacket
 						sm.addItemName(item);
 						activeChar.broadcastPacket(sm);
 						
-						final Skill skill = CommonSkill.FIREWORK.getSkill();
+						final Skill skill = CommonSkill.LUCKY.getSkill();
 						if (skill != null)
 						{
 							activeChar.broadcastPacket(new MagicSkillUse(activeChar, activeChar, skill.getId(), skill.getLevel(), skill.getHitTime(), skill.getReuseDelay()));
