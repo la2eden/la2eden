@@ -54,13 +54,6 @@ public final class Config
 	// Constants
 	// --------------------------------------------------
 	public static final String EOL = System.lineSeparator();
-
-    // --------------------------------------------------
-    // Project-related constants
-    // --------------------------------------------------
-	public static final BuildType BUILD_TYPE = BuildType.FREE;
-	public static final Integer MAX_FREE_USERS = 300;
-    public static final Integer MAX_VIP_USERS = 5000;
 	
 	// --------------------------------------------------
 	// L2J Initialization File Definitions
@@ -1249,15 +1242,7 @@ public final class Config
 			CLAN_NAME_TEMPLATE = serverSettings.getString("ClanNameTemplate", ".*");
 			
 			MAX_CHARACTERS_NUMBER_PER_ACCOUNT = serverSettings.getInt("CharMaxNumber", 7);
-
-			switch (BUILD_TYPE) {
-                case FREE:
-                    MAXIMUM_ONLINE_USERS = MAX_FREE_USERS;
-                    break;
-                case VIP:
-                    MAXIMUM_ONLINE_USERS = MAX_VIP_USERS;
-                    break;
-            }
+            MAXIMUM_ONLINE_USERS = serverSettings.getInt("MaximumOnlinePlayers", 2000);
 			
 			final String[] protocols = serverSettings.getString("AllowedProtocolRevisions", "267;268;271;273").split(";");
 			PROTOCOL_LIST = new ArrayList<>(protocols.length);
