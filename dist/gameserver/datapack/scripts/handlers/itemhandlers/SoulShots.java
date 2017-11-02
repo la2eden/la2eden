@@ -52,11 +52,14 @@ public class SoulShots implements IItemHandler
 		final SkillHolder[] skills = item.getItem().getSkills();
 		
 		final int itemId = item.getId();
+		boolean isSoulPotion = false;
 
         switch (itemId)
         {
             case 728: // mana potion
             {
+                isSoulPotion = true;
+
                 if (activeChar.isAutoPot(728))
                 {
                     activeChar.sendPacket(new ExAutoSoulShot(728, 0));
@@ -86,6 +89,8 @@ public class SoulShots implements IItemHandler
             }
             case 1539: // greater healing potion
             {
+                isSoulPotion = true;
+
                 if (activeChar.isAutoPot(1539))
                 {
                     activeChar.sendPacket(new ExAutoSoulShot(1539, 0));
@@ -115,6 +120,8 @@ public class SoulShots implements IItemHandler
             }
             case 5592: // greater cp potion
             {
+                isSoulPotion = true;
+
                 if (activeChar.isAutoPot(5592))
                 {
                     activeChar.sendPacket(new ExAutoSoulShot(5592, 0));
@@ -158,7 +165,12 @@ public class SoulShots implements IItemHandler
 			return false;
 		}
 		
-		final boolean gradeCheck = item.isEtcItem() && (item.getEtcItem().getDefaultAction() == ActionType.SOULSHOT) && (weaponInst.getItem().getItemGradeSPlus() == item.getItem().getItemGradeSPlus());
+		boolean gradeCheck = item.isEtcItem() && (item.getEtcItem().getDefaultAction() == ActionType.SOULSHOT) && (weaponInst.getItem().getItemGradeSPlus() == item.getItem().getItemGradeSPlus());
+
+        // Prevents SystemMessage if its a potion.
+        if (isSoulPotion) {
+            gradeCheck = true;
+        }
 		
 		if (!gradeCheck)
 		{
