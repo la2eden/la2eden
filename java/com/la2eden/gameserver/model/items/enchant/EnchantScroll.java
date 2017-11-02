@@ -16,10 +16,7 @@
  */
 package com.la2eden.gameserver.model.items.enchant;
 
-import java.util.HashSet;
-import java.util.Set;
-import java.util.logging.Level;
-
+import com.la2eden.Config;
 import com.la2eden.gameserver.data.xml.impl.EnchantItemGroupsData;
 import com.la2eden.gameserver.model.StatsSet;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
@@ -27,8 +24,13 @@ import com.la2eden.gameserver.model.items.instance.L2ItemInstance;
 import com.la2eden.gameserver.model.items.type.EtcItemType;
 import com.la2eden.gameserver.model.items.type.ItemType;
 import com.la2eden.gameserver.network.Debug;
+import com.la2eden.gameserver.network.serverpackets.ExShowScreenMessage;
 import com.la2eden.gameserver.util.Util;
 import com.la2eden.util.Rnd;
+
+import java.util.HashSet;
+import java.util.Set;
+import java.util.logging.Level;
 
 /**
  * @author UnAfraid
@@ -169,6 +171,10 @@ public final class EnchantScroll extends AbstractEnchantItem
 		final double bonusRate = getBonusRate();
 		final double supportBonusRate = (supportItem != null) ? supportItem.getBonusRate() : 0;
 		final double finalChance = Math.min(chance + bonusRate + supportBonusRate, 100);
+
+        if (Config.SHOW_ENCHANT_CHANCE) {
+            player.sendPacket(new ExShowScreenMessage(Config.ENCHANT_SCREEN_MSG.replaceAll("%chance%", String.valueOf(finalChance) + "%"), 5));
+        }
 		
 		final double random = 100 * Rnd.nextDouble();
 		final boolean success = (random < finalChance);
