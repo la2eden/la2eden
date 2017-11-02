@@ -62,6 +62,7 @@ public class SoulShots implements IItemHandler
 
                 if (activeChar.isAutoPot(728))
                 {
+                    activeChar.disableAutoShot(728);
                     activeChar.sendPacket(new ExAutoSoulShot(728, 0));
                     activeChar.sendMessage("Deactivated auto mana potions.");
                     activeChar.setAutoPot(728, null, false);
@@ -70,6 +71,7 @@ public class SoulShots implements IItemHandler
                     {
                         if (activeChar.getInventory().getItemByItemId(728).getCount() > 1)
                         {
+                            activeChar.addAutoSoulShot(728);
                             activeChar.sendPacket(new ExAutoSoulShot(728, 1));
                             activeChar.sendMessage("Activated auto mana potions.");
                             activeChar.setAutoPot(728, ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AutoPot(728, activeChar), 1000, MANA_POT_CD*1000), true);
@@ -93,6 +95,7 @@ public class SoulShots implements IItemHandler
 
                 if (activeChar.isAutoPot(1539))
                 {
+                    activeChar.disableAutoShot(1539);
                     activeChar.sendPacket(new ExAutoSoulShot(1539, 0));
                     activeChar.sendMessage("Deactivated auto healing potions.");
                     activeChar.setAutoPot(1539, null, false);
@@ -101,6 +104,7 @@ public class SoulShots implements IItemHandler
                     {
                         if (activeChar.getInventory().getItemByItemId(1539).getCount() > 1)
                         {
+                            activeChar.addAutoSoulShot(1539);
                             activeChar.sendPacket(new ExAutoSoulShot(1539, 1));
                             activeChar.sendMessage("Activated auto healing potions.");
                             activeChar.setAutoPot(1539, ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AutoPot(1539, activeChar), 1000, HEALING_POT_CD*1000), true);
@@ -124,6 +128,7 @@ public class SoulShots implements IItemHandler
 
                 if (activeChar.isAutoPot(5592))
                 {
+                    activeChar.disableAutoShot(5592);
                     activeChar.sendPacket(new ExAutoSoulShot(5592, 0));
                     activeChar.sendMessage("Deactivated auto cp potions.");
                     activeChar.setAutoPot(5592, null, false);
@@ -132,6 +137,7 @@ public class SoulShots implements IItemHandler
                     {
                         if (activeChar.getInventory().getItemByItemId(5592).getCount() > 1)
                         {
+                            activeChar.addAutoSoulShot(5592);
                             activeChar.sendPacket(new ExAutoSoulShot(5592, 1));
                             activeChar.sendMessage("Activated auto cp potions.");
                             activeChar.setAutoPot(5592, ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AutoPot(5592, activeChar), 1000, CP_POT_CD*1000), true);
@@ -214,8 +220,10 @@ public class SoulShots implements IItemHandler
 		}
 		
 		// Send message to client
-		activeChar.sendPacket(SystemMessageId.YOUR_SOULSHOTS_ARE_ENABLED);
-		Broadcast.toSelfAndKnownPlayersInRadius(activeChar, new MagicSkillUse(activeChar, activeChar, skills[0].getSkillId(), skills[0].getSkillLvl(), 0, 0), 600);
+        if (!isSoulPotion) {
+            activeChar.sendPacket(SystemMessageId.YOUR_SOULSHOTS_ARE_ENABLED);
+            Broadcast.toSelfAndKnownPlayersInRadius(activeChar, new MagicSkillUse(activeChar, activeChar, skills[0].getSkillId(), skills[0].getSkillLvl(), 0, 0), 600);
+        }
 		return true;
 	}
 

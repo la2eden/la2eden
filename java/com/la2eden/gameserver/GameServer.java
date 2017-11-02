@@ -150,7 +150,7 @@ public final class GameServer
 		}
 
 		if (Config.PRIMESHOP_ENABLED) {
-            _log.info("PrimeShopManager: PrimeShop system is enabled.");
+            _log.info("PrimeShop: system is enabled.");
             PrimeShopTable.getInstance();
         }
 		
