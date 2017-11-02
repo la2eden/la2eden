@@ -14082,7 +14082,15 @@ public final class L2PcInstance extends L2Playable
 		return _eventListeners;
 	}
 
+    public long getPrimePoints()
+    {
+        return prime_points;
+    }
 
+    public void setPrimePoints(long primePoints)
+    {
+        prime_points = primePoints;
+    }
 	
 	@Override
 	public int getId()
