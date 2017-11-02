@@ -13,8 +13,10 @@
 	<property name="datapack" location="dist" />
 	<property name="libs" location="${datapack}/libs" />
 	<property name="src" location="java" />
-
     <property name="version.file" location="${datapack}/gameserver/config/core/Version.ini" />
+
+    <property name="changelog.format" value="* [%h] %aN (%cr)%n| -> %B|" />
+    <property name="changelog.file" location="${build}/changelog.txt" />
 
 	<path id="classpath">
 		<fileset dir="${libs}">
@@ -69,6 +71,7 @@
             <arg value="1"/>
         </exec>
 
+        <!--
         <propertyfile file="${version.file}">
             <entry key="ShortCommit" value="${commit.short}" />
             <entry key="LongCommit" value="${commit.long}" />
@@ -76,6 +79,7 @@
             <entry key="BuildDate" value="${timestamp}" />
         </propertyfile>
         <property file="${version.file}"/>
+        -->
 
         <echo message="Current version: ${BuildNumber}" />
         <echo message="Build date: ${timestamp}" />
@@ -89,7 +93,18 @@
 		<mkdir dir="${build.bin}" />
 	</target>
 
-    <target name="dist" depends="init" description="Export the files to the output directory.">
+    <target name="generateChangelog" depends="init" description="Generates a changelog">
+        <exec executable="git" outputproperty="changelog" failifexecutionfails="false" errorproperty="">
+            <arg value="log"/>
+            <arg value="--format=format:${changelog.format}"/>
+            <arg value="--decorate"/>
+            <arg value="--all"/>
+        </exec>
+
+        <concat destfile="${changelog.file}">${changelog}</concat>
+    </target>
+
+    <target name="dist" depends="generateChangelog" description="Export the files to the output directory.">
         <sync todir="${build.dist}" includeemptydirs="true">
             <fileset dir="dist"/>
         </sync>
