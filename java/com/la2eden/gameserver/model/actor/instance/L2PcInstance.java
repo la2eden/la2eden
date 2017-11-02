@@ -231,7 +231,7 @@ public final class L2PcInstance extends L2Playable
 	protected int _classIndex = 0;
 
 	// PrimeShop points
-    private long prime_points;
+    private long prime_points = 0;
 
 	/** data for mounted pets */
 	private int _controlItemId;
@@ -6503,6 +6503,7 @@ public final class L2PcInstance extends L2Playable
 			ps.setInt(35, isNoble() ? 1 : 0);
 			ps.setLong(36, 0);
 			ps.setTimestamp(37, new Timestamp(getCreateDate().getTimeInMillis()));
+			ps.setLong(38, getPrimePoints());
 			ps.executeUpdate();
 		}
 		catch (Exception e)
@@ -7130,8 +7131,8 @@ public final class L2PcInstance extends L2Playable
 			ps.setInt(47, getBookMarkSlot());
 			ps.setInt(48, getVitalityPoints());
 			ps.setString(49, getLang());
-			ps.setInt(50, getObjectId());
-            ps.setLong(51, getPrimePoints());
+            ps.setLong(50, getPrimePoints());
+			ps.setInt(51, getObjectId());
 			
 			ps.execute();
 		}

@@ -16,8 +16,8 @@
  */
 package handlers.itemhandlers;
 
-import com.la2eden.gameserver.enums.ShotType;
 import com.la2eden.gameserver.ThreadPoolManager;
+import com.la2eden.gameserver.enums.ShotType;
 import com.la2eden.gameserver.handler.IItemHandler;
 import com.la2eden.gameserver.model.actor.L2Playable;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
@@ -28,14 +28,21 @@ import com.la2eden.gameserver.model.items.type.ActionType;
 import com.la2eden.gameserver.network.SystemMessageId;
 import com.la2eden.gameserver.network.serverpackets.ExAutoSoulShot;
 import com.la2eden.gameserver.network.serverpackets.MagicSkillUse;
+import com.la2eden.gameserver.network.serverpackets.SystemMessage;
 import com.la2eden.gameserver.util.Broadcast;
 import com.la2eden.util.Rnd;
 
+import java.util.ArrayList;
 import java.util.logging.Level;
 
 public class SoulShots implements IItemHandler
 {
     private static final int MANA_POT_CD = 2, HEALING_POT_CD = 12, CP_POT_CD = 2;
+    private static final int[] POTION_LIST = {
+            728,   // Mana Potion
+            1539,  // Greater Healing Potion
+            5592   // Greater CP Potion
+    };
 
 	@Override
 	public boolean useItem(L2Playable playable, L2ItemInstance item, boolean forceUse)
@@ -54,104 +61,42 @@ public class SoulShots implements IItemHandler
 		final int itemId = item.getId();
 		boolean isSoulPotion = false;
 
-        switch (itemId)
-        {
-            case 728: // mana potion
+		// This is just for checking purposes
+        ArrayList<Integer> plist = new ArrayList<>();
+        for (Integer potion : POTION_LIST) {
+            plist.add(potion);
+        }
+
+		if (plist.contains(itemId)) {
+            isSoulPotion = true;
+
+            if (activeChar.isAutoPot(itemId))
             {
-                isSoulPotion = true;
-
-                if (activeChar.isAutoPot(728))
+                activeChar.disableAutoShot(itemId);
+                activeChar.sendPacket(new ExAutoSoulShot(itemId, 0));
+                activeChar.setAutoPot(itemId, null, false);
+            } else {
+                if (activeChar.getInventory().getItemByItemId(itemId) != null)
                 {
-                    activeChar.disableAutoShot(728);
-                    activeChar.sendPacket(new ExAutoSoulShot(728, 0));
-                    activeChar.sendMessage("Deactivated auto mana potions.");
-                    activeChar.setAutoPot(728, null, false);
-                } else {
-                    if (activeChar.getInventory().getItemByItemId(728) != null)
+                    if (activeChar.getInventory().getItemByItemId(itemId).getCount() > 1)
                     {
-                        if (activeChar.getInventory().getItemByItemId(728).getCount() > 1)
-                        {
-                            activeChar.addAutoSoulShot(728);
-                            activeChar.sendPacket(new ExAutoSoulShot(728, 1));
-                            activeChar.sendMessage("Activated auto mana potions.");
-                            activeChar.setAutoPot(728, ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AutoPot(728, activeChar), 1000, MANA_POT_CD*1000), true);
-                        }
-                        else
-                        {
-                            MagicSkillUse msu = new MagicSkillUse(activeChar, activeChar, 2279, 2, 0, 100);
-                            activeChar.broadcastPacket(msu);
+                        activeChar.addAutoSoulShot(itemId);
+                        activeChar.sendPacket(new ExAutoSoulShot(itemId, 1));
+                        final SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.THE_AUTOMATIC_USE_OF_S1_HAS_BEEN_ACTIVATED);
+                        sm.addItemName(itemId);
+                        activeChar.sendPacket(sm);
 
-                            ItemSkills is = new ItemSkills();
-                            is.useItem(activeChar, activeChar.getInventory().getItemByItemId(728), true);
-                        }
+                        activeChar.setAutoPot(itemId, ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AutoPot(1539, activeChar), 1000, HEALING_POT_CD*1000), true);
+                    }
+                    else
+                    {
+                        MagicSkillUse msu = new MagicSkillUse(activeChar, activeChar, 2037, 1, 0, 100);
+                        activeChar.broadcastPacket(msu);
+
+                        ItemSkills is = new ItemSkills();
+                        is.useItem(activeChar, activeChar.getInventory().getItemByItemId(itemId), true);
                     }
                 }
-
-                break;
-            }
-            case 1539: // greater healing potion
-            {
-                isSoulPotion = true;
-
-                if (activeChar.isAutoPot(1539))
-                {
-                    activeChar.disableAutoShot(1539);
-                    activeChar.sendPacket(new ExAutoSoulShot(1539, 0));
-                    activeChar.sendMessage("Deactivated auto healing potions.");
-                    activeChar.setAutoPot(1539, null, false);
-                } else {
-                    if (activeChar.getInventory().getItemByItemId(1539) != null)
-                    {
-                        if (activeChar.getInventory().getItemByItemId(1539).getCount() > 1)
-                        {
-                            activeChar.addAutoSoulShot(1539);
-                            activeChar.sendPacket(new ExAutoSoulShot(1539, 1));
-                            activeChar.sendMessage("Activated auto healing potions.");
-                            activeChar.setAutoPot(1539, ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AutoPot(1539, activeChar), 1000, HEALING_POT_CD*1000), true);
-                        }
-                        else
-                        {
-                            MagicSkillUse msu = new MagicSkillUse(activeChar, activeChar, 2037, 1, 0, 100);
-                            activeChar.broadcastPacket(msu);
-
-                            ItemSkills is = new ItemSkills();
-                            is.useItem(activeChar, activeChar.getInventory().getItemByItemId(1539), true);
-                        }
-                    }
-                }
-
-                break;
-            }
-            case 5592: // greater cp potion
-            {
-                isSoulPotion = true;
-
-                if (activeChar.isAutoPot(5592))
-                {
-                    activeChar.disableAutoShot(5592);
-                    activeChar.sendPacket(new ExAutoSoulShot(5592, 0));
-                    activeChar.sendMessage("Deactivated auto cp potions.");
-                    activeChar.setAutoPot(5592, null, false);
-                } else {
-                    if (activeChar.getInventory().getItemByItemId(5592) != null)
-                    {
-                        if (activeChar.getInventory().getItemByItemId(5592).getCount() > 1)
-                        {
-                            activeChar.addAutoSoulShot(5592);
-                            activeChar.sendPacket(new ExAutoSoulShot(5592, 1));
-                            activeChar.sendMessage("Activated auto cp potions.");
-                            activeChar.setAutoPot(5592, ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AutoPot(5592, activeChar), 1000, CP_POT_CD*1000), true);
-                        } else {
-                            MagicSkillUse msu = new MagicSkillUse(activeChar, activeChar, 2166, 2, 0, 100);
-                            activeChar.broadcastPacket(msu);
-
-                            ItemSkills is = new ItemSkills();
-                            is.useItem(activeChar, activeChar.getInventory().getItemByItemId(5592), true);
-                        }
-                    }
-                }
-
-                break;
             }
         }
 		
