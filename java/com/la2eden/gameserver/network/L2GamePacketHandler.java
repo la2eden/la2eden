@@ -1117,18 +1117,23 @@ public final class L2GamePacketHandler implements IPacketHandler<L2GameClient>, 
 								break;
 							case 0x89:
 								// RequestBRGamePoint
+                                msg = new RequestBrGamePoint();
 								break;
 							case 0x8A:
 								// RequestBRProductList
+                                msg = new RequestBrProductList();
 								break;
 							case 0x8B:
 								// RequestBRProductInfo
+                                msg = new RequestBrProductInfo();
 								break;
 							case 0x8C:
 								// RequestBRBuyProduct
+                                msg = new RequestBrBuyProduct();
 								break;
 							case 0x8D:
 								// RequestBRRecentProductList
+                                msg = new RequestBrRecentProductList();
 								break;
 							case 0x8E:
 								// BrMinigameLoadScores

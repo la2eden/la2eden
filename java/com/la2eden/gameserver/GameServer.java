@@ -148,6 +148,11 @@ public final class GameServer
 			_log.info("PremiumManager: Premium system is enabled.");
 			PremiumManager.getInstance();
 		}
+
+		if (Config.PRIMESHOP_ENABLED) {
+            _log.info("PrimeShopManager: PrimeShop system is enabled.");
+            PrimeShopTable.getInstance();
+        }
 		
 		printSection("Clans");
 		ClanTable.getInstance();

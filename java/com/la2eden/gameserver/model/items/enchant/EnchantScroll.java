@@ -173,7 +173,7 @@ public final class EnchantScroll extends AbstractEnchantItem
 		final double finalChance = Math.min(chance + bonusRate + supportBonusRate, 100);
 
         if (Config.SHOW_ENCHANT_CHANCE) {
-            player.sendPacket(new ExShowScreenMessage(Config.ENCHANT_SCREEN_MSG.replaceAll("%chance%", String.valueOf(finalChance) + "%"), 5));
+            player.sendPacket(new ExShowScreenMessage(Config.ENCHANT_SCREEN_MSG.replaceAll("%chance%", String.valueOf(finalChance) + "%"), 5000));
         }
 		
 		final double random = 100 * Rnd.nextDouble();

@@ -93,8 +93,9 @@ public final class Config
     public static final String CHAT_FILE = "./config/mods/Chat.ini";
     public static final String COMMUNITY_FILE = "./config/mods/CommunityBoard.ini";
     public static final String CUSTOM_CONFIG_FILE = "./config/mods/Custom.ini";
-    public static final String OFFLINE_TRADE_FILE = "./config/mods/OfflineShop.ini";
+    public static final String OFFLINE_TRADE_FILE = "./config/mods/OfflineTraders.ini";
     public static final String PREMIUM_FILE = "./config/mods/Premium.ini";
+    public static final String PRIMESHOP_FILE = "./config/mods/PrimeShop.ini";
     public static final String WEDDING_FILE = "./config/mods/Wedding.ini";
 
     // Version files
@@ -817,6 +818,10 @@ public final class Config
 	public static float PREMIUM_RATE_SPOIL_AMOUNT;
 	public static Map<Integer, Float> PREMIUM_RATE_DROP_CHANCE_BY_ID;
 	public static Map<Integer, Float> PREMIUM_RATE_DROP_AMOUNT_BY_ID;
+
+	// PrimeShop
+    public static boolean PRIMESHOP_ENABLED;
+    public static boolean PRIMESHOP_PREMIUM_ONLY;
 
 	// --------------------------------------------------
 	// NPC Settings
@@ -2727,9 +2732,14 @@ public final class Config
 			COMMUNITYBOARD_COMBAT_DISABLED = CommunityBoardSettings.getBoolean("CommunityCombatDisabled", true);
 			COMMUNITYBOARD_KARMA_DISABLED = CommunityBoardSettings.getBoolean("CommunityKarmaDisabled", true);
 
-			// Load Premium L2Properties file (if exists)
+            // Load PrimeShop settings
+            final PropertiesParser PrimeShopSettings = new PropertiesParser(PRIMESHOP_FILE);
+            PRIMESHOP_ENABLED = PrimeShopSettings.getBoolean("PrimeShopEnabled", true);
+            PRIMESHOP_PREMIUM_ONLY = PrimeShopSettings.getBoolean("PrimeShopPremiumOnly", false);
+
+
+			// Load Premium settings
             final PropertiesParser PremiumSettings = new PropertiesParser(PREMIUM_FILE);
-			
 			PREMIUM_SYSTEM_ENABLED = PremiumSettings.getBoolean("EnablePremiumSystem", false);
 			PREMIUM_RATE_XP = PremiumSettings.getFloat("PremiumRateXp", 2);
 			PREMIUM_RATE_SP = PremiumSettings.getFloat("PremiumRateSp", 2);

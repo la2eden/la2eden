@@ -149,7 +149,7 @@ public final class L2PcInstance extends L2Playable
 	
 	// Character Character SQL String Definitions:
 	private static final String INSERT_CHARACTER = "INSERT INTO characters (account_name,charId,char_name,level,maxHp,curHp,maxCp,curCp,maxMp,curMp,face,hairStyle,hairColor,sex,exp,sp,karma,fame,pvpkills,pkkills,clanid,race,classid,deletetime,cancraft,title,title_color,accesslevel,online,isin7sdungeon,clan_privs,wantspeace,base_class,newbie,nobless,power_grade,createDate) values (?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
-	private static final String UPDATE_CHARACTER = "UPDATE characters SET level=?,maxHp=?,curHp=?,maxCp=?,curCp=?,maxMp=?,curMp=?,face=?,hairStyle=?,hairColor=?,sex=?,heading=?,x=?,y=?,z=?,exp=?,expBeforeDeath=?,sp=?,karma=?,fame=?,pvpkills=?,pkkills=?,clanid=?,race=?,classid=?,deletetime=?,title=?,title_color=?,accesslevel=?,online=?,isin7sdungeon=?,clan_privs=?,wantspeace=?,base_class=?,onlinetime=?,newbie=?,nobless=?,power_grade=?,subpledge=?,lvl_joined_academy=?,apprentice=?,sponsor=?,clan_join_expiry_time=?,clan_create_expiry_time=?,char_name=?,death_penalty_level=?,bookmarkslot=?,vitality_points=?,language=? WHERE charId=?";
+	private static final String UPDATE_CHARACTER = "UPDATE characters SET level=?,maxHp=?,curHp=?,maxCp=?,curCp=?,maxMp=?,curMp=?,face=?,hairStyle=?,hairColor=?,sex=?,heading=?,x=?,y=?,z=?,exp=?,expBeforeDeath=?,sp=?,karma=?,fame=?,pvpkills=?,pkkills=?,clanid=?,race=?,classid=?,deletetime=?,title=?,title_color=?,accesslevel=?,online=?,isin7sdungeon=?,clan_privs=?,wantspeace=?,base_class=?,onlinetime=?,newbie=?,nobless=?,power_grade=?,subpledge=?,lvl_joined_academy=?,apprentice=?,sponsor=?,clan_join_expiry_time=?,clan_create_expiry_time=?,char_name=?,death_penalty_level=?,bookmarkslot=?,vitality_points=?,language=?,prime_points=? WHERE charId=?";
 	private static final String RESTORE_CHARACTER = "SELECT * FROM characters WHERE charId=?";
 	
 	// Character Premium System String Definitions:
@@ -229,7 +229,10 @@ public final class L2PcInstance extends L2Playable
 	protected int _baseClass;
 	protected int _activeClass;
 	protected int _classIndex = 0;
-	
+
+	// PrimeShop points
+    private long prime_points;
+
 	/** data for mounted pets */
 	private int _controlItemId;
 	private L2PetLevelData _leveldata;
@@ -6651,6 +6654,9 @@ public final class L2PcInstance extends L2Playable
 					
 					// Language
 					player.setLang(rset.getString("language"));
+
+					// Prime Shop Points
+                    player.setPrimePoints(rset.getLong("prime_points"));
 					
 					// Set Hero status if it applies
 					player.setHero(Hero.getInstance().isHero(objectId));
@@ -7125,6 +7131,7 @@ public final class L2PcInstance extends L2Playable
 			ps.setInt(48, getVitalityPoints());
 			ps.setString(49, getLang());
 			ps.setInt(50, getObjectId());
+            ps.setLong(51, getPrimePoints());
 			
 			ps.execute();
 		}
@@ -14074,6 +14081,16 @@ public final class L2PcInstance extends L2Playable
 	{
 		return _eventListeners;
 	}
+
+    public long getPrimePoints()
+    {
+        return prime_points;
+    }
+
+    public void setPrimePoints(long primePoints)
+    {
+        prime_points = primePoints;
+    }
 	
 	@Override
 	public int getId()
