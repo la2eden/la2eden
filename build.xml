@@ -15,7 +15,7 @@
 	<property name="src" location="java" />
 
     <property name="version.file" location="${datapack}/gameserver/config/core/Version.ini" />
-    <property name="changelog.format" value="* [%h] %aN (%cr)%n| -> %B|" />
+    <property name="changelog.format" value="* [%h] %aN (%cD)%n| -> %B|" />
     <property name="changelog.file" location="${build}/changelog.txt" />
 
 	<path id="classpath">
