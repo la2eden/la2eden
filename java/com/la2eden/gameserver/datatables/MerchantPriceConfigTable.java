@@ -16,25 +16,23 @@
  */
 package com.la2eden.gameserver.datatables;
 
+import com.la2eden.Config;
+import com.la2eden.gameserver.InstanceListManager;
+import com.la2eden.gameserver.instancemanager.CastleManager;
+import com.la2eden.gameserver.model.actor.instance.L2MerchantInstance;
+import com.la2eden.gameserver.model.entity.Castle;
+import org.w3c.dom.Document;
+import org.w3c.dom.Node;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.File;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.parsers.ParserConfigurationException;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.Node;
-import org.xml.sax.SAXException;
-
-import com.la2eden.Config;
-import com.la2eden.gameserver.InstanceListManager;
-import com.la2eden.gameserver.instancemanager.CastleManager;
-import com.la2eden.gameserver.model.actor.instance.L2MerchantInstance;
-import com.la2eden.gameserver.model.entity.Castle;
 
 /**
  * @author KenM
@@ -76,7 +74,7 @@ public class MerchantPriceConfigTable implements InstanceListManager
 		final DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
 		factory.setValidating(false);
 		factory.setIgnoringComments(true);
-		final File file = new File(Config.DATAPACK_ROOT + "/data/" + MPCS_FILE);
+		final File file = new File(Config.DATAPACK_ROOT + "/datapack/" + MPCS_FILE);
 		if (file.exists())
 		{
 			int defaultPriceConfigId;

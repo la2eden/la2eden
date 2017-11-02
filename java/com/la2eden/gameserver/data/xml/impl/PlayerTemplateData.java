@@ -16,21 +16,20 @@
  */
 package com.la2eden.gameserver.data.xml.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Logger;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-
 import com.la2eden.gameserver.model.Location;
 import com.la2eden.gameserver.model.StatsSet;
 import com.la2eden.gameserver.model.actor.templates.L2PcTemplate;
 import com.la2eden.gameserver.model.base.ClassId;
 import com.la2eden.util.data.xml.IXmlReader;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Logger;
 
 /**
  * Loads player's base stats.
@@ -53,7 +52,7 @@ public final class PlayerTemplateData implements IXmlReader
 	public void load()
 	{
 		_playerTemplates.clear();
-		parseDatapackDirectory("./datapack/stats/chars/baseStats", false);
+		parseDatapackDirectory("/datapack/stats/chars/baseStats", false);
 		LOGGER.info(getClass().getSimpleName() + ": Loaded " + _playerTemplates.size() + " character templates.");
 		LOGGER.info(getClass().getSimpleName() + ": Loaded " + _dataCount + " level up gain records.");
 	}

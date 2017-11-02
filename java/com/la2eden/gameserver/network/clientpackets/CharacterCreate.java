@@ -270,6 +270,7 @@ public final class CharacterCreate extends L2GameClientPacket
 
 		if (Config.CUSTOM_CHAR_TITLE) {
 			newChar.setTitle(Config.CUSTOM_CHAR_TITLE_TEXT);
+			//newChar.getAppearance().setVisibleTitle(Config.CUSTOM_CHAR_TITLE_TEXT);
 			newChar.getAppearance().setTitleColor(Config.CUSTOM_TITLE_COLOR);
 		} else {
 			newChar.setTitle("");

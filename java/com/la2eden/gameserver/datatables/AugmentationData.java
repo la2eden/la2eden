@@ -16,20 +16,6 @@
  */
 package com.la2eden.gameserver.datatables;
 
-import java.io.File;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
-import javax.xml.parsers.DocumentBuilderFactory;
-
-import org.w3c.dom.Document;
-import org.w3c.dom.NamedNodeMap;
-import org.w3c.dom.Node;
-
 import com.la2eden.Config;
 import com.la2eden.gameserver.data.xml.impl.OptionData;
 import com.la2eden.gameserver.model.L2Augmentation;
@@ -39,6 +25,18 @@ import com.la2eden.gameserver.model.items.instance.L2ItemInstance;
 import com.la2eden.gameserver.model.options.Options;
 import com.la2eden.gameserver.network.clientpackets.AbstractRefinePacket;
 import com.la2eden.util.Rnd;
+import org.w3c.dom.Document;
+import org.w3c.dom.NamedNodeMap;
+import org.w3c.dom.Node;
+
+import javax.xml.parsers.DocumentBuilderFactory;
+import java.io.File;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Loads augmentation bonuses and skills.
@@ -234,7 +232,7 @@ public class AugmentationData
 				factory.setValidating(false);
 				factory.setIgnoringComments(true);
 				
-				final File file = new File(Config.DATAPACK_ROOT + "/data/stats/augmentation/augmentation_skillmap.xml");
+				final File file = new File(Config.DATAPACK_ROOT + "/datapack/stats/augmentation/augmentation_skillmap.xml");
 				if (!file.exists())
 				{
 					LOGGER.log(Level.WARNING, getClass().getSimpleName() + ": ERROR The augmentation skillmap file is missing.");
@@ -322,7 +320,7 @@ public class AugmentationData
 			factory.setValidating(false);
 			factory.setIgnoringComments(true);
 			
-			final File aFile = new File(Config.DATAPACK_ROOT + "/data/stats/augmentation/retailchances.xml");
+			final File aFile = new File(Config.DATAPACK_ROOT + "/datapack/stats/augmentation/retailchances.xml");
 			if (aFile.exists())
 			{
 				Document aDoc = null;
@@ -419,7 +417,7 @@ public class AugmentationData
 			factory3.setValidating(false);
 			factory3.setIgnoringComments(true);
 			
-			final File aFile3 = new File(Config.DATAPACK_ROOT + "/data/stats/augmentation/retailchances_accessory.xml");
+			final File aFile3 = new File(Config.DATAPACK_ROOT + "/datapack/stats/augmentation/retailchances_accessory.xml");
 			if (aFile3.exists())
 			{
 				Document aDoc = null;

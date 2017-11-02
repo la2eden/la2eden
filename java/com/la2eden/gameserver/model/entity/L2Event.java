@@ -16,21 +16,6 @@
  */
 package com.la2eden.gameserver.model.entity;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.CopyOnWriteArrayList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.la2eden.Config;
 import com.la2eden.gameserver.cache.HtmCache;
 import com.la2eden.gameserver.data.xml.impl.NpcData;
@@ -41,11 +26,16 @@ import com.la2eden.gameserver.model.L2World;
 import com.la2eden.gameserver.model.actor.L2Npc;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 import com.la2eden.gameserver.model.holders.PlayerEventHolder;
-import com.la2eden.gameserver.network.serverpackets.CharInfo;
-import com.la2eden.gameserver.network.serverpackets.ExBrExtraUserInfo;
-import com.la2eden.gameserver.network.serverpackets.MagicSkillUse;
-import com.la2eden.gameserver.network.serverpackets.NpcHtmlMessage;
-import com.la2eden.gameserver.network.serverpackets.UserInfo;
+import com.la2eden.gameserver.network.serverpackets.*;
+
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.util.*;
+import java.util.Map.Entry;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.CopyOnWriteArrayList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @author Nik
@@ -371,7 +361,7 @@ public class L2Event
 				return "Cannot start event, invalid npc id.";
 			}
 			
-			try (FileReader fr = new FileReader(Config.DATAPACK_ROOT + "/data/events/" + _eventName);
+			try (FileReader fr = new FileReader(Config.DATAPACK_ROOT + "/datapack/events/" + _eventName);
 				BufferedReader br = new BufferedReader(fr))
 			{
 				_eventCreator = br.readLine();

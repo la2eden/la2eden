@@ -600,9 +600,9 @@ public class EnterWorld extends L2GameClientPacket
 	{
 		chr.sendMessage("========< Version >========");
 		chr.sendMessage("Build number: .. " + Config.BUILD_NUMBER);
-		chr.sendMessage("Build date: ...... " + Config.BUILD_DATE);
+		chr.sendMessage("Build date: ........ " + Config.BUILD_DATE);
 		chr.sendMessage("Build commit: .. " + Config.SHORT_COMMIT);
-		chr.sendMessage("==========================");
+		chr.sendMessage("========================");
 	}
 	
 	/**

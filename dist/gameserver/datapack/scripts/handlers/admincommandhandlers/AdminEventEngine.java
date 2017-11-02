@@ -16,16 +16,6 @@
  */
 package handlers.admincommandhandlers;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedReader;
-import java.io.DataInputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.util.StringTokenizer;
-
 import com.la2eden.Config;
 import com.la2eden.gameserver.data.xml.impl.AdminData;
 import com.la2eden.gameserver.data.xml.impl.TransformData;
@@ -34,13 +24,12 @@ import com.la2eden.gameserver.model.L2World;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 import com.la2eden.gameserver.model.entity.L2Event;
 import com.la2eden.gameserver.model.entity.L2Event.EventState;
-import com.la2eden.gameserver.network.serverpackets.CharInfo;
-import com.la2eden.gameserver.network.serverpackets.ExBrExtraUserInfo;
-import com.la2eden.gameserver.network.serverpackets.NpcHtmlMessage;
-import com.la2eden.gameserver.network.serverpackets.PlaySound;
-import com.la2eden.gameserver.network.serverpackets.UserInfo;
+import com.la2eden.gameserver.network.serverpackets.*;
 import com.la2eden.gameserver.util.Broadcast;
 import com.la2eden.util.Rnd;
+
+import java.io.*;
+import java.util.StringTokenizer;
 
 /**
  * This class handles following admin commands: - admin = shows menu
@@ -121,7 +110,7 @@ public class AdminEventEngine implements IAdminCommandHandler
 				{
 					final NpcHtmlMessage adminReply = new NpcHtmlMessage();
 					
-					final DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(Config.DATAPACK_ROOT + "/data/events/" + eventName)));
+					final DataInputStream in = new DataInputStream(new BufferedInputStream(new FileInputStream(Config.DATAPACK_ROOT + "/datapack/events/" + eventName)));
 					final BufferedReader inbr = new BufferedReader(new InputStreamReader(in));
 					adminReply.setFile("en", "./datapack/html/mods/EventEngine/Participation.htm");
 					adminReply.replace("%eventName%", eventName);
@@ -144,7 +133,7 @@ public class AdminEventEngine implements IAdminCommandHandler
 			{
 				// There is an exception here for not using the ST. We use spaces (ST delim) for the event name.
 				final String eventName = command.substring(16);
-				final File file = new File(Config.DATAPACK_ROOT + "/data/events/" + eventName);
+				final File file = new File(Config.DATAPACK_ROOT + "/datapack/events/" + eventName);
 				file.delete();
 				showMainPage(activeChar);
 			}
@@ -438,7 +427,7 @@ public class AdminEventEngine implements IAdminCommandHandler
 	
 	private String showStoredEvents()
 	{
-		final File dir = new File(Config.DATAPACK_ROOT, "/data/events");
+		final File dir = new File(Config.DATAPACK_ROOT, "/datapack/events");
 		if (dir.isFile())
 		{
 			return "<font color=\"FF0000\">The directory '" + dir.getAbsolutePath() + "' is a file or is corrupted!</font><br>";

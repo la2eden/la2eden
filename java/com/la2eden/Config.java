@@ -2982,7 +2982,7 @@ public final class Config
 			
 			final PropertiesParser geoData = new PropertiesParser(GEODATA_FILE);
 			
-			PATHNODE_PATH = Paths.get(Config.DATAPACK_ROOT.getPath() + "/data/" + geoData.getString("PathnodePath", "pathnode"));
+			PATHNODE_PATH = Paths.get(Config.DATAPACK_ROOT.getPath() + "/datapack/" + geoData.getString("PathnodePath", "pathnode"));
 			PATHFINDING = geoData.getInt("PathFinding", 0);
 			PATHFIND_BUFFERS = geoData.getString("PathFindBuffers", "100x6;128x6;192x6;256x4;320x4;384x4;500x2");
 			LOW_WEIGHT = geoData.getFloat("LowWeight", 0.5f);
@@ -2994,7 +2994,7 @@ public final class Config
 			DEBUG_PATH = geoData.getBoolean("DebugPath", false);
 			FORCE_GEODATA = geoData.getBoolean("ForceGeoData", true);
 			COORD_SYNCHRONIZE = geoData.getInt("CoordSynchronize", -1);
-			GEODATA_PATH = Paths.get(Config.DATAPACK_ROOT.getPath() + "/data/" + geoData.getString("GeoDataPath", "geodata"));
+			GEODATA_PATH = Paths.get(Config.DATAPACK_ROOT.getPath() + "/datapack/" + geoData.getString("GeoDataPath", "geodata"));
 			TRY_LOAD_UNSPECIFIED_REGIONS = geoData.getBoolean("TryLoadUnspecifiedRegions", true);
 			GEODATA_REGIONS = new HashMap<>();
 			for (int regionX = L2World.TILE_X_MIN; regionX <= L2World.TILE_X_MAX; regionX++)
