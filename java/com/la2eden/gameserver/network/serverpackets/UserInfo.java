@@ -89,7 +89,8 @@ public final class UserInfo extends L2GameServerPacket
 		writeD(_activeChar.getVehicle() != null ? _activeChar.getVehicle().getObjectId() : 0);
 		
 		writeD(_activeChar.getObjectId());
-		writeS(_activeChar.getAppearance().getVisibleName());
+		//writeS(_activeChar.getAppearance().getVisibleName());
+		writeS(_activeChar.isInsideZone(ZoneId.ANONYMOUS) ? "Anonymous" : _activeChar.getAppearance().getVisibleName());
 		writeD(_activeChar.getRace().ordinal());
 		writeD(_activeChar.getAppearance().getSex() ? 1 : 0);
 		
@@ -179,7 +180,8 @@ public final class UserInfo extends L2GameServerPacket
 				title += " - " + polyObj.getName();
 			}
 		}
-		writeS(title);
+		//writeS(title);
+        writeS(_activeChar.isInsideZone(ZoneId.ANONYMOUS) ? "Hidden Title" : title);
 		
 		writeD(_activeChar.getClanId());
 		writeD(_activeChar.getClanCrestId());

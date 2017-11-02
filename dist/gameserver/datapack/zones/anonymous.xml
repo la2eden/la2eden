@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<list enabled="true" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../xsd/zones.xsd">
+    <!-- Anonymous Name & Title Zone -->
+    <zone name="dion_monster_pvp" type="AnonymousZone" shape="NPoly" minZ="-3596" maxZ="0">
+        <node X="11947" Y="183019" />
+        <node X="12937" Y="183019" />
+        <node X="12943" Y="184010" />
+        <node X="11941" Y="184010" />
+    </zone>
+</list>

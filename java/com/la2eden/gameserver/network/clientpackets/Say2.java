@@ -16,10 +16,6 @@
  */
 package com.la2eden.gameserver.network.clientpackets;
 
-import java.util.logging.Level;
-import java.util.logging.LogRecord;
-import java.util.logging.Logger;
-
 import com.la2eden.Config;
 import com.la2eden.gameserver.enums.ChatType;
 import com.la2eden.gameserver.handler.ChatHandler;
@@ -32,9 +28,14 @@ import com.la2eden.gameserver.model.events.EventDispatcher;
 import com.la2eden.gameserver.model.events.impl.character.player.OnPlayerChat;
 import com.la2eden.gameserver.model.events.returns.ChatFilterReturn;
 import com.la2eden.gameserver.model.items.instance.L2ItemInstance;
+import com.la2eden.gameserver.model.zone.ZoneId;
 import com.la2eden.gameserver.network.SystemMessageId;
 import com.la2eden.gameserver.network.serverpackets.ActionFailed;
 import com.la2eden.gameserver.util.Util;
+
+import java.util.logging.Level;
+import java.util.logging.LogRecord;
+import java.util.logging.Logger;
 
 /**
  * This class ...
@@ -107,6 +108,12 @@ public final class Say2 extends L2GameClientPacket
 		final L2PcInstance activeChar = getClient().getActiveChar();
 		if (activeChar == null)
 		{
+			return;
+		}
+
+		if (activeChar.isInsideZone(ZoneId.ANONYMOUS) && (_text.charAt(0) != '.'))
+		{
+			activeChar.sendMessage("You can't talk!");
 			return;
 		}
 		
