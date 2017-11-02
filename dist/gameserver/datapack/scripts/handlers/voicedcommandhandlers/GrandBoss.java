@@ -17,6 +17,7 @@
 package handlers.voicedcommandhandlers;
 
 import com.la2eden.Config;
+import com.la2eden.gameserver.cache.HtmCache;
 import com.la2eden.gameserver.data.xml.impl.NpcData;
 import com.la2eden.gameserver.handler.IVoicedCommandHandler;
 import com.la2eden.gameserver.instancemanager.GrandBossManager;
@@ -41,13 +42,9 @@ public class GrandBoss implements IVoicedCommandHandler
         if (command.startsWith("grandboss"))
         {
             StringBuilder sb = new StringBuilder();
-            NpcHtmlMessage msg = new NpcHtmlMessage(5);
-
-            sb.append("<html noscrollbar><title>GrandBoss Status</title><body>");
-            sb.append("<table cellspacing=0 cellpadding=0 width=294 height=359 background=\"L2UI_CH3.refinewnd_back_Pattern\">");
-            sb.append("<tr><td height=10 width=300 align=center><br><center><font name=\"hs22\">Boss Watcher</font><br1><font color=4c4c4c>La2Eden</font></center><br></td></tr>");
-
-            sb.append("<tr><td height=180 width=294><br><br>");
+            String file = "datapack/html/mods/GrandBoss/Status.htm";
+            String content = HtmCache.getInstance().getHtm(activeChar.getHtmlPrefix(), file);
+            NpcHtmlMessage html = new NpcHtmlMessage(content);
 
             for (int boss : Config.GRANDBOSS_LIST)
             {
@@ -70,12 +67,9 @@ public class GrandBoss implements IVoicedCommandHandler
                 }
             }
 
-            sb.append("</td></tr><tr><td height=50 width=294><center><br><br><br><button value=\"Refresh\" action=\"bypass -h .grandboss\" width=80 height=30 back=\"L2UI_CT1.Button_DF_Down\" fore=\"L2UI_CT1.Button_DF\"></center></td></tr>");
+            html.replace("%BossStatus%", sb.toString());
 
-            sb.append("</table></body></html>");
-            msg.setHtml(sb.toString());
-
-            activeChar.sendPacket(msg);
+            activeChar.sendPacket(html);
         }
 
         return true;
