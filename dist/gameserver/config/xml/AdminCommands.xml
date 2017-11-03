@@ -142,6 +142,9 @@
 	<admin command="admin_set_mp" accessLevel="100" />
 	<admin command="admin_set_cp" accessLevel="100" />
 
+    <!-- ADMIN PRIMESHOP -->
+	<admin command="admin_set_primepoints" accessLevel="100" confirmDlg="true" />
+
 	<!-- ADMIN EFFECTS -->
 	<admin command="admin_invis" accessLevel="30" />
 	<admin command="admin_invisible" accessLevel="30" />

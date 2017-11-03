@@ -141,6 +141,7 @@ public class MasterHandler
 			AdminZones.class,
 			AdminPolymorph.class,
 			AdminPremium.class,
+			AdminPrimePoints.class,
 			AdminPunishment.class,
 			AdminQuest.class,
 			AdminReload.class,
