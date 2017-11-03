@@ -59,7 +59,7 @@ public class SoulShots implements IItemHandler
         final SkillHolder[] skills = item.getItem().getSkills();
 
         boolean isSoulPotion = false;
-        final int itemId = item.getId();
+        final Integer itemId = item.getId();
         final Integer cooldown = potions.get(itemId);
 
         // if there is a cooldown, there is an auto potion.
