@@ -143,11 +143,11 @@
 	<admin command="admin_set_cp" accessLevel="100" />
 
     <!-- ADMIN PRIMESHOP -->
-    <admin command="admin_primepoints" accessLevel="100" confirmDlg="false" />
-	<admin command="admin_set_primepoints" accessLevel="100" confirmDlg="true" />
-    <admin command="admin_give_primepoints" accessLevel="100" confirmDlg="true" />
-    <admin command="admin_clear_primepoints" accessLevel="100" confirmDlg="true" />
-    <admin command="admin_reward_primepoints" accessLevel="100" confirmDlg="true" />
+    <admin command="admin_primepoints" accessLevel="100" />
+	<admin command="admin_set_primepoints" accessLevel="100" />
+    <admin command="admin_give_primepoints" accessLevel="100" />
+    <admin command="admin_clear_primepoints" accessLevel="100" />
+    <admin command="admin_reward_primepoints" accessLevel="100" />
 
 	<!-- ADMIN EFFECTS -->
 	<admin command="admin_invis" accessLevel="30" />

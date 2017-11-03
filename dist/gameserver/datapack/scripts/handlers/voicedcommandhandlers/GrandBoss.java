@@ -55,7 +55,7 @@ public class GrandBoss implements IVoicedCommandHandler
 
                 if (delay <= System.currentTimeMillis())
                 {
-                    sb.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color=\"00C3FF\">" + name + " (" + lvl + ")</font>: " + "<font color=\"9CC300\">alive</font>" + "<br1>");
+                    sb.append("&nbsp;&nbsp;&nbsp;<font color=\"09596D\">(" + lvl + ")</font> <font color=\"069FCE\">" + name + "</font> <font color=\"9CC300\">is alive</font>" + "<br1>");
                 }
                 else
                 {
@@ -63,7 +63,7 @@ public class GrandBoss implements IVoicedCommandHandler
                     int mins = (int) (((delay - (hours * 60 * 60 * 1000)) - System.currentTimeMillis()) / 1000 / 60);
                     int seconds = (int) (((delay - ((hours * 60 * 60 * 1000) + (mins * 60 * 1000))) - System.currentTimeMillis()) / 1000);
 
-                    sb.append("&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<font color=\"00C3FF\">" + name + " (" + lvl + ")</font>: <font color=\"FFFFFF\">will respawn in</font> <font color=\"FF3333\">" + hours + "h " + mins + "m " + seconds + "s</font><br1>");
+                    sb.append("&nbsp;&nbsp;&nbsp;<font color=\"09596D\">(" + lvl + ")</font> <font color=\"069FCE\">" + name + "</font> <font color=\"C42121\">is dead (" + hours + "h " + mins + "m " + seconds + "s)</font><br1>");
                 }
             }
 
