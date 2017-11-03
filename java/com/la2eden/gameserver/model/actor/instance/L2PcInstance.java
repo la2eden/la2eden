@@ -140,7 +140,11 @@ public final class L2PcInstance extends L2Playable
         // Only works if there is something in the stack
         if (_autoPotTasks.size() > 0) {
             for (Map.Entry<Integer, Future<?>> potionTask : _autoPotTasks.entrySet()) {
-                potionTask.getValue().cancel(true);
+                // potionTask.getValue().cancel(true);
+
+                disableAutoShot(potionTask.getKey());
+                sendPacket(new ExAutoSoulShot(potionTask.getKey(), 0));
+                setAutoPot(potionTask.getKey(), null, false);
             }
         }
     }

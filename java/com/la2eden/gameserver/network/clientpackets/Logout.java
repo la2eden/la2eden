@@ -97,7 +97,7 @@ public final class Logout extends L2GameClientPacket
 
 		if (player.isAway())
 		{
-            player.sendMessage("You can't leave in Away mode.");
+            player.sendMessage("You can't leave in away mode.");
             return;
 		}
 
