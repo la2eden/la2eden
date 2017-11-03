@@ -2741,7 +2741,7 @@ public final class Config
             PRIMESHOP_COMBAT_USE = PrimeShopSettings.getBoolean("PrimeShopEnabledInCombat", false);
             PRIMESHOP_KARMA_USE = PrimeShopSettings.getBoolean("PrimeShopEnabledKarma", false);
             PRIMESHOP_FLAGGED_USE = PrimeShopSettings.getBoolean("PrimeShopEnableFlagged", false);
-            PRIMESHOP_START_POINTS = CommunityBoardSettings.getInt("PrimeShopStartingPoints", 0);
+            PRIMESHOP_START_POINTS = PrimeShopSettings.getInt("PrimeShopStartingPoints", 0);
 
 			// Load Premium settings
             final PropertiesParser PremiumSettings = new PropertiesParser(PREMIUM_FILE);

@@ -1,0 +1,40 @@
+<html noscrollbar>
+<title>PrimeShop Points Manager</title>
+<body>
+<center>
+    <table width=294>
+        <tr>
+            <td width=45><button value="Main" action="bypass admin_admin" width=45 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+            <td width=180><center>Prime Points</center></td>
+            <td width=45><button value="Back" action="bypass -h admin_admin6" width=45 height=21 back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF"></td>
+        </tr>
+    </table>
+    <table width=294>
+        <tr>
+            <td>
+                <center>
+                    <br>
+                    <br>
+                    <font color="LEVEL">Player Name</font>
+                    <edit var="player_name" width=200>
+                </center>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <center>
+                    <br>
+                    <br>
+                    <button value="Add 1000 points" action="bypass -h admin_give_primepoints $player_name 1000" width=200 height=30 back="L2UI_CT1.OlympiadWnd_DF_BuyEtc_Down" fore="L2UI_CT1.OlympiadWnd_DF_BuyEtc">
+                    <button value="Add 2000 points" action="bypass -h admin_give_primepoints $player_name 2000" width=200 height=30 back="L2UI_CT1.OlympiadWnd_DF_BuyEtc_Down" fore="L2UI_CT1.OlympiadWnd_DF_BuyEtc">
+                    <button value="Add 5000 points" action="bypass -h admin_give_primepoints $player_name 5000" width=200 height=30 back="L2UI_CT1.OlympiadWnd_DF_BuyEtc_Down" fore="L2UI_CT1.OlympiadWnd_DF_BuyEtc">
+                    <br>
+                    <button value="Clear Points" action="bypass -h admin_clear_primepoints $player_name" width=200 height=30  back="L2UI_CT1.Button_DF_Down" fore="L2UI_CT1.Button_DF">
+                    <br>
+                </center>
+            </td>
+        </tr>
+    </table>
+</center>
+</body>
+</html>

@@ -27,13 +27,26 @@ public final class RequestBrProductList extends L2GameClientPacket {
     }
 
     @Override
-    protected void runImpl()
-    {
+    protected void runImpl() {
         L2PcInstance player = getClient().getActiveChar();
 
-        if (Config.PRIMESHOP_PREMIUM_ONLY && player.hasPremiumStatus())
-        {
+        if (Config.PRIMESHOP_PREMIUM_ONLY && player.hasPremiumStatus()) {
             player.sendMessage("Only premium players can use the PrimeShop.");
+            return;
+        }
+
+        if (Config.PRIMESHOP_COMBAT_USE && player.isInCombat()) {
+            player.sendMessage("You can't use PrimeShop while you are in combat.");
+            return;
+        }
+
+        if (Config.PRIMESHOP_KARMA_USE && (player.getKarma() != 0)) {
+            player.sendMessage("Players with Karma can't use the PrimeShop.");
+            return;
+        }
+
+        if (Config.PRIMESHOP_FLAGGED_USE && (player.getPvpFlag() != 0)) {
+            player.sendMessage("");
             return;
         }
 
