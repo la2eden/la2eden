@@ -426,7 +426,6 @@ public final class GameServer
 
     public static void projectInfo()
     {
-        _log.info("");
         _log.info("    -> Get access to source files at our website. <-    ");
         _log.info("               -> https://la2eden.com <-                ");
         _log.info("");
