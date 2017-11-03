@@ -22,13 +22,13 @@ import com.la2eden.gameserver.model.items.L2Item;
 import com.la2eden.gameserver.network.serverpackets.ExBrBuyProduct;
 import com.la2eden.gameserver.network.serverpackets.ExBrProductInfo;
 import com.la2eden.gameserver.util.Util;
-import javolution.util.FastMap;
 import org.w3c.dom.Document;
 import org.w3c.dom.NamedNodeMap;
 import org.w3c.dom.Node;
 
 import javax.xml.parsers.DocumentBuilderFactory;
 import java.io.File;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -38,7 +38,7 @@ import java.util.logging.Logger;
  */
 public class PrimeShopTable {
     private static final Logger _log = Logger.getLogger(PrimeShopTable.class.getName());
-    private final Map<Integer, PrimeShopItem> _primeItems = new FastMap<>();
+    private final Map<Integer, PrimeShopItem> _primeItems = new HashMap<>();
     public final int BR_BUY_SUCCESS = 1;
     public final int BR_BUY_LACK_OF_POINT = -1;
     public final int BR_BUY_INVALID_PRODUCT = -2;

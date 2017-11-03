@@ -2,10 +2,9 @@
   <library name="libs">
     <CLASSES>
       <root url="jar://$PROJECT_DIR$/dist/libs/mchange-commons-java-0.2.11.jar!/" />
-      <root url="jar://$PROJECT_DIR$/dist/libs/mysql-connector-java-5.1.38-bin.jar!/" />
       <root url="jar://$PROJECT_DIR$/dist/libs/c3p0-0.9.5.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/dist/libs/ecj-4.4.2.jar!/" />
-      <root url="jar://$PROJECT_DIR$/dist/libs/javolution-core-6.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/libs/ecj-4.7.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/dist/libs/mysql-connector-java-5.1.44-bin.jar!/" />
     </CLASSES>
     <JAVADOC />
     <SOURCES />
