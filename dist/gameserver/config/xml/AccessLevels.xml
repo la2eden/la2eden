@@ -10,5 +10,5 @@
 	<access level="50" name="Event GM" nameColor="00C000" titleColor="00C000" childAccess="40" isGM="false" allowPeaceAttack="false" allowFixedRes="true" allowTransaction="false" allowAltg="true" giveDamage="false" takeAggro="false" gainExp="false" />
 	<access level="60" name="Head GM" nameColor="0C0000" titleColor="0C0000" childAccess="50" isGM="false" allowPeaceAttack="false" allowFixedRes="true" allowTransaction="true" allowAltg="true" giveDamage="true" takeAggro="true" gainExp="true" />
 	<access level="70" name="Admin" nameColor="0FF000" titleColor="0FF000" childAccess="60" isGM="true" allowPeaceAttack="true" allowFixedRes="true" allowTransaction="true" allowAltg="true" giveDamage="true" takeAggro="true" gainExp="true" />
-	<access level="100" name="Master" nameColor="7FFF00" titleColor="3333FF" childAccess="70" isGM="true" allowPeaceAttack="true" allowFixedRes="true" allowTransaction="true" allowAltg="true" giveDamage="true" takeAggro="true" gainExp="true" />
+	<access level="100" name="Master" nameColor="7FFF00" titleColor="E57E34" childAccess="70" isGM="true" allowPeaceAttack="true" allowFixedRes="true" allowTransaction="true" allowAltg="true" giveDamage="true" takeAggro="true" gainExp="true" />
 </list>
