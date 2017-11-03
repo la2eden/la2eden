@@ -16,14 +16,16 @@
  */
 package com.la2eden.gameserver.network.clientpackets;
 
-import java.util.logging.Level;
-
+import com.la2eden.Config;
 import com.la2eden.gameserver.data.xml.impl.EnchantItemData;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 import com.la2eden.gameserver.model.items.enchant.EnchantScroll;
 import com.la2eden.gameserver.model.items.instance.L2ItemInstance;
 import com.la2eden.gameserver.network.SystemMessageId;
 import com.la2eden.gameserver.network.serverpackets.ExPutEnchantTargetItemResult;
+import com.la2eden.gameserver.network.serverpackets.ExShowScreenMessage;
+
+import java.util.logging.Level;
 
 /**
  * @author KenM
@@ -73,6 +75,12 @@ public class RequestExTryToPutEnchantTargetItem extends L2GameClientPacket
 			}
 			return;
 		}
+
+		if (Config.SHOW_ENCHANT_CHANCE) {
+		    double chance = scrollTemplate.getEnchantChance(activeChar, item, null);
+            activeChar.sendPacket(new ExShowScreenMessage(Config.ENCHANT_SCREEN_MSG.replaceAll("%chance%", String.valueOf((int) chance) + "%"), 3000));
+		}
+
 		activeChar.setIsEnchanting(true);
 		activeChar.setActiveEnchantTimestamp(System.currentTimeMillis());
 		activeChar.sendPacket(new ExPutEnchantTargetItemResult(_objectId));

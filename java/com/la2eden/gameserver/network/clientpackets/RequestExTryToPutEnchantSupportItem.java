@@ -16,6 +16,7 @@
  */
 package com.la2eden.gameserver.network.clientpackets;
 
+import com.la2eden.Config;
 import com.la2eden.gameserver.data.xml.impl.EnchantItemData;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 import com.la2eden.gameserver.model.items.enchant.EnchantScroll;
@@ -23,6 +24,7 @@ import com.la2eden.gameserver.model.items.enchant.EnchantSupportItem;
 import com.la2eden.gameserver.model.items.instance.L2ItemInstance;
 import com.la2eden.gameserver.network.SystemMessageId;
 import com.la2eden.gameserver.network.serverpackets.ExPutEnchantSupportItemResult;
+import com.la2eden.gameserver.network.serverpackets.ExShowScreenMessage;
 
 /**
  * @author KenM
@@ -75,6 +77,12 @@ public class RequestExTryToPutEnchantSupportItem extends L2GameClientPacket
 				activeChar.sendPacket(new ExPutEnchantSupportItemResult(0));
 				return;
 			}
+
+			if (Config.SHOW_ENCHANT_CHANCE) {
+				double chance = scrollTemplate.getEnchantChance(activeChar, item, supportTemplate);
+				activeChar.sendPacket(new ExShowScreenMessage(Config.ENCHANT_SCREEN_MSG.replaceAll("%chance%", String.valueOf((int) chance) + "%"), 3000));
+			}
+
 			activeChar.setActiveEnchantSupportItemId(support.getObjectId());
 			activeChar.sendPacket(new ExPutEnchantSupportItemResult(_supportObjectId));
 		}

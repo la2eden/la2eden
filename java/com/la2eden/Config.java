@@ -1610,7 +1610,7 @@ public final class Config
 			}
 			Arrays.sort(ENCHANT_BLACKLIST);
 			SHOW_ENCHANT_CHANCE = character.getBoolean("ShowEnchantChance", false);
-			ENCHANT_SCREEN_MSG = character.getString("EnchantScreenMessage", "You have %chance% chance of success");
+			ENCHANT_SCREEN_MSG = character.getString("EnchantScreenMessage", "This enchant has a %chance% chance of success");
 			
 			AUGMENTATION_NG_SKILL_CHANCE = character.getInt("AugmentationNGSkillChance", 15);
 			AUGMENTATION_NG_GLOW_CHANCE = character.getInt("AugmentationNGGlowChance", 0);

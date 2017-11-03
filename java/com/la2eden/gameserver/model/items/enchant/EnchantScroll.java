@@ -16,7 +16,6 @@
  */
 package com.la2eden.gameserver.model.items.enchant;
 
-import com.la2eden.Config;
 import com.la2eden.gameserver.data.xml.impl.EnchantItemGroupsData;
 import com.la2eden.gameserver.model.StatsSet;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
@@ -24,7 +23,6 @@ import com.la2eden.gameserver.model.items.instance.L2ItemInstance;
 import com.la2eden.gameserver.model.items.type.EtcItemType;
 import com.la2eden.gameserver.model.items.type.ItemType;
 import com.la2eden.gameserver.network.Debug;
-import com.la2eden.gameserver.network.serverpackets.ExShowScreenMessage;
 import com.la2eden.gameserver.util.Util;
 import com.la2eden.util.Rnd;
 
@@ -37,6 +35,7 @@ import java.util.logging.Level;
  */
 public final class EnchantScroll extends AbstractEnchantItem
 {
+    private double _chance;
 	private final boolean _isWeapon;
 	private final boolean _isBlessed;
 	private final boolean _isSafe;
@@ -148,7 +147,29 @@ public final class EnchantScroll extends AbstractEnchantItem
 		}
 		return group.getChance(enchantItem.getEnchantLevel());
 	}
-	
+
+    /**
+     * Author: Enkel
+     *
+     * @param player
+     * @param enchantItem
+     * @param supportItem
+     * @return Enchant chance (usable elsewhere)
+     */
+	public double getEnchantChance(L2PcInstance player, L2ItemInstance enchantItem, EnchantSupportItem supportItem) {
+        final double chance = getChance(player, enchantItem);
+        if (chance == -1)
+        {
+            return 0;
+        }
+
+        final double bonusRate = getBonusRate();
+        final double supportBonusRate = (supportItem != null) ? supportItem.getBonusRate() : 0;
+        _chance = Math.min(chance + bonusRate + supportBonusRate, 100);
+
+	    return _chance;
+    }
+
 	/**
 	 * @param player
 	 * @param enchantItem
@@ -157,27 +178,18 @@ public final class EnchantScroll extends AbstractEnchantItem
 	 */
 	public EnchantResultType calculateSuccess(L2PcInstance player, L2ItemInstance enchantItem, EnchantSupportItem supportItem)
 	{
-		if (!isValid(enchantItem, supportItem))
-		{
-			return EnchantResultType.ERROR;
-		}
-		
-		final double chance = getChance(player, enchantItem);
-		if (chance == -1)
-		{
-			return EnchantResultType.ERROR;
-		}
-		
-		final double bonusRate = getBonusRate();
-		final double supportBonusRate = (supportItem != null) ? supportItem.getBonusRate() : 0;
-		final double finalChance = Math.min(chance + bonusRate + supportBonusRate, 100);
+	    double chance = getEnchantChance(player, enchantItem, supportItem);
 
-        if (Config.SHOW_ENCHANT_CHANCE) {
-            player.sendPacket(new ExShowScreenMessage(Config.ENCHANT_SCREEN_MSG.replaceAll("%chance%", String.valueOf(finalChance) + "%"), 5000));
-        }
-		
+		if (!isValid(enchantItem, supportItem) || (chance == -1))
+		{
+			return EnchantResultType.ERROR;
+		}
+
+        final double bonusRate = getBonusRate();
+        final double supportBonusRate = (supportItem != null) ? supportItem.getBonusRate() : 0;
+
 		final double random = 100 * Rnd.nextDouble();
-		final boolean success = (random < finalChance);
+		final boolean success = (random < chance);
 		
 		if (player.isDebug())
 		{
@@ -200,7 +212,7 @@ public final class EnchantScroll extends AbstractEnchantItem
 			{
 				set.set("supportBonusRate", Util.formatDouble(supportBonusRate, "#.##"));
 			}
-			set.set("finalChance", Util.formatDouble(finalChance, "#.##"));
+			set.set("finalChance", Util.formatDouble(chance, "#.##"));
 			set.set("random", Util.formatDouble(random, "#.##"));
 			set.set("success", success);
 			set.set("item group", group.getName());

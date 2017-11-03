@@ -206,7 +206,7 @@ public final class RequestEnchantItem extends L2GameClientPacket
 						sm.addItemName(item);
 						activeChar.broadcastPacket(sm);
 						
-						final Skill skill = CommonSkill.LUCKY.getSkill();
+						final Skill skill = CommonSkill.FIREWORK.getSkill();
 						if (skill != null)
 						{
 							activeChar.broadcastPacket(new MagicSkillUse(activeChar, activeChar, skill.getId(), skill.getLevel(), skill.getHitTime(), skill.getReuseDelay()));

@@ -2233,6 +2233,10 @@ public final class L2PcInstance extends L2Playable
 	{
 		_isEnchanting = val;
 	}
+
+	public void sendScreenEnchantChance(int chance) {
+		sendPacket(new ExShowScreenMessage(Config.ENCHANT_SCREEN_MSG.replaceAll("%chance%", String.valueOf(chance) + "%"), 5000));
+	}
 	
 	public boolean isEnchanting()
 	{
