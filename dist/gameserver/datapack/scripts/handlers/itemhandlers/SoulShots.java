@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -32,42 +32,38 @@ import com.la2eden.gameserver.network.serverpackets.SystemMessage;
 import com.la2eden.gameserver.util.Broadcast;
 import com.la2eden.util.Rnd;
 
-import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.logging.Level;
 
 public class SoulShots implements IItemHandler
 {
-    private static final int MANA_POT_CD = 2, HEALING_POT_CD = 12, CP_POT_CD = 2;
-    private static final int[] POTION_LIST = {
-            728,   // Mana Potion
-            1539,  // Greater Healing Potion
-            5592   // Greater CP Potion
-    };
+    private static Map<Integer, Integer> potions = new HashMap<>();
 
-	@Override
-	public boolean useItem(L2Playable playable, L2ItemInstance item, boolean forceUse)
-	{
-		if (!playable.isPlayer())
-		{
-			playable.sendPacket(SystemMessageId.YOUR_PET_CANNOT_CARRY_THIS_ITEM);
-			return false;
-		}
-		
-		final L2PcInstance activeChar = playable.getActingPlayer();
-		final L2ItemInstance weaponInst = activeChar.getActiveWeaponInstance();
-		final L2Weapon weaponItem = activeChar.getActiveWeaponItem();
-		final SkillHolder[] skills = item.getItem().getSkills();
-		
-		final int itemId = item.getId();
-		boolean isSoulPotion = false;
+    @Override
+    public boolean useItem(L2Playable playable, L2ItemInstance item, boolean forceUse)
+    {
+        potions.put(728, 2);   // Mana Potion Cooldown
+        potions.put(1539, 12); // Greater Healing Potion Cooldown
+        potions.put(5592, 2);  // Greater CP Potion Cooldown
 
-		// This is just for checking purposes
-        ArrayList<Integer> plist = new ArrayList<>();
-        for (Integer potion : POTION_LIST) {
-            plist.add(potion);
+        if (!playable.isPlayer())
+        {
+            playable.sendPacket(SystemMessageId.YOUR_PET_CANNOT_CARRY_THIS_ITEM);
+            return false;
         }
 
-		if (plist.contains(itemId)) {
+        final L2PcInstance activeChar = playable.getActingPlayer();
+        final L2ItemInstance weaponInst = activeChar.getActiveWeaponInstance();
+        final L2Weapon weaponItem = activeChar.getActiveWeaponItem();
+        final SkillHolder[] skills = item.getItem().getSkills();
+
+        boolean isSoulPotion = false;
+        final int itemId = item.getId();
+        final Integer cooldown = potions.get(itemId);
+
+        // if there is a cooldown, there is an auto potion.
+        if (cooldown != null) {
             isSoulPotion = true;
 
             if (activeChar.isAutoPot(itemId))
@@ -86,7 +82,7 @@ public class SoulShots implements IItemHandler
                         sm.addItemName(itemId);
                         activeChar.sendPacket(sm);
 
-                        activeChar.setAutoPot(itemId, ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AutoPot(1539, activeChar), 1000, HEALING_POT_CD*1000), true);
+                        activeChar.setAutoPot(itemId, ThreadPoolManager.getInstance().scheduleGeneralAtFixedRate(new AutoPot(1539, activeChar), 1000, cooldown * 1000), true);
                     }
                     else
                     {
@@ -99,81 +95,81 @@ public class SoulShots implements IItemHandler
                 }
             }
         }
-		
-		if (skills == null)
-		{
-			_log.log(Level.WARNING, getClass().getSimpleName() + ": is missing skills!");
-			return false;
-		}
-		
-		// Check if Soul shot can be used
-		if ((weaponInst == null) || (weaponItem.getSoulShotCount() == 0))
-		{
-			if (!activeChar.getAutoSoulShot().contains(itemId))
-			{
-				activeChar.sendPacket(SystemMessageId.CANNOT_USE_SOULSHOTS);
-			}
-			return false;
-		}
-		
-		boolean gradeCheck = item.isEtcItem() && (item.getEtcItem().getDefaultAction() == ActionType.SOULSHOT) && (weaponInst.getItem().getItemGradeSPlus() == item.getItem().getItemGradeSPlus());
+
+        if (skills == null)
+        {
+            _log.log(Level.WARNING, getClass().getSimpleName() + ": is missing skills!");
+            return false;
+        }
+
+        // Check if Soul shot can be used
+        if ((weaponInst == null) || (weaponItem.getSoulShotCount() == 0))
+        {
+            if (!activeChar.getAutoSoulShot().contains(itemId))
+            {
+                activeChar.sendPacket(SystemMessageId.CANNOT_USE_SOULSHOTS);
+            }
+            return false;
+        }
+
+        boolean gradeCheck = item.isEtcItem() && (item.getEtcItem().getDefaultAction() == ActionType.SOULSHOT) && (weaponInst.getItem().getItemGradeSPlus() == item.getItem().getItemGradeSPlus());
 
         // Prevents SystemMessage if its a potion.
         if (isSoulPotion) {
             gradeCheck = true;
         }
-		
-		if (!gradeCheck)
-		{
-			if (!activeChar.getAutoSoulShot().contains(itemId))
-			{
-				activeChar.sendPacket(SystemMessageId.THE_SOULSHOT_YOU_ARE_ATTEMPTING_TO_USE_DOES_NOT_MATCH_THE_GRADE_OF_YOUR_EQUIPPED_WEAPON);
-			}
-			return false;
-		}
-		
-		activeChar.soulShotLock.lock();
-		try
-		{
-			// Check if Soul shot is already active
-			if (activeChar.isChargedShot(ShotType.SOULSHOTS))
-			{
-				return false;
-			}
-			
-			// Consume Soul shots if player has enough of them
-			int SSCount = weaponItem.getSoulShotCount();
-			if ((weaponItem.getReducedSoulShot() > 0) && (Rnd.get(100) < weaponItem.getReducedSoulShotChance()))
-			{
-				SSCount = weaponItem.getReducedSoulShot();
-			}
-			
-			if (!activeChar.destroyItemWithoutTrace("Consume", item.getObjectId(), SSCount, null, false))
-			{
-				if (!activeChar.disableAutoShot(itemId))
-				{
-					activeChar.sendPacket(SystemMessageId.YOU_DO_NOT_HAVE_ENOUGH_SOULSHOTS_FOR_THAT);
-				}
-				return false;
-			}
-			// Charge soul shot
-			weaponInst.setChargedShot(ShotType.SOULSHOTS, true);
-		}
-		finally
-		{
-			activeChar.soulShotLock.unlock();
-		}
-		
-		// Send message to client
+
+        if (!gradeCheck)
+        {
+            if (!activeChar.getAutoSoulShot().contains(itemId))
+            {
+                activeChar.sendPacket(SystemMessageId.THE_SOULSHOT_YOU_ARE_ATTEMPTING_TO_USE_DOES_NOT_MATCH_THE_GRADE_OF_YOUR_EQUIPPED_WEAPON);
+            }
+            return false;
+        }
+
+        activeChar.soulShotLock.lock();
+        try
+        {
+            // Check if Soul shot is already active
+            if (activeChar.isChargedShot(ShotType.SOULSHOTS))
+            {
+                return false;
+            }
+
+            // Consume Soul shots if player has enough of them
+            int SSCount = weaponItem.getSoulShotCount();
+            if ((weaponItem.getReducedSoulShot() > 0) && (Rnd.get(100) < weaponItem.getReducedSoulShotChance()))
+            {
+                SSCount = weaponItem.getReducedSoulShot();
+            }
+
+            if (!activeChar.destroyItemWithoutTrace("Consume", item.getObjectId(), SSCount, null, false))
+            {
+                if (!activeChar.disableAutoShot(itemId))
+                {
+                    activeChar.sendPacket(SystemMessageId.YOU_DO_NOT_HAVE_ENOUGH_SOULSHOTS_FOR_THAT);
+                }
+                return false;
+            }
+            // Charge soul shot
+            weaponInst.setChargedShot(ShotType.SOULSHOTS, true);
+        }
+        finally
+        {
+            activeChar.soulShotLock.unlock();
+        }
+
+        // Send message to client
         if (!isSoulPotion) {
             activeChar.sendPacket(SystemMessageId.YOUR_SOULSHOTS_ARE_ENABLED);
             Broadcast.toSelfAndKnownPlayersInRadius(activeChar, new MagicSkillUse(activeChar, activeChar, skills[0].getSkillId(), skills[0].getSkillLvl(), 0, 0), 600);
         }
-		return true;
-	}
+        return true;
+    }
 
     private class AutoPot implements Runnable
-	{
+    {
         private int id;
         private L2PcInstance activeChar;
 

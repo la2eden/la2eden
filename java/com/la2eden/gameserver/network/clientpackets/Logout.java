@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -37,13 +37,13 @@ public final class Logout extends L2GameClientPacket
 {
 	private static final String _C__00_LOGOUT = "[C] 00 Logout";
 	protected static final Logger _logAccounting = Logger.getLogger("accounting");
-	
+
 	@Override
 	protected void readImpl()
 	{
-		
+
 	}
-	
+
 	@Override
 	protected void runImpl()
 	{
@@ -52,7 +52,7 @@ public final class Logout extends L2GameClientPacket
 		{
 			return;
 		}
-		
+
 		if ((player.getActiveEnchantItemId() != L2PcInstance.ID_NONE) || (player.getActiveEnchantAttrItemId() != L2PcInstance.ID_NONE))
 		{
 			if (Config.DEBUG)
@@ -62,14 +62,14 @@ public final class Logout extends L2GameClientPacket
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		
+
 		if (player.isLocked())
 		{
 			_log.warning("Player " + player.getName() + " tried to logout during class change.");
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		
+
 		// Don't allow leaving if player is fighting
 		if (AttackStanceTaskManager.getInstance().hasAttackStanceTask(player))
 		{
@@ -77,17 +77,17 @@ public final class Logout extends L2GameClientPacket
 			{
 				return;
 			}
-			
+
 			if (Config.DEBUG)
 			{
 				_log.fine("Player " + player.getName() + " tried to logout while fighting.");
 			}
-			
+
 			player.sendPacket(SystemMessageId.YOU_CANNOT_EXIT_THE_GAME_WHILE_IN_COMBAT);
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		
+
 		if (L2Event.isParticipant(player))
 		{
 			player.sendMessage("A superior power doesn't allow you to leave the event.");
@@ -100,7 +100,7 @@ public final class Logout extends L2GameClientPacket
             player.sendMessage("You can't leave in Away mode.");
             return;
 		}
-		
+
 		// Prevent player from logging out if they are a festival participant
 		// and it is in progress, otherwise notify party members that the player
 		// is not longer a participant.
@@ -112,26 +112,29 @@ public final class Logout extends L2GameClientPacket
 				player.sendPacket(ActionFailed.STATIC_PACKET);
 				return;
 			}
-			
+
 			if (player.isInParty())
 			{
 				player.getParty().broadcastPacket(SystemMessage.sendString(player.getName() + " has been removed from the upcoming Festival."));
 			}
 		}
-		
+
+		// Prevents Schedule errors
+		player.detachAutoPotions();
+
 		// Remove player from GrandBoss Zone
 		player.removeFromBossZone();
-		
+
 		final LogRecord record = new LogRecord(Level.INFO, "Disconnected");
 		record.setParameters(new Object[]
 		{
 			getClient()
 		});
 		_logAccounting.log(record);
-		
+
 		player.logout();
 	}
-	
+
 	@Override
 	public String getType()
 	{
