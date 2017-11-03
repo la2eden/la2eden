@@ -65,7 +65,7 @@ public class PrimeShopTable {
         DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
         factory.setValidating(false);
         factory.setIgnoringComments(true);
-        File file = new File("config/xml/PrimeShop.xml");
+        File file = new File("datapack/PrimeShop.xml");
         Document doc = null;
 
         if (file.exists()) {
@@ -76,6 +76,7 @@ public class PrimeShopTable {
                     _log.log(Level.WARNING, "Could not load PrimeShop.xml");
                     return;
                 }
+
                 for (Node n = doc.getFirstChild(); n != null; n = n.getNextSibling()) {
                     if ("primelist".equalsIgnoreCase(n.getNodeName()))
                     {

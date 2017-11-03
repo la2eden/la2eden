@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -20,7 +20,6 @@ import com.la2eden.util.data.xml.IXmlReader;
 import org.w3c.dom.Document;
 import org.w3c.dom.Node;
 
-import java.io.File;
 import java.util.HashSet;
 import java.util.Set;
 import java.util.logging.Level;
@@ -36,20 +35,20 @@ public class SecondaryAuthData implements IXmlReader
 	private int _maxAttempts = 5;
 	private int _banTime = 480;
 	private String _recoveryLink = "";
-	
+
 	protected SecondaryAuthData()
 	{
 		load();
 	}
-	
+
 	@Override
 	public synchronized void load()
 	{
 		_forbiddenPasswords.clear();
-		parseFile(new File("config/xml/SecondaryAuth.xml"));
+		parseDatapackFile("datapack/SecondaryAuth.xml");
 		LOGGER.info(getClass().getSimpleName() + ": Loaded " + _forbiddenPasswords.size() + " forbidden passwords.");
 	}
-	
+
 	@Override
 	public void parseDocument(Document doc)
 	{
@@ -96,42 +95,42 @@ public class SecondaryAuthData implements IXmlReader
 			LOGGER.log(Level.WARNING, "Failed to load secondary auth data from xml.", e);
 		}
 	}
-	
+
 	public boolean isEnabled()
 	{
 		return _enabled;
 	}
-	
+
 	public int getMaxAttempts()
 	{
 		return _maxAttempts;
 	}
-	
+
 	public int getBanTime()
 	{
 		return _banTime;
 	}
-	
+
 	public String getRecoveryLink()
 	{
 		return _recoveryLink;
 	}
-	
+
 	public Set<String> getForbiddenPasswords()
 	{
 		return _forbiddenPasswords;
 	}
-	
+
 	public boolean isForbiddenPassword(String password)
 	{
 		return _forbiddenPasswords.contains(password);
 	}
-	
+
 	public static SecondaryAuthData getInstance()
 	{
 		return SingletonHolder._instance;
 	}
-	
+
 	private static class SingletonHolder
 	{
 		protected static final SecondaryAuthData _instance = new SecondaryAuthData();

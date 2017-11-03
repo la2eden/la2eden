@@ -19,7 +19,6 @@ package com.la2eden.gameserver.network.clientpackets;
 import com.la2eden.Config;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 import com.la2eden.gameserver.network.serverpackets.ExBrProductList;
-import com.la2eden.gameserver.network.serverpackets.ExShowScreenMessage;
 
 public final class RequestBrProductList extends L2GameClientPacket {
     @Override
@@ -34,7 +33,7 @@ public final class RequestBrProductList extends L2GameClientPacket {
 
         if (Config.PRIMESHOP_PREMIUM_ONLY && player.hasPremiumStatus())
         {
-            player.sendPacket(new ExShowScreenMessage("You are not vip, you cannot to use Prime Shop", 5000));
+            player.sendMessage("Only premium players can use the PrimeShop.");
             return;
         }
 

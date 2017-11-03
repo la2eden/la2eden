@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../datapack/xsd/AdminCommands.xsd">
+<list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="xsd/AdminCommands.xsd">
 	<!-- ADMIN COND EXCEPTIONS -->
 	<admin command="admin_exceptions" accessLevel="100" />
 	<admin command="admin_set_exception" accessLevel="100" confirmDlg="true" />
@@ -144,6 +144,8 @@
 
     <!-- ADMIN PRIMESHOP -->
 	<admin command="admin_set_primepoints" accessLevel="100" confirmDlg="true" />
+    <admin command="admin_get_primepoints" accessLevel="100" confirmDlg="true" />
+    <admin command="admin_clear_primepoints" accessLevel="100" confirmDlg="true" />
 
 	<!-- ADMIN EFFECTS -->
 	<admin command="admin_invis" accessLevel="30" />
@@ -305,7 +307,7 @@
 	<admin command="admin_grandboss_respawn" accessLevel="100" />
 	<admin command="admin_grandboss_minions" accessLevel="100" />
 	<admin command="admin_grandboss_abort" accessLevel="100" />
-	
+
 	<!-- ADMIN HEAL -->
 	<admin command="admin_heal" accessLevel="100" />
 
@@ -359,7 +361,7 @@
 
 	<!-- ADMIN MANOR -->
 	<admin command="admin_manor" accessLevel="100" />
-	
+
 	<!-- ADMIN MENU -->
 	<admin command="admin_char_manage" accessLevel="30" />
 	<admin command="admin_teleport_character_to_menu" accessLevel="100" />
@@ -444,7 +446,7 @@
 
 	<!-- ADMIN RELOAD -->
 	<admin command="admin_reload" accessLevel="100" confirmDlg="true" />
-	
+
 	<!-- ADMIN REPAIR CHAR -->
 	<admin command="admin_restore" accessLevel="100" />
 	<admin command="admin_repair" accessLevel="100" />

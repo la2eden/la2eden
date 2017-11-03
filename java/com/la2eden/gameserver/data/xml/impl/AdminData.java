@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -46,23 +46,23 @@ public final class AdminData implements IXmlReader
 	private final Map<String, L2AdminCommandAccessRight> _adminCommandAccessRights = new HashMap<>();
 	private final Map<L2PcInstance, Boolean> _gmList = new ConcurrentHashMap<>();
 	private int _highestLevel = 0;
-	
+
 	protected AdminData()
 	{
 		load();
 	}
-	
+
 	@Override
 	public synchronized void load()
 	{
 		_accessLevels.clear();
 		_adminCommandAccessRights.clear();
-		parseDatapackFile("config/xml/AccessLevels.xml");
+		parseDatapackFile("datapack/AccessLevels.xml");
 		LOGGER.log(Level.INFO, getClass().getSimpleName() + ": Loaded: " + _accessLevels.size() + " Access Levels.");
-		parseDatapackFile("config/xml/AdminCommands.xml");
+		parseDatapackFile("datapack/AdminCommands.xml");
 		LOGGER.log(Level.INFO, getClass().getSimpleName() + ": Loaded: " + _adminCommandAccessRights.size() + " Access Commands.");
 	}
-	
+
 	@Override
 	public void parseDocument(Document doc)
 	{
@@ -107,7 +107,7 @@ public final class AdminData implements IXmlReader
 			}
 		}
 	}
-	
+
 	/**
 	 * Returns the access level by characterAccessLevel.
 	 * @param accessLevelNum as int
@@ -125,7 +125,7 @@ public final class AdminData implements IXmlReader
 		}
 		return _accessLevels.get(accessLevelNum);
 	}
-	
+
 	/**
 	 * Gets the master access level.
 	 * @return the master access level
@@ -134,7 +134,7 @@ public final class AdminData implements IXmlReader
 	{
 		return _accessLevels.get(_highestLevel);
 	}
-	
+
 	/**
 	 * Checks for access level.
 	 * @param id the id
@@ -144,7 +144,7 @@ public final class AdminData implements IXmlReader
 	{
 		return _accessLevels.containsKey(id);
 	}
-	
+
 	/**
 	 * Checks for access.
 	 * @param adminCommand the admin command
@@ -171,7 +171,7 @@ public final class AdminData implements IXmlReader
 		}
 		return acar.hasAccess(accessLevel);
 	}
-	
+
 	/**
 	 * Require confirm.
 	 * @param command the command
@@ -187,7 +187,7 @@ public final class AdminData implements IXmlReader
 		}
 		return acar.getRequireConfirm();
 	}
-	
+
 	/**
 	 * Gets the all GMs.
 	 * @param includeHidden the include hidden
@@ -205,7 +205,7 @@ public final class AdminData implements IXmlReader
 		}
 		return tmpGmList;
 	}
-	
+
 	/**
 	 * Gets the all GM names.
 	 * @param includeHidden the include hidden
@@ -227,7 +227,7 @@ public final class AdminData implements IXmlReader
 		}
 		return tmpGmList;
 	}
-	
+
 	/**
 	 * Add a L2PcInstance player to the Set _gmList.
 	 * @param player the player
@@ -237,7 +237,7 @@ public final class AdminData implements IXmlReader
 	{
 		_gmList.put(player, hidden);
 	}
-	
+
 	/**
 	 * Delete a GM.
 	 * @param player the player
@@ -246,7 +246,7 @@ public final class AdminData implements IXmlReader
 	{
 		_gmList.remove(player);
 	}
-	
+
 	/**
 	 * GM will be displayed on clients GM list.
 	 * @param player the player
@@ -258,7 +258,7 @@ public final class AdminData implements IXmlReader
 			_gmList.put(player, false);
 		}
 	}
-	
+
 	/**
 	 * GM will no longer be displayed on clients GM list.
 	 * @param player the player
@@ -270,7 +270,7 @@ public final class AdminData implements IXmlReader
 			_gmList.put(player, true);
 		}
 	}
-	
+
 	/**
 	 * Checks if is GM online.
 	 * @param includeHidden the include hidden
@@ -287,7 +287,7 @@ public final class AdminData implements IXmlReader
 		}
 		return false;
 	}
-	
+
 	/**
 	 * Send list to player.
 	 * @param player the player
@@ -297,7 +297,7 @@ public final class AdminData implements IXmlReader
 		if (isGmOnline(player.isGM()))
 		{
 			player.sendPacket(SystemMessageId.GM_LIST);
-			
+
 			for (String name : getAllGmNames(player.isGM()))
 			{
 				final SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.GM_C1);
@@ -310,7 +310,7 @@ public final class AdminData implements IXmlReader
 			player.sendPacket(SystemMessageId.THERE_ARE_NO_GMS_CURRENTLY_VISIBLE_IN_THE_PUBLIC_LIST_AS_THEY_MAY_BE_PERFORMING_OTHER_FUNCTIONS_AT_THE_MOMENT);
 		}
 	}
-	
+
 	/**
 	 * Broadcast to GMs.
 	 * @param packet the packet
@@ -322,7 +322,7 @@ public final class AdminData implements IXmlReader
 			gm.sendPacket(packet);
 		}
 	}
-	
+
 	/**
 	 * Broadcast message to GMs.
 	 * @param message the message
@@ -334,7 +334,7 @@ public final class AdminData implements IXmlReader
 			gm.sendMessage(message);
 		}
 	}
-	
+
 	/**
 	 * Gets the single instance of AdminTable.
 	 * @return AccessLevels: the one and only instance of this class<br>
@@ -343,7 +343,7 @@ public final class AdminData implements IXmlReader
 	{
 		return SingletonHolder._instance;
 	}
-	
+
 	private static class SingletonHolder
 	{
 		protected static final AdminData _instance = new AdminData();
