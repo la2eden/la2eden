@@ -123,9 +123,6 @@ public final class RequestRestart extends L2GameClientPacket
 			return;
 		}
 
-        // Prevents Schedule errors
-		player.detachAutoPotions();
-
 		// Remove player from GrandBoss Zone
 		player.removeFromBossZone();
 

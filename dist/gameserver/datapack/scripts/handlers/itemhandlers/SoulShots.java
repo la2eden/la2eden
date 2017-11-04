@@ -173,7 +173,7 @@ public class SoulShots implements IItemHandler
         private int id;
         private L2PcInstance activeChar;
 
-        public AutoPot(int id, L2PcInstance activeChar)
+        private AutoPot(int id, L2PcInstance activeChar)
         {
             this.id = id;
             this.activeChar = activeChar;
@@ -182,6 +182,9 @@ public class SoulShots implements IItemHandler
         @Override
         public void run()
         {
+            // Player must be alive to use potions, duh
+            final boolean isAlive = activeChar.getCurrentHp() > 0;
+
             if (activeChar.getInventory().getItemByItemId(id) == null)
             {
                 activeChar.sendPacket(new ExAutoSoulShot(id, 0));
@@ -193,7 +196,7 @@ public class SoulShots implements IItemHandler
             {
                 case 728:
                 {
-                    if (activeChar.getCurrentMp() < 0.70*activeChar.getMaxMp())
+                    if ((activeChar.getCurrentMp() < 0.70 * activeChar.getMaxMp()) && isAlive)
                     {
                         MagicSkillUse msu = new MagicSkillUse(activeChar, activeChar, 2279, 2, 0, 100);
                         activeChar.broadcastPacket(msu);
@@ -206,7 +209,7 @@ public class SoulShots implements IItemHandler
                 }
                 case 1539:
                 {
-                    if (activeChar.getCurrentHp() < 0.95*activeChar.getMaxHp())
+                    if ((activeChar.getCurrentHp() < 0.95 * activeChar.getMaxHp()) && isAlive)
                     {
                         MagicSkillUse msu = new MagicSkillUse(activeChar, activeChar, 2037, 1, 0, 100);
                         activeChar.broadcastPacket(msu);
@@ -219,7 +222,7 @@ public class SoulShots implements IItemHandler
                 }
                 case 5592:
                 {
-                    if (activeChar.getCurrentCp() < 0.95*activeChar.getMaxCp())
+                    if ((activeChar.getCurrentCp() < 0.95 * activeChar.getMaxCp()) && isAlive)
                     {
                         MagicSkillUse msu = new MagicSkillUse(activeChar, activeChar, 2166, 2, 0, 100);
                         activeChar.broadcastPacket(msu);

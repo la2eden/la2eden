@@ -119,9 +119,6 @@ public final class Logout extends L2GameClientPacket
 			}
 		}
 
-		// Prevents Schedule errors
-		player.detachAutoPotions();
-
 		// Remove player from GrandBoss Zone
 		player.removeFromBossZone();
 

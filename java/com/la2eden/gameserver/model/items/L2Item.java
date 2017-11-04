@@ -1,26 +1,20 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.la2eden.gameserver.model.items;
-
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.List;
-import java.util.logging.Logger;
 
 import com.la2eden.Config;
 import com.la2eden.gameserver.datatables.ItemTable;
@@ -36,16 +30,18 @@ import com.la2eden.gameserver.model.events.ListenersContainer;
 import com.la2eden.gameserver.model.holders.SkillHolder;
 import com.la2eden.gameserver.model.interfaces.IIdentifiable;
 import com.la2eden.gameserver.model.items.instance.L2ItemInstance;
-import com.la2eden.gameserver.model.items.type.ActionType;
-import com.la2eden.gameserver.model.items.type.CrystalType;
-import com.la2eden.gameserver.model.items.type.EtcItemType;
-import com.la2eden.gameserver.model.items.type.ItemType;
-import com.la2eden.gameserver.model.items.type.MaterialType;
+import com.la2eden.gameserver.model.items.type.*;
 import com.la2eden.gameserver.model.skills.Skill;
 import com.la2eden.gameserver.model.stats.functions.AbstractFunction;
 import com.la2eden.gameserver.model.stats.functions.FuncTemplate;
 import com.la2eden.gameserver.network.SystemMessageId;
 import com.la2eden.gameserver.network.serverpackets.SystemMessage;
+
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
+import java.util.logging.Logger;
 
 /**
  * This class contains all informations concerning the item (weapon, armor, etc).<BR>
@@ -59,18 +55,18 @@ import com.la2eden.gameserver.network.serverpackets.SystemMessage;
 public abstract class L2Item extends ListenersContainer implements IIdentifiable
 {
 	protected static final Logger _log = Logger.getLogger(L2Item.class.getName());
-	
+
 	public static final int TYPE1_WEAPON_RING_EARRING_NECKLACE = 0;
 	public static final int TYPE1_SHIELD_ARMOR = 1;
 	public static final int TYPE1_ITEM_QUESTITEM_ADENA = 4;
-	
+
 	public static final int TYPE2_WEAPON = 0;
 	public static final int TYPE2_SHIELD_ARMOR = 1;
 	public static final int TYPE2_ACCESSORY = 2;
 	public static final int TYPE2_QUEST = 3;
 	public static final int TYPE2_MONEY = 4;
 	public static final int TYPE2_OTHER = 5;
-	
+
 	public static final int SLOT_NONE = 0x0000;
 	public static final int SLOT_UNDERWEAR = 0x0001;
 	public static final int SLOT_R_EAR = 0x0002;
@@ -103,9 +99,9 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	public static final int SLOT_STRIDER = -102;
 	public static final int SLOT_BABYPET = -103;
 	public static final int SLOT_GREATWOLF = -104;
-	
+
 	public static final int SLOT_MULTI_ALLWEAPON = SLOT_LR_HAND | SLOT_R_HAND;
-	
+
 	private int _itemId;
 	private int _displayId;
 	private String _name;
@@ -140,7 +136,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	private boolean _ex_immediate_effect;
 	private int _defaultEnchantLevel;
 	private ActionType _defaultAction;
-	
+
 	protected int _type1; // needed for item list (inventory)
 	protected int _type2; // different lists for armor, weapon, etc
 	protected Elementals[] _elementals = null;
@@ -148,11 +144,11 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	protected List<Condition> _preConditions;
 	private SkillHolder[] _skillHolder;
 	private SkillHolder _unequipSkill = null;
-	
+
 	private int _useSkillDisTime;
 	private int _reuseDelay;
 	private int _sharedReuseGroup;
-	
+
 	/**
 	 * Constructor of the L2Item that fill class variables.<BR>
 	 * <BR>
@@ -162,7 +158,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		set(set);
 	}
-	
+
 	public void set(StatsSet set)
 	{
 		_itemId = set.getInt("item_id");
@@ -179,7 +175,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 		_referencePrice = set.getInt("price", 0);
 		_crystalType = set.getEnum("crystal_type", CrystalType.class, CrystalType.NONE);
 		_crystalCount = set.getInt("crystal_count", 0);
-		
+
 		_stackable = set.getBoolean("is_stackable", false);
 		_sellable = set.getBoolean("is_sellable", true);
 		_dropable = set.getBoolean("is_dropable", true);
@@ -193,23 +189,23 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 		_allow_self_resurrection = set.getBoolean("allow_self_resurrection", false);
 		_is_oly_restricted = set.getBoolean("is_oly_restricted", false);
 		_for_npc = set.getBoolean("for_npc", false);
-		
+
 		_immediate_effect = set.getBoolean("immediate_effect", false);
 		_ex_immediate_effect = set.getBoolean("ex_immediate_effect", false);
-		
+
 		_defaultAction = set.getEnum("default_action", ActionType.class, ActionType.NONE);
 		_useSkillDisTime = set.getInt("useSkillDisTime", 0);
 		_defaultEnchantLevel = set.getInt("enchanted", 0);
 		_reuseDelay = set.getInt("reuse_delay", 0);
 		_sharedReuseGroup = set.getInt("shared_reuse_group", 0);
-		
+
 		String skills = set.getString("item_skill", null);
 		if (skills != null)
 		{
 			final String[] skillsSplit = skills.split(";");
 			_skillHolder = new SkillHolder[skillsSplit.length];
 			int used = 0;
-			
+
 			for (String element : skillsSplit)
 			{
 				try
@@ -217,19 +213,19 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 					final String[] skillSplit = element.split("-");
 					final int id = Integer.parseInt(skillSplit[0]);
 					final int level = Integer.parseInt(skillSplit[1]);
-					
+
 					if (id == 0)
 					{
 						_log.info("Ignoring item_skill(" + element + ") for item " + this + ". Skill id is 0!");
 						continue;
 					}
-					
+
 					if (level == 0)
 					{
 						_log.info("Ignoring item_skill(" + element + ") for item " + this + ". Skill level is 0!");
 						continue;
 					}
-					
+
 					_skillHolder[used] = new SkillHolder(id, level);
 					++used;
 				}
@@ -238,7 +234,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 					_log.warning("Failed to parse item_skill(" + element + ") for item " + this + "! Format: SkillId0-SkillLevel0[;SkillIdN-SkillLevelN]");
 				}
 			}
-			
+
 			// this is only loading? just don't leave a null or use a collection?
 			if (used != _skillHolder.length)
 			{
@@ -247,12 +243,12 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 				_skillHolder = skillHolder;
 			}
 		}
-		
+
 		skills = set.getString("unequip_skill", null);
 		if (skills != null)
 		{
 			final String[] info = skills.split("-");
-			if ((info != null) && (info.length == 2))
+			if (info.length == 2)
 			{
 				int id = 0;
 				int level = 0;
@@ -272,18 +268,18 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 				}
 			}
 		}
-		
+
 		_common = ((_itemId >= 11605) && (_itemId <= 12361));
 		_heroItem = ((_itemId >= 6611) && (_itemId <= 6621)) || ((_itemId >= 9388) && (_itemId <= 9390)) || (_itemId == 6842);
 		_pvpItem = ((_itemId >= 10667) && (_itemId <= 10835)) || ((_itemId >= 12852) && (_itemId <= 12977)) || ((_itemId >= 14363) && (_itemId <= 14525)) || (_itemId == 14528) || (_itemId == 14529) || (_itemId == 14558) || ((_itemId >= 15913) && (_itemId <= 16024)) || ((_itemId >= 16134) && (_itemId <= 16147)) || (_itemId == 16149) || (_itemId == 16151) || (_itemId == 16153) || (_itemId == 16155) || (_itemId == 16157) || (_itemId == 16159) || ((_itemId >= 16168) && (_itemId <= 16176)) || ((_itemId >= 16179) && (_itemId <= 16220));
 	}
-	
+
 	/**
 	 * Returns the itemType.
 	 * @return Enum
 	 */
 	public abstract ItemType getItemType();
-	
+
 	/**
 	 * Verifies if the item is a magic weapon.
 	 * @return {@code true} if the weapon is magic, {@code false} otherwise
@@ -292,7 +288,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return false;
 	}
-	
+
 	/**
 	 * @return the _equipReuseDelay
 	 */
@@ -300,7 +296,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _equipReuseDelay;
 	}
-	
+
 	/**
 	 * Returns the duration of the item
 	 * @return int
@@ -309,7 +305,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _duration;
 	}
-	
+
 	/**
 	 * Returns the time of the item
 	 * @return int
@@ -318,7 +314,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _time;
 	}
-	
+
 	/**
 	 * @return the auto destroy time of the item in seconds: 0 or less - default
 	 */
@@ -326,7 +322,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _autoDestroyTime;
 	}
-	
+
 	/**
 	 * Returns the ID of the item
 	 * @return int
@@ -336,7 +332,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _itemId;
 	}
-	
+
 	/**
 	 * Returns the ID of the item
 	 * @return int
@@ -345,9 +341,9 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _displayId;
 	}
-	
+
 	public abstract int getItemMask();
-	
+
 	/**
 	 * Return the type of material of the item
 	 * @return MaterialType
@@ -356,7 +352,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _materialType;
 	}
-	
+
 	/**
 	 * Returns the type 2 of the item
 	 * @return int
@@ -365,7 +361,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _type2;
 	}
-	
+
 	/**
 	 * Returns the weight of the item
 	 * @return int
@@ -374,7 +370,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _weight;
 	}
-	
+
 	/**
 	 * Returns if the item is crystallizable
 	 * @return boolean
@@ -383,7 +379,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return (_crystalType != CrystalType.NONE) && (_crystalCount > 0);
 	}
-	
+
 	/**
 	 * Return the type of crystal if item is crystallizable
 	 * @return CrystalType
@@ -392,7 +388,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _crystalType;
 	}
-	
+
 	/**
 	 * Return the ID of crystal if item is crystallizable
 	 * @return int
@@ -401,7 +397,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _crystalType.getCrystalId();
 	}
-	
+
 	/**
 	 * Returns the grade of the item.<BR>
 	 * <BR>
@@ -413,7 +409,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return getCrystalType();
 	}
-	
+
 	/**
 	 * For grades S80 and S84 return S
 	 * @return the grade of the item.
@@ -433,7 +429,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 			}
 		}
 	}
-	
+
 	/**
 	 * @return the quantity of crystals for crystallization.
 	 */
@@ -441,7 +437,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _crystalCount;
 	}
-	
+
 	/**
 	 * @param enchantLevel
 	 * @return the quantity of crystals for crystallization on specific enchant level
@@ -488,7 +484,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 			}
 		}
 	}
-	
+
 	/**
 	 * @return the name of the item.
 	 */
@@ -496,7 +492,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _name;
 	}
-	
+
 	/**
 	 * @return the base elemental of the item.
 	 */
@@ -504,7 +500,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _elementals;
 	}
-	
+
 	public Elementals getElemental(byte attribute)
 	{
 		for (Elementals elm : _elementals)
@@ -516,7 +512,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 		}
 		return null;
 	}
-	
+
 	/**
 	 * Sets the base elemental of the item.
 	 * @param element the element to set.
@@ -545,7 +541,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 			}
 		}
 	}
-	
+
 	/**
 	 * @return the part of the body used with the item.
 	 */
@@ -553,7 +549,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _bodyPart;
 	}
-	
+
 	/**
 	 * @return the type 1 of the item.
 	 */
@@ -561,7 +557,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _type1;
 	}
-	
+
 	/**
 	 * @return {@code true} if the item is stackable, {@code false} otherwise.
 	 */
@@ -569,7 +565,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _stackable;
 	}
-	
+
 	/**
 	 * @return {@code true} if the item can be equipped, {@code false} otherwise.
 	 */
@@ -577,7 +573,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return (getBodyPart() != 0) && !(getItemType() instanceof EtcItemType);
 	}
-	
+
 	/**
 	 * @return the price of reference of the item.
 	 */
@@ -585,7 +581,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _referencePrice;
 	}
-	
+
 	/**
 	 * @return {@code true} if the item can be sold, {@code false} otherwise.
 	 */
@@ -593,7 +589,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _sellable;
 	}
-	
+
 	/**
 	 * @return {@code true} if the item can be dropped, {@code false} otherwise.
 	 */
@@ -601,7 +597,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _dropable;
 	}
-	
+
 	/**
 	 * @return {@code true} if the item can be destroyed, {@code false} otherwise.
 	 */
@@ -609,7 +605,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _destroyable;
 	}
-	
+
 	/**
 	 * @return {@code true} if the item can be traded, {@code false} otherwise.
 	 */
@@ -617,7 +613,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _tradeable;
 	}
-	
+
 	/**
 	 * @return {@code true} if the item can be put into warehouse, {@code false} otherwise.
 	 */
@@ -625,7 +621,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _depositable;
 	}
-	
+
 	/**
 	 * This method also check the enchant blacklist.
 	 * @return {@code true} if the item can be enchanted, {@code false} otherwise.
@@ -634,7 +630,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return Arrays.binarySearch(Config.ENCHANT_BLACKLIST, getId()) < 0 ? _enchantable : 0;
 	}
-	
+
 	/**
 	 * @return {@code true} if the item can be elemented, {@code false} otherwise.
 	 */
@@ -642,7 +638,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _elementable;
 	}
-	
+
 	/**
 	 * Returns if item is common
 	 * @return boolean
@@ -651,7 +647,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _common;
 	}
-	
+
 	/**
 	 * Returns if item is hero-only
 	 * @return
@@ -660,7 +656,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _heroItem;
 	}
-	
+
 	/**
 	 * Returns if item is pvp
 	 * @return
@@ -669,22 +665,22 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _pvpItem;
 	}
-	
+
 	public boolean isPotion()
 	{
 		return getItemType() == EtcItemType.POTION;
 	}
-	
+
 	public boolean isElixir()
 	{
 		return getItemType() == EtcItemType.ELIXIR;
 	}
-	
+
 	public boolean isScroll()
 	{
 		return getItemType() == EtcItemType.SCROLL;
 	}
-	
+
 	/**
 	 * Get the functions used by this item.
 	 * @param item : L2ItemInstance pointing out the item
@@ -695,9 +691,9 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		if ((_funcTemplates == null) || _funcTemplates.isEmpty())
 		{
-			return Collections.<AbstractFunction> emptyList();
+			return Collections.emptyList();
 		}
-		
+
 		final List<AbstractFunction> funcs = new ArrayList<>(_funcTemplates.size());
 		for (FuncTemplate t : _funcTemplates)
 		{
@@ -709,7 +705,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 		}
 		return funcs;
 	}
-	
+
 	/**
 	 * Add the FuncTemplate f to the list of functions used with the item
 	 * @param f : FuncTemplate to add
@@ -755,14 +751,14 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 				break;
 			}
 		}
-		
+
 		if (_funcTemplates == null)
 		{
 			_funcTemplates = new ArrayList<>(1);
 		}
 		_funcTemplates.add(f);
 	}
-	
+
 	public final void attach(Condition c)
 	{
 		if (_preConditions == null)
@@ -774,12 +770,12 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 			_preConditions.add(c);
 		}
 	}
-	
+
 	public boolean hasSkills()
 	{
 		return _skillHolder != null;
 	}
-	
+
 	/**
 	 * Method to retrieve skills linked to this item armor and weapon: passive skills etcitem: skills used on item use <-- ???
 	 * @return Skills linked to this item as SkillHolder[]
@@ -788,7 +784,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _skillHolder;
 	}
-	
+
 	/**
 	 * @return skill that activates, when player unequip this weapon or armor
 	 */
@@ -796,14 +792,14 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _unequipSkill == null ? null : _unequipSkill.getSkill();
 	}
-	
+
 	public boolean checkCondition(L2Character activeChar, L2Object object, boolean sendMessage)
 	{
 		if (activeChar.canOverrideCond(PcCondOverride.ITEM_CONDITIONS) && !Config.GM_ITEM_RESTRICTION)
 		{
 			return true;
 		}
-		
+
 		// Don't allow hero equipment and restricted items during Olympiad
 		if ((isOlyRestrictedItem() || isHeroItem()) && (activeChar instanceof L2PcInstance) && activeChar.getActingPlayer().isInOlympiadMode())
 		{
@@ -817,12 +813,12 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 			}
 			return false;
 		}
-		
+
 		if (!isConditionAttached())
 		{
 			return true;
 		}
-		
+
 		final L2Character target = (object instanceof L2Character) ? (L2Character) object : null;
 		for (Condition preCondition : _preConditions)
 		{
@@ -830,7 +826,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 			{
 				continue;
 			}
-			
+
 			if (!preCondition.test(activeChar, target, null, null))
 			{
 				if (activeChar instanceof L2Summon)
@@ -838,7 +834,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 					activeChar.sendPacket(SystemMessageId.THIS_PET_CANNOT_USE_THIS_ITEM);
 					return false;
 				}
-				
+
 				if (sendMessage)
 				{
 					final String msg = preCondition.getMessage();
@@ -862,37 +858,37 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 		}
 		return true;
 	}
-	
+
 	public boolean isConditionAttached()
 	{
 		return (_preConditions != null) && !_preConditions.isEmpty();
 	}
-	
+
 	public boolean isQuestItem()
 	{
 		return _questItem;
 	}
-	
+
 	public boolean isFreightable()
 	{
 		return _freightable;
 	}
-	
+
 	public boolean isAllowSelfResurrection()
 	{
 		return _allow_self_resurrection;
 	}
-	
+
 	public boolean isOlyRestrictedItem()
 	{
 		return _is_oly_restricted || Config.LIST_OLY_RESTRICTED_ITEMS.contains(_itemId);
 	}
-	
+
 	public boolean isForNpc()
 	{
 		return _for_npc;
 	}
-	
+
 	/**
 	 * Returns the name of the item followed by the item ID.
 	 * @return the name and the ID of the item
@@ -902,7 +898,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _name + "(" + _itemId + ")";
 	}
-	
+
 	/**
 	 * Verifies if the item has effects immediately.<br>
 	 * <i>Used for herbs mostly.</i>
@@ -912,7 +908,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _ex_immediate_effect;
 	}
-	
+
 	/**
 	 * Verifies if the item has effects immediately.
 	 * @return {@code true} if the item applies effects immediately, {@code false} otherwise
@@ -921,7 +917,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _immediate_effect;
 	}
-	
+
 	/**
 	 * @return the _default_action
 	 */
@@ -929,12 +925,12 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _defaultAction;
 	}
-	
+
 	public int useSkillDisTime()
 	{
 		return _useSkillDisTime;
 	}
-	
+
 	/**
 	 * Gets the item reuse delay time in seconds.
 	 * @return the reuse delay time
@@ -943,7 +939,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _reuseDelay;
 	}
-	
+
 	/**
 	 * Gets the shared reuse group.<br>
 	 * Items with the same reuse group will render reuse delay upon those items when used.
@@ -953,7 +949,7 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _sharedReuseGroup;
 	}
-	
+
 	/**
 	 * Usable in HTML windows.
 	 * @return the icon link in client files
@@ -962,17 +958,17 @@ public abstract class L2Item extends ListenersContainer implements IIdentifiable
 	{
 		return _icon;
 	}
-	
+
 	public int getDefaultEnchantLevel()
 	{
 		return _defaultEnchantLevel;
 	}
-	
+
 	public boolean isPetItem()
 	{
 		return getItemType() == EtcItemType.PET_COLLAR;
 	}
-	
+
 	public Skill getEnchant4Skill()
 	{
 		return null;

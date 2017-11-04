@@ -426,8 +426,8 @@ public final class GameServer
 
     public static void projectInfo()
     {
-        _log.info("    -> Get access to source files at our website. <-    ");
-        _log.info("               -> https://la2eden.com <-                ");
+        _log.info("-> Report any bugs you may find in our forums");
+        _log.info("Website: ..................... https://la2eden.com");
         _log.info("");
 		_log.info("Max online players: .......... " + Config.MAXIMUM_ONLINE_USERS);
         _log.info("Build Number: ................ " + Config.BUILD_NUMBER);

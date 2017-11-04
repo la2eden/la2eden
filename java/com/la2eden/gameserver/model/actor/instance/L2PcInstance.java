@@ -113,40 +113,27 @@ import java.util.logging.Level;
  */
 public final class L2PcInstance extends L2Playable
 {
-    private Map<Integer, Future<?>> _autoPotTasks = new HashMap<>();
+    private Map<Integer, Future<?>> _autoPotTasks = new ConcurrentHashMap<>();
 
     public boolean isAutoPot(int id)
 	{
     	return _autoPotTasks.keySet().contains(id);
     }
 
+    // Cannot be called from within a loop
     public void setAutoPot(int id, Future<?> task, boolean add)
 	{
         if (add) {
             _autoPotTasks.put(id, task);
+
         } else {
             _autoPotTasks.get(id).cancel(true);
             _autoPotTasks.remove(id);
         }
     }
 
-    /**
-     * Disables auto potions
-     * Safecall: ONLY when the player leaves
-     *
-     * @author Enkel
-     */
-    public void detachAutoPotions() {
-        // Only works if there is something in the stack
-        if (_autoPotTasks.size() > 0) {
-            for (Map.Entry<Integer, Future<?>> potionTask : _autoPotTasks.entrySet()) {
-                // potionTask.getValue().cancel(true);
-
-                disableAutoShot(potionTask.getKey());
-                sendPacket(new ExAutoSoulShot(potionTask.getKey(), 0));
-                setAutoPot(potionTask.getKey(), null, false);
-            }
-        }
+    public boolean canLeave() {
+        return _autoPotTasks.keySet().size() > 0;
     }
 
 	// Character Skill SQL String Definitions:
@@ -10945,6 +10932,19 @@ public final class L2PcInstance extends L2Playable
 		{
 			_log.log(Level.SEVERE, "deleteMe()", e);
 		}
+
+		// Good bye auto potions
+		try {
+		    // This causes a console error (ConcurrentMod..Exception)
+            _autoPotTasks.forEach((Integer itemId, Future<?> task) -> {
+                disableAutoShot(itemId);
+                sendPacket(new ExAutoSoulShot(itemId, 0));
+                setAutoPot(itemId, null, false);
+            });
+        } catch (Exception e) {
+		    // TODO: Log to console?
+            _log.log(Level.SEVERE, "Auto Potions cleanup error", e);
+        }
 
 		// remove combat flag
 		try
