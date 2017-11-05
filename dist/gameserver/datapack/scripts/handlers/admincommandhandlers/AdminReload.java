@@ -50,7 +50,7 @@ public class AdminReload implements IAdminCommandHandler
 		"admin_reload"
 	};
 
-	private static final String RELOAD_USAGE = "Usage: //reload <config|access|npc|quest [quest_id|quest_name]|walker|htm[l] [file|directory]|multisell|buylist|teleport|skill|item|door|effect|handler|enchant>";
+	private static final String RELOAD_USAGE = "Usage: //reload <config|access|npc|quest [quest_id|quest_name]|walker|htm[l] [file|directory]|multisell|buylist|teleport|skill|item|door|effect|handler|enchant|primeshop>";
 
 	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
