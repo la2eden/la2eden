@@ -4415,7 +4415,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 				if ((curX < L2World.MAP_MIN_X) || (curX > L2World.MAP_MAX_X) || (curY < L2World.MAP_MIN_Y) || (curY > L2World.MAP_MAX_Y))
 				{
 					// Temporary fix for character outside world region errors
-					_log.warning("EventCharacter " + getName() + " outside world area, in coordinates x:" + curX + " y:" + curY);
+					_log.warning("Character " + getName() + " outside world area, in coordinates x:" + curX + " y:" + curY);
 					getAI().setIntention(CtrlIntention.AI_INTENTION_IDLE);
 					if (isPlayer())
 					{
@@ -4814,7 +4814,7 @@ public abstract class L2Character extends L2Object implements ISkillsHolder, IDe
 		sendDamageMessage(target, damage, false, crit, miss);
 
 		// Check Raidboss attack
-		// EventCharacter will be petrified if attacking a raid that's more
+		// Character will be petrified if attacking a raid that's more
 		// than 8 levels lower
 		if (target.isRaid() && target.giveRaidCurse() && !Config.RAID_DISABLE_CURSE)
 		{

@@ -20,7 +20,7 @@ import com.la2eden.gameserver.model.itemcontainer.Inventory;
 import com.la2eden.gameserver.model.itemcontainer.PcInventory;
 
 /**
- * Used to Store data sent to Client for EventCharacter.<br>
+ * Used to Store data sent to Client for Character.<br>
  * Selection screen.
  * @version $Revision: 1.2.2.2.2.4 $ $Date: 2005/03/27 15:29:33 $
  */

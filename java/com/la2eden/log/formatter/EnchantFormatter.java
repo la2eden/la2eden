@@ -46,7 +46,7 @@ public class EnchantFormatter extends AbstractFormatter
 				if (p instanceof L2PcInstance)
 				{
 					L2PcInstance player = (L2PcInstance) p;
-					output.append("EventCharacter:");
+					output.append("Character:");
 					output.append(player.getName());
 					output.append(" [");
 					output.append(player.getObjectId());

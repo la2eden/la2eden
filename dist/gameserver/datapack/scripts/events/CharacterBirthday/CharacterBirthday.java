@@ -22,7 +22,7 @@ import com.la2eden.gameserver.model.quest.Quest;
 import com.la2eden.gameserver.util.Util;
 
 /**
- * EventCharacter Birthday event AI.<br>
+ * Character Birthday event AI.<br>
  * Updated to H5 by Nyaran.
  * @author Gnacik
  */

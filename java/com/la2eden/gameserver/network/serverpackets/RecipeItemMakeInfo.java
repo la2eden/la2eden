@@ -55,7 +55,7 @@ public class RecipeItemMakeInfo extends L2GameServerPacket
 		}
 		else
 		{
-			_log.info("EventCharacter: " + getClient().getActiveChar() + ": Requested unexisting recipe with id = " + _id);
+			_log.info("Character: " + getClient().getActiveChar() + ": Requested unexisting recipe with id = " + _id);
 		}
 	}
 }

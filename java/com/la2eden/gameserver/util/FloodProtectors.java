@@ -82,7 +82,7 @@ public final class FloodProtectors
 	 */
 	private final FloodProtectorAction _sendMail;
 	/**
-	 * EventCharacter Select protector
+	 * Character Select protector
 	 */
 	private final FloodProtectorAction _characterSelect;
 	/**

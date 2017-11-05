@@ -56,7 +56,7 @@ public final class RequestRefineCancel extends L2GameClientPacket
 		}
 		if (targetItem.getOwnerId() != activeChar.getObjectId())
 		{
-			Util.handleIllegalPlayerAction(getClient().getActiveChar(), "Warning!! EventCharacter " + getClient().getActiveChar().getName() + " of account " + getClient().getActiveChar().getAccountName() + " tryied to augment item that doesn't own.", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(getClient().getActiveChar(), "Warning!! Character " + getClient().getActiveChar().getName() + " of account " + getClient().getActiveChar().getAccountName() + " tryied to augment item that doesn't own.", Config.DEFAULT_PUNISH);
 			return;
 		}
 		// cannot remove augmentation from a not augmented item

@@ -81,7 +81,7 @@ public final class RequestGiveItemToPet extends L2GameClientPacket
 
 		if (_amount > item.getCount())
 		{
-			Util.handleIllegalPlayerAction(player, getClass().getSimpleName() + ": EventCharacter " + player.getName() + " of account " + player.getAccountName() + " tried to get item with oid " + _objectId + " from pet but has invalid count " + _amount + " item count: " + item.getCount(), Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, getClass().getSimpleName() + ": Character " + player.getName() + " of account " + player.getAccountName() + " tried to get item with oid " + _objectId + " from pet but has invalid count " + _amount + " item count: " + item.getCount(), Config.DEFAULT_PUNISH);
 			return;
 		}
 

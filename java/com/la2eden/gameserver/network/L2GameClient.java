@@ -685,7 +685,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 		final CharSelectInfoPackage info = getCharSelection(charslot);
 		if (info == null)
 		{
-			_log.warning(toString() + " tried to delete EventCharacter in slot " + charslot + " but no characters exits at that slot.");
+			_log.warning(toString() + " tried to delete Character in slot " + charslot + " but no characters exits at that slot.");
 			return -1;
 		}
 		return info.getObjectId();
@@ -754,7 +754,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 				}
 				case IN_GAME:
 				{
-					return "[EventCharacter: " + (getActiveChar() == null ? "disconnected" : getActiveChar().getName() + "[" + getActiveChar().getObjectId() + "]") + " - Account: " + getAccountName() + " - IP: " + (address == null ? "disconnected" : address.getHostAddress()) + "]";
+					return "[Character: " + (getActiveChar() == null ? "disconnected" : getActiveChar().getName() + "[" + getActiveChar().getObjectId() + "]") + " - Account: " + getAccountName() + " - IP: " + (address == null ? "disconnected" : address.getHostAddress()) + "]";
 				}
 				default:
 				{
@@ -764,7 +764,7 @@ public final class L2GameClient extends MMOClient<MMOConnection<L2GameClient>> i
 		}
 		catch (NullPointerException e)
 		{
-			return "[EventCharacter read failed due to disconnect]";
+			return "[Character read failed due to disconnect]";
 		}
 	}
 

@@ -135,7 +135,7 @@ public final class SendWareHouseWithDrawList extends L2GameClientPacket
 			final L2ItemInstance item = warehouse.getItemByObjectId(i.getId());
 			if ((item == null) || (item.getCount() < i.getCount()))
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! EventCharacter " + player.getName() + " of account " + player.getAccountName() + " tried to withdraw non-existent item from warehouse.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to withdraw non-existent item from warehouse.", Config.DEFAULT_PUNISH);
 				return;
 			}
 

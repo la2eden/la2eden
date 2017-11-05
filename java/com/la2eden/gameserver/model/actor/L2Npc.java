@@ -66,7 +66,7 @@ import java.util.logging.Level;
 import static com.la2eden.gameserver.ai.CtrlIntention.AI_INTENTION_ACTIVE;
 
 /**
- * This class represents a Non-Player-EventCharacter in the world.<br>
+ * This class represents a Non-Player-Character in the world.<br>
  * It can be a monster or a friendly character.<br>
  * It uses a template to fetch some static values.
  */

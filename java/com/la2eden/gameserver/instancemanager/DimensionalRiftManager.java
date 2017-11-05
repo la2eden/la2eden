@@ -429,7 +429,7 @@ public final class DimensionalRiftManager
 		if (!player.isGM())
 		{
 			_log.warning("Player " + player.getName() + "(" + player.getObjectId() + ") was cheating in dimension rift area!");
-			Util.handleIllegalPlayerAction(player, "Warning!! EventCharacter " + player.getName() + " tried to cheat in dimensional rift.", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " tried to cheat in dimensional rift.", Config.DEFAULT_PUNISH);
 		}
 	}
 

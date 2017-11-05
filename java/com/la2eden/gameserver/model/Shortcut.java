@@ -34,7 +34,7 @@ public class Shortcut
 	private final int _id;
 	/** Shortcut level (skills). */
 	private final int _level;
-	/** EventCharacter type: 1 player, 2 summon. */
+	/** Character type: 1 player, 2 summon. */
 	private final int _characterType;
 	/** Shared reuse group. */
 	private int _sharedReuseGroup = -1;

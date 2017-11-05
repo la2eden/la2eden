@@ -65,7 +65,7 @@ public final class RequestDestroyItem extends L2GameClientPacket
 		{
 			if (_count < 0)
 			{
-				Util.handleIllegalPlayerAction(activeChar, "[RequestDestroyItem] EventCharacter " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to destroy item with oid " + _objectId + " but has count < 0!", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(activeChar, "[RequestDestroyItem] Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to destroy item with oid " + _objectId + " but has count < 0!", Config.DEFAULT_PUNISH);
 			}
 			return;
 		}
@@ -129,7 +129,7 @@ public final class RequestDestroyItem extends L2GameClientPacket
 
 		if (!itemToRemove.isStackable() && (count > 1))
 		{
-			Util.handleIllegalPlayerAction(activeChar, "[RequestDestroyItem] EventCharacter " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to destroy a non-stackable item with oid " + _objectId + " but has count > 1!", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(activeChar, "[RequestDestroyItem] Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to destroy a non-stackable item with oid " + _objectId + " but has count > 1!", Config.DEFAULT_PUNISH);
 			return;
 		}
 

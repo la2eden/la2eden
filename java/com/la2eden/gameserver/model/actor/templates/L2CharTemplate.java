@@ -28,7 +28,7 @@ import com.la2eden.gameserver.model.skills.Skill;
 import com.la2eden.gameserver.model.stats.MoveType;
 
 /**
- * EventCharacter template.
+ * Character template.
  * @author Zoey76
  */
 public class L2CharTemplate extends ListenersContainer

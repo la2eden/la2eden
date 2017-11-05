@@ -16,16 +16,6 @@
  */
 package com.la2eden.gameserver.ai;
 
-import static com.la2eden.gameserver.ai.CtrlIntention.AI_INTENTION_ACTIVE;
-import static com.la2eden.gameserver.ai.CtrlIntention.AI_INTENTION_ATTACK;
-import static com.la2eden.gameserver.ai.CtrlIntention.AI_INTENTION_IDLE;
-
-import java.util.Collection;
-import java.util.List;
-import java.util.Set;
-import java.util.concurrent.Future;
-import java.util.concurrent.TimeUnit;
-
 import com.la2eden.Config;
 import com.la2eden.gameserver.GameTimeController;
 import com.la2eden.gameserver.GeoData;
@@ -37,20 +27,8 @@ import com.la2eden.gameserver.enums.AIType;
 import com.la2eden.gameserver.instancemanager.DimensionalRiftManager;
 import com.la2eden.gameserver.model.L2Object;
 import com.la2eden.gameserver.model.Location;
-import com.la2eden.gameserver.model.actor.L2Attackable;
-import com.la2eden.gameserver.model.actor.L2Character;
-import com.la2eden.gameserver.model.actor.L2Npc;
-import com.la2eden.gameserver.model.actor.L2Playable;
-import com.la2eden.gameserver.model.actor.L2Summon;
-import com.la2eden.gameserver.model.actor.instance.L2FestivalMonsterInstance;
-import com.la2eden.gameserver.model.actor.instance.L2FriendlyMobInstance;
-import com.la2eden.gameserver.model.actor.instance.L2GrandBossInstance;
-import com.la2eden.gameserver.model.actor.instance.L2GuardInstance;
-import com.la2eden.gameserver.model.actor.instance.L2MonsterInstance;
-import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
-import com.la2eden.gameserver.model.actor.instance.L2RaidBossInstance;
-import com.la2eden.gameserver.model.actor.instance.L2RiftInvaderInstance;
-import com.la2eden.gameserver.model.actor.instance.L2StaticObjectInstance;
+import com.la2eden.gameserver.model.actor.*;
+import com.la2eden.gameserver.model.actor.instance.*;
 import com.la2eden.gameserver.model.effects.L2EffectType;
 import com.la2eden.gameserver.model.events.EventDispatcher;
 import com.la2eden.gameserver.model.events.impl.character.npc.attackable.OnAttackableFactionCall;
@@ -62,6 +40,14 @@ import com.la2eden.gameserver.model.skills.targets.L2TargetType;
 import com.la2eden.gameserver.model.zone.ZoneId;
 import com.la2eden.gameserver.util.Util;
 import com.la2eden.util.Rnd;
+
+import java.util.Collection;
+import java.util.List;
+import java.util.Set;
+import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
+
+import static com.la2eden.gameserver.ai.CtrlIntention.*;
 
 /**
  * This class manages AI of L2Attackable.
@@ -1760,7 +1746,7 @@ public class L2AttackableAI extends L2CharacterAI implements Runnable
 		{
 			return false;
 		}
-		// EventCharacter is in "skill disabled" mode.
+		// Character is in "skill disabled" mode.
 		if (getActiveChar().isSkillDisabled(skill))
 		{
 			return false;

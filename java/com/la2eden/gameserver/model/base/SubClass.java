@@ -20,7 +20,7 @@ import com.la2eden.Config;
 import com.la2eden.gameserver.data.xml.impl.ExperienceData;
 
 /**
- * EventCharacter Sub-Class Definition <BR>
+ * Character Sub-Class Definition <BR>
  * Used to store key information about a character's sub-class.
  * @author Tempy
  */

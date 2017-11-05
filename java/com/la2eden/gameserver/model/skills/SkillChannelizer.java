@@ -71,7 +71,7 @@ public class SkillChannelizer implements Runnable
 		// Verify for same status.
 		if (isChanneling())
 		{
-			_log.warning("EventCharacter: " + _channelizer + " is attempting to channel skill but he already does!");
+			_log.warning("Character: " + _channelizer + " is attempting to channel skill but he already does!");
 			return;
 		}
 
@@ -85,7 +85,7 @@ public class SkillChannelizer implements Runnable
 		// Verify for same status.
 		if (!isChanneling())
 		{
-			_log.warning("EventCharacter: " + _channelizer + " is attempting to stop channel skill but he does not!");
+			_log.warning("Character: " + _channelizer + " is attempting to stop channel skill but he does not!");
 			return;
 		}
 

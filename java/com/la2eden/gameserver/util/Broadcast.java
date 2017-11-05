@@ -38,7 +38,7 @@ public final class Broadcast
 	private static Logger _log = Logger.getLogger(Broadcast.class.getName());
 
 	/**
-	 * Send a packet to all L2PcInstance in the _KnownPlayers of the L2Character that have the EventCharacter targeted.<BR>
+	 * Send a packet to all L2PcInstance in the _KnownPlayers of the L2Character that have the Character targeted.<BR>
 	 * <B><U> Concept</U> :</B><BR>
 	 * L2PcInstance in the detection area of the L2Character are identified in <B>_knownPlayers</B>.<BR>
 	 * In order to inform other players of state modification on the L2Character, server just need to go through _knownPlayers to send Server->Client Packet<BR>

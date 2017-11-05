@@ -16,24 +16,12 @@
  */
 package com.la2eden.gameserver;
 
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 import com.la2eden.Config;
 import com.la2eden.commons.database.DatabaseFactory;
 import com.la2eden.gameserver.data.sql.impl.ClanTable;
 import com.la2eden.gameserver.data.sql.impl.OfflineTradersTable;
 import com.la2eden.gameserver.datatables.BotReportTable;
-import com.la2eden.gameserver.instancemanager.CHSiegeManager;
-import com.la2eden.gameserver.instancemanager.CastleManorManager;
-import com.la2eden.gameserver.instancemanager.CursedWeaponsManager;
-import com.la2eden.gameserver.instancemanager.FishingChampionshipManager;
-import com.la2eden.gameserver.instancemanager.GlobalVariablesManager;
-import com.la2eden.gameserver.instancemanager.GrandBossManager;
-import com.la2eden.gameserver.instancemanager.ItemAuctionManager;
-import com.la2eden.gameserver.instancemanager.ItemsOnGroundManager;
-import com.la2eden.gameserver.instancemanager.QuestManager;
-import com.la2eden.gameserver.instancemanager.RaidBossSpawnManager;
+import com.la2eden.gameserver.instancemanager.*;
 import com.la2eden.gameserver.model.L2World;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 import com.la2eden.gameserver.model.entity.Hero;
@@ -44,6 +32,9 @@ import com.la2eden.gameserver.network.gameserverpackets.ServerStatus;
 import com.la2eden.gameserver.network.serverpackets.ServerClose;
 import com.la2eden.gameserver.network.serverpackets.SystemMessage;
 import com.la2eden.gameserver.util.Broadcast;
+
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * This class provides the functions for shutting down and restarting the server.<br>
@@ -612,7 +603,7 @@ public class Shutdown extends Thread
 	{
 		for (L2PcInstance player : L2World.getInstance().getPlayers())
 		{
-			// Logout EventCharacter
+			// Logout character
 			try
 			{
 				final L2GameClient client = player.getClient();

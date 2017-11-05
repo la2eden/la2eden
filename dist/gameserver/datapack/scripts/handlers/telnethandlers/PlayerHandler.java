@@ -230,11 +230,11 @@ public class PlayerHandler implements ITelnetHandler
 				{
 					final long expirationTime = delay > 0 ? System.currentTimeMillis() + (delay * 60 * 1000) : -1;
 					PunishmentManager.getInstance().startPunishment(new PunishmentTask(charId, PunishmentAffect.CHARACTER, PunishmentType.JAIL, expirationTime, reason, "Telnet Admin: " + _cSocket.getInetAddress().getHostAddress()));
-					_print.println("EventCharacter " + name + " jailed for " + (delay > 0 ? delay + " minutes." : "ever!"));
+					_print.println("Character " + name + " jailed for " + (delay > 0 ? delay + " minutes." : "ever!"));
 				}
 				else
 				{
-					_print.println("EventCharacter with name: " + name + " was not found!");
+					_print.println("Character with name: " + name + " was not found!");
 				}
 			}
 			catch (NoSuchElementException nsee)
@@ -260,11 +260,11 @@ public class PlayerHandler implements ITelnetHandler
 				if (charId > 0)
 				{
 					PunishmentManager.getInstance().stopPunishment(charId, PunishmentAffect.CHARACTER, PunishmentType.JAIL);
-					_print.println("EventCharacter " + name + " have been unjailed");
+					_print.println("Character " + name + " have been unjailed");
 				}
 				else
 				{
-					_print.println("EventCharacter with name: " + name + " was not found!");
+					_print.println("Character with name: " + name + " was not found!");
 				}
 			}
 			catch (NoSuchElementException nsee)

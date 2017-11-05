@@ -56,7 +56,7 @@ public final class AddTradeItem extends L2GameClientPacket
 		final TradeList trade = player.getActiveTradeList();
 		if (trade == null)
 		{
-			_log.warning("EventCharacter: " + player.getName() + " requested item:" + _objectId + " add without active tradelist:" + _tradeId);
+			_log.warning("Character: " + player.getName() + " requested item:" + _objectId + " add without active tradelist:" + _tradeId);
 			return;
 		}
 
@@ -66,7 +66,7 @@ public final class AddTradeItem extends L2GameClientPacket
 			// Trade partner not found, cancel trade
 			if (partner != null)
 			{
-				_log.warning("EventCharacter:" + player.getName() + " requested invalid trade object: " + _objectId);
+				_log.warning("Character:" + player.getName() + " requested invalid trade object: " + _objectId);
 			}
 			player.sendPacket(SystemMessageId.THAT_PLAYER_IS_NOT_ONLINE);
 			player.cancelActiveTrade();

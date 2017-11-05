@@ -21,7 +21,7 @@ import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 import com.la2eden.gameserver.network.serverpackets.ExConfirmAddingContact;
 
 /**
- * Format: (ch)S S: EventCharacter Name
+ * Format: (ch)S S: Character Name
  * @author UnAfraid & mrTJO
  */
 public class RequestExAddContactToContactList extends L2GameClientPacket

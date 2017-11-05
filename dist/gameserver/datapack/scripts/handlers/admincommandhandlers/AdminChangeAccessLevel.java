@@ -83,11 +83,11 @@ public final class AdminChangeAccessLevel implements IAdminCommandHandler
 					statement.close();
 					if (count == 0)
 					{
-						activeChar.sendMessage("EventCharacter not found or access level unaltered.");
+						activeChar.sendMessage("Character not found or access level unaltered.");
 					}
 					else
 					{
-						activeChar.sendMessage("EventCharacter's access level is now set to " + lvl);
+						activeChar.sendMessage("Character's access level is now set to " + lvl);
 					}
 				}
 				catch (SQLException se)

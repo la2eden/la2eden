@@ -96,13 +96,13 @@ public final class RequestDropItem extends L2GameClientPacket
 
 		if (_count < 0)
 		{
-			Util.handleIllegalPlayerAction(activeChar, "[RequestDropItem] EventCharacter " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to drop item with oid " + _objectId + " but has count < 0!", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(activeChar, "[RequestDropItem] Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to drop item with oid " + _objectId + " but has count < 0!", Config.DEFAULT_PUNISH);
 			return;
 		}
 
 		if (!item.isStackable() && (_count > 1))
 		{
-			Util.handleIllegalPlayerAction(activeChar, "[RequestDropItem] EventCharacter " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to drop non-stackable item with oid " + _objectId + " but has count > 1!", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(activeChar, "[RequestDropItem] Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to drop non-stackable item with oid " + _objectId + " but has count > 1!", Config.DEFAULT_PUNISH);
 			return;
 		}
 
@@ -219,7 +219,7 @@ public final class RequestDropItem extends L2GameClientPacket
 
 		if ((dropedItem != null) && (dropedItem.getId() == Inventory.ADENA_ID) && (dropedItem.getCount() >= 1000000))
 		{
-			final String msg = "EventCharacter (" + activeChar.getName() + ") has dropped (" + dropedItem.getCount() + ")adena at (" + _x + "," + _y + "," + _z + ")";
+			final String msg = "Character (" + activeChar.getName() + ") has dropped (" + dropedItem.getCount() + ")adena at (" + _x + "," + _y + "," + _z + ")";
 			_log.warning(msg);
 			AdminData.getInstance().broadcastMessageToGMs(msg);
 		}

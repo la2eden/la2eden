@@ -155,7 +155,7 @@ public final class Action extends L2GameClientPacket
 			default:
 			{
 				// Invalid action detected (probably client cheating), log this
-				_log.warning(getType() + ": EventCharacter: " + activeChar.getName() + " requested invalid action: " + _actionId);
+				_log.warning(getType() + ": Character: " + activeChar.getName() + " requested invalid action: " + _actionId);
 				sendPacket(ActionFailed.STATIC_PACKET);
 				break;
 			}

@@ -20,7 +20,7 @@ import com.la2eden.Config;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 
 /**
- * Format: (ch)S S: EventCharacter Name
+ * Format: (ch)S S: Character Name
  * @author UnAfraid & mrTJO
  */
 public class RequestExDeleteContactFromContactList extends L2GameClientPacket

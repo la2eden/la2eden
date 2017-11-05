@@ -926,7 +926,7 @@ public class L2Clan implements IIdentifiable, INamable
 	 * <li>Clan's reputation</li>
 	 * <li>Alliance's penalty expiration time</li>
 	 * <li>Alliance's penalty type</li>
-	 * <li>EventCharacter's penalty expiration time</li>
+	 * <li>Character's penalty expiration time</li>
 	 * <li>Dissolving expiration time</li>
 	 * <li>Clan's id</li>
 	 * </ul>

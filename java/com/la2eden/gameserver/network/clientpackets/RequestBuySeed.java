@@ -129,7 +129,7 @@ public class RequestBuySeed extends L2GameClientPacket
 			totalPrice += (sp.getPrice() * ih.getCount());
 			if (totalPrice > MAX_ADENA)
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! EventCharacter " + player.getName() + " of account " + player.getAccountName() + " tried to purchase over " + MAX_ADENA + " adena worth of goods.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to purchase over " + MAX_ADENA + " adena worth of goods.", Config.DEFAULT_PUNISH);
 				sendActionFailed();
 				return;
 			}

@@ -141,7 +141,7 @@ public final class ServerList extends L2LoginServerPacket
 			writeH(server._currentPlayers);
 			writeH(server._maxPlayers);
 			writeC(server._status == ServerStatus.STATUS_DOWN ? 0x00 : 0x01);
-			writeD(server._serverType); // 1: Normal, 2: Relax, 4: Public Test, 8: No Label, 16: EventCharacter Creation Restricted, 32: Event, 64: Free
+			writeD(server._serverType); // 1: Normal, 2: Relax, 4: Public Test, 8: No Label, 16: Character Creation Restricted, 32: Event, 64: Free
 			writeC(server._brackets ? 0x01 : 0x00);
 		}
 		writeH(0x00); // unknown
