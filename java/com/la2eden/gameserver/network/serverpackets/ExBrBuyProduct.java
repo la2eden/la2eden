@@ -16,7 +16,10 @@
  */
 package com.la2eden.gameserver.network.serverpackets;
 
-public class ExBrBuyProduct extends L2GameServerPacket {
+public class ExBrBuyProduct extends L2GameServerPacket
+{
+    private static final String TYPE = "[S] FE:D8 ExBRBuyProduct";
+
     private final int _reply;
 
     public ExBrBuyProduct(int reply)
@@ -27,13 +30,13 @@ public class ExBrBuyProduct extends L2GameServerPacket {
     @Override
     protected final void writeImpl()
     {
-        writeC(254);
-        writeH(216);
+        writeC(0xFE); // 254
+        writeH(0xD8); // 216
         writeD(_reply);
     }
 
     public String getType()
     {
-        return "[S] FE:D8 ExBRBuyProduct";
+        return TYPE;
     }
 }

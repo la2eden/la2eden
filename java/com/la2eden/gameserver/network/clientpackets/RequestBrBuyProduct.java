@@ -19,14 +19,17 @@ package com.la2eden.gameserver.network.clientpackets;
 import com.la2eden.gameserver.datatables.PrimeShopTable;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 
-public final class RequestBrBuyProduct extends L2GameClientPacket {
-    private int _brId;
+public final class RequestBrBuyProduct extends L2GameClientPacket
+{
+    private static final String TYPE = "[C] D0:8C RequestBrBuyProduct";
+
+    private int _product_id;
     private int _count;
 
     @Override
     protected void readImpl()
     {
-        this._brId = readD();
+        this._product_id = readD();
         this._count = readD();
     }
 
@@ -36,13 +39,13 @@ public final class RequestBrBuyProduct extends L2GameClientPacket {
         L2PcInstance player = getClient().getActiveChar();
         if (player != null)
         {
-            PrimeShopTable.getInstance().buyItem(player, this._brId, this._count);
+            PrimeShopTable.getInstance().buyItem(player, this._product_id, this._count);
         }
     }
 
     @Override
     public String getType()
     {
-        return "[C] D0:8C RequestBRBuyProduct";
+        return TYPE;
     }
 }

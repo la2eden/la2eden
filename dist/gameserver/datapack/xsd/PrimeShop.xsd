@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <xs:element name="list">
+        <xs:complexType>
+            <xs:sequence minOccurs="1" maxOccurs="1" >
+                <xs:element name="item" minOccurs="1" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:attribute name="brId" type="xs:long" use="required" />
+                        <xs:attribute name="itemId" type="xs:integer" use="required" />
+                        <xs:attribute name="count" type="xs:integer" use="required" />
+                        <xs:attribute name="cat" type="xs:integer" use="required" />
+                        <xs:attribute name="price" type="xs:integer" use="required" />
+                        <xs:attribute name="event" type="xs:boolean" use="required" />
+                        <xs:attribute name="best" type="xs:boolean" use="required" />
+                        <xs:attribute name="sale_start_date" type="xs:string" />
+                        <xs:attribute name="sale_end_date" type="xs:string" />
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

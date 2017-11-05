@@ -18,7 +18,10 @@ package com.la2eden.gameserver.network.serverpackets;
 
 import com.la2eden.gameserver.datatables.PrimeShopTable.PrimeShopItem;
 
-public class ExBrProductInfo extends L2GameServerPacket {
+public class ExBrProductInfo extends L2GameServerPacket
+{
+    private static final String TYPE = "[S] FE:D7 ExBRProductInfo";
+
     private final int _brId;
     private final int _price;
     private final int _cat;
@@ -41,19 +44,20 @@ public class ExBrProductInfo extends L2GameServerPacket {
     @Override
     protected final void writeImpl()
     {
-        writeC(254);
-        writeH(215);
-        writeD(_brId);
-        writeD(_price);
-        writeD(_cat);
-        writeD(_itemId);
-        writeD(_count);
-        writeD(_weight);
-        writeD(_tradable);
+        writeC(0xFE); // 254
+        writeH(0xD7); // 215
+
+        writeD(_brId); // product id (for primeshop only)
+        writeD(_price); // prime points necessary
+        writeD(_cat); // category
+        writeD(_itemId); // item id
+        writeD(_count); // quantity
+        writeD(_weight); // weight
+        writeD(_tradable); // 0 - dont drop/trade
     }
 
     public String getType()
     {
-        return "[S] FE:D7 ExBRProductInfo";
+        return TYPE;
     }
 }

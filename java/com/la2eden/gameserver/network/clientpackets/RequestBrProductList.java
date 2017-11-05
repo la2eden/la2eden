@@ -20,7 +20,10 @@ import com.la2eden.Config;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 import com.la2eden.gameserver.network.serverpackets.ExBrProductList;
 
-public final class RequestBrProductList extends L2GameClientPacket {
+public final class RequestBrProductList extends L2GameClientPacket
+{
+    private static final String TYPE = "[C] D0:89 RequestBrProductList";
+
     @Override
     protected void readImpl()
     {
@@ -50,12 +53,14 @@ public final class RequestBrProductList extends L2GameClientPacket {
             return;
         }
 
-        player.sendPacket(new ExBrProductList());
+        if (player != null) {
+            player.sendPacket(new ExBrProductList());
+        }
     }
 
     @Override
     public String getType()
     {
-        return "[C] D0:8A RequestBRProductList";
+        return TYPE;
     }
 }

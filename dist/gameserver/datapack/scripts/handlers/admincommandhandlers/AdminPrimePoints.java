@@ -37,10 +37,10 @@ public class AdminPrimePoints implements IAdminCommandHandler {
     private static final String[] ADMIN_COMMANDS =
             {
                     "admin_primepoints", // Show admin menu
-                    "admin_set_primepoints", // Set by target
-                    "admin_give_primepoints", // Set by name
-                    "admin_clear_primepoints", // Set to 0 (target)
-                    "admin_reward_primepoints" // Set to all players online
+                    "admin_primepoints_set", // Set by target
+                    "admin_primepoints_give", // Set by name
+                    "admin_primepoints_clear", // Set to 0 (target)
+                    "admin_primepoints_all" // Set to all players online
             };
 
     @Override
@@ -76,7 +76,8 @@ public class AdminPrimePoints implements IAdminCommandHandler {
                 }
                 catch (Exception e)
                 {
-                    activeChar.sendMessage("Usage: //give_primepoints <player> [points]");
+                    activeChar.sendMessage("Usage: //primepoints_give <player> [points]");
+                    return false;
                 }
 
                 return givePoints(activeChar, player, points);
@@ -91,7 +92,8 @@ public class AdminPrimePoints implements IAdminCommandHandler {
                 }
                 catch (Exception e)
                 {
-                    activeChar.sendMessage("Usage: //set_primepoints [points]");
+                    activeChar.sendMessage("Usage: //primepoints_set [points]");
+                    return false;
                 }
 
                 return setPoints(activeChar, target.getName(), points);
@@ -108,7 +110,8 @@ public class AdminPrimePoints implements IAdminCommandHandler {
                 }
                 catch (Exception e)
                 {
-                    activeChar.sendMessage("Usage: //reward_primepoints [points]");
+                    activeChar.sendMessage("Usage: //primepoints_all [points]");
+                    return false;
                 }
 
                 return rewardPoints(activeChar, points);
@@ -117,17 +120,6 @@ public class AdminPrimePoints implements IAdminCommandHandler {
 
         activeChar.sendMessage("Invalid command.");
         return false;
-    }
-
-    @Override
-    public String[] getAdminCommandList()
-    {
-        return ADMIN_COMMANDS;
-    }
-
-    public static void main(String[] args)
-    {
-        new AdminPrimePoints();
     }
 
     /**
@@ -146,7 +138,7 @@ public class AdminPrimePoints implements IAdminCommandHandler {
             return true;
         }
 
-        admin.sendMessage("Usage: //reward_primepoints [points]");
+        admin.sendMessage("Usage: //primepoints_all [points]");
         return false;
     }
 
@@ -164,7 +156,7 @@ public class AdminPrimePoints implements IAdminCommandHandler {
             return true;
         }
 
-        admin.sendMessage("Usage: //clear_primepoints <player>");
+        admin.sendMessage("Usage: //primepoints_clear <player>");
         return false;
     }
 
@@ -210,7 +202,7 @@ public class AdminPrimePoints implements IAdminCommandHandler {
             return true;
         }
 
-        admin.sendMessage("Usage: //give_primepoints <player> [points]");
+        admin.sendMessage("Usage: //primepoints_give <player> [points]");
         return false;
     }
 
@@ -224,23 +216,6 @@ public class AdminPrimePoints implements IAdminCommandHandler {
      */
     private void updatePlayerPoints(String player_name, Long points, boolean add, boolean isReward, String msg)
     {
-        // This can be handy when using the reward command
-        if (player_name != null) {
-            /*
-            try (Connection con = DatabaseFactory.getInstance().getConnection()) {
-                final PreparedStatement statement = con.prepareStatement("UPDATE characters SET prime_points=? WHERE char_name=?");
-
-                statement.setLong(1, points);
-                statement.setString(2, player_name);
-
-                statement.execute();
-                statement.close();
-            } catch (SQLException e) {
-                // TODO: Log to console?
-            }
-            */
-        }
-
         for (L2PcInstance player : L2World.getInstance().getPlayers()) {
             if (player.getName().equalsIgnoreCase(player_name) || isReward) {
                 if (add) {
@@ -253,5 +228,16 @@ public class AdminPrimePoints implements IAdminCommandHandler {
                 break;
             }
         }
+    }
+
+    @Override
+    public String[] getAdminCommandList()
+    {
+        return ADMIN_COMMANDS;
+    }
+
+    public static void main(String[] args)
+    {
+        new AdminPrimePoints();
     }
 }

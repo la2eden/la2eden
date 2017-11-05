@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,6 +22,7 @@ import com.la2eden.gameserver.data.sql.impl.CrestTable;
 import com.la2eden.gameserver.data.sql.impl.TeleportLocationTable;
 import com.la2eden.gameserver.data.xml.impl.*;
 import com.la2eden.gameserver.datatables.ItemTable;
+import com.la2eden.gameserver.datatables.PrimeShopTable;
 import com.la2eden.gameserver.datatables.SkillData;
 import com.la2eden.gameserver.handler.IAdminCommandHandler;
 import com.la2eden.gameserver.instancemanager.CursedWeaponsManager;
@@ -43,14 +44,14 @@ import java.util.logging.Logger;
 public class AdminReload implements IAdminCommandHandler
 {
 	private static final Logger LOGGER = Logger.getLogger(AdminReload.class.getName());
-	
+
 	private static final String[] ADMIN_COMMANDS =
 	{
 		"admin_reload"
 	};
-	
+
 	private static final String RELOAD_USAGE = "Usage: //reload <config|access|npc|quest [quest_id|quest_name]|walker|htm[l] [file|directory]|multisell|buylist|teleport|skill|item|door|effect|handler|enchant>";
-	
+
 	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
@@ -64,7 +65,7 @@ public class AdminReload implements IAdminCommandHandler
 				activeChar.sendMessage(RELOAD_USAGE);
 				return true;
 			}
-			
+
 			final String type = st.nextToken();
 			switch (type.toLowerCase())
 			{
@@ -124,7 +125,7 @@ public class AdminReload implements IAdminCommandHandler
 					if (st.hasMoreElements())
 					{
 						final String path = st.nextToken();
-						final File file = new File(Config.DATAPACK_ROOT, "./datapack/html/" + path);
+						final File file = new File(Config.DATAPACK_ROOT, "datapack/html/" + path);
 						if (file.exists())
 						{
 							HtmCache.getInstance().reload(file);
@@ -238,6 +239,12 @@ public class AdminReload implements IAdminCommandHandler
 					AdminData.getInstance().broadcastMessageToGMs(activeChar.getName() + ": Reloaded transform data.");
 					break;
 				}
+                case "primeshop":
+                {
+                    PrimeShopTable.getInstance().reload();
+                    AdminData.getInstance().broadcastMessageToGMs(activeChar.getName() + ": Reloaded PrimeShop.");
+                    break;
+                }
 				default:
 				{
 					activeChar.sendMessage(RELOAD_USAGE);
@@ -248,7 +255,7 @@ public class AdminReload implements IAdminCommandHandler
 		}
 		return true;
 	}
-	
+
 	@Override
 	public String[] getAdminCommandList()
 	{

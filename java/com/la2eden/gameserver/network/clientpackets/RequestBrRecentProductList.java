@@ -16,7 +16,9 @@
  */
 package com.la2eden.gameserver.network.clientpackets;
 
-public final class RequestBrRecentProductList extends L2GameClientPacket {
+public final class RequestBrRecentProductList extends L2GameClientPacket
+{
+    private static final String TYPE = "[C] D0:8D RequestBRRecentProductList";
     @Override
     protected void readImpl()
     {
@@ -25,11 +27,12 @@ public final class RequestBrRecentProductList extends L2GameClientPacket {
     @Override
     protected void runImpl()
     {
+        // FIXME
     }
 
     @Override
     public String getType()
     {
-        return "[C] D0:8D RequestBRRecentProductList";
+        return TYPE;
     }
 }

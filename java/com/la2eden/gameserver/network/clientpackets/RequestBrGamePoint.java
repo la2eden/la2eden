@@ -19,7 +19,10 @@ package com.la2eden.gameserver.network.clientpackets;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 import com.la2eden.gameserver.network.serverpackets.ExBrGamePoint;
 
-public final class RequestBrGamePoint extends L2GameClientPacket {
+public final class RequestBrGamePoint extends L2GameClientPacket
+{
+    private static final String TYPE = "[C] D0:89 RequestBrGamePoint";
+
     @Override
     protected void readImpl()
     {
@@ -38,6 +41,6 @@ public final class RequestBrGamePoint extends L2GameClientPacket {
     @Override
     public String getType()
     {
-        return "[C] D0:89 RequestBRGamePoint";
+        return TYPE;
     }
 }

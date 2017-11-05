@@ -142,12 +142,18 @@
 	<admin command="admin_set_mp" accessLevel="100" />
 	<admin command="admin_set_cp" accessLevel="100" />
 
-    <!-- ADMIN PRIMESHOP -->
+    <!-- ADMIN PRIMEPOINTS -->
     <admin command="admin_primepoints" accessLevel="100" />
-	<admin command="admin_set_primepoints" accessLevel="100" />
-    <admin command="admin_give_primepoints" accessLevel="100" />
-    <admin command="admin_clear_primepoints" accessLevel="100" />
-    <admin command="admin_reward_primepoints" accessLevel="100" />
+	<admin command="admin_primepoints_set" accessLevel="100" />
+    <admin command="admin_primepoints_give" accessLevel="100" />
+    <admin command="admin_primepoints_clear" accessLevel="100" />
+    <admin command="admin_primepoints_all" accessLevel="100" />
+
+    <!-- ADMIN PRIMESHOP -->
+    <admin command="admin_primeshop" accessLevel="100" />
+    <admin command="admin_primeshop_add" accessLevel="100" />
+    <admin command="admin_primeshop_del" accessLevel="100" />
+    <admin command="admin_primeshop_update" accessLevel="100" />
 
 	<!-- ADMIN EFFECTS -->
 	<admin command="admin_invis" accessLevel="30" />

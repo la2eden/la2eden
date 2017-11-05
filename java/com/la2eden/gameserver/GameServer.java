@@ -151,7 +151,7 @@ public final class GameServer
 
 		if (Config.PRIMESHOP_ENABLED) {
             _log.info("PrimeShop: system is enabled.");
-            PrimeShopTable.getInstance();
+            PrimeShopTable.getInstance().load();
         }
 
 		printSection("Clans");

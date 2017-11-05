@@ -1,22 +1,26 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.la2eden.tools.dbinstaller.util.mysql;
 
-import java.awt.HeadlessException;
+import com.la2eden.tools.dbinstaller.DBOutputInterface;
+import com.la2eden.util.file.filter.SQLFilter;
+
+import javax.swing.*;
+import java.awt.*;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.sql.Connection;
@@ -25,28 +29,23 @@ import java.sql.Statement;
 import java.util.Arrays;
 import java.util.Scanner;
 
-import javax.swing.JOptionPane;
-
-import com.la2eden.tools.dbinstaller.DBOutputInterface;
-import com.la2eden.util.file.filter.SQLFilter;
-
 /**
  * @author mrTJO
  */
 public class ScriptExecutor
 {
 	DBOutputInterface _frame;
-	
+
 	public ScriptExecutor(DBOutputInterface frame)
 	{
 		_frame = frame;
 	}
-	
+
 	public void execSqlBatch(File dir)
 	{
 		execSqlBatch(dir, false);
 	}
-	
+
 	public void execSqlBatch(File dir, boolean skipErrors)
 	{
 		final File[] files = dir.listFiles(new SQLFilter());
@@ -63,12 +62,12 @@ public class ScriptExecutor
 			execSqlFile(files[i], skipErrors);
 		}
 	}
-	
+
 	public void execSqlFile(File file)
 	{
 		execSqlFile(file, false);
 	}
-	
+
 	public void execSqlFile(File file, boolean skipErrors)
 	{
 		_frame.appendToProgressArea("Installing " + file.getName());
@@ -89,13 +88,13 @@ public class ScriptExecutor
 				{
 					line = line.split("--")[0];
 				}
-				
+
 				line = line.trim();
 				if (!line.isEmpty())
 				{
 					sb.append(line + System.getProperty("line.separator"));
 				}
-				
+
 				if (line.endsWith(";"))
 				{
 					stmt.execute(sb.toString());
@@ -105,7 +104,7 @@ public class ScriptExecutor
 		}
 		catch (FileNotFoundException e)
 		{
-			JOptionPane.showMessageDialog(null, "File Not Found!: " + e.getMessage(), "Installer Error", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "File not found: " + e.getMessage(), "Installer Error", JOptionPane.ERROR_MESSAGE);
 		}
 		catch (SQLException e)
 		{
@@ -118,8 +117,8 @@ public class ScriptExecutor
 						"Continue",
 						"Abort"
 					};
-					
-					if (JOptionPane.showOptionDialog(null, "MySQL Error: " + e.getMessage(), "Script Error", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]) == 1)
+
+					if (JOptionPane.showOptionDialog(null, "MySQL error: " + e.getMessage(), "Script Error", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[0]) == 1)
 					{
 						System.exit(0);
 					}

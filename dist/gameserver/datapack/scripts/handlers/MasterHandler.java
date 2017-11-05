@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -47,7 +47,7 @@ import java.util.logging.Logger;
 public class MasterHandler
 {
 	private static final Logger _log = Logger.getLogger(MasterHandler.class.getName());
-	
+
 	private static final IHandler<?, ?>[] LOAD_INSTANCES =
 	{
 		ActionHandler.getInstance(),
@@ -63,7 +63,7 @@ public class MasterHandler
 		TargetHandler.getInstance(),
 		TelnetHandler.getInstance(),
 	};
-	
+
 	private static final Class<?>[][] HANDLERS =
 	{
 		{
@@ -142,6 +142,7 @@ public class MasterHandler
 			AdminPolymorph.class,
 			AdminPremium.class,
 			AdminPrimePoints.class,
+            AdminPrimeShop.class,
 			AdminPunishment.class,
 			AdminQuest.class,
 			AdminReload.class,
@@ -352,11 +353,11 @@ public class MasterHandler
 			ThreadHandler.class,
 		},
 	};
-	
+
 	public static void main(String[] args)
 	{
 		_log.log(Level.INFO, "Loading Handlers...");
-		
+
 		final Map<IHandler<?, ?>, Method> registerHandlerMethods = new HashMap<>();
 		for (IHandler<?, ?> loadInstance : LOAD_INSTANCES)
 		{
@@ -369,12 +370,12 @@ public class MasterHandler
 				}
 			}
 		}
-		
+
 		registerHandlerMethods.entrySet().stream().filter(e -> e.getValue() == null).forEach(e ->
 		{
 			_log.log(Level.WARNING, "Failed loading handlers of: " + e.getKey().getClass().getSimpleName() + " seems registerHandler function does not exist.");
 		});
-		
+
 		for (Class<?> classes[] : HANDLERS)
 		{
 			for (Class<?> c : classes)
@@ -383,7 +384,7 @@ public class MasterHandler
 				{
 					continue; // Disabled handler
 				}
-				
+
 				try
 				{
 					final Object handler = c.newInstance();
@@ -402,12 +403,12 @@ public class MasterHandler
 				}
 			}
 		}
-		
+
 		for (IHandler<?, ?> loadInstance : LOAD_INSTANCES)
 		{
 			_log.log(Level.INFO, loadInstance.getClass().getSimpleName() + ": Loaded " + loadInstance.size() + " Handlers");
 		}
-		
+
 		_log.log(Level.INFO, "Handlers Loaded...");
 	}
 }

@@ -19,7 +19,9 @@ package com.la2eden.gameserver.network.clientpackets;
 import com.la2eden.gameserver.datatables.PrimeShopTable;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 
-public final class RequestBrProductInfo extends L2GameClientPacket {
+public final class RequestBrProductInfo extends L2GameClientPacket
+{
+    private static final String TYPE = "[C] D0:8B RequestBRProductInfo";
     private int _brId;
 
     @Override
@@ -41,6 +43,6 @@ public final class RequestBrProductInfo extends L2GameClientPacket {
     @Override
     public String getType()
     {
-        return "[C] D0:8B RequestBRProductInfo";
+        return TYPE;
     }
 }

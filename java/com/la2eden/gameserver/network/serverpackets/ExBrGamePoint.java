@@ -18,7 +18,10 @@ package com.la2eden.gameserver.network.serverpackets;
 
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 
-public class ExBrGamePoint extends L2GameServerPacket {
+public class ExBrGamePoint extends L2GameServerPacket
+{
+    private static final String TYPE = "[S] FE:D5 ExBRGamePoint";
+
     private final int _charId;
     private final int _charPoints;
 
@@ -31,15 +34,15 @@ public class ExBrGamePoint extends L2GameServerPacket {
     @Override
     protected final void writeImpl()
     {
-        writeC(254);
-        writeH(213);
+        writeC(0xFE); // 254
+        writeH(0xD5); // 213
         writeD(_charId);
         writeQ(_charPoints);
-        writeD(0);
+        writeD(0x00); // ??
     }
 
     public String getType()
     {
-        return "[S] FE:D5 ExBRGamePoint";
+        return TYPE;
     }
 }
