@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -22,7 +22,7 @@ import com.la2eden.gameserver.model.quest.Quest;
 import com.la2eden.gameserver.util.Util;
 
 /**
- * Character Birthday event AI.<br>
+ * EventCharacter Birthday event AI.<br>
  * Updated to H5 by Nyaran.
  * @author Gnacik
  */
@@ -30,7 +30,7 @@ public final class CharacterBirthday extends Quest
 {
 	private static final int ALEGRIA = 32600;
 	private static int SPAWNS = 0;
-	
+
 	private final static int[] GK =
 	{
 		30006,
@@ -53,7 +53,7 @@ public final class CharacterBirthday extends Quest
 		31964,
 		32163
 	};
-	
+
 	private CharacterBirthday()
 	{
 		super(-1, CharacterBirthday.class.getSimpleName(), "events");
@@ -62,7 +62,7 @@ public final class CharacterBirthday extends Quest
 		addTalkId(ALEGRIA);
 		addTalkId(GK);
 	}
-	
+
 	@Override
 	public String onAdvEvent(String event, L2Npc npc, L2PcInstance player)
 	{
@@ -71,7 +71,7 @@ public final class CharacterBirthday extends Quest
 		{
 			npc.doDie(player);
 			SPAWNS--;
-			
+
 			htmltext = null;
 		}
 		else if (event.equalsIgnoreCase("change"))
@@ -93,7 +93,7 @@ public final class CharacterBirthday extends Quest
 		}
 		return htmltext;
 	}
-	
+
 	@Override
 	public String onTalk(L2Npc npc, L2PcInstance player)
 	{
@@ -101,7 +101,7 @@ public final class CharacterBirthday extends Quest
 		{
 			return "busy.htm";
 		}
-		
+
 		if (!Util.checkIfInRange(10, npc, player, true))
 		{
 			final L2Npc spawned = addSpawn(32600, player.getX() + 10, player.getY() + 10, player.getZ() + 10, 0, false, 0, true);
@@ -114,7 +114,7 @@ public final class CharacterBirthday extends Quest
 		}
 		return null;
 	}
-	
+
 	public static void main(String[] args)
 	{
 		new CharacterBirthday();

@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -38,7 +38,7 @@ public final class AdminChangeAccessLevel implements IAdminCommandHandler
 	{
 		"admin_changelvl"
 	};
-	
+
 	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
@@ -83,11 +83,11 @@ public final class AdminChangeAccessLevel implements IAdminCommandHandler
 					statement.close();
 					if (count == 0)
 					{
-						activeChar.sendMessage("Character not found or access level unaltered.");
+						activeChar.sendMessage("EventCharacter not found or access level unaltered.");
 					}
 					else
 					{
-						activeChar.sendMessage("Character's access level is now set to " + lvl);
+						activeChar.sendMessage("EventCharacter's access level is now set to " + lvl);
 					}
 				}
 				catch (SQLException se)
@@ -102,13 +102,13 @@ public final class AdminChangeAccessLevel implements IAdminCommandHandler
 		}
 		return true;
 	}
-	
+
 	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-	
+
 	/**
 	 * @param activeChar the active GM
 	 * @param player the online target

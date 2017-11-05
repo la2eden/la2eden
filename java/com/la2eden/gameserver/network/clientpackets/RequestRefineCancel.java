@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -32,13 +32,13 @@ public final class RequestRefineCancel extends L2GameClientPacket
 {
 	private static final String _C__D0_43_REQUESTREFINECANCEL = "[C] D0:43 RequestRefineCancel";
 	private int _targetItemObjId;
-	
+
 	@Override
 	protected void readImpl()
 	{
 		_targetItemObjId = readD();
 	}
-	
+
 	@Override
 	protected void runImpl()
 	{
@@ -47,7 +47,7 @@ public final class RequestRefineCancel extends L2GameClientPacket
 		{
 			return;
 		}
-		
+
 		final L2ItemInstance targetItem = activeChar.getInventory().getItemByObjectId(_targetItemObjId);
 		if (targetItem == null)
 		{
@@ -56,7 +56,7 @@ public final class RequestRefineCancel extends L2GameClientPacket
 		}
 		if (targetItem.getOwnerId() != activeChar.getObjectId())
 		{
-			Util.handleIllegalPlayerAction(getClient().getActiveChar(), "Warning!! Character " + getClient().getActiveChar().getName() + " of account " + getClient().getActiveChar().getAccountName() + " tryied to augment item that doesn't own.", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(getClient().getActiveChar(), "Warning!! EventCharacter " + getClient().getActiveChar().getName() + " of account " + getClient().getActiveChar().getAccountName() + " tryied to augment item that doesn't own.", Config.DEFAULT_PUNISH);
 			return;
 		}
 		// cannot remove augmentation from a not augmented item
@@ -66,7 +66,7 @@ public final class RequestRefineCancel extends L2GameClientPacket
 			activeChar.sendPacket(new ExVariationCancelResult(0));
 			return;
 		}
-		
+
 		// get the price
 		int price = 0;
 		switch (targetItem.getItem().getCrystalType())
@@ -121,7 +121,7 @@ public final class RequestRefineCancel extends L2GameClientPacket
 				activeChar.sendPacket(new ExVariationCancelResult(0));
 				return;
 		}
-		
+
 		// try to reduce the players adena
 		if (!activeChar.reduceAdena("RequestRefineCancel", price, null, true))
 		{
@@ -129,25 +129,25 @@ public final class RequestRefineCancel extends L2GameClientPacket
 			activeChar.sendPacket(SystemMessageId.YOU_DO_NOT_HAVE_ENOUGH_ADENA);
 			return;
 		}
-		
+
 		// unequip item
 		if (targetItem.isEquipped())
 		{
 			activeChar.disarmWeapons();
 		}
-		
+
 		// remove the augmentation
 		targetItem.removeAugmentation();
-		
+
 		// send ExVariationCancelResult
 		activeChar.sendPacket(new ExVariationCancelResult(1));
-		
+
 		// send inventory update
 		final InventoryUpdate iu = new InventoryUpdate();
 		iu.addModifiedItem(targetItem);
 		activeChar.sendPacket(iu);
 	}
-	
+
 	@Override
 	public String getType()
 	{

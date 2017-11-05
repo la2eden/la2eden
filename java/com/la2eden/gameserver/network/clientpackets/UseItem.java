@@ -1,23 +1,20 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.la2eden.gameserver.network.clientpackets;
-
-import java.util.concurrent.TimeUnit;
-import java.util.logging.Level;
 
 import com.la2eden.Config;
 import com.la2eden.gameserver.ThreadPoolManager;
@@ -47,26 +44,29 @@ import com.la2eden.gameserver.network.serverpackets.ExUseSharedGroupItem;
 import com.la2eden.gameserver.network.serverpackets.ItemList;
 import com.la2eden.gameserver.network.serverpackets.SystemMessage;
 
+import java.util.concurrent.TimeUnit;
+import java.util.logging.Level;
+
 public final class UseItem extends L2GameClientPacket
 {
 	private static final String _C__19_USEITEM = "[C] 19 UseItem";
-	
+
 	private int _objectId;
 	private boolean _ctrlPressed;
 	private int _itemId;
-	
+
 	/** Weapon Equip Task */
 	private static class WeaponEquipTask implements Runnable
 	{
 		private final L2ItemInstance item;
 		private final L2PcInstance activeChar;
-		
+
 		protected WeaponEquipTask(L2ItemInstance it, L2PcInstance character)
 		{
 			item = it;
 			activeChar = character;
 		}
-		
+
 		@Override
 		public void run()
 		{
@@ -74,14 +74,14 @@ public final class UseItem extends L2GameClientPacket
 			activeChar.useEquippableItem(item, false);
 		}
 	}
-	
+
 	@Override
 	protected void readImpl()
 	{
 		_objectId = readD();
 		_ctrlPressed = readD() != 0;
 	}
-	
+
 	@Override
 	protected void runImpl()
 	{
@@ -90,50 +90,50 @@ public final class UseItem extends L2GameClientPacket
 		{
 			return;
 		}
-		
+
 		if (Config.DEBUG)
 		{
 			_log.log(Level.INFO, activeChar + ": use item " + _objectId);
 		}
-		
+
 		// Flood protect UseItem
 		if (!getClient().getFloodProtectors().getUseItem().tryPerformAction("use item"))
 		{
 			return;
 		}
-		
+
 		if (activeChar.getActiveTradeList() != null)
 		{
 			activeChar.cancelActiveTrade();
 		}
-		
+
 		if (activeChar.getPrivateStoreType() != PrivateStoreType.NONE)
 		{
 			activeChar.sendPacket(SystemMessageId.WHILE_OPERATING_A_PRIVATE_STORE_OR_WORKSHOP_YOU_CANNOT_DISCARD_DESTROY_OR_TRADE_AN_ITEM);
 			activeChar.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		
+
 		final L2ItemInstance item = activeChar.getInventory().getItemByObjectId(_objectId);
 		if (item == null)
 		{
 			return;
 		}
-		
+
 		if (item.getItem().getType2() == L2Item.TYPE2_QUEST)
 		{
 			activeChar.sendPacket(SystemMessageId.YOU_CANNOT_USE_QUEST_ITEMS);
 			return;
 		}
-		
+
 		// No UseItem is allowed while the player is in special conditions
 		if (activeChar.isStunned() || activeChar.isParalyzed() || activeChar.isSleeping() || activeChar.isAfraid() || activeChar.isAlikeDead())
 		{
 			return;
 		}
-		
+
 		_itemId = item.getId();
-		
+
 		// Char cannot use item when dead
 		if (activeChar.isDead() || !activeChar.getInventory().canManipulateWithItemId(_itemId))
 		{
@@ -142,19 +142,19 @@ public final class UseItem extends L2GameClientPacket
 			activeChar.sendPacket(sm);
 			return;
 		}
-		
+
 		if (!item.isEquipped() && !item.getItem().checkCondition(activeChar, activeChar, true))
 		{
 			return;
 		}
-		
+
 		if (activeChar.isFishing() && ((_itemId < 6535) || (_itemId > 6540)))
 		{
 			// You cannot do anything else while fishing
 			activeChar.sendPacket(SystemMessageId.YOU_CANNOT_DO_THAT_WHILE_FISHING3);
 			return;
 		}
-		
+
 		if (!Config.ALT_GAME_KARMA_PLAYER_CAN_TELEPORT && (activeChar.getKarma() > 0))
 		{
 			final SkillHolder[] skills = item.getItem().getSkills();
@@ -170,7 +170,7 @@ public final class UseItem extends L2GameClientPacket
 				}
 			}
 		}
-		
+
 		// If the item has reuse time and it has not passed.
 		// Message from reuse delay must come from item.
 		final int reuseDelay = item.getReuseDelay();
@@ -184,7 +184,7 @@ public final class UseItem extends L2GameClientPacket
 				sendSharedGroupUpdate(activeChar, sharedReuseGroup, reuse, reuseDelay);
 				return;
 			}
-			
+
 			final long reuseOnGroup = activeChar.getReuseDelayOnGroup(sharedReuseGroup);
 			if (reuseOnGroup > 0)
 			{
@@ -193,7 +193,7 @@ public final class UseItem extends L2GameClientPacket
 				return;
 			}
 		}
-		
+
 		if (item.isEquipable())
 		{
 			// Don't allow to put formal wear while a cursed weapon is equipped.
@@ -201,18 +201,18 @@ public final class UseItem extends L2GameClientPacket
 			{
 				return;
 			}
-			
+
 			// Equip or unEquip
 			if (FortSiegeManager.getInstance().isCombat(_itemId))
 			{
 				return; // no message
 			}
-			
+
 			if (activeChar.isCombatFlagEquipped())
 			{
 				return;
 			}
-			
+
 			switch (item.getItem().getBodyPart())
 			{
 				case L2Item.SLOT_LR_HAND:
@@ -225,7 +225,7 @@ public final class UseItem extends L2GameClientPacket
 						activeChar.sendPacket(SystemMessageId.YOU_DO_NOT_MEET_THE_REQUIRED_CONDITION_TO_EQUIP_THAT_ITEM);
 						return;
 					}
-					
+
 					if (activeChar.isMounted())
 					{
 						activeChar.sendPacket(SystemMessageId.YOU_DO_NOT_MEET_THE_REQUIRED_CONDITION_TO_EQUIP_THAT_ITEM);
@@ -236,18 +236,18 @@ public final class UseItem extends L2GameClientPacket
 						activeChar.sendPacket(SystemMessageId.YOU_DO_NOT_MEET_THE_REQUIRED_CONDITION_TO_EQUIP_THAT_ITEM);
 						return;
 					}
-					
+
 					// Don't allow weapon/shield equipment if a cursed weapon is equipped.
 					if (activeChar.isCursedWeaponEquipped())
 					{
 						return;
 					}
-					
+
 					// Don't allow other Race to Wear Kamael exclusive Weapons.
 					if (!item.isEquipped() && item.isWeapon() && !activeChar.canOverrideCond(PcCondOverride.ITEM_CONDITIONS))
 					{
 						final L2Weapon wpn = (L2Weapon) item.getItem();
-						
+
 						switch (activeChar.getRace())
 						{
 							case KAMAEL:
@@ -304,12 +304,12 @@ public final class UseItem extends L2GameClientPacket
 					}
 				}
 			}
-			
+
 			if (activeChar.isCastingNow() || activeChar.isCastingSimultaneouslyNow())
 			{
 				// Creating next action class.
 				final NextAction nextAction = new NextAction(CtrlEvent.EVT_FINISH_CASTING, CtrlIntention.AI_INTENTION_CAST, () -> activeChar.useEquippableItem(item, true));
-				
+
 				// Binding next action to AI.
 				activeChar.getAI().setNextAction(nextAction);
 			}
@@ -333,7 +333,7 @@ public final class UseItem extends L2GameClientPacket
 				sendPacket(new ItemList(activeChar, false));
 				return;
 			}
-			
+
 			final L2EtcItem etcItem = item.getEtcItem();
 			final IItemHandler handler = ItemHandler.getInstance().getHandler(etcItem);
 			if (handler == null)
@@ -348,7 +348,7 @@ public final class UseItem extends L2GameClientPacket
 				}
 				return;
 			}
-			
+
 			// Item reuse time should be added if the item is successfully used.
 			// Skill reuse delay is done at handlers.itemhandlers.ItemSkillsTemplate;
 			if (handler.useItem(activeChar, item, _ctrlPressed))
@@ -361,7 +361,7 @@ public final class UseItem extends L2GameClientPacket
 			}
 		}
 	}
-	
+
 	private void reuseData(L2PcInstance activeChar, L2ItemInstance item, long remainingTime)
 	{
 		final int hours = (int) (remainingTime / 3600000L);
@@ -389,7 +389,7 @@ public final class UseItem extends L2GameClientPacket
 		sm.addInt(seconds);
 		activeChar.sendPacket(sm);
 	}
-	
+
 	private void sendSharedGroupUpdate(L2PcInstance activeChar, int group, long remaining, int reuse)
 	{
 		if (group > 0)
@@ -397,13 +397,13 @@ public final class UseItem extends L2GameClientPacket
 			activeChar.sendPacket(new ExUseSharedGroupItem(_itemId, group, remaining, reuse));
 		}
 	}
-	
+
 	@Override
 	public String getType()
 	{
 		return _C__19_USEITEM;
 	}
-	
+
 	@Override
 	protected boolean triggersOnActionRequest()
 	{

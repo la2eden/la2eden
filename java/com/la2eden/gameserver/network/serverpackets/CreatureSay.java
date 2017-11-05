@@ -1,28 +1,28 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 package com.la2eden.gameserver.network.serverpackets;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.la2eden.gameserver.enums.ChatType;
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 import com.la2eden.gameserver.network.NpcStringId;
 import com.la2eden.gameserver.network.SystemMessageId;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public final class CreatureSay extends L2GameServerPacket
 {
@@ -33,7 +33,7 @@ public final class CreatureSay extends L2GameServerPacket
 	private String _text = null;
 	private int _npcString = -1;
 	private List<String> _parameters;
-	
+
 	/**
 	 * @param objectId
 	 * @param messageType
@@ -47,7 +47,7 @@ public final class CreatureSay extends L2GameServerPacket
 		_charName = charName;
 		_text = text;
 	}
-	
+
 	public CreatureSay(int objectId, ChatType messageType, int charId, NpcStringId npcString)
 	{
 		_objectId = objectId;
@@ -55,7 +55,7 @@ public final class CreatureSay extends L2GameServerPacket
 		_charId = charId;
 		_npcString = npcString.getId();
 	}
-	
+
 	public CreatureSay(int objectId, ChatType messageType, String charName, NpcStringId npcString)
 	{
 		_objectId = objectId;
@@ -63,7 +63,7 @@ public final class CreatureSay extends L2GameServerPacket
 		_charName = charName;
 		_npcString = npcString.getId();
 	}
-	
+
 	public CreatureSay(int objectId, ChatType messageType, int charId, SystemMessageId sysString)
 	{
 		_objectId = objectId;
@@ -71,7 +71,7 @@ public final class CreatureSay extends L2GameServerPacket
 		_charId = charId;
 		_npcString = sysString.getId();
 	}
-	
+
 	/**
 	 * String parameter for argument S1,S2,.. in npcstring-e.dat
 	 * @param text
@@ -84,7 +84,7 @@ public final class CreatureSay extends L2GameServerPacket
 		}
 		_parameters.add(text);
 	}
-	
+
 	@Override
 	protected final void writeImpl()
 	{
@@ -112,7 +112,7 @@ public final class CreatureSay extends L2GameServerPacket
 			}
 		}
 	}
-	
+
 	@Override
 	public final void runImpl()
 	{

@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -41,17 +41,17 @@ import com.la2eden.gameserver.util.Util;
 public final class RequestDestroyItem extends L2GameClientPacket
 {
 	private static final String _C__60_REQUESTDESTROYITEM = "[C] 60 RequestDestroyItem";
-	
+
 	private int _objectId;
 	private long _count;
-	
+
 	@Override
 	protected void readImpl()
 	{
 		_objectId = readD();
 		_count = readQ();
 	}
-	
+
 	@Override
 	protected void runImpl()
 	{
@@ -60,39 +60,39 @@ public final class RequestDestroyItem extends L2GameClientPacket
 		{
 			return;
 		}
-		
+
 		if (_count <= 0)
 		{
 			if (_count < 0)
 			{
-				Util.handleIllegalPlayerAction(activeChar, "[RequestDestroyItem] Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to destroy item with oid " + _objectId + " but has count < 0!", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(activeChar, "[RequestDestroyItem] EventCharacter " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to destroy item with oid " + _objectId + " but has count < 0!", Config.DEFAULT_PUNISH);
 			}
 			return;
 		}
-		
+
 		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("destroy"))
 		{
 			activeChar.sendMessage("You are destroying items too fast.");
 			return;
 		}
-		
+
 		long count = _count;
-		
+
 		if (activeChar.isProcessingTransaction() || (activeChar.getPrivateStoreType() != PrivateStoreType.NONE))
 		{
 			activeChar.sendPacket(SystemMessageId.WHILE_OPERATING_A_PRIVATE_STORE_OR_WORKSHOP_YOU_CANNOT_DISCARD_DESTROY_OR_TRADE_AN_ITEM);
 			return;
 		}
-		
+
 		final L2ItemInstance itemToRemove = activeChar.getInventory().getItemByObjectId(_objectId);
-		
+
 		// if we can't find the requested item, its actually a cheat
 		if (itemToRemove == null)
 		{
 			activeChar.sendPacket(SystemMessageId.THIS_ITEM_CANNOT_BE_DISCARDED);
 			return;
 		}
-		
+
 		// Cannot discard item that the skill is consuming
 		if (activeChar.isCastingNow())
 		{
@@ -111,9 +111,9 @@ public final class RequestDestroyItem extends L2GameClientPacket
 				return;
 			}
 		}
-		
+
 		final int itemId = itemToRemove.getId();
-		
+
 		if ((!activeChar.canOverrideCond(PcCondOverride.DESTROY_ALL_ITEMS) && !itemToRemove.isDestroyable()) || CursedWeaponsManager.getInstance().isCursed(itemId))
 		{
 			if (itemToRemove.isHeroItem())
@@ -126,31 +126,31 @@ public final class RequestDestroyItem extends L2GameClientPacket
 			}
 			return;
 		}
-		
+
 		if (!itemToRemove.isStackable() && (count > 1))
 		{
-			Util.handleIllegalPlayerAction(activeChar, "[RequestDestroyItem] Character " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to destroy a non-stackable item with oid " + _objectId + " but has count > 1!", Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(activeChar, "[RequestDestroyItem] EventCharacter " + activeChar.getName() + " of account " + activeChar.getAccountName() + " tried to destroy a non-stackable item with oid " + _objectId + " but has count > 1!", Config.DEFAULT_PUNISH);
 			return;
 		}
-		
+
 		if (!activeChar.getInventory().canManipulateWithItemId(itemToRemove.getId()))
 		{
 			activeChar.sendMessage("You cannot use this item.");
 			return;
 		}
-		
+
 		if (_count > itemToRemove.getCount())
 		{
 			count = itemToRemove.getCount();
 		}
-		
+
 		if (itemToRemove.getItem().isPetItem())
 		{
 			if (activeChar.hasSummon() && (activeChar.getSummon().getControlObjectId() == _objectId))
 			{
 				activeChar.getSummon().unSummon(activeChar);
 			}
-			
+
 			try (Connection con = DatabaseFactory.getInstance().getConnection();
 				PreparedStatement statement = con.prepareStatement("DELETE FROM pets WHERE item_obj_id=?"))
 			{
@@ -166,7 +166,7 @@ public final class RequestDestroyItem extends L2GameClientPacket
 		{
 			itemToRemove.endOfLife();
 		}
-		
+
 		if (itemToRemove.isEquipped())
 		{
 			if (itemToRemove.getEnchantLevel() > 0)
@@ -182,9 +182,9 @@ public final class RequestDestroyItem extends L2GameClientPacket
 				sm.addItemName(itemToRemove);
 				activeChar.sendPacket(sm);
 			}
-			
+
 			final L2ItemInstance[] unequiped = activeChar.getInventory().unEquipItemInSlotAndRecord(itemToRemove.getLocationSlot());
-			
+
 			final InventoryUpdate iu = new InventoryUpdate();
 			for (L2ItemInstance itm : unequiped)
 			{
@@ -192,14 +192,14 @@ public final class RequestDestroyItem extends L2GameClientPacket
 			}
 			activeChar.sendPacket(iu);
 		}
-		
+
 		final L2ItemInstance removedItem = activeChar.getInventory().destroyItem("Destroy", itemToRemove, count, activeChar, null);
-		
+
 		if (removedItem == null)
 		{
 			return;
 		}
-		
+
 		if (!Config.FORCE_INVENTORY_UPDATE)
 		{
 			final InventoryUpdate iu = new InventoryUpdate();
@@ -217,12 +217,12 @@ public final class RequestDestroyItem extends L2GameClientPacket
 		{
 			sendPacket(new ItemList(activeChar, true));
 		}
-		
+
 		final StatusUpdate su = new StatusUpdate(activeChar);
 		su.addAttribute(StatusUpdate.CUR_LOAD, activeChar.getCurrentLoad());
 		activeChar.sendPacket(su);
 	}
-	
+
 	@Override
 	public String getType()
 	{

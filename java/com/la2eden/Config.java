@@ -58,7 +58,7 @@ public final class Config
 	// --------------------------------------------------
 	// L2J Initialization File Definitions
 	// --------------------------------------------------
-	public static final String CHARACTER_CONFIG_FILE = "./config/main/Character.ini";
+	public static final String CHARACTER_CONFIG_FILE = "./config/main/EventCharacter.ini";
 	public static final String FEATURE_CONFIG_FILE = "./config/main/Feature.ini";
 	public static final String FORTSIEGE_CONFIGURATION_FILE = "./config/main/FortSiege.ini";
 	public static final String GENERAL_CONFIG_FILE = "./config/main/General.ini";
@@ -1459,7 +1459,7 @@ public final class Config
 			ALLOW_WYVERN_DURING_SIEGE = Feature.getBoolean("AllowRideWyvernDuringSiege", true);
 			ALLOW_MOUNTS_DURING_SIEGE = Feature.getBoolean("AllowRideMountsDuringSiege", false);
 
-			// Load Character L2Properties file (if exists)
+			// Load EventCharacter L2Properties file (if exists)
 			final PropertiesParser character = new PropertiesParser(CHARACTER_CONFIG_FILE);
 
 			PLAYER_DELEVEL = character.getBoolean("Delevel", true);

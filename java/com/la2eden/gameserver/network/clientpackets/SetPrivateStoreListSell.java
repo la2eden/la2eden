@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -38,12 +38,12 @@ import com.la2eden.gameserver.util.Util;
 public class SetPrivateStoreListSell extends L2GameClientPacket
 {
 	private static final String _C__31_SETPRIVATESTORELISTSELL = "[C] 31 SetPrivateStoreListSell";
-	
+
 	private static final int BATCH_LENGTH = 20; // length of the one item
-	
+
 	private boolean _packageSale;
 	private Item[] _items = null;
-	
+
 	@Override
 	protected void readImpl()
 	{
@@ -53,14 +53,14 @@ public class SetPrivateStoreListSell extends L2GameClientPacket
 		{
 			return;
 		}
-		
+
 		_items = new Item[count];
 		for (int i = 0; i < count; i++)
 		{
 			final int itemId = readD();
 			final long cnt = readQ();
 			final long price = readQ();
-			
+
 			if ((itemId < 1) || (cnt < 1) || (price < 0))
 			{
 				_items = null;
@@ -69,7 +69,7 @@ public class SetPrivateStoreListSell extends L2GameClientPacket
 			_items[i] = new Item(itemId, cnt, price);
 		}
 	}
-	
+
 	@Override
 	protected void runImpl()
 	{
@@ -78,7 +78,7 @@ public class SetPrivateStoreListSell extends L2GameClientPacket
 		{
 			return;
 		}
-		
+
 		if (_items == null)
 		{
 			player.sendPacket(SystemMessageId.INCORRECT_ITEM_COUNT);
@@ -86,13 +86,13 @@ public class SetPrivateStoreListSell extends L2GameClientPacket
 			player.broadcastUserInfo();
 			return;
 		}
-		
+
 		if (!player.getAccessLevel().allowTransaction())
 		{
 			player.sendPacket(SystemMessageId.YOU_ARE_NOT_AUTHORIZED_TO_DO_THAT);
 			return;
 		}
-		
+
 		if (AttackStanceTaskManager.getInstance().hasAttackStanceTask(player) || player.isInDuel())
 		{
 			player.sendPacket(SystemMessageId.WHILE_YOU_ARE_ENGAGED_IN_COMBAT_YOU_CANNOT_OPERATE_A_PRIVATE_STORE_OR_PRIVATE_WORKSHOP);
@@ -100,7 +100,7 @@ public class SetPrivateStoreListSell extends L2GameClientPacket
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		
+
 		if (player.isInsideZone(ZoneId.NO_STORE))
 		{
 			player.sendPacket(new PrivateStoreManageListSell(player, _packageSale));
@@ -108,14 +108,14 @@ public class SetPrivateStoreListSell extends L2GameClientPacket
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		
+
 		if (!player.canOpenPrivateStore())
 		{
 			player.sendPacket(new PrivateStoreManageListSell(player, _packageSale));
 			player.sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		
+
 		// Check maximum number of allowed slots for pvt shops
 		if (_items.length > player.getPrivateSellStoreLimit())
 		{
@@ -123,28 +123,28 @@ public class SetPrivateStoreListSell extends L2GameClientPacket
 			player.sendPacket(SystemMessageId.YOU_HAVE_EXCEEDED_THE_QUANTITY_THAT_CAN_BE_INPUTTED);
 			return;
 		}
-		
+
 		final TradeList tradeList = player.getSellList();
 		tradeList.clear();
 		tradeList.setPackaged(_packageSale);
-		
+
 		long totalCost = player.getAdena();
 		for (Item i : _items)
 		{
 			if (!i.addToTradeList(tradeList))
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to set price more than " + MAX_ADENA + " adena in Private Store - Sell.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! EventCharacter " + player.getName() + " of account " + player.getAccountName() + " tried to set price more than " + MAX_ADENA + " adena in Private Store - Sell.", Config.DEFAULT_PUNISH);
 				return;
 			}
-			
+
 			totalCost += i.getPrice();
 			if (totalCost > MAX_ADENA)
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to set total price more than " + MAX_ADENA + " adena in Private Store - Sell.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! EventCharacter " + player.getName() + " of account " + player.getAccountName() + " tried to set total price more than " + MAX_ADENA + " adena in Private Store - Sell.", Config.DEFAULT_PUNISH);
 				return;
 			}
 		}
-		
+
 		player.sitDown();
 		if (_packageSale)
 		{
@@ -154,9 +154,9 @@ public class SetPrivateStoreListSell extends L2GameClientPacket
 		{
 			player.setPrivateStoreType(PrivateStoreType.SELL);
 		}
-		
+
 		player.broadcastUserInfo();
-		
+
 		if (_packageSale)
 		{
 			player.broadcastPacket(new ExPrivateStoreSetWholeMsg(player));
@@ -166,37 +166,37 @@ public class SetPrivateStoreListSell extends L2GameClientPacket
 			player.broadcastPacket(new PrivateStoreMsgSell(player));
 		}
 	}
-	
+
 	private static class Item
 	{
 		private final int _itemId;
 		private final long _count;
 		private final long _price;
-		
+
 		public Item(int id, long num, long pri)
 		{
 			_itemId = id;
 			_count = num;
 			_price = pri;
 		}
-		
+
 		public boolean addToTradeList(TradeList list)
 		{
 			if ((MAX_ADENA / _count) < _price)
 			{
 				return false;
 			}
-			
+
 			list.addItem(_itemId, _count, _price);
 			return true;
 		}
-		
+
 		public long getPrice()
 		{
 			return _count * _price;
 		}
 	}
-	
+
 	@Override
 	public String getType()
 	{

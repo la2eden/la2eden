@@ -101,7 +101,7 @@ public final class CharacterCreate extends L2GameClientPacket
 		{
 			if (Config.DEBUG)
 			{
-				_log.fine("Character Creation Failure: Character name " + _name + " is invalid. Message generated: Your title cannot exceed 16 characters in length. Please try again.");
+				_log.fine("EventCharacter Creation Failure: EventCharacter name " + _name + " is invalid. Message generated: Your title cannot exceed 16 characters in length. Please try again.");
 			}
 
 			sendPacket(new CharCreateFail(CharCreateFail.REASON_16_ENG_CHARS));
@@ -125,7 +125,7 @@ public final class CharacterCreate extends L2GameClientPacket
 		{
 			if (Config.DEBUG)
 			{
-				_log.fine("Character Creation Failure: Character name " + _name + " is invalid. Message generated: Incorrect name. Please try again.");
+				_log.fine("EventCharacter Creation Failure: EventCharacter name " + _name + " is invalid. Message generated: Incorrect name. Please try again.");
 			}
 
 			sendPacket(new CharCreateFail(CharCreateFail.REASON_INCORRECT_NAME));
@@ -134,7 +134,7 @@ public final class CharacterCreate extends L2GameClientPacket
 
 		if ((_face > 2) || (_face < 0))
 		{
-			_log.warning("Character Creation Failure: Character face " + _face + " is invalid. Possible client hack. " + getClient());
+			_log.warning("EventCharacter Creation Failure: EventCharacter face " + _face + " is invalid. Possible client hack. " + getClient());
 
 			sendPacket(new CharCreateFail(CharCreateFail.REASON_CREATION_FAILED));
 			return;
@@ -142,7 +142,7 @@ public final class CharacterCreate extends L2GameClientPacket
 
 		if ((_hairStyle < 0) || ((_sex == 0) && (_hairStyle > 4)) || ((_sex != 0) && (_hairStyle > 6)))
 		{
-			_log.warning("Character Creation Failure: Character hair style " + _hairStyle + " is invalid. Possible client hack. " + getClient());
+			_log.warning("EventCharacter Creation Failure: EventCharacter hair style " + _hairStyle + " is invalid. Possible client hack. " + getClient());
 
 			sendPacket(new CharCreateFail(CharCreateFail.REASON_CREATION_FAILED));
 			return;
@@ -150,7 +150,7 @@ public final class CharacterCreate extends L2GameClientPacket
 
 		if ((_hairColor > 3) || (_hairColor < 0))
 		{
-			_log.warning("Character Creation Failure: Character hair color " + _hairColor + " is invalid. Possible client hack. " + getClient());
+			_log.warning("EventCharacter Creation Failure: EventCharacter hair color " + _hairColor + " is invalid. Possible client hack. " + getClient());
 
 			sendPacket(new CharCreateFail(CharCreateFail.REASON_CREATION_FAILED));
 			return;
@@ -178,7 +178,7 @@ public final class CharacterCreate extends L2GameClientPacket
 			{
 				if (Config.DEBUG)
 				{
-					_log.fine("Character Creation Failure: Message generated: You cannot create another character. Please delete the existing character and try again.");
+					_log.fine("EventCharacter Creation Failure: Message generated: You cannot create another character. Please delete the existing character and try again.");
 				}
 
 				sendPacket(new CharCreateFail(CharCreateFail.REASON_NAME_ALREADY_EXISTS));
@@ -190,7 +190,7 @@ public final class CharacterCreate extends L2GameClientPacket
 			{
 				if (Config.DEBUG)
 				{
-					_log.fine("Character Creation Failure: " + _name + " classId: " + _classId + " Template: " + template + " Message generated: Your character creation has failed.");
+					_log.fine("EventCharacter Creation Failure: " + _name + " classId: " + _classId + " Template: " + template + " Message generated: Your character creation has failed.");
 				}
 
 				sendPacket(new CharCreateFail(CharCreateFail.REASON_CREATION_FAILED));
@@ -230,7 +230,7 @@ public final class CharacterCreate extends L2GameClientPacket
 		}
 		catch (PatternSyntaxException e) // case of illegal pattern
 		{
-			_log.warning("ERROR : Character name pattern of config is wrong!");
+			_log.warning("ERROR : EventCharacter name pattern of config is wrong!");
 			pattern = Pattern.compile(".*");
 		}
 		final Matcher regexp = pattern.matcher(test);
@@ -245,7 +245,7 @@ public final class CharacterCreate extends L2GameClientPacket
 	{
 		if (Config.DEBUG)
 		{
-			_log.fine("Character init start");
+			_log.fine("EventCharacter init start");
 		}
 
 		L2World.getInstance().storeObject(newChar);
@@ -340,7 +340,7 @@ public final class CharacterCreate extends L2GameClientPacket
 
 		if (Config.DEBUG)
 		{
-			_log.fine("Character init end");
+			_log.fine("EventCharacter init end");
 		}
 	}
 

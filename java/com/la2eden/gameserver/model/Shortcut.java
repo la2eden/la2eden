@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -34,11 +34,11 @@ public class Shortcut
 	private final int _id;
 	/** Shortcut level (skills). */
 	private final int _level;
-	/** Character type: 1 player, 2 summon. */
+	/** EventCharacter type: 1 player, 2 summon. */
 	private final int _characterType;
 	/** Shared reuse group. */
 	private int _sharedReuseGroup = -1;
-	
+
 	public Shortcut(int slot, int page, ShortcutType type, int id, int level, int characterType)
 	{
 		_slot = slot;
@@ -48,7 +48,7 @@ public class Shortcut
 		_level = level;
 		_characterType = characterType;
 	}
-	
+
 	/**
 	 * Gets the shortcut ID.
 	 * @return the ID
@@ -57,7 +57,7 @@ public class Shortcut
 	{
 		return _id;
 	}
-	
+
 	/**
 	 * Gets the shortcut level.
 	 * @return the level
@@ -66,7 +66,7 @@ public class Shortcut
 	{
 		return _level;
 	}
-	
+
 	/**
 	 * Gets the shortcut page.
 	 * @return the page
@@ -75,7 +75,7 @@ public class Shortcut
 	{
 		return _page;
 	}
-	
+
 	/**
 	 * Gets the shortcut slot.
 	 * @return the slot
@@ -84,7 +84,7 @@ public class Shortcut
 	{
 		return _slot;
 	}
-	
+
 	/**
 	 * Gets the shortcut type.
 	 * @return the type
@@ -93,7 +93,7 @@ public class Shortcut
 	{
 		return _type;
 	}
-	
+
 	/**
 	 * Gets the shortcut character type.
 	 * @return the character type
@@ -102,7 +102,7 @@ public class Shortcut
 	{
 		return _characterType;
 	}
-	
+
 	/**
 	 * Gets the shared reuse group.
 	 * @return the shared reuse group
@@ -111,7 +111,7 @@ public class Shortcut
 	{
 		return _sharedReuseGroup;
 	}
-	
+
 	/**
 	 * Sets the shared reuse group.
 	 * @param sharedReuseGroup the shared reuse group to set

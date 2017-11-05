@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -39,13 +39,13 @@ import com.la2eden.gameserver.util.Util;
 public final class RequestRefundItem extends L2GameClientPacket
 {
 	private static final String _C__D0_75_REQUESTREFUNDITEM = "[C] D0:75 RequestRefundItem";
-	
+
 	private static final int BATCH_LENGTH = 4; // length of the one item
 	private static final int CUSTOM_CB_SELL_LIST = 423;
-	
+
 	private int _listId;
 	private int[] _items = null;
-	
+
 	@Override
 	protected void readImpl()
 	{
@@ -55,14 +55,14 @@ public final class RequestRefundItem extends L2GameClientPacket
 		{
 			return;
 		}
-		
+
 		_items = new int[count];
 		for (int i = 0; i < count; i++)
 		{
 			_items[i] = readD();
 		}
 	}
-	
+
 	@Override
 	protected void runImpl()
 	{
@@ -71,25 +71,25 @@ public final class RequestRefundItem extends L2GameClientPacket
 		{
 			return;
 		}
-		
+
 		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("refund"))
 		{
 			player.sendMessage("You are using refund too fast.");
 			return;
 		}
-		
+
 		if (_items == null)
 		{
 			sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		
+
 		if (!player.hasRefund())
 		{
 			sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		
+
 		final L2Object target = player.getTarget();
 		L2Character merchant = null;
 		if (!player.isGM() && (_listId != CUSTOM_CB_SELL_LIST))
@@ -101,66 +101,66 @@ public final class RequestRefundItem extends L2GameClientPacket
 			}
 			merchant = (L2Character) target;
 		}
-		
+
 		if ((merchant == null) && !player.isGM() && (_listId != CUSTOM_CB_SELL_LIST))
 		{
 			sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		
+
 		final L2BuyList buyList = BuyListData.getInstance().getBuyList(_listId);
 		if (buyList == null)
 		{
-			Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent a false BuyList list_id " + _listId, Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, "Warning!! EventCharacter " + player.getName() + " of account " + player.getAccountName() + " sent a false BuyList list_id " + _listId, Config.DEFAULT_PUNISH);
 			return;
 		}
-		
+
 		if ((merchant != null) && !buyList.isNpcAllowed(merchant.getId()))
 		{
 			sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		
+
 		long weight = 0;
 		long adena = 0;
 		long slots = 0;
-		
+
 		final L2ItemInstance[] refund = player.getRefund().getItems();
 		final int[] objectIds = new int[_items.length];
-		
+
 		for (int i = 0; i < _items.length; i++)
 		{
 			final int idx = _items[i];
 			if ((idx < 0) || (idx >= refund.length))
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent invalid refund index", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! EventCharacter " + player.getName() + " of account " + player.getAccountName() + " sent invalid refund index", Config.DEFAULT_PUNISH);
 				return;
 			}
-			
+
 			// check for duplicates - indexes
 			for (int j = i + 1; j < _items.length; j++)
 			{
 				if (idx == _items[j])
 				{
-					Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " sent duplicate refund index", Config.DEFAULT_PUNISH);
+					Util.handleIllegalPlayerAction(player, "Warning!! EventCharacter " + player.getName() + " of account " + player.getAccountName() + " sent duplicate refund index", Config.DEFAULT_PUNISH);
 					return;
 				}
 			}
-			
+
 			final L2ItemInstance item = refund[idx];
 			final L2Item template = item.getItem();
 			objectIds[i] = item.getObjectId();
-			
+
 			// second check for duplicates - object ids
 			for (int j = 0; j < i; j++)
 			{
 				if (objectIds[i] == objectIds[j])
 				{
-					Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " has duplicate items in refund list", Config.DEFAULT_PUNISH);
+					Util.handleIllegalPlayerAction(player, "Warning!! EventCharacter " + player.getName() + " of account " + player.getAccountName() + " has duplicate items in refund list", Config.DEFAULT_PUNISH);
 					return;
 				}
 			}
-			
+
 			final long count = item.getCount();
 			weight += count * template.getWeight();
 			adena += (count * template.getReferencePrice()) / 2;
@@ -173,28 +173,28 @@ public final class RequestRefundItem extends L2GameClientPacket
 				slots++;
 			}
 		}
-		
+
 		if ((weight > Integer.MAX_VALUE) || (weight < 0) || !player.getInventory().validateWeight((int) weight))
 		{
 			player.sendPacket(SystemMessageId.YOU_HAVE_EXCEEDED_THE_WEIGHT_LIMIT);
 			sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		
+
 		if ((slots > Integer.MAX_VALUE) || (slots < 0) || !player.getInventory().validateCapacity((int) slots))
 		{
 			player.sendPacket(SystemMessageId.YOUR_INVENTORY_IS_FULL);
 			sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		
+
 		if ((adena < 0) || !player.reduceAdena("Refund", adena, player.getLastFolkNPC(), false))
 		{
 			player.sendPacket(SystemMessageId.YOU_DO_NOT_HAVE_ENOUGH_ADENA);
 			sendPacket(ActionFailed.STATIC_PACKET);
 			return;
 		}
-		
+
 		for (int i = 0; i < _items.length; i++)
 		{
 			final L2ItemInstance item = player.getRefund().transferItem("Refund", objectIds[i], Long.MAX_VALUE, player.getInventory(), player, player.getLastFolkNPC());
@@ -204,14 +204,14 @@ public final class RequestRefundItem extends L2GameClientPacket
 				continue;
 			}
 		}
-		
+
 		// Update current load status on player
 		final StatusUpdate su = new StatusUpdate(player);
 		su.addAttribute(StatusUpdate.CUR_LOAD, player.getCurrentLoad());
 		player.sendPacket(su);
 		player.sendPacket(new ExBuySellList(player, true));
 	}
-	
+
 	@Override
 	public String getType()
 	{

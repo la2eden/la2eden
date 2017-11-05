@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -31,11 +31,11 @@ import com.la2eden.gameserver.network.serverpackets.TradeOwnAdd;
 public final class AddTradeItem extends L2GameClientPacket
 {
 	private static final String _C__1B_ADDTRADEITEM = "[C] 1B AddTradeItem";
-	
+
 	private int _tradeId;
 	private int _objectId;
 	private long _count;
-	
+
 	@Override
 	protected void readImpl()
 	{
@@ -43,7 +43,7 @@ public final class AddTradeItem extends L2GameClientPacket
 		_objectId = readD();
 		_count = readQ();
 	}
-	
+
 	@Override
 	protected void runImpl()
 	{
@@ -52,46 +52,46 @@ public final class AddTradeItem extends L2GameClientPacket
 		{
 			return;
 		}
-		
+
 		final TradeList trade = player.getActiveTradeList();
 		if (trade == null)
 		{
-			_log.warning("Character: " + player.getName() + " requested item:" + _objectId + " add without active tradelist:" + _tradeId);
+			_log.warning("EventCharacter: " + player.getName() + " requested item:" + _objectId + " add without active tradelist:" + _tradeId);
 			return;
 		}
-		
+
 		final L2PcInstance partner = trade.getPartner();
 		if ((partner == null) || (L2World.getInstance().getPlayer(partner.getObjectId()) == null) || (partner.getActiveTradeList() == null))
 		{
 			// Trade partner not found, cancel trade
 			if (partner != null)
 			{
-				_log.warning("Character:" + player.getName() + " requested invalid trade object: " + _objectId);
+				_log.warning("EventCharacter:" + player.getName() + " requested invalid trade object: " + _objectId);
 			}
 			player.sendPacket(SystemMessageId.THAT_PLAYER_IS_NOT_ONLINE);
 			player.cancelActiveTrade();
 			return;
 		}
-		
+
 		if (trade.isConfirmed() || partner.getActiveTradeList().isConfirmed())
 		{
 			player.sendPacket(SystemMessageId.YOU_MAY_NO_LONGER_ADJUST_ITEMS_IN_THE_TRADE_BECAUSE_THE_TRADE_HAS_BEEN_CONFIRMED);
 			return;
 		}
-		
+
 		if (!player.getAccessLevel().allowTransaction())
 		{
 			player.sendMessage("Transactions are disabled for your Access Level.");
 			player.cancelActiveTrade();
 			return;
 		}
-		
+
 		if (!player.validateItemManipulation(_objectId, "trade"))
 		{
 			player.sendPacket(SystemMessageId.NOTHING_HAPPENED);
 			return;
 		}
-		
+
 		final TradeItem item = trade.addItem(_objectId, _count);
 		if (item != null)
 		{
@@ -99,7 +99,7 @@ public final class AddTradeItem extends L2GameClientPacket
 			trade.getPartner().sendPacket(new TradeOtherAdd(item));
 		}
 	}
-	
+
 	@Override
 	public String getType()
 	{

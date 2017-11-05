@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -31,7 +31,7 @@ public class EnchantFormatter extends AbstractFormatter
 		final Object[] params = record.getParameters();
 		final StringBuilder output = new StringBuilder(32 + record.getMessage().length() + (params != null ? 10 * params.length : 0));
 		output.append(super.format(record));
-		
+
 		if (params != null)
 		{
 			for (Object p : params)
@@ -40,13 +40,13 @@ public class EnchantFormatter extends AbstractFormatter
 				{
 					continue;
 				}
-				
+
 				output.append(", ");
-				
+
 				if (p instanceof L2PcInstance)
 				{
 					L2PcInstance player = (L2PcInstance) p;
-					output.append("Character:");
+					output.append("EventCharacter:");
 					output.append(player.getName());
 					output.append(" [");
 					output.append(player.getObjectId());
@@ -97,7 +97,7 @@ public class EnchantFormatter extends AbstractFormatter
 				}
 			}
 		}
-		
+
 		output.append(Config.EOL);
 		return output.toString();
 	}

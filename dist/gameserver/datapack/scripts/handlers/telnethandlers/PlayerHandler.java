@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -54,7 +54,7 @@ public class PlayerHandler implements ITelnetHandler
 		"jail",
 		"unjail"
 	};
-	
+
 	@Override
 	public boolean useCommand(String command, PrintWriter _print, Socket _cSocket, int _uptime)
 	{
@@ -79,13 +79,13 @@ public class PlayerHandler implements ITelnetHandler
 		else if (command.startsWith("give"))
 		{
 			final StringTokenizer st = new StringTokenizer(command.substring(5));
-			
+
 			try
 			{
 				final L2PcInstance player = L2World.getInstance().getPlayer(st.nextToken());
 				final int itemId = Integer.parseInt(st.nextToken());
 				final int amount = Integer.parseInt(st.nextToken());
-				
+
 				if (player != null)
 				{
 					final L2ItemInstance item = player.getInventory().addItem("Status-Give", itemId, amount, null, null);
@@ -106,20 +106,20 @@ public class PlayerHandler implements ITelnetHandler
 			}
 			catch (Exception e)
 			{
-				
+
 			}
 		}
 		else if (command.startsWith("enchant"))
 		{
 			final StringTokenizer st = new StringTokenizer(command.substring(8), " ");
 			int enchant = 0, itemType = 0;
-			
+
 			try
 			{
 				final L2PcInstance player = L2World.getInstance().getPlayer(st.nextToken());
 				itemType = Integer.parseInt(st.nextToken());
 				enchant = Integer.parseInt(st.nextToken());
-				
+
 				switch (itemType)
 				{
 					case 1:
@@ -170,7 +170,7 @@ public class PlayerHandler implements ITelnetHandler
 					default:
 						itemType = 0;
 				}
-				
+
 				if (enchant > 65535)
 				{
 					enchant = 65535;
@@ -179,9 +179,9 @@ public class PlayerHandler implements ITelnetHandler
 				{
 					enchant = 0;
 				}
-				
+
 				boolean success = false;
-				
+
 				if ((player != null) && (itemType > 0))
 				{
 					success = setEnchant(player, enchant, itemType);
@@ -197,7 +197,7 @@ public class PlayerHandler implements ITelnetHandler
 			}
 			catch (Exception e)
 			{
-				
+
 			}
 		}
 		else if (command.startsWith("jail"))
@@ -225,16 +225,16 @@ public class PlayerHandler implements ITelnetHandler
 						reason = reason.substring(0, reason.length() - 1);
 					}
 				}
-				
+
 				if (charId > 0)
 				{
 					final long expirationTime = delay > 0 ? System.currentTimeMillis() + (delay * 60 * 1000) : -1;
 					PunishmentManager.getInstance().startPunishment(new PunishmentTask(charId, PunishmentAffect.CHARACTER, PunishmentType.JAIL, expirationTime, reason, "Telnet Admin: " + _cSocket.getInetAddress().getHostAddress()));
-					_print.println("Character " + name + " jailed for " + (delay > 0 ? delay + " minutes." : "ever!"));
+					_print.println("EventCharacter " + name + " jailed for " + (delay > 0 ? delay + " minutes." : "ever!"));
 				}
 				else
 				{
-					_print.println("Character with name: " + name + " was not found!");
+					_print.println("EventCharacter with name: " + name + " was not found!");
 				}
 			}
 			catch (NoSuchElementException nsee)
@@ -256,15 +256,15 @@ public class PlayerHandler implements ITelnetHandler
 			{
 				final String name = st.nextToken();
 				final int charId = CharNameTable.getInstance().getIdByName(name);
-				
+
 				if (charId > 0)
 				{
 					PunishmentManager.getInstance().stopPunishment(charId, PunishmentAffect.CHARACTER, PunishmentType.JAIL);
-					_print.println("Character " + name + " have been unjailed");
+					_print.println("EventCharacter " + name + " have been unjailed");
 				}
 				else
 				{
-					_print.println("Character with name: " + name + " was not found!");
+					_print.println("EventCharacter with name: " + name + " was not found!");
 				}
 			}
 			catch (NoSuchElementException nsee)
@@ -281,13 +281,13 @@ public class PlayerHandler implements ITelnetHandler
 		}
 		return false;
 	}
-	
+
 	private boolean setEnchant(L2PcInstance activeChar, int ench, int armorType)
 	{
 		// now we need to find the equipped weapon of the targeted character...
 		int curEnchant = 0; // display purposes only
 		L2ItemInstance itemInstance = null;
-		
+
 		// only attempt to enchant if there is a weapon equipped
 		L2ItemInstance parmorInstance = activeChar.getInventory().getPaperdollItem(armorType);
 		if ((parmorInstance != null) && (parmorInstance.getLocationSlot() == armorType))
@@ -303,16 +303,16 @@ public class PlayerHandler implements ITelnetHandler
 				itemInstance = parmorInstance;
 			}
 		}
-		
+
 		if (itemInstance != null)
 		{
 			curEnchant = itemInstance.getEnchantLevel();
-			
+
 			// set enchant value
 			activeChar.getInventory().unEquipItemInSlot(armorType);
 			itemInstance.setEnchantLevel(ench);
 			activeChar.getInventory().equipItem(itemInstance);
-			
+
 			// send packets
 			final InventoryUpdate iu = new InventoryUpdate();
 			iu.addModifiedItem(itemInstance);
@@ -320,18 +320,18 @@ public class PlayerHandler implements ITelnetHandler
 			activeChar.broadcastPacket(new CharInfo(activeChar));
 			activeChar.sendPacket(new UserInfo(activeChar));
 			activeChar.broadcastPacket(new ExBrExtraUserInfo(activeChar));
-			
+
 			// informations
 			activeChar.sendMessage("Changed enchantment of " + activeChar.getName() + "'s " + itemInstance.getItem().getName() + " from " + curEnchant + " to " + ench + ".");
 			activeChar.sendMessage("Admin has changed the enchantment of your " + itemInstance.getItem().getName() + " from " + curEnchant + " to " + ench + ".");
-			
+
 			// log
 			GMAudit.auditGMAction("TelnetAdministrator", "enchant", activeChar.getName(), itemInstance.getItem().getName() + "(" + itemInstance.getObjectId() + ") from " + curEnchant + " to " + ench);
 			return true;
 		}
 		return false;
 	}
-	
+
 	@Override
 	public String[] getCommandList()
 	{

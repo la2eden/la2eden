@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -39,7 +39,7 @@ import com.la2eden.gameserver.network.SystemMessageId;
 public class AdminMenu implements IAdminCommandHandler
 {
 	private static final Logger _log = Logger.getLogger(AdminMenu.class.getName());
-	
+
 	private static final String[] ADMIN_COMMANDS =
 	{
 		"admin_char_manage",
@@ -53,7 +53,7 @@ public class AdminMenu implements IAdminCommandHandler
 		"admin_ban_menu",
 		"admin_unban_menu"
 	};
-	
+
 	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
@@ -132,7 +132,7 @@ public class AdminMenu implements IAdminCommandHandler
 					teleportCharacter(player, activeChar.getLocation(), activeChar, "Admin is teleporting you.");
 					return true;
 				}
-				
+
 				for (L2PcInstance member : clan.getOnlineMembers(0))
 				{
 					teleportCharacter(member, activeChar.getLocation(), activeChar, "Your clan is being teleported by an Admin.");
@@ -191,7 +191,7 @@ public class AdminMenu implements IAdminCommandHandler
 				if (!AdminData.getInstance().hasAccess(subCommand, activeChar.getAccessLevel()))
 				{
 					activeChar.sendMessage("You don't have the access right to use this command!");
-					_log.warning("Character " + activeChar.getName() + " tryed to use admin command " + subCommand + ", but have no access to it!");
+					_log.warning("EventCharacter " + activeChar.getName() + " tryed to use admin command " + subCommand + ", but have no access to it!");
 					return false;
 				}
 				final IAdminCommandHandler ach = AdminCommandHandler.getInstance().getHandler(subCommand);
@@ -208,7 +208,7 @@ public class AdminMenu implements IAdminCommandHandler
 				if (!AdminData.getInstance().hasAccess(subCommand, activeChar.getAccessLevel()))
 				{
 					activeChar.sendMessage("You don't have the access right to use this command!");
-					_log.warning("Character " + activeChar.getName() + " tryed to use admin command " + subCommand + ", but have no access to it!");
+					_log.warning("EventCharacter " + activeChar.getName() + " tryed to use admin command " + subCommand + ", but have no access to it!");
 					return false;
 				}
 				final IAdminCommandHandler ach = AdminCommandHandler.getInstance().getHandler(subCommand);
@@ -218,18 +218,18 @@ public class AdminMenu implements IAdminCommandHandler
 		}
 		return true;
 	}
-	
+
 	@Override
 	public String[] getAdminCommandList()
 	{
 		return ADMIN_COMMANDS;
 	}
-	
+
 	private void handleKill(L2PcInstance activeChar)
 	{
 		handleKill(activeChar, null);
 	}
-	
+
 	private void handleKill(L2PcInstance activeChar, String player)
 	{
 		final L2Object obj = activeChar.getTarget();
@@ -266,7 +266,7 @@ public class AdminMenu implements IAdminCommandHandler
 		}
 		AdminHtml.showAdminHtml(activeChar, filename);
 	}
-	
+
 	private void teleportCharacter(L2PcInstance player, Location loc, L2PcInstance activeChar, String message)
 	{
 		if (player != null)
@@ -276,7 +276,7 @@ public class AdminMenu implements IAdminCommandHandler
 		}
 		showMainPage(activeChar);
 	}
-	
+
 	private void teleportToCharacter(L2PcInstance activeChar, L2Object target)
 	{
 		L2PcInstance player = null;
@@ -301,7 +301,7 @@ public class AdminMenu implements IAdminCommandHandler
 		}
 		showMainPage(activeChar);
 	}
-	
+
 	/**
 	 * @param activeChar
 	 */

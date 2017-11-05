@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -28,7 +28,7 @@ import com.la2eden.gameserver.model.skills.Skill;
 import com.la2eden.gameserver.model.stats.MoveType;
 
 /**
- * Character template.
+ * EventCharacter template.
  * @author Zoey76
  */
 public class L2CharTemplate extends ListenersContainer
@@ -77,19 +77,19 @@ public class L2CharTemplate extends ListenersContainer
 	private int _collisionRadius;
 	/** For client info use {@link #_fCollisionHeight} */
 	private int _collisionHeight;
-	
+
 	private double _fCollisionRadius;
 	private double _fCollisionHeight;
-	
+
 	private final double[] _moveType = new double[MoveType.values().length];
 	/** The creature's race. */
 	private Race _race;
-	
+
 	public L2CharTemplate(StatsSet set)
 	{
 		set(set);
 	}
-	
+
 	public void set(StatsSet set)
 	{
 		// Base stats
@@ -117,7 +117,7 @@ public class L2CharTemplate extends ListenersContainer
 		_baseShldRate = set.getInt("baseShldRate", 0);
 		_baseCritRate = set.getInt("baseCritRate", 4);
 		_baseMCritRate = set.getInt("baseMCritRate", 0);
-		
+
 		// SpecialStats
 		_baseBreath = set.getInt("baseBreath", 100);
 		_baseFire = set.getInt("baseFire", 0);
@@ -133,13 +133,13 @@ public class L2CharTemplate extends ListenersContainer
 		_baseHolyRes = set.getInt("baseHolyRes", 0);
 		_baseDarkRes = set.getInt("baseDarkRes", 0);
 		_baseElementRes = set.getInt("baseElementRes", 0);
-		
+
 		// Geometry
 		_fCollisionHeight = set.getDouble("collisionHeight", 0);
 		_fCollisionRadius = set.getDouble("collisionRadius", 0);
 		_collisionRadius = (int) _fCollisionRadius;
 		_collisionHeight = (int) _fCollisionHeight;
-		
+
 		// speed.
 		Arrays.fill(_moveType, 1);
 		setBaseMoveSpeed(MoveType.RUN, set.getDouble("baseRunSpd", 120));
@@ -149,7 +149,7 @@ public class L2CharTemplate extends ListenersContainer
 		setBaseMoveSpeed(MoveType.FAST_FLY, set.getDouble("baseFlyRunSpd", getBaseMoveSpeed(MoveType.RUN)));
 		setBaseMoveSpeed(MoveType.SLOW_FLY, set.getDouble("baseFlyWalkSpd", getBaseMoveSpeed(MoveType.WALK)));
 	}
-	
+
 	/**
 	 * @return the baseHpMax
 	 */
@@ -157,7 +157,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseHpMax;
 	}
-	
+
 	/**
 	 * @return the _baseFire
 	 */
@@ -165,7 +165,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseFire;
 	}
-	
+
 	/**
 	 * @return the _baseWind
 	 */
@@ -173,7 +173,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseWind;
 	}
-	
+
 	/**
 	 * @return the _baseWater
 	 */
@@ -181,7 +181,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseWater;
 	}
-	
+
 	/**
 	 * @return the _baseEarth
 	 */
@@ -189,7 +189,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseEarth;
 	}
-	
+
 	/**
 	 * @return the _baseHoly
 	 */
@@ -197,7 +197,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseHoly;
 	}
-	
+
 	/**
 	 * @return the _baseDark
 	 */
@@ -205,7 +205,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseDark;
 	}
-	
+
 	/**
 	 * @return the _baseFireRes
 	 */
@@ -213,7 +213,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseFireRes;
 	}
-	
+
 	/**
 	 * @return the _baseWindRes
 	 */
@@ -221,7 +221,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseWindRes;
 	}
-	
+
 	/**
 	 * @return the _baseWaterRes
 	 */
@@ -229,7 +229,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseWaterRes;
 	}
-	
+
 	/**
 	 * @return the _baseEarthRes
 	 */
@@ -237,7 +237,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseEarthRes;
 	}
-	
+
 	/**
 	 * @return the _baseHolyRes
 	 */
@@ -245,7 +245,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseHolyRes;
 	}
-	
+
 	/**
 	 * @return the _baseDarkRes
 	 */
@@ -253,7 +253,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseDarkRes;
 	}
-	
+
 	/**
 	 * @return the _baseElementRes
 	 */
@@ -261,7 +261,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseElementRes;
 	}
-	
+
 	/**
 	 * @return the baseSTR
 	 */
@@ -269,7 +269,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseSTR;
 	}
-	
+
 	/**
 	 * @return the baseCON
 	 */
@@ -277,7 +277,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseCON;
 	}
-	
+
 	/**
 	 * @return the baseDEX
 	 */
@@ -285,7 +285,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseDEX;
 	}
-	
+
 	/**
 	 * @return the baseINT
 	 */
@@ -293,7 +293,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseINT;
 	}
-	
+
 	/**
 	 * @return the baseWIT
 	 */
@@ -301,7 +301,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseWIT;
 	}
-	
+
 	/**
 	 * @return the baseMEN
 	 */
@@ -309,7 +309,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseMEN;
 	}
-	
+
 	/**
 	 * @return the baseCpMax
 	 */
@@ -317,7 +317,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseCpMax;
 	}
-	
+
 	/**
 	 * @return the baseMpMax
 	 */
@@ -325,7 +325,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseMpMax;
 	}
-	
+
 	/**
 	 * @return the baseHpReg
 	 */
@@ -333,7 +333,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseHpReg;
 	}
-	
+
 	/**
 	 * @return the baseMpReg
 	 */
@@ -341,7 +341,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseMpReg;
 	}
-	
+
 	/**
 	 * @return the basePAtk
 	 */
@@ -349,7 +349,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _basePAtk;
 	}
-	
+
 	/**
 	 * @return the baseMAtk
 	 */
@@ -357,7 +357,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseMAtk;
 	}
-	
+
 	/**
 	 * @return the basePDef
 	 */
@@ -365,7 +365,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _basePDef;
 	}
-	
+
 	/**
 	 * @return the baseMDef
 	 */
@@ -373,7 +373,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseMDef;
 	}
-	
+
 	/**
 	 * @return the basePAtkSpd
 	 */
@@ -381,7 +381,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _basePAtkSpd;
 	}
-	
+
 	/**
 	 * @return the baseMAtkSpd
 	 */
@@ -389,7 +389,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseMAtkSpd;
 	}
-	
+
 	/**
 	 * @return the random damage
 	 */
@@ -397,7 +397,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _randomDamage;
 	}
-	
+
 	/**
 	 * @return the baseShldDef
 	 */
@@ -405,7 +405,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseShldDef;
 	}
-	
+
 	/**
 	 * @return the baseShldRate
 	 */
@@ -413,7 +413,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseShldRate;
 	}
-	
+
 	/**
 	 * @return the baseCritRate
 	 */
@@ -421,7 +421,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseCritRate;
 	}
-	
+
 	/**
 	 * @return the baseMCritRate
 	 */
@@ -429,17 +429,17 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseMCritRate;
 	}
-	
+
 	public void setBaseMoveSpeed(MoveType type, double val)
 	{
 		_moveType[type.ordinal()] = val;
 	}
-	
+
 	public double getBaseMoveSpeed(MoveType mt)
 	{
 		return _moveType[mt.ordinal()];
 	}
-	
+
 	/**
 	 * @return the baseBreath
 	 */
@@ -447,7 +447,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseBreath;
 	}
-	
+
 	/**
 	 * @return the collisionRadius
 	 */
@@ -455,7 +455,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _collisionRadius;
 	}
-	
+
 	/**
 	 * @return the collisionHeight
 	 */
@@ -463,7 +463,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _collisionHeight;
 	}
-	
+
 	/**
 	 * @return the fCollisionRadius
 	 */
@@ -471,7 +471,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _fCollisionRadius;
 	}
-	
+
 	/**
 	 * @return the fCollisionHeight
 	 */
@@ -479,7 +479,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _fCollisionHeight;
 	}
-	
+
 	/**
 	 * @param baseFire the baseFire to set
 	 */
@@ -487,7 +487,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseFire = baseFire;
 	}
-	
+
 	/**
 	 * @param baseWater the baseWater to set
 	 */
@@ -495,7 +495,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseWater = baseWater;
 	}
-	
+
 	/**
 	 * @param baseEarth the baseEarth to set
 	 */
@@ -503,7 +503,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseEarth = baseEarth;
 	}
-	
+
 	/**
 	 * @param baseWind the baseWind to set
 	 */
@@ -511,7 +511,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseWind = baseWind;
 	}
-	
+
 	/**
 	 * @param baseHoly the baseHoly to set
 	 */
@@ -519,7 +519,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseHoly = baseHoly;
 	}
-	
+
 	/**
 	 * @param baseDark the baseDark to set
 	 */
@@ -527,7 +527,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseDark = baseDark;
 	}
-	
+
 	/**
 	 * @param baseFireRes the baseFireRes to set
 	 */
@@ -535,7 +535,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseFireRes = baseFireRes;
 	}
-	
+
 	/**
 	 * @param baseWaterRes the baseWaterRes to set
 	 */
@@ -543,7 +543,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseWaterRes = baseWaterRes;
 	}
-	
+
 	/**
 	 * @param baseEarthRes the baseEarthRes to set
 	 */
@@ -551,7 +551,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseEarthRes = baseEarthRes;
 	}
-	
+
 	/**
 	 * @param baseWindRes the baseWindRes to set
 	 */
@@ -559,7 +559,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseWindRes = baseWindRes;
 	}
-	
+
 	/**
 	 * @param baseHolyRes the baseHolyRes to set
 	 */
@@ -567,7 +567,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseHolyRes = baseHolyRes;
 	}
-	
+
 	/**
 	 * @param baseDarkRes the baseDarkRes to set
 	 */
@@ -575,7 +575,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseDarkRes = baseDarkRes;
 	}
-	
+
 	/**
 	 * @param baseElementRes
 	 */
@@ -583,7 +583,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseElementRes = baseElementRes;
 	}
-	
+
 	/**
 	 * @return the base attack type (Sword, Fist, Blunt, etc..)
 	 */
@@ -591,7 +591,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseAttackType;
 	}
-	
+
 	/**
 	 * Sets base attack type.
 	 * @param type
@@ -600,7 +600,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseAttackType = type;
 	}
-	
+
 	/**
 	 * @return the baseAtkRange
 	 */
@@ -608,7 +608,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _baseAttackRange;
 	}
-	
+
 	/**
 	 * Sets base attack range.
 	 * @param val
@@ -617,7 +617,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		_baseAttackRange = val;
 	}
-	
+
 	/**
 	 * Overridden in L2NpcTemplate
 	 * @return the characters skills
@@ -626,7 +626,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return Collections.emptyMap();
 	}
-	
+
 	/**
 	 * Gets the craeture's race.
 	 * @return the race
@@ -635,7 +635,7 @@ public class L2CharTemplate extends ListenersContainer
 	{
 		return _race;
 	}
-	
+
 	/**
 	 * Sets the creature's race.
 	 * @param race the race

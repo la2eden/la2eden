@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -82,14 +82,14 @@ public final class FloodProtectors
 	 */
 	private final FloodProtectorAction _sendMail;
 	/**
-	 * Character Select protector
+	 * EventCharacter Select protector
 	 */
 	private final FloodProtectorAction _characterSelect;
 	/**
 	 * Item Auction
 	 */
 	private final FloodProtectorAction _itemAuction;
-	
+
 	/**
 	 * Creates new instance of FloodProtectors.
 	 * @param client game client for which the collection of flood protectors is being created.
@@ -114,7 +114,7 @@ public final class FloodProtectors
 		_characterSelect = new FloodProtectorAction(client, Config.FLOOD_PROTECTOR_CHARACTER_SELECT);
 		_itemAuction = new FloodProtectorAction(client, Config.FLOOD_PROTECTOR_ITEM_AUCTION);
 	}
-	
+
 	/**
 	 * Returns {@link #_useItem}.
 	 * @return {@link #_useItem}
@@ -123,7 +123,7 @@ public final class FloodProtectors
 	{
 		return _useItem;
 	}
-	
+
 	/**
 	 * Returns {@link #_rollDice}.
 	 * @return {@link #_rollDice}
@@ -132,7 +132,7 @@ public final class FloodProtectors
 	{
 		return _rollDice;
 	}
-	
+
 	/**
 	 * Returns {@link #_firework}.
 	 * @return {@link #_firework}
@@ -141,7 +141,7 @@ public final class FloodProtectors
 	{
 		return _firework;
 	}
-	
+
 	/**
 	 * Returns {@link #_itemPetSummon}.
 	 * @return {@link #_itemPetSummon}
@@ -150,7 +150,7 @@ public final class FloodProtectors
 	{
 		return _itemPetSummon;
 	}
-	
+
 	/**
 	 * Returns {@link #_heroVoice}.
 	 * @return {@link #_heroVoice}
@@ -159,7 +159,7 @@ public final class FloodProtectors
 	{
 		return _heroVoice;
 	}
-	
+
 	/**
 	 * Returns {@link #_globalChat}.
 	 * @return {@link #_globalChat}
@@ -168,7 +168,7 @@ public final class FloodProtectors
 	{
 		return _globalChat;
 	}
-	
+
 	/**
 	 * Returns {@link #_subclass}.
 	 * @return {@link #_subclass}
@@ -177,7 +177,7 @@ public final class FloodProtectors
 	{
 		return _subclass;
 	}
-	
+
 	/**
 	 * Returns {@link #_dropItem}.
 	 * @return {@link #_dropItem}
@@ -186,7 +186,7 @@ public final class FloodProtectors
 	{
 		return _dropItem;
 	}
-	
+
 	/**
 	 * Returns {@link #_serverBypass}.
 	 * @return {@link #_serverBypass}
@@ -195,7 +195,7 @@ public final class FloodProtectors
 	{
 		return _serverBypass;
 	}
-	
+
 	/**
 	 * @return {@link #_multiSell}
 	 */
@@ -203,7 +203,7 @@ public final class FloodProtectors
 	{
 		return _multiSell;
 	}
-	
+
 	/**
 	 * Returns {@link #_transaction}.
 	 * @return {@link #_transaction}
@@ -212,7 +212,7 @@ public final class FloodProtectors
 	{
 		return _transaction;
 	}
-	
+
 	/**
 	 * Returns {@link #_manufacture}.
 	 * @return {@link #_manufacture}
@@ -221,7 +221,7 @@ public final class FloodProtectors
 	{
 		return _manufacture;
 	}
-	
+
 	/**
 	 * Returns {@link #_manor}.
 	 * @return {@link #_manor}
@@ -230,7 +230,7 @@ public final class FloodProtectors
 	{
 		return _manor;
 	}
-	
+
 	/**
 	 * Returns {@link #_sendMail}.
 	 * @return {@link #_sendMail}
@@ -239,7 +239,7 @@ public final class FloodProtectors
 	{
 		return _sendMail;
 	}
-	
+
 	/**
 	 * Returns {@link #_characterSelect}.
 	 * @return {@link #_characterSelect}
@@ -248,7 +248,7 @@ public final class FloodProtectors
 	{
 		return _characterSelect;
 	}
-	
+
 	/**
 	 * Returns {@link #_itemAuction}.
 	 * @return {@link #_itemAuction}

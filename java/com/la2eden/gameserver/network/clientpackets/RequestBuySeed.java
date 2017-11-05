@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -46,7 +46,7 @@ public class RequestBuySeed extends L2GameClientPacket
 	private static final int BATCH_LENGTH = 12; // length of the one item
 	private int _manorId;
 	private List<ItemHolder> _items = null;
-	
+
 	@Override
 	protected final void readImpl()
 	{
@@ -56,7 +56,7 @@ public class RequestBuySeed extends L2GameClientPacket
 		{
 			return;
 		}
-		
+
 		_items = new ArrayList<>(count);
 		for (int i = 0; i < count; i++)
 		{
@@ -70,7 +70,7 @@ public class RequestBuySeed extends L2GameClientPacket
 			_items.add(new ItemHolder(itemId, cnt));
 		}
 	}
-	
+
 	@Override
 	protected final void runImpl()
 	{
@@ -89,32 +89,32 @@ public class RequestBuySeed extends L2GameClientPacket
 			sendActionFailed();
 			return;
 		}
-		
+
 		final CastleManorManager manor = CastleManorManager.getInstance();
 		if (manor.isUnderMaintenance())
 		{
 			sendActionFailed();
 			return;
 		}
-		
+
 		final Castle castle = CastleManager.getInstance().getCastleById(_manorId);
 		if (castle == null)
 		{
 			sendActionFailed();
 			return;
 		}
-		
+
 		final L2Npc manager = player.getLastFolkNPC();
 		if (!(manager instanceof L2MerchantInstance) || !manager.canInteract(player) || (manager.getTemplate().getParameters().getInt("manor_id", -1) != _manorId))
 		{
 			sendActionFailed();
 			return;
 		}
-		
+
 		long totalPrice = 0;
 		int slots = 0;
 		int totalWeight = 0;
-		
+
 		final Map<Integer, SeedProduction> _productInfo = new HashMap<>();
 		for (ItemHolder ih : _items)
 		{
@@ -124,20 +124,20 @@ public class RequestBuySeed extends L2GameClientPacket
 				sendActionFailed();
 				return;
 			}
-			
+
 			// Calculate price
 			totalPrice += (sp.getPrice() * ih.getCount());
 			if (totalPrice > MAX_ADENA)
 			{
-				Util.handleIllegalPlayerAction(player, "Warning!! Character " + player.getName() + " of account " + player.getAccountName() + " tried to purchase over " + MAX_ADENA + " adena worth of goods.", Config.DEFAULT_PUNISH);
+				Util.handleIllegalPlayerAction(player, "Warning!! EventCharacter " + player.getName() + " of account " + player.getAccountName() + " tried to purchase over " + MAX_ADENA + " adena worth of goods.", Config.DEFAULT_PUNISH);
 				sendActionFailed();
 				return;
 			}
-			
+
 			// Calculate weight
 			final L2Item template = ItemTable.getInstance().getTemplate(ih.getId());
 			totalWeight += ih.getCount() * template.getWeight();
-			
+
 			// Calculate slots
 			if (!template.isStackable())
 			{
@@ -149,7 +149,7 @@ public class RequestBuySeed extends L2GameClientPacket
 			}
 			_productInfo.put(ih.getId(), sp);
 		}
-		
+
 		if (!player.getInventory().validateWeight(totalWeight))
 		{
 			player.sendPacket(SystemMessageId.YOU_HAVE_EXCEEDED_THE_WEIGHT_LIMIT);
@@ -165,13 +165,13 @@ public class RequestBuySeed extends L2GameClientPacket
 			player.sendPacket(SystemMessageId.YOU_DO_NOT_HAVE_ENOUGH_ADENA);
 			return;
 		}
-		
+
 		// Proceed the purchase
 		for (ItemHolder i : _items)
 		{
 			final SeedProduction sp = _productInfo.get(i.getId());
 			final long price = sp.getPrice() * i.getCount();
-			
+
 			// Take Adena and decrease seed amount
 			if (!sp.decreaseAmount(i.getCount()) || !player.reduceAdena("Buy", price, player, false))
 			{
@@ -179,27 +179,27 @@ public class RequestBuySeed extends L2GameClientPacket
 				totalPrice -= price;
 				continue;
 			}
-			
+
 			// Add item to player's inventory
 			player.addItem("Buy", i.getId(), i.getCount(), manager, true);
 		}
-		
+
 		// Adding to treasury for Manor Castle
 		if (totalPrice > 0)
 		{
 			castle.addToTreasuryNoTax(totalPrice);
-			
+
 			final SystemMessage sm = SystemMessage.getSystemMessage(SystemMessageId.S1_ADENA_DISAPPEARED);
 			sm.addLong(totalPrice);
 			player.sendPacket(sm);
-			
+
 			if (Config.ALT_MANOR_SAVE_ALL_ACTIONS)
 			{
 				manor.updateCurrentProduction(_manorId, _productInfo.values());
 			}
 		}
 	}
-	
+
 	@Override
 	public String getType()
 	{

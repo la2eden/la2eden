@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="xsd/SecondaryAuth.xsd">
-	<enabled>false</enabled> <!-- Enable Secondary Authentication on Character Select -->
+	<enabled>false</enabled> <!-- Enable Secondary Authentication on EventCharacter Select -->
 	<maxAttempts>5</maxAttempts> <!-- Max Attempts for Second Auth Password (0 to disable) -->
 	<banTime>480</banTime> <!-- Ban time if user reach maxAttempts (in minutes) -->
 	<recoveryLink>http://www.google.com</recoveryLink> <!-- Password Recovery Link -->

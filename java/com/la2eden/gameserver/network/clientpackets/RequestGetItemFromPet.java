@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -29,12 +29,12 @@ import com.la2eden.gameserver.util.Util;
 public final class RequestGetItemFromPet extends L2GameClientPacket
 {
 	private static final String _C__2C_REQUESTGETITEMFROMPET = "[C] 2C RequestGetItemFromPet";
-	
+
 	private int _objectId;
 	private long _amount;
 	@SuppressWarnings("unused")
 	private int _unknown;
-	
+
 	@Override
 	protected void readImpl()
 	{
@@ -42,7 +42,7 @@ public final class RequestGetItemFromPet extends L2GameClientPacket
 		_amount = readQ();
 		_unknown = readD();// = 0 for most trades
 	}
-	
+
 	@Override
 	protected void runImpl()
 	{
@@ -51,37 +51,37 @@ public final class RequestGetItemFromPet extends L2GameClientPacket
 		{
 			return;
 		}
-		
+
 		if (!getClient().getFloodProtectors().getTransaction().tryPerformAction("getfrompet"))
 		{
 			player.sendMessage("You get items from pet too fast.");
 			return;
 		}
-		
+
 		final L2PetInstance pet = (L2PetInstance) player.getSummon();
 		if (player.getActiveEnchantItemId() != L2PcInstance.ID_NONE)
 		{
 			return;
 		}
-		
+
 		final L2ItemInstance item = pet.getInventory().getItemByObjectId(_objectId);
 		if (item == null)
 		{
 			return;
 		}
-		
+
 		if (_amount > item.getCount())
 		{
-			Util.handleIllegalPlayerAction(player, getClass().getSimpleName() + ": Character " + player.getName() + " of account " + player.getAccountName() + " tried to get item with oid " + _objectId + " from pet but has invalid count " + _amount + " item count: " + item.getCount(), Config.DEFAULT_PUNISH);
+			Util.handleIllegalPlayerAction(player, getClass().getSimpleName() + ": EventCharacter " + player.getName() + " of account " + player.getAccountName() + " tried to get item with oid " + _objectId + " from pet but has invalid count " + _amount + " item count: " + item.getCount(), Config.DEFAULT_PUNISH);
 			return;
 		}
-		
+
 		if (pet.transferItem("Transfer", _objectId, _amount, player.getInventory(), player, pet) == null)
 		{
 			_log.warning("Invalid item transfer request: " + pet.getName() + "(pet) --> " + player.getName());
 		}
 	}
-	
+
 	@Override
 	public String getType()
 	{

@@ -1,16 +1,16 @@
 /*
  * This file is part of the La2Eden project.
- * 
+ *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- * 
+ *
  * This program is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE. See the GNU
  * General Public License for more details.
- * 
+ *
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
@@ -29,19 +29,19 @@ import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 public class AdminSummon implements IAdminCommandHandler
 {
 	private static final Logger _log = Logger.getLogger(AdminSummon.class.getName());
-	
+
 	public static final String[] ADMIN_COMMANDS =
 	{
 		"admin_summon"
 	};
-	
+
 	@Override
 	public String[] getAdminCommandList()
 	{
-		
+
 		return ADMIN_COMMANDS;
 	}
-	
+
 	@Override
 	public boolean useAdminCommand(String command, L2PcInstance activeChar)
 	{
@@ -61,7 +61,7 @@ public class AdminSummon implements IAdminCommandHandler
 			activeChar.sendMessage("Incorrect format for command 'summon'");
 			return false;
 		}
-		
+
 		String subCommand;
 		if (id < 1000000)
 		{
@@ -69,7 +69,7 @@ public class AdminSummon implements IAdminCommandHandler
 			if (!AdminData.getInstance().hasAccess(subCommand, activeChar.getAccessLevel()))
 			{
 				activeChar.sendMessage("You don't have the access right to use this command!");
-				_log.warning("Character " + activeChar.getName() + " tryed to use admin command " + subCommand + ", but have no access to it!");
+				_log.warning("EventCharacter " + activeChar.getName() + " tryed to use admin command " + subCommand + ", but have no access to it!");
 				return false;
 			}
 			final IAdminCommandHandler ach = AdminCommandHandler.getInstance().getHandler(subCommand);
@@ -81,11 +81,11 @@ public class AdminSummon implements IAdminCommandHandler
 			if (!AdminData.getInstance().hasAccess(subCommand, activeChar.getAccessLevel()))
 			{
 				activeChar.sendMessage("You don't have the access right to use this command!");
-				_log.warning("Character " + activeChar.getName() + " tryed to use admin command " + subCommand + ", but have no access to it!");
+				_log.warning("EventCharacter " + activeChar.getName() + " tryed to use admin command " + subCommand + ", but have no access to it!");
 				return false;
 			}
 			final IAdminCommandHandler ach = AdminCommandHandler.getInstance().getHandler(subCommand);
-			
+
 			activeChar.sendMessage("This is only a temporary spawn.  The mob(s) will NOT respawn.");
 			id -= 1000000;
 			ach.useAdminCommand(subCommand + " " + id + " " + count, activeChar);
