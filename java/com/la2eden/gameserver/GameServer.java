@@ -430,7 +430,7 @@ public final class GameServer
         _log.info("Website: ..................... https://la2eden.com");
         _log.info("");
 		_log.info("Max online players: .......... " + Config.MAXIMUM_ONLINE_USERS);
-        _log.info("Build Number: ................ " + Config.BUILD_NUMBER);
+        _log.info("Build Version: ............... " + Config.BUILD_VERSION);
 		_log.info("Build Commit: ................ " + Config.SHORT_COMMIT);
 		_log.info("Build Date: .................. " + Config.BUILD_DATE);
         _log.info("");

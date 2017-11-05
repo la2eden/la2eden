@@ -70,16 +70,20 @@
             <arg value="-n"/>
             <arg value="1"/>
         </exec>
+        <exec executable="git" outputproperty="version" failifexecutionfails="false" errorproperty="">
+            <arg value="rev-list"/>
+            <arg value="--count"/>
+            <arg value="master"/>
+        </exec>
 
         <propertyfile file="${version.file}">
             <entry key="ShortCommit" value="${commit.short}" />
             <entry key="LongCommit" value="${commit.long}" />
-            <entry key="BuildNumber" type="int" operation="+" default="0" />
+            <entry key="BuildVersion" value="${version}" />
             <entry key="BuildDate" value="${timestamp}" />
         </propertyfile>
-        <property file="${version.file}"/>
 
-        <echo message="Current version: ${BuildNumber}" />
+        <echo message="Build version: ${version}" />
         <echo message="Build date: ${timestamp}" />
         <echo message="Build from commit: ${commit.short}" />
     </target>

@@ -998,7 +998,7 @@ public final class Config
 	public static boolean SERVER_RESTART_SCHEDULE_MESSAGE;
 	public static int SERVER_RESTART_SCHEDULE_COUNTDOWN;
 	public static String[] SERVER_RESTART_SCHEDULE;
-    public static String BUILD_NUMBER;
+    public static String BUILD_VERSION;
     public static String BUILD_DATE;
     public static String SHORT_COMMIT;
     public static String LONG_COMMIT;
@@ -1809,7 +1809,7 @@ public final class Config
 
             // Load Version files
             final PropertiesParser CoreVersion = new PropertiesParser(VERSION_FILE);
-            BUILD_NUMBER = CoreVersion.getString("BuildNumber", "Unknown build version");
+            BUILD_VERSION = CoreVersion.getString("BuildVersion", "Unknown build version");
             BUILD_DATE = CoreVersion.getString("BuildDate", "Unknown build date");
 			SHORT_COMMIT = CoreVersion.getString("ShortCommit", "Unknown build hash");
 			LONG_COMMIT = CoreVersion.getString("LongCommit", "Unknown build hash");
