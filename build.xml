@@ -4,16 +4,17 @@
 		This script will build the La2Eden High Five project.
 	</description>
 
+    <property name="dist" location="./dist" />
 	<property name="build" location="./build" />
 	<property name="build.bin" location="${build}/bin" />
 	<property name="build.dist" location="${build}/dist" />
 	<property name="build.dist.gameserver" location="${build.dist}/gameserver" />
 	<property name="build.dist.loginserver" location="${build.dist}/loginserver" />
 	<property name="build.dist.installer" location="${build.dist}/db_installer" />
-    <property name="libs" location="./dist/libs" />
+    <property name="libs" location="${dist}/libs" />
 	<property name="src" location="java" />
 
-    <property name="version.file" location="${build.dist}/gameserver/config/core/Version.ini" />
+    <property name="version.file" location="${dist}/gameserver/config/core/Version.ini" />
     <property name="changelog.format" value="* [%h] %aN (%cD)%n| -> %B|" />
     <property name="changelog.file" location="${build}/changelog.txt" />
 
