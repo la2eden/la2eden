@@ -16,13 +16,23 @@
  */
 package com.la2eden.gameserver.network.serverpackets;
 
+import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
+
 public class ExBrRecentProductList extends L2GameServerPacket {
     private static final String TYPE = "[S] FE:D9 ExBRRecentProductList";
+    private L2PcInstance _player;
+
+    public ExBrRecentProductList(L2PcInstance player)
+    {
+        _player = player;
+
+        // FIXME: Load players latest buyings
+    }
 
     @Override
     protected final void writeImpl()
     {
-        // FIXME: send the recent player buyings
+        // FIXME: Send the recent player buyings
     }
 
     public String getType()

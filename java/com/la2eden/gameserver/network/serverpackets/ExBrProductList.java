@@ -40,12 +40,10 @@ public class ExBrProductList extends L2GameServerPacket
         writeH(primeList.size());
         writeH(0x00); // ???
 
-        for (Map.Entry<Integer, PrimeShopTable.PrimeShopItem> entrySet : primeList.entrySet())
-        {
+        for (Map.Entry<Integer, PrimeShopTable.PrimeShopItem> entrySet : primeList.entrySet()) {
             PrimeShopTable.PrimeShopItem item = entrySet.getValue();
 
-            if ((System.currentTimeMillis() >= item.sale_start_date()) && (System.currentTimeMillis() <= item.sale_end_date()))
-            {
+            if ((System.currentTimeMillis() >= item.sale_start_date()) && (System.currentTimeMillis() <= item.sale_end_date())) {
                 int brId = entrySet.getKey();
 
                 writeD(brId); // product id

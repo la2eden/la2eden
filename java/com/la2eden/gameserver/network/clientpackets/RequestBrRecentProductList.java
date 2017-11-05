@@ -17,7 +17,6 @@
 package com.la2eden.gameserver.network.clientpackets;
 
 import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
-import com.la2eden.gameserver.network.serverpackets.ExBrRecentProductList;
 
 public final class RequestBrRecentProductList extends L2GameClientPacket
 {
@@ -33,7 +32,7 @@ public final class RequestBrRecentProductList extends L2GameClientPacket
         L2PcInstance player = getClient().getActiveChar();
 
         if (player != null) {
-            player.sendPacket(new ExBrRecentProductList());
+            // player.sendPacket(new ExBrRecentProductList(player));
         }
     }
 
