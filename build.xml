@@ -10,11 +10,10 @@
 	<property name="build.dist.gameserver" location="${build.dist}/gameserver" />
 	<property name="build.dist.loginserver" location="${build.dist}/loginserver" />
 	<property name="build.dist.installer" location="${build.dist}/db_installer" />
-	<property name="datapack" location="dist" />
-	<property name="libs" location="${datapack}/libs" />
+	<property name="libs" location="${build.dist}/libs" />
 	<property name="src" location="java" />
 
-    <property name="version.file" location="${datapack}/gameserver/config/core/Version.ini" />
+    <property name="version.file" location="${build.dist}/gameserver/config/core/Version.ini" />
     <property name="changelog.format" value="* [%h] %aN (%cD)%n| -> %B|" />
     <property name="changelog.file" location="${build}/changelog.txt" />
 
@@ -182,15 +181,11 @@
 		</jar>
 	</target>
 
-	<target name="adding-core" depends="jar" description="Adding the compiled jars to the Zip file.">
+	<target name="zip" depends="jar" description="Adding the compiled jars to the Zip file.">
 		<zip destfile="${build}/La2Eden.zip" basedir="${build.dist}" level="9" />
 	</target>
 
-	<target name="adding-datapack" depends="adding-core" description="Updating the Zip file with datapack content.">
-		<zip destfile="${build}/La2Eden.zip" basedir="${datapack}" update="true" level="9" />
-	</target>
-
-	<target name="finish" depends="adding-datapack" description="Cleaning the build folder.">
+	<target name="finish" depends="zip" description="Cleaning the build folder.">
         <delete dir="${build.dist}" />
         <delete dir="${build.bin}" />
 	</target>
