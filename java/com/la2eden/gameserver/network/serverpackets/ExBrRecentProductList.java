@@ -14,30 +14,17 @@
  * You should have received a copy of the GNU General Public License
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.la2eden.gameserver.network.clientpackets;
+package com.la2eden.gameserver.network.serverpackets;
 
-import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
-import com.la2eden.gameserver.network.serverpackets.ExBrRecentProductList;
+public class ExBrRecentProductList extends L2GameServerPacket {
+    private static final String TYPE = "[S] FE:D9 ExBRRecentProductList";
 
-public final class RequestBrRecentProductList extends L2GameClientPacket
-{
-    private static final String TYPE = "[C] D0:8D RequestBRRecentProductList";
     @Override
-    protected void readImpl()
+    protected final void writeImpl()
     {
+        // FIXME: send the recent player buyings
     }
 
-    @Override
-    protected void runImpl()
-    {
-        L2PcInstance player = getClient().getActiveChar();
-
-        if (player != null) {
-            player.sendPacket(new ExBrRecentProductList());
-        }
-    }
-
-    @Override
     public String getType()
     {
         return TYPE;

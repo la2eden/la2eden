@@ -38,7 +38,7 @@ public class ExBrProductList extends L2GameServerPacket
         writeC(0xFE); // 254
         writeH(0xD6); // 214
         writeH(primeList.size());
-        // writeH(0);
+        writeH(0x00); // ???
 
         for (Map.Entry<Integer, PrimeShopTable.PrimeShopItem> entrySet : primeList.entrySet())
         {

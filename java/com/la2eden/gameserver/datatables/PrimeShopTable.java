@@ -21,7 +21,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
@@ -59,7 +58,7 @@ public class PrimeShopTable implements IXmlReader
 
     public PrimeShopTable()
     {
-        // code
+        load();
     }
 
     @Override
@@ -97,7 +96,7 @@ public class PrimeShopTable implements IXmlReader
                 Node att = attrs.getNamedItem("brId");
                 if (att == null)
                 {
-                    _log.severe("[PrimeShop]: Missing brId, skipping");
+                    _log.severe("PrimeShopTable: Missing brId, skipping");
                     continue;
                 }
                 final int brId = Integer.parseInt(att.getNodeValue());
@@ -105,7 +104,7 @@ public class PrimeShopTable implements IXmlReader
                 att = attrs.getNamedItem("itemId");
                 if (att == null)
                 {
-                    _log.severe("[PrimeShop]: Missing itemId, skipping");
+                    _log.severe("PrimeShopTable: Missing itemId, skipping");
                     continue;
                 }
                 final int itemId = Integer.parseInt(att.getNodeValue());
@@ -113,7 +112,7 @@ public class PrimeShopTable implements IXmlReader
                 att = attrs.getNamedItem("cat");
                 if (att == null)
                 {
-                    _log.severe("[PrimeShop]: Missing category, skipping");
+                    _log.severe("PrimeShopTable: Missing category, skipping");
                     continue;
                 }
                 final int cat = Integer.parseInt(att.getNodeValue());
@@ -121,7 +120,7 @@ public class PrimeShopTable implements IXmlReader
                 att = attrs.getNamedItem("price");
                 if (att == null)
                 {
-                    _log.severe("[PrimeShop]: Missing price, skipping");
+                    _log.severe("PrimeShopTable: Missing price, skipping");
                     continue;
                 }
                 final int price = Integer.parseInt(att.getNodeValue());
@@ -129,7 +128,7 @@ public class PrimeShopTable implements IXmlReader
                 att = attrs.getNamedItem("count");
                 if (att == null)
                 {
-                    _log.severe("[PrimeShop]: Missing count, skipping");
+                    _log.severe("PrimeShopTable: Missing count, skipping");
                     continue;
                 }
                 final int count = Integer.parseInt(att.getNodeValue());
@@ -137,7 +136,7 @@ public class PrimeShopTable implements IXmlReader
                 att = attrs.getNamedItem("event");
                 if (att == null)
                 {
-                    _log.severe("[PrimeShop]: Missing event, skipping");
+                    _log.severe("PrimeShopTable: Missing event, skipping");
                     continue;
                 }
                 final boolean event = Boolean.parseBoolean(att.getNodeValue());
@@ -145,7 +144,7 @@ public class PrimeShopTable implements IXmlReader
                 att = attrs.getNamedItem("best");
                 if (att == null)
                 {
-                    _log.severe("[PrimeShop]: Missing best, skipping");
+                    _log.severe("PrimeShopTable: Missing best, skipping");
                     continue;
                 }
                 final boolean best = Boolean.parseBoolean(att.getNodeValue());
@@ -161,14 +160,14 @@ public class PrimeShopTable implements IXmlReader
                 L2Item item = ItemTable.getInstance().getTemplate(itemId);
                 if (item == null)
                 {
-                    _log.severe("[PrimeShop]: Item template null");
+                    _log.severe("PrimeShopTable: Item template null");
                 }
                 else
                 {
                     att = attrs.getNamedItem("sale_start_date");
                     if (att == null)
                     {
-                        _log.severe("[PrimeShop]: Missing item start date, skipping");
+                        _log.severe("PrimeShopTable: Missing item start date, skipping");
                         continue;
                     }
                     final String sale_start_date = att.getNodeValue();
@@ -176,7 +175,7 @@ public class PrimeShopTable implements IXmlReader
                     att = attrs.getNamedItem("sale_end_date");
                     if (att == null)
                     {
-                        _log.severe("[PrimeShop]: Missing item end date, skipping");
+                        _log.severe("PrimeShopTable: Missing item end date, skipping");
                         continue;
                     }
                     final String sale_end_date = att.getNodeValue();
@@ -188,7 +187,7 @@ public class PrimeShopTable implements IXmlReader
 
         if (_primeItems.size() > 0)
         {
-            _log.info("[PrimeShop]: Loaded " + _primeItems.size() + " items");
+            _log.info("PrimeShopTable: Loaded " + _primeItems.size() + " items");
         }
     }
 
@@ -427,7 +426,7 @@ public class PrimeShopTable implements IXmlReader
         public static int getMaxStock(int brId)
         {
             if (!hasPrimeItem(brId)) {
-                _log.log(Level.WARNING, "[PrimeShop]: Trying to get stock count from an invalid product (" + brId + ")");
+                _log.warning("PrimeShopTable: Trying to get stock count from an invalid product (" + brId + ")");
                 return 0;
             }
 
@@ -441,37 +440,37 @@ public class PrimeShopTable implements IXmlReader
                 {
                     while (rset.next())
                     {
-                        maxStock = rset.getInt("total");
+                        maxStock = rset.getInt("stock");
                     }
                 }
             }
             catch (Exception e)
             {
-                _log.log(Level.WARNING, "[PrimeShop]: Error while loading stock for product: " + brId + e, e);
+                _log.warning("PrimeShopTable: Error while loading stock for product: " + brId + e);
             }
 
             return maxStock;
         }
 
-        public static boolean setMaxStock(int brId, int total)
+        public static boolean setMaxStock(int brId, int stock)
         {
             boolean ok = false;
 
             if (!hasPrimeItem(brId)) {
-                _log.log(Level.WARNING, "[PrimeShop]: Trying to set new stock count to an invalid product (" + brId + ")");
+                _log.warning("PrimeShopTable: Trying to set new stock count to an invalid product (" + brId + ")");
                 return false;
             }
 
             try (Connection con = DatabaseFactory.getInstance().getConnection();
                  PreparedStatement statement = con.prepareStatement(UPDATE_STOCK_COUNT))
             {
-                statement.setInt(1, total);
+                statement.setInt(1, stock);
                 statement.setInt(2, brId);
                 ok = statement.execute();
             }
             catch (Exception e)
             {
-                _log.log(Level.WARNING, "[PrimeShop]: Error while updating product: " + brId + e, e);
+                _log.warning("PrimeShopTable: Error while updating product: " + brId + e);
             }
 
             return ok;
@@ -480,7 +479,7 @@ public class PrimeShopTable implements IXmlReader
         public static int getSoldCount(int brId)
         {
             if (!hasPrimeItem(brId)) {
-                _log.log(Level.WARNING, "[PrimeShop]: Trying to get sold count from an invalid product (" + brId + ")");
+                _log.warning("PrimeShopTable: Trying to get sold count from an invalid product (" + brId + ")");
 
                 return 0;
             }
@@ -501,38 +500,38 @@ public class PrimeShopTable implements IXmlReader
             }
             catch (Exception e)
             {
-                _log.log(Level.WARNING, "[PrimeShop]: Error while loading current stock for product: " + brId + e, e);
+                _log.warning("PrimeShopTable: Error while loading current stock for product: " + brId + e);
             }
 
             return getActualStock;
         }
 
-        public static boolean setSoldCount(int brId, int total, int count)
+        public static boolean setSoldCount(int brId, int stock, int count)
         {
             boolean ok = false;
             if (!hasPrimeItem(brId)) {
-                _log.log(Level.WARNING, "[PrimeShop]: Trying to set new sold count to an invalid product (" + brId + ")");
+                _log.warning("PrimeShopTable: Trying to set new sold count to an invalid product (" + brId + ")");
                 return false;
             }
 
-            total += count;
+            stock += count;
 
             try (Connection con = DatabaseFactory.getInstance().getConnection();
                  PreparedStatement statement = con.prepareStatement(UPDATE_SOLD_COUNT))
             {
-                statement.setInt(1, total);
+                statement.setInt(1, stock);
                 statement.setInt(2, brId);
                 ok = statement.execute();
             }
             catch (Exception e)
             {
-                _log.log(Level.WARNING, "[PrimeShop]: Error while updating product: " + brId + e, e);
+                _log.warning("PrimeShopTable: Error while updating product: " + brId + e);
             }
 
             return ok;
         }
 
-        public static boolean addPrimeItem(int brId, int total)
+        public static boolean addPrimeItem(int brId, int stock)
         {
             boolean added = false;
 
@@ -541,15 +540,15 @@ public class PrimeShopTable implements IXmlReader
                      PreparedStatement statement = con.prepareStatement(INSERT_ITEM))
                 {
                     statement.setInt(1, brId);
-                    statement.setInt(2, total);
+                    statement.setInt(2, stock);
                     added = statement.execute();
                 }
                 catch (Exception e)
                 {
-                    _log.log(Level.WARNING, "[PrimeShop]: Error while inserting product: " + brId + e, e);
+                    _log.warning("PrimeShopTable: Error while inserting product: " + brId + e);
                 }
             } else {
-                _log.log(Level.WARNING, "[PrimeShop]: Trying to add product (" + brId + ") that already exists");
+                _log.warning("PrimeShopTable: Trying to add product (" + brId + ") that already exists");
             }
 
             return added;
@@ -560,7 +559,7 @@ public class PrimeShopTable implements IXmlReader
             boolean removed = false;
 
             if (!hasPrimeItem(brId)) {
-                _log.log(Level.WARNING, "[PrimeShop]: Product (" + brId + ") cannot be removed from primeshop because it's not there!");
+                _log.warning("PrimeShopTable: Product (" + brId + ") cannot be removed from primeshop because it's not there!");
                 return false;
             }
 
@@ -572,7 +571,7 @@ public class PrimeShopTable implements IXmlReader
             }
             catch (Exception e)
             {
-                _log.log(Level.WARNING, "[PrimeShop]: Error while removing product: " + brId + e, e);
+                _log.warning("PrimeShopTable: Error while removing product: " + brId + e);
             }
 
             return removed;
@@ -590,7 +589,7 @@ public class PrimeShopTable implements IXmlReader
             }
             catch (Exception e)
             {
-                _log.log(Level.WARNING, "[PrimeShop]: Error while checking product: " + brId + e, e);
+                _log.warning("PrimeShopTable: Error while checking product: " + brId + e);
             }
 
             return exists;

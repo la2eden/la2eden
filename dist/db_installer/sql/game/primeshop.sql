@@ -2,7 +2,7 @@ DROP TABLE IF EXISTS `primeshop`;
 CREATE TABLE IF NOT EXISTS `primeshop` (
   `id` int(4) unsigned NOT NULL AUTO_INCREMENT,
   `brId` int(7) unsigned NOT NULL,
-  `total` int(11) unsigned NOT NULL,
+  `stock` int(11) unsigned NOT NULL,
   `sold` int(11) unsigned NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   KEY (`brId`)

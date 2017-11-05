@@ -241,7 +241,7 @@ public class AdminReload implements IAdminCommandHandler
 				}
                 case "primeshop":
                 {
-                    PrimeShopTable.getInstance().reload();
+                    PrimeShopTable.getInstance().load();
                     AdminData.getInstance().broadcastMessageToGMs(activeChar.getName() + ": Reloaded PrimeShop.");
                     break;
                 }
