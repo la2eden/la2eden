@@ -113,11 +113,11 @@ public class AdminPrimeShop implements IAdminCommandHandler {
 
     private boolean addPItem(L2PcInstance admin, int brId, int stock)
     {
-        if ((brId > 0 && stock > 0)
+        if ((brId > 0) && (stock > 0)
                 && (!PrimeShopTable.PrimeShopHelper.hasPrimeItem(brId))
                 && (PrimeShopTable.PrimeShopHelper.addPrimeItem(brId, stock)))
         {
-            admin.sendMessage("You added " + brId + " to the primeshop table. Update your PrimeShop.xml accordingly.");
+            admin.sendMessage("You added " + brId + " to the primeshop table.");
 
             return true;
         }
@@ -129,10 +129,10 @@ public class AdminPrimeShop implements IAdminCommandHandler {
     private boolean deletePItem(L2PcInstance admin, int brId)
     {
         if ((brId > 0)
-                && (!PrimeShopTable.PrimeShopHelper.hasPrimeItem(brId))
+                && (PrimeShopTable.PrimeShopHelper.hasPrimeItem(brId))
                 && (PrimeShopTable.PrimeShopHelper.removePrimeItem(brId)))
         {
-            admin.sendMessage("You removed " + brId + " from the primeshop table. Update your PrimeShop.xml accordingly.");
+            admin.sendMessage("You removed " + brId + " from the primeshop table.");
 
             return true;
         }
@@ -143,11 +143,12 @@ public class AdminPrimeShop implements IAdminCommandHandler {
 
     private boolean updatePItem(L2PcInstance admin, int brId, int stock, int sold)
     {
-        if ((brId > 0 && stock > 0 && sold >= 0)
-                && (!PrimeShopTable.PrimeShopHelper.hasPrimeItem(brId))
-                && (PrimeShopTable.PrimeShopHelper.setMaxStock(brId, stock) && PrimeShopTable.PrimeShopHelper.setSoldCount(brId, stock, sold)))
+        if ((brId > 0) && (stock > 0) && (sold >= 0)
+                && (PrimeShopTable.PrimeShopHelper.hasPrimeItem(brId))
+                && (PrimeShopTable.PrimeShopHelper.setMaxStock(brId, stock))
+                && (PrimeShopTable.PrimeShopHelper.setSoldCount(brId, sold)))
         {
-            admin.sendMessage("You updated " + brId + " from the primeshop table. Update your PrimeShop.xml accordingly.");
+            admin.sendMessage("You updated " + brId + " from the primeshop table.");
 
             return true;
         }

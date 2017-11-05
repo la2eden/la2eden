@@ -19,10 +19,10 @@
     <item brId="1080005" itemId="22004" count="1" cat="5" price="216" event="false" best="true" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
     <!-- Large fortuna cube -->
     <item brId="1080006" itemId="22005" count="1" cat="5" price="324" event="false" best="true" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
+    <!-- Feather of Blessing -->
+    <item brId="1080184" itemId="10649" count="1" cat="5" price="500" event="false" best="true" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
 
     <!-- SUPPLIES -->
-    <!-- Feather of Blessing -->
-    <item brId="1050000" itemId="10649" count="1" cat="2" price="500" event="false" best="true" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
     <!-- Powerful Healing Potion -->
     <item brId="1080007" itemId="22025" count="1" cat="2" price="3" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
     <!-- High-grade Healing Potion -->
@@ -104,20 +104,6 @@
     <!-- Rune of SP 720hs -->
     <item brId="1080043" itemId="22061" count="1" cat="5" price="100" event="true" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
 
-    <!-- ?? -->
-    <item brId="1080044" itemId="22062" count="1" cat="1" price="20" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
-    <item brId="1080045" itemId="22063" count="1" cat="1" price="50" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
-    <item brId="1080046" itemId="22064" count="1" cat="1" price="80" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
-    <item brId="1080047" itemId="22065" count="1" cat="1" price="100" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
-    <item brId="1080048" itemId="22066" count="1" cat="1" price="68" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
-    <item brId="1080049" itemId="22087" count="1" cat="4" price="52" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
-    <item brId="1080050" itemId="22088" count="1" cat="4" price="59" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
-    <item brId="1080051" itemId="22089" count="1" cat="2" price="21" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
-    <item brId="1080052" itemId="22090" count="1" cat="2" price="34" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
-    <item brId="1080053" itemId="22091" count="1" cat="2" price="48" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
-    <item brId="1080054" itemId="22092" count="1" cat="2" price="54" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
-    <item brId="1080055" itemId="22093" count="1" cat="2" price="68" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
-
     <!-- PACKAGE -->
     <!-- Bone Bolt Container -->
     <item brId="1080056" itemId="22149" count="1" cat="4" price="21" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
@@ -174,19 +160,19 @@
 
     <!-- DECORATING -->
     <!-- Color Name -->
-    <item brId="1030032" itemId="13021" count="1" cat="500" price="268" event="false" best="true" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
+    <item brId="1030032" itemId="13021" count="1" cat="3" price="268" event="false" best="true" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
     <!-- Uniform Hat -->
-    <item brId="1030068" itemId="20020" count="1" cat="200" price="1" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
+    <item brId="1030068" itemId="20020" count="1" cat="3" price="1" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
     <!-- Napoleon Hat -->
-    <item brId="1030069" itemId="20322" count="1" cat="200" price="1" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
+    <item brId="1030069" itemId="20322" count="1" cat="3" price="1" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
     <!-- Popped-Out Eye -->
-    <item brId="1030070" itemId="13491" count="1" cat="200" price="1" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
+    <item brId="1030070" itemId="13491" count="1" cat="3" price="1" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
     <!-- Halloween Hat -->
-    <item brId="1030076" itemId="13489" count="1" cat="200" price="1" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
+    <item brId="1030076" itemId="13489" count="1" cat="3" price="1" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
     <!-- Kai the Cat Hat -->
-    <item brId="1030080" itemId="20501" count="1" cat="200" price="1" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
+    <item brId="1030080" itemId="20501" count="1" cat="3" price="1" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
     <!-- Afro Hair Pack - Gold -->
-    <item brId="1030038" itemId="20278" count="1" cat="200" price="1" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
+    <item brId="1030038" itemId="20278" count="1" cat="3" price="1" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
     <!-- Afro Hair Pack - Pink -->
-    <item brId="1030039" itemId="20279" count="1" cat="200" price="1" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
+    <item brId="1030039" itemId="20279" count="1" cat="3" price="1" event="false" best="false" sale_start_date="2017.11.05 09:00" sale_end_date="2020.12.05 18:00" />
 </list>

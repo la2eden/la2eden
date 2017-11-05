@@ -153,7 +153,7 @@
     <admin command="admin_primeshop" accessLevel="100" />
     <admin command="admin_primeshop_add" accessLevel="100" />
     <admin command="admin_primeshop_del" accessLevel="100" />
-    <admin command="admin_primeshop_update" accessLevel="100" />
+    <admin command="admin_primeshop_set" accessLevel="100" />
 
 	<!-- ADMIN EFFECTS -->
 	<admin command="admin_invis" accessLevel="30" />

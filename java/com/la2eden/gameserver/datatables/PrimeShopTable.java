@@ -248,7 +248,7 @@ public class PrimeShopTable implements IXmlReader
 
                                 if (MaxStock != 0)
                                 {
-                                    PrimeShopHelper.setSoldCount(brId, Stock, count);
+                                    PrimeShopHelper.setSoldCount(brId, count);
                                 }
                             }
                             else
@@ -506,7 +506,7 @@ public class PrimeShopTable implements IXmlReader
             return getActualStock;
         }
 
-        public static boolean setSoldCount(int brId, int stock, int count)
+        public static boolean setSoldCount(int brId, int count)
         {
             boolean ok = false;
             if (!hasPrimeItem(brId)) {
@@ -514,12 +514,10 @@ public class PrimeShopTable implements IXmlReader
                 return false;
             }
 
-            stock += count;
-
             try (Connection con = DatabaseFactory.getInstance().getConnection();
                  PreparedStatement statement = con.prepareStatement(UPDATE_SOLD_COUNT))
             {
-                statement.setInt(1, stock);
+                statement.setInt(1, count);
                 statement.setInt(2, brId);
                 ok = statement.execute();
             }
