@@ -10,7 +10,7 @@
 	<property name="build.dist.gameserver" location="${build.dist}/gameserver" />
 	<property name="build.dist.loginserver" location="${build.dist}/loginserver" />
 	<property name="build.dist.installer" location="${build.dist}/db_installer" />
-	<property name="libs" location="${build.dist}/libs" />
+    <property name="libs" location="./dist/libs" />
 	<property name="src" location="java" />
 
     <property name="version.file" location="${build.dist}/gameserver/config/core/Version.ini" />
