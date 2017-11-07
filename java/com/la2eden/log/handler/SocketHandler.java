@@ -1,7 +1,6 @@
 package com.la2eden.log.handler;
 
-import java.io.DataOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.logging.Level;
@@ -13,6 +12,7 @@ public class SocketHandler extends StreamHandler
 {
     private static Boolean ENABLED;
     private static Integer SERVER_PORT;
+    private static String TOKEN;
 
     private static DataOutputStream OUT_STREAM;
     private static ServerSocket SOCKET;
@@ -23,6 +23,7 @@ public class SocketHandler extends StreamHandler
 
         ENABLED = Boolean.valueOf(manager.getProperty(cname + ".enabled"));
         SERVER_PORT = Integer.valueOf(manager.getProperty(cname + ".port"));
+        TOKEN = manager.getProperty(cname + ".token");
 
         setLevel(Level.parse(manager.getProperty(cname + ".level")));
         try {
@@ -62,6 +63,19 @@ public class SocketHandler extends StreamHandler
 
                     if (client.isConnected()) {
                         connected = true;
+                    }
+                }
+
+                InputStreamReader isr = new InputStreamReader(client.getInputStream());
+                BufferedReader br = new BufferedReader(isr);
+                String readTkn = br.readLine();
+                String token;
+                if (readTkn.startsWith("tkn:")) {
+                    token = readTkn.replaceAll("tkn:", "");
+
+                    if ((token == null) || (!token.equals(TOKEN))) {
+                        close();
+                        return;
                     }
                 }
 
