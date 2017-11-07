@@ -45,7 +45,7 @@ public class DatabaseFactory
 		// Hello Hikari!
         HikariConfig config = new HikariConfig();
         config.setJdbcUrl(Config.DATABASE_URL);
-        config.setUsername(Config.DATABASE_PASSWORD);
+        config.setUsername(Config.DATABASE_LOGIN);
         config.setPassword(Config.DATABASE_PASSWORD);
         config.addDataSourceProperty("cachePrepStmts", "true");
         config.addDataSourceProperty("prepStmtCacheSize", "250");
