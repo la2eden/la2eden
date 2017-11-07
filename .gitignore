@@ -3,6 +3,9 @@ bin/*
 build/*
 localserver/*
 
+# Prevent from commiting user-generated build information
+dist/gameserver/config/core/Version.ini
+
 # IDEA-related files
 .idea/workspace.xml
 .idea/uiDesigner.xml
