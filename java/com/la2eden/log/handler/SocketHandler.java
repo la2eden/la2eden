@@ -1,22 +1,28 @@
 package com.la2eden.log.handler;
 
-import com.la2eden.log.formatter.SocketFormatter;
+import com.la2eden.Server;
 
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.*;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Handler;
+import java.util.logging.Level;
+import java.util.logging.LogManager;
+import java.util.logging.LogRecord;
 
-public class SocketHandler extends StreamHandler
+public class SocketHandler extends Handler
 {
     private static Boolean ENABLED;
     private static Integer SERVER_PORT;
     private static String TOKEN;
 
+    private static OutputStreamWriter writer;
     private static DataOutputStream stream;
     private static ServerSocket socket;
-    private static Thread thrd;
-    private static Writer writer;
+    private static Socket client;
+    private static Thread thread;
 
     private void configure() {
         LogManager manager = LogManager.getLogManager();
@@ -27,16 +33,6 @@ public class SocketHandler extends StreamHandler
         TOKEN = manager.getProperty(cname + ".token");
 
         setLevel(Level.parse(manager.getProperty(cname + ".level")));
-
-        try {
-            setEncoding(manager.getProperty(cname +".encoding"));
-        } catch (Exception ex) {
-            try {
-                setEncoding(null);
-            } catch (Exception e) {
-                // code
-            }
-        }
     }
 
     public SocketHandler() throws IOException {
@@ -53,49 +49,73 @@ public class SocketHandler extends StreamHandler
         connect();
     }
 
-    public void connect() {
+    private static String format(LogRecord record) {
+        String type = (Server.serverMode == Server.MODE_GAMESERVER) ? "game;" : "login;";
+        StringBuilder output = new StringBuilder();
+        String date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(record.getMillis())) + ";";
+        String level = record.getLevel().getName() + ";";
+        String message = record.getMessage();
+
+        if (message != null) {
+            output.append(type);
+            output.append(date);
+            output.append(level);
+            output.append(message);
+        }
+
+        return output.toString();
+    }
+
+    private void connect() {
         if (ENABLED) {
             Runnable listener = () -> {
                 try {
                     socket = new ServerSocket(SERVER_PORT);
-                    Socket client = null;
 
                     while (client == null) {
                         client = socket.accept();
                     }
 
                     stream = new DataOutputStream(client.getOutputStream());
-                    writer = new OutputStreamWriter(stream);
+                    //OutputStreamWriter outWriter = new OutputStreamWriter(stream, "UTF-8");
+                    //writer = new PrintWriter(outWriter);
+                    writer = new OutputStreamWriter(stream, "UTF-8");
 
                     InputStreamReader isr = new InputStreamReader(client.getInputStream());
                     BufferedReader br = new BufferedReader(isr);
                     String readTkn = br.readLine();
-                    String token;
-                    if (readTkn.startsWith("tkn:")) {
-                        token = readTkn.replaceAll("tkn:", "");
 
-                        if ((token == null) || (!token.equals(TOKEN))) {
-                            writer.write("Invalid access token!");
+                    if ((readTkn.startsWith("tkn:"))) {
+                        String token = readTkn.replaceAll("tkn:", "");
+
+                        if (!token.equals(TOKEN)) {
+                            send("ERR");
                             close();
+                        } else {
+                            // Connected
+                            send("EHLO");
                         }
-
-                        // Connected
-                        writer.write("EHLO");
-                        flush();
                     }
-
-                    //setOutputStream(stream);
                 } catch (IOException e) {
                     // code
                 }
             };
 
-            thrd = new Thread(listener);
-            thrd.start();
+            thread = new Thread(listener);
+            thread.start();
         }
     }
 
-    @Override
+    private void send(String msg) {
+        if (client != null) {
+            try {
+                writer.write(msg);
+            } catch (Exception e) {
+                System.out.println("Error while sending data: " + e.getMessage());
+            }
+        }
+    }
+
     public void publish(LogRecord record)
     {
         if (!isLoggable(record)) {
@@ -103,49 +123,44 @@ public class SocketHandler extends StreamHandler
         }
 
         if (ENABLED) {
-            String msg = SocketFormatter.format(record);
+            String msg = format(record);
 
-            try {
-                writer.write(msg);
-                flush();
-            } catch (IOException e) {
-                close();
-            }
+            send(msg);
         }
     }
 
-    @Override
     public void flush() {
-        if (ENABLED && writer != null) {
+        if (writer != null) {
             try {
                 writer.flush();
-                stream.flush();
-            } catch (IOException e) {
+                //stream.flush();
+            } catch (Exception e) {
                 // code
             }
         }
     }
 
-    @Override
-    public void close() throws SecurityException {
-        if ((socket != null) && (writer != null) && (!thrd.isInterrupted())) {
+    public void close() {
+        if ((socket != null) && (writer != null) && (!thread.isInterrupted())) {
             try {
                 flush();
 
                 writer.close();
+                stream.close();
                 socket.close();
 
-                thrd.interrupt();
+                thread.interrupt();
             } catch (IOException ix) {
                 // drop through.
             }
+
+            writer = null;
+            stream = null;
+            socket = null;
+            thread = null;
+
+            // Start again
+            connect();
         }
-
-        writer = null;
-        socket = null;
-        thrd = null;
-
-        // Start again
-        connect();
     }
 }

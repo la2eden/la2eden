@@ -4,7 +4,7 @@
 		This script will build the La2Eden High Five project.
 	</description>
 
-    <property name="prefix_version" value="0.1.1" />
+    <property name="prefix_version" value="0.1.0" />
     <property name="suffix_version" value="alpha" />
 
     <property name="dist" location="./dist" />
@@ -189,7 +189,7 @@
 	</target>
 
 	<target name="zip" depends="jar" description="Adding the compiled jars to the Zip file.">
-		<zip destfile="${build}/La2Eden ${prefix_version}-${suffix_version}.zip" basedir="${build.dist}" level="9" />
+		<zip destfile="${build}/La2Eden_${prefix_version}-${suffix_version}.zip" basedir="${build.dist}" level="9" />
 	</target>
 
 	<target name="finish" depends="zip" description="Cleaning the build folder.">
