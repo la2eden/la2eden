@@ -4,6 +4,9 @@
 		This script will build the La2Eden High Five project.
 	</description>
 
+    <property name="prefix_version" value="0.1.1" />
+    <property name="suffix_version" value="alpha" />
+
     <property name="dist" location="./dist" />
 	<property name="build" location="./build" />
 	<property name="build.bin" location="${build}/bin" />
@@ -15,7 +18,7 @@
 	<property name="src" location="java" />
 
     <property name="version.file" location="${dist}/gameserver/config/core/Version.ini" />
-    <property name="changelog.format" value="* [%h] %aN (%cD)%n| -> %B|" />
+    <property name="changelog.format" value="* [%h] %aN (%cD)%n-> %B%n" />
     <property name="changelog.file" location="${build}/changelog.txt" />
 
 	<path id="classpath">
@@ -99,7 +102,6 @@
         <exec executable="git" outputproperty="changelog" failifexecutionfails="false" errorproperty="">
             <arg value="log"/>
             <arg value="--format=format:${changelog.format}"/>
-            <arg value="--decorate"/>
             <arg value="--all"/>
         </exec>
 
@@ -187,7 +189,7 @@
 	</target>
 
 	<target name="zip" depends="jar" description="Adding the compiled jars to the Zip file.">
-		<zip destfile="${build}/La2Eden.zip" basedir="${build.dist}" level="9" />
+		<zip destfile="${build}/La2Eden ${prefix_version}-${suffix_version}.zip" basedir="${build.dist}" level="9" />
 	</target>
 
 	<target name="finish" depends="zip" description="Cleaning the build folder.">

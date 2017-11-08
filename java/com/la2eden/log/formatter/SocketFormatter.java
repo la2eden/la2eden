@@ -6,8 +6,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.logging.LogRecord;
 
-public class SocketFormatter extends AbstractFormatter {
-    public String format(LogRecord record) {
+public class SocketFormatter {
+    public static String format(LogRecord record) {
         String type = (Server.serverMode == Server.MODE_GAMESERVER) ? "game;" : "login;";
         StringBuilder output = new StringBuilder();
         String date = new SimpleDateFormat("dd/MM/yyyy HH:mm:ss").format(new Date(record.getMillis())) + ";";

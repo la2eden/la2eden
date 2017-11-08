@@ -1,12 +1,11 @@
 package com.la2eden.log.handler;
 
+import com.la2eden.log.formatter.SocketFormatter;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.LogManager;
-import java.util.logging.LogRecord;
-import java.util.logging.StreamHandler;
+import java.util.logging.*;
 
 public class SocketHandler extends StreamHandler
 {
@@ -14,8 +13,10 @@ public class SocketHandler extends StreamHandler
     private static Integer SERVER_PORT;
     private static String TOKEN;
 
-    private static DataOutputStream OUT_STREAM;
-    private static ServerSocket SOCKET;
+    private static DataOutputStream stream;
+    private static ServerSocket socket;
+    private static Thread thrd;
+    private static Writer writer;
 
     private void configure() {
         LogManager manager = LogManager.getLogManager();
@@ -26,6 +27,7 @@ public class SocketHandler extends StreamHandler
         TOKEN = manager.getProperty(cname + ".token");
 
         setLevel(Level.parse(manager.getProperty(cname + ".level")));
+
         try {
             setEncoding(manager.getProperty(cname +".encoding"));
         } catch (Exception ex) {
@@ -53,38 +55,43 @@ public class SocketHandler extends StreamHandler
 
     public void connect() {
         if (ENABLED) {
-            try {
-                SOCKET = new ServerSocket(SERVER_PORT);
-                Socket client = null;
-                Boolean connected = false;
+            Runnable listener = () -> {
+                try {
+                    socket = new ServerSocket(SERVER_PORT);
+                    Socket client = null;
 
-                while (!connected) {
-                    client = SOCKET.accept();
-
-                    if (client.isConnected()) {
-                        connected = true;
+                    while (client == null) {
+                        client = socket.accept();
                     }
-                }
 
-                InputStreamReader isr = new InputStreamReader(client.getInputStream());
-                BufferedReader br = new BufferedReader(isr);
-                String readTkn = br.readLine();
-                String token;
-                if (readTkn.startsWith("tkn:")) {
-                    token = readTkn.replaceAll("tkn:", "");
+                    stream = new DataOutputStream(client.getOutputStream());
+                    writer = new OutputStreamWriter(stream);
 
-                    if ((token == null) || (!token.equals(TOKEN))) {
-                        close();
-                        return;
+                    InputStreamReader isr = new InputStreamReader(client.getInputStream());
+                    BufferedReader br = new BufferedReader(isr);
+                    String readTkn = br.readLine();
+                    String token;
+                    if (readTkn.startsWith("tkn:")) {
+                        token = readTkn.replaceAll("tkn:", "");
+
+                        if ((token == null) || (!token.equals(TOKEN))) {
+                            writer.write("Invalid access token!");
+                            close();
+                        }
+
+                        // Connected
+                        writer.write("EHLO");
+                        flush();
                     }
+
+                    //setOutputStream(stream);
+                } catch (IOException e) {
+                    // code
                 }
+            };
 
-                OUT_STREAM = new DataOutputStream(client.getOutputStream());
-
-                setOutputStream(OUT_STREAM);
-            } catch (IOException e) {
-                // code
-            }
+            thrd = new Thread(listener);
+            thrd.start();
         }
     }
 
@@ -96,35 +103,49 @@ public class SocketHandler extends StreamHandler
         }
 
         if (ENABLED) {
-            super.publish(record);
-        }
+            String msg = SocketFormatter.format(record);
 
-        flush();
+            try {
+                writer.write(msg);
+                flush();
+            } catch (IOException e) {
+                close();
+            }
+        }
     }
 
     @Override
     public void flush() {
-        super.flush();
-
-        try {
-            if (ENABLED) {
-                OUT_STREAM.flush();
+        if (ENABLED && writer != null) {
+            try {
+                writer.flush();
+                stream.flush();
+            } catch (IOException e) {
+                // code
             }
-        } catch (IOException e) {
-            // code
         }
     }
 
     @Override
     public void close() throws SecurityException {
-        super.close();
-        if (SOCKET != null) {
+        if ((socket != null) && (writer != null) && (!thrd.isInterrupted())) {
             try {
-                SOCKET.close();
+                flush();
+
+                writer.close();
+                socket.close();
+
+                thrd.interrupt();
             } catch (IOException ix) {
                 // drop through.
             }
         }
-        SOCKET = null;
+
+        writer = null;
+        socket = null;
+        thrd = null;
+
+        // Start again
+        connect();
     }
 }

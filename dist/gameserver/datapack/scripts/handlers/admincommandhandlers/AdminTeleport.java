@@ -16,13 +16,6 @@
  */
 package handlers.admincommandhandlers;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.util.NoSuchElementException;
-import java.util.StringTokenizer;
-import java.util.logging.Logger;
-
 import com.la2eden.Config;
 import com.la2eden.commons.database.DatabaseFactory;
 import com.la2eden.gameserver.ai.CtrlIntention;
@@ -40,6 +33,13 @@ import com.la2eden.gameserver.model.actor.instance.L2PcInstance;
 import com.la2eden.gameserver.model.actor.instance.L2RaidBossInstance;
 import com.la2eden.gameserver.network.SystemMessageId;
 import com.la2eden.gameserver.network.serverpackets.NpcHtmlMessage;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+import java.util.NoSuchElementException;
+import java.util.StringTokenizer;
+import java.util.logging.Logger;
 
 /**
  * This class handles following admin commands: - show_moves - show_teleport - teleport_to_character - move_to - teleport_character
@@ -179,7 +179,7 @@ public class AdminTeleport implements IAdminCommandHandler
 			{
 			}
 		}
-		else if (command.startsWith("admin_recall "))
+		else if (command.startsWith("admin_recall"))
 		{
 			try
 			{
