@@ -1,16 +1,14 @@
 package com.la2eden.log.handler;
 
-import java.io.BufferedReader;
-import java.io.DataOutputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.logging.Level;
 import java.util.logging.LogManager;
 import java.util.logging.LogRecord;
 import java.util.logging.StreamHandler;
 
-public class SocketHandler extends StreamHandler
+public class RemoteConsoleHandler extends StreamHandler
 {
     private static Boolean ENABLED;
     private static Boolean BLOCKING;
@@ -29,16 +27,27 @@ public class SocketHandler extends StreamHandler
         BLOCKING = Boolean.valueOf(manager.getProperty(cname + ".blocking"));
         SERVER_PORT = Integer.valueOf(manager.getProperty(cname + ".port"));
         TOKEN = manager.getProperty(cname + ".token");
+
+        setLevel(Level.parse(manager.getProperty(cname + ".level")));
+        try {
+            setEncoding(manager.getProperty(cname +".encoding"));
+        } catch (Exception ex) {
+            try {
+                setEncoding(null);
+            } catch (Exception e) {
+                // code
+            }
+        }
     }
 
-    public SocketHandler() throws IOException {
+    public RemoteConsoleHandler() throws IOException {
         // We are going to use the logging defaults.
         configure();
 
         connect();
     }
 
-    public SocketHandler(int port) throws IOException {
+    public RemoteConsoleHandler(int port) throws IOException {
         configure();
         SERVER_PORT = port;
 
@@ -48,13 +57,14 @@ public class SocketHandler extends StreamHandler
     private void listen() {
         try {
             socket = new ServerSocket(SERVER_PORT);
-            Socket client;
+            Socket client = null;
+            Boolean connected = false;
 
-            while (true) {
+            while (!connected) {
                 client = socket.accept();
 
                 if (client.isConnected()) {
-                    break;
+                    connected = true;
                 }
             }
 
@@ -62,21 +72,23 @@ public class SocketHandler extends StreamHandler
             BufferedReader br = new BufferedReader(isr);
             String readTkn = br.readLine();
             String token;
-
             if (readTkn.startsWith("tkn:")) {
                 token = readTkn.replaceAll("tkn:", "");
 
-                if ((token != null) && (token.equals(TOKEN))) {
-                    stream = new DataOutputStream(client.getOutputStream());
-                    setOutputStream(stream);
+                if ((token == null) || (!token.equals(TOKEN))) {
+                    close();
+                    return;
                 }
             }
+
+            stream = new DataOutputStream(client.getOutputStream());
+            setOutputStream(stream);
         } catch (IOException e) {
             // code
         }
     }
 
-    private void connect() {
+    public void connect() {
         if (ENABLED) {
             Runnable listener = this::listen;
 
@@ -92,7 +104,7 @@ public class SocketHandler extends StreamHandler
     @Override
     public void publish(LogRecord record)
     {
-        if (ENABLED) {
+        if (ENABLED && (stream != null)) {
             super.publish(record);
         }
 
@@ -104,7 +116,7 @@ public class SocketHandler extends StreamHandler
         super.flush();
 
         try {
-            if (ENABLED) {
+            if (ENABLED && (stream != null)) {
                 stream.flush();
             }
         } catch (IOException e) {
@@ -112,7 +124,6 @@ public class SocketHandler extends StreamHandler
         }
     }
 
-    /*
     @Override
     public void close() throws SecurityException {
         super.close();
@@ -127,5 +138,4 @@ public class SocketHandler extends StreamHandler
 
         socket = null;
     }
-    */
 }

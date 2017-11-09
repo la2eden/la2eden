@@ -25,7 +25,7 @@ import java.util.logging.LogRecord;
 /**
  * @author Enkel
  */
-public class SocketFormatter extends AbstractFormatter {
+public class RemoteConsoleFormatter extends AbstractFormatter {
     public String format(LogRecord record) {
         String type = (Server.serverMode == Server.MODE_GAMESERVER) ? "game;" : "login;";
         StringBuilder output = new StringBuilder();
@@ -40,6 +40,6 @@ public class SocketFormatter extends AbstractFormatter {
             output.append(message);
         }
 
-        return output.toString() + "\n";
+        return output.toString();
     }
 }
