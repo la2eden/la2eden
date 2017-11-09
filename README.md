@@ -1,4 +1,4 @@
-# La2Eden
+# La2Eden [![Build Status](https://travis-ci.org/la2eden/la2eden.svg?branch=master)](https://travis-ci.org/la2eden/la2eden)
 For more information, please visit our website at [https://la2eden.com](https://la2eden.com)
 
 
