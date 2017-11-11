@@ -130,6 +130,10 @@ public class EnterWorld extends L2GameClientPacket
 			if (Config.GM_STARTUP_SUPER_HASTE && AdminData.getInstance().hasAccess("admin_gmspeed", activeChar.getAccessLevel())) {
                 Skill skill = new SkillHolder(7029, 4).getSkill();
                 if (skill != null) {
+                    activeChar.addSkill(skill, true);
+                    activeChar.sendSkillList();
+
+                    // Use Super Haste
                     activeChar.broadcastPacket(new MagicSkillUse(activeChar, activeChar, skill.getId(), skill.getLevel(), skill.getHitTime(), skill.getReuseDelay()));
                 }
             }
