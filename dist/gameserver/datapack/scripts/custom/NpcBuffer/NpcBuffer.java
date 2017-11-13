@@ -68,39 +68,40 @@ public class NpcBuffer extends Quest
     private static final String TITLE_NAME = "Scheme Buffer";
     private static final boolean SCRIPT_RELOAD = true;
     private static final boolean SMART_WINDOW = true;
-    private static final boolean ENABLE_BUFF_SECTION = true;
-    private static final boolean ENABLE_SCHEME_SYSTEM = true;
-    private static final boolean ENABLE_HEAL = true;
-    private static final boolean ENABLE_HEAL_IN_COMBAT = false;
-    private static final boolean ENABLE_BUFFS = true;
-    private static final boolean ENABLE_RESIST = true;
-    private static final boolean ENABLE_SONGS = true;
-    private static final boolean ENABLE_DANCES = true;
-    private static final boolean ENABLE_CHANTS = true;
-    private static final boolean ENABLE_OTHERS = false;
-    private static final boolean ENABLE_SPECIAL = true;
-    private static final boolean ENABLE_CUBIC = false;
-    private static final boolean ENABLE_BUFF_REMOVE = true;
-    private static final boolean ENABLE_BUFF_SET = true;
-    private static final boolean BUFF_WITH_KARMA = true;
-    private static final boolean FREE_BUFFS = false;
+    private static final boolean ENABLE_BUFF_SECTION = Config.NPC_BUFFER_ENABLED;
+    private static final boolean PREMIUM_ONLY = Config.NPC_BUFFER_PREMIUM_ONLY;
+    private static final boolean ENABLE_SCHEME_SYSTEM = Config.SCHEME_SYSTEM_ENABLED;
+    private static final boolean ENABLE_HEAL = Config.NPC_BUFFER_ENABLE_HEAL;
+    private static final boolean ENABLE_HEAL_IN_COMBAT = Config.NPC_BUFFER_COMBAT_HEALING;
+    private static final boolean ENABLE_BUFFS = Config.NPC_BUFFER_ENABLE_COMMON;
+    private static final boolean ENABLE_RESIST = Config.NPC_BUFFER_ENABLE_RESISTS;
+    private static final boolean ENABLE_SONGS = Config.NPC_BUFFER_ENABLE_SONGS;
+    private static final boolean ENABLE_DANCES = Config.NPC_BUFFER_ENABLE_DANCES;
+    private static final boolean ENABLE_CHANTS = Config.NPC_BUFFER_ENABLE_CHANTS;
+    private static final boolean ENABLE_OTHERS = Config.NPC_BUFFER_ENABLE_OTHERS;
+    private static final boolean ENABLE_SPECIAL = Config.NPC_BUFFER_ENABLE_SPECIALS;
+    private static final boolean ENABLE_CUBIC = Config.NPC_BUFFER_ENABLE_CUBICS;
+    private static final boolean ENABLE_BUFF_REMOVE = Config.NPC_BUFFER_ENABLE_CANCEL;
+    private static final boolean ENABLE_BUFF_SET = Config.NPC_BUFFER_ENABLE_BUFF_SETS;
+    private static final boolean BUFF_WITH_KARMA = Config.NPC_BUFFER_ENABLE_KARMA;
+    private static final boolean FREE_BUFFS = Config.NPC_BUFFER_FREE_BUFFS;
     private static final boolean TIME_OUT = true;
     private static final int TIME_OUT_TIME = 1;
-    private static final int MIN_LEVEL = 1;
-    private static final int BUFF_REMOVE_PRICE = 30000;
-    private static final int HEAL_PRICE = 30000;
-    private static final int BUFF_PRICE = 2000;
-    private static final int RESIST_PRICE = 2000;
-    private static final int SONG_PRICE = 2000;
-    private static final int DANCE_PRICE = 2000;
-    private static final int CHANT_PRICE = 2000;
-    private static final int OTHERS_PRICE = 2000;
-    private static final int SPECIAL_PRICE = 2000;
-    private static final int CUBIC_PRICE = 2000;
-    private static final int BUFF_SET_PRICE = 30000;
-    private static final int SCHEME_BUFF_PRICE = 50000;
-    private static final int SCHEMES_PER_PLAYER = 2;
-    private static final int CONSUMABLE_ID = 57;
+    private static final int MIN_LEVEL = Config.NPC_BUFFER_MIN_LEVEL;
+    private static final int BUFF_REMOVE_PRICE = Config.NPC_BUFFER_CANCEL_PRICE;
+    private static final int HEAL_PRICE = Config.NPC_BUFFER_HEAL_PRICE;
+    private static final int BUFF_PRICE = Config.NPC_BUFFER_COMMON_PRICE;
+    private static final int RESIST_PRICE = Config.NPC_BUFFER_RESIST_PRICE;
+    private static final int SONG_PRICE = Config.NPC_BUFFER_SONG_PRICE;
+    private static final int DANCE_PRICE = Config.NPC_BUFFER_DANCE_PRICE;
+    private static final int CHANT_PRICE = Config.NPC_BUFFER_CHANT_PRICE;
+    private static final int OTHERS_PRICE = Config.NPC_BUFFER_OTHER_PRICE;
+    private static final int SPECIAL_PRICE = Config.NPC_BUFFER_SPECIAL_PRICE;
+    private static final int CUBIC_PRICE = Config.NPC_BUFFER_CUBIC_PRICE;
+    private static final int BUFF_SET_PRICE = Config.NPC_BUFFER_BUFF_SETS_PRICE;
+    private static final int SCHEME_BUFF_PRICE = Config.NPC_BUFFER_SCHEME_PRICE;
+    private static final int SCHEMES_PER_PLAYER = Config.NPC_BUFFER_SCHEMES_PER_PLAYER;
+    private static final int CONSUMABLE_ID = Config.NPC_BUFFER_CONSUMABLE_ID;
     private static final int MAX_SCHEME_BUFFS = Config.BUFFS_MAX_AMOUNT; // +4 = Divine Inspiration Lv4
     private static final int MAX_SCHEME_DANCES = Config.DANCES_MAX_AMOUNT;
 
@@ -132,16 +133,16 @@ public class NpcBuffer extends Quest
             bottonA = "Auto Buff Pet";
             bottonB = "Heal My Pet";
             bottonC = "Remove Pet Buffs";
-            MAIN_HTML_MESSAGE += "<button value=\"Click to Buff You\" action=\"bypass -h Quest " + QUEST_LOADING_INFO + " buffpet 0 0 0\" width=140 height=27 back=\"L2UI_CT1.Button_DF_Large\" fore=\"L2UI_CT1.Button_DF_Large\">";
-            MAIN_HTML_MESSAGE += "Buffing: Pets";
+            MAIN_HTML_MESSAGE += "<button value=\"Switch Target\" action=\"bypass -h Quest " + QUEST_LOADING_INFO + " buffpet 0 0 0\" width=140 height=27 back=\"L2UI_CT1.Button_DF_Large\" fore=\"L2UI_CT1.Button_DF_Large\">";
+            MAIN_HTML_MESSAGE += "Buffing: <font color=LEVEL>your pets</font>";
         }
         else
         {
             bottonA = "Auto Buff";
             bottonB = "Heal";
             bottonC = "Remove Buffs";
-            MAIN_HTML_MESSAGE += "<button value=\"Click to Buff Pet\" action=\"bypass -h Quest " + QUEST_LOADING_INFO + " buffpet 1 0 0\" width=140 height=27 back=\"L2UI_CT1.Button_DF_Large\" fore=\"L2UI_CT1.Button_DF_Large\">";
-            MAIN_HTML_MESSAGE += "Buffing: Player";
+            MAIN_HTML_MESSAGE += "<button value=\"Switch Target\" action=\"bypass -h Quest " + QUEST_LOADING_INFO + " buffpet 1 0 0\" width=140 height=27 back=\"L2UI_CT1.Button_DF_Large\" fore=\"L2UI_CT1.Button_DF_Large\">";
+            MAIN_HTML_MESSAGE += "Buffing: <font color=LEVEL>yourself</font>";
         }
 
         if (ENABLE_BUFF_SECTION)
@@ -270,9 +271,13 @@ public class NpcBuffer extends Quest
             MAIN_HTML_MESSAGE += generateScheme(st);
         }
 
+        if ((PREMIUM_ONLY) && !st.getPlayer().hasPremiumStatus()) {
+            MAIN_HTML_MESSAGE = "No buffs are available at this moment!";
+        }
+
         if (st.getPlayer().isGM())
         {
-            MAIN_HTML_MESSAGE += "<br><button value=\"GM Manage Buffs\" action=\"bypass -h Quest " + QUEST_LOADING_INFO + " redirect manage_buffs 0 0\" width=130 height=27 back=\"L2UI_CT1.Button_DF_Large\" fore=\"L2UI_CT1.Button_DF_Large\">";
+            MAIN_HTML_MESSAGE += "<br><button value=\"Manage Buffs\" action=\"bypass -h Quest " + QUEST_LOADING_INFO + " redirect manage_buffs 0 0\" width=130 height=27 back=\"L2UI_CT1.Button_DF_Large\" fore=\"L2UI_CT1.Button_DF_Large\">";
         }
         MAIN_HTML_MESSAGE += "<br></td></tr></table></body></html>";
         return MAIN_HTML_MESSAGE;
@@ -497,12 +502,12 @@ public class NpcBuffer extends Quest
             }
             else
             {
-                st.getPlayer().sendMessage("Script Reloaded Failed. you edited something wrong! :P, fix it and restart the server");
+                st.getPlayer().sendMessage("Script Reloaded Failed. You have edited something wrong! :P, fix it and restart the server");
             }
         }
         catch (Exception e)
         {
-            st.getPlayer().sendMessage("Script Reloaded Failed. you edited something wrong! :P, fix it and restart the server");
+            st.getPlayer().sendMessage("Script Reloaded Failed. You have edited something wrong! :P, fix it and restart the server");
             print(e);
         }
         return rebuildMainHtml(st);
@@ -1159,7 +1164,6 @@ public class NpcBuffer extends Quest
             else if (target instanceof L2ServitorInstance)
             {
                 final L2ServitorInstance summon = (L2ServitorInstance) target;
-                // FIXME: summon.setLifeTimeRemaining(summon.getLifeTimeRemaining() - summon.getLifeTime());
                 summon.setLifeTimeRemaining(summon.getLifeTimeRemaining() + summon.getLifeTime());
                 player.sendPacket(new SetSummonRemainTime(summon.getLifeTime(), summon.getLifeTimeRemaining()));
             }
@@ -1627,7 +1631,7 @@ public class NpcBuffer extends Quest
                     {
                         if (getQuestItemsCount(player, CONSUMABLE_ID) < SCHEME_BUFF_PRICE)
                         {
-                            return showText(st, "Sorry", "You don't have the enough items:<br>You need: <font color=LEVEL>" + SCHEME_BUFF_PRICE + " " + getItemNameHtml(st, CONSUMABLE_ID) + "!", false, "0", "0");
+                            return showText(st, "Sorry", "You don't have the enough items.<br>You need: <font color=LEVEL>" + SCHEME_BUFF_PRICE + " " + getItemNameHtml(st, CONSUMABLE_ID) + "!", false, "0", "0");
                         }
                     }
 
@@ -1792,7 +1796,7 @@ public class NpcBuffer extends Quest
                     {
                         if (getQuestItemsCount(player, CONSUMABLE_ID) < BUFF_SET_PRICE)
                         {
-                            return showText(st, "Sorry", "You don't have the enough items:<br>You need: <font color=LEVEL>" + BUFF_SET_PRICE + " " + getItemNameHtml(st, CONSUMABLE_ID) + "!", false, "0", "0");
+                            return showText(st, "Sorry", "You don't have the enough items.<br>You need: <font color=LEVEL>" + BUFF_SET_PRICE + " " + getItemNameHtml(st, CONSUMABLE_ID) + "!", false, "0", "0");
                         }
                     }
                     final List<int[]> buff_sets = new ArrayList<>();
@@ -1912,7 +1916,7 @@ public class NpcBuffer extends Quest
         }
         else if ((int) (System.currentTimeMillis() / 1000) < st.getInt("blockUntilTime"))
         {
-            return showText(st, "Sorry", "You have to wait a while!<br>if you wish to use my services!", false, "Return", "main");
+            return showText(st, "Sorry", "You have to wait for a while!<br>if you wish to use my services!", false, "Return", "main");
         }
         if (!BUFF_WITH_KARMA && (player.getKarma() > 0))
         {

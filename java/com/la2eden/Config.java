@@ -93,6 +93,7 @@ public final class Config
     public static final String CHAT_FILE = "./config/mods/Chat.ini";
     public static final String COMMUNITY_FILE = "./config/mods/CommunityBoard.ini";
     public static final String CUSTOM_CONFIG_FILE = "./config/mods/Custom.ini";
+    public static final String NPC_BUFFER_CONFIG_FILE = "./config/mods/NpcBuffer.ini";
     public static final String OFFLINE_TRADE_FILE = "./config/mods/OfflineTraders.ini";
     public static final String PREMIUM_FILE = "./config/mods/Premium.ini";
     public static final String PRIMESHOP_FILE = "./config/mods/PrimeShop.ini";
@@ -817,6 +818,41 @@ public final class Config
 	public static float PREMIUM_RATE_SPOIL_AMOUNT;
 	public static Map<Integer, Float> PREMIUM_RATE_DROP_CHANCE_BY_ID;
 	public static Map<Integer, Float> PREMIUM_RATE_DROP_AMOUNT_BY_ID;
+
+	// NPC Buffer
+    public static boolean NPC_BUFFER_ENABLED;
+    public static boolean NPC_BUFFER_PREMIUM_ONLY;
+    public static boolean SCHEME_SYSTEM_ENABLED;
+    public static boolean NPC_BUFFER_ENABLE_HEAL;
+    public static boolean NPC_BUFFER_COMBAT_HEALING;
+    public static boolean NPC_BUFFER_ENABLE_COMMON;
+    public static boolean NPC_BUFFER_ENABLE_RESISTS;
+    public static boolean NPC_BUFFER_ENABLE_SONGS;
+    public static boolean NPC_BUFFER_ENABLE_DANCES;
+    public static boolean NPC_BUFFER_ENABLE_CHANTS;
+    public static boolean NPC_BUFFER_ENABLE_OTHERS;
+    public static boolean NPC_BUFFER_ENABLE_SPECIALS;
+    public static boolean NPC_BUFFER_ENABLE_CUBICS;
+    public static boolean NPC_BUFFER_ENABLE_CANCEL;
+    public static boolean NPC_BUFFER_ENABLE_BUFF_SETS;
+    public static boolean NPC_BUFFER_ENABLE_KARMA;
+    public static boolean NPC_BUFFER_FREE_BUFFS;
+    public static Integer NPC_BUFFER_MIN_LEVEL;
+    public static Integer NPC_BUFFER_CONSUMABLE_ID;
+    public static Integer NPC_BUFFER_CANCEL_PRICE;
+    public static Integer NPC_BUFFER_HEAL_PRICE;
+    public static Integer NPC_BUFFER_BUFF_SETS_PRICE;
+    public static Integer NPC_BUFFER_SCHEME_PRICE;
+    public static Integer NPC_BUFFER_SCHEMES_PER_PLAYER;
+    public static Integer NPC_BUFFER_COMMON_PRICE;
+    public static Integer NPC_BUFFER_RESIST_PRICE;
+    public static Integer NPC_BUFFER_SONG_PRICE;
+    public static Integer NPC_BUFFER_DANCE_PRICE;
+    public static Integer NPC_BUFFER_CHANT_PRICE;
+    public static Integer NPC_BUFFER_OTHER_PRICE;
+    public static Integer NPC_BUFFER_SPECIAL_PRICE;
+    public static Integer NPC_BUFFER_CUBIC_PRICE;
+
 
 	// PrimeShop
     public static boolean PRIMESHOP_ENABLED;
@@ -2720,6 +2756,43 @@ public final class Config
 					MOBS_LIST_NOT_RANDOM.add(Integer.valueOf(id));
 				}
 			}
+
+            // Load NPC Buffer file (if exists)
+            final PropertiesParser BufferSettings = new PropertiesParser(NPC_BUFFER_CONFIG_FILE);
+
+            NPC_BUFFER_ENABLED = BufferSettings.getBoolean("EnableBuffer", true);
+            NPC_BUFFER_PREMIUM_ONLY = BufferSettings.getBoolean("PremiumOnly", false);
+            SCHEME_SYSTEM_ENABLED = BufferSettings.getBoolean("EnableSchemeSystem", true);
+            NPC_BUFFER_ENABLE_HEAL = BufferSettings.getBoolean("EnableHeal", true);
+            NPC_BUFFER_COMBAT_HEALING = BufferSettings.getBoolean("HealInCombat", false);
+            NPC_BUFFER_ENABLE_COMMON = BufferSettings.getBoolean("EnableCommonBuffs", true);
+            NPC_BUFFER_ENABLE_RESISTS = BufferSettings.getBoolean("EnableResistBuffs", true);
+            NPC_BUFFER_ENABLE_SONGS = BufferSettings.getBoolean("EnableSongBuffs", true);
+            NPC_BUFFER_ENABLE_DANCES = BufferSettings.getBoolean("EnableDanceBuffs", true);
+            NPC_BUFFER_ENABLE_CHANTS = BufferSettings.getBoolean("EnableChantBuffs", true);
+            NPC_BUFFER_ENABLE_OTHERS = BufferSettings.getBoolean("EnableOtherBuffs", true);
+            NPC_BUFFER_ENABLE_SPECIALS = BufferSettings.getBoolean("EnableSpecialBuffs", true);
+            NPC_BUFFER_ENABLE_CUBICS = BufferSettings.getBoolean("EnableCubicBuffs", false);
+            NPC_BUFFER_ENABLE_CANCEL = BufferSettings.getBoolean("EnableBuffCancel", true);
+            NPC_BUFFER_ENABLE_BUFF_SETS = BufferSettings.getBoolean("EnableBuffSets", true);
+            NPC_BUFFER_ENABLE_KARMA = BufferSettings.getBoolean("EnableBufferWithKarma", true);
+            NPC_BUFFER_FREE_BUFFS = BufferSettings.getBoolean("FreeBuffsForAll", false);
+            NPC_BUFFER_MIN_LEVEL = BufferSettings.getInt("MinLevelToBuff", 1);
+            NPC_BUFFER_CONSUMABLE_ID = BufferSettings.getInt("ConsumableId", 57);
+            NPC_BUFFER_CANCEL_PRICE = BufferSettings.getInt("BuffCancelPrice", 30000);
+            NPC_BUFFER_HEAL_PRICE = BufferSettings.getInt("HealPrice", 30000);
+            NPC_BUFFER_COMMON_PRICE = BufferSettings.getInt("CommonBuffPrice", 2000);
+            NPC_BUFFER_RESIST_PRICE = BufferSettings.getInt("ResistBuffPrice", 2000);
+            NPC_BUFFER_SONG_PRICE = BufferSettings.getInt("SongBuffPrice", 2000);
+            NPC_BUFFER_DANCE_PRICE = BufferSettings.getInt("DanceBuffPrice", 2000);
+            NPC_BUFFER_CHANT_PRICE = BufferSettings.getInt("ChantBuffPrice", 2000);
+            NPC_BUFFER_OTHER_PRICE = BufferSettings.getInt("OtherBuffPrice", 2000);
+            NPC_BUFFER_SPECIAL_PRICE = BufferSettings.getInt("SpecialBuffPrice", 2000);
+            NPC_BUFFER_CUBIC_PRICE = BufferSettings.getInt("CubicBuffPrice", 2000);
+            NPC_BUFFER_BUFF_SETS_PRICE = BufferSettings.getInt("BuffSetPrice", 30000);
+            NPC_BUFFER_SCHEME_PRICE = BufferSettings.getInt("SchemeBuffPrice", 50000);
+            NPC_BUFFER_SCHEMES_PER_PLAYER = BufferSettings.getInt("SchemesPerPlayer", 3);
+
 
             // Load Community Board L2Properties file (if exists)
             final PropertiesParser CommunityBoardSettings = new PropertiesParser(COMMUNITY_FILE);
